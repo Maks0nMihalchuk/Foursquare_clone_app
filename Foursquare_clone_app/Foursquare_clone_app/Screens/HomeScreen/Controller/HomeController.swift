@@ -24,10 +24,16 @@ class HomeController: UIViewController {
         collectionView.register(StandardCategoryCell.nib(),
                                 forCellWithReuseIdentifier: StandardCategoryCell.identifier)
     }
+    @IBAction func searchButtonPress(_ sender: UIButton) {
+
+    }
 }
 extension HomeController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        NetworkManager.shared().searchQuery(categoryName: standardCategories[indexPath.item].imageName) { (data) in
+            guard let data = data else {return}
+            
+        }
         print("didSelectItemAt")
     }
 }

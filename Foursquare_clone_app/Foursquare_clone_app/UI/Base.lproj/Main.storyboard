@@ -50,6 +50,9 @@
                                         <integer key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="searchButtonPress:" destination="8k5-bL-xfm" eventType="touchUpInside" id="8AR-iO-AsZ"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sk8-3b-zb2">
                                 <rect key="frame" x="0.0" y="500" width="414" height="313"/>
