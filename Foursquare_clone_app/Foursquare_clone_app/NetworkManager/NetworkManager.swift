@@ -9,20 +9,17 @@
 import Foundation
 
 class NetworkManager {
-    private static var uniqueInstance: NetworkManager?
 
     private let clientId = "Q4YNTPHGHLDSQ53JZKYRTME42RCAGUNE4DL5VBU15NLTQCQB"
     private let clientSecret = "XXZHEWMXAXNSVSAWRZS31HI3WKYCVRWPJQGLA2J21GCYKOKA"
     private let versionAPI = "20201015"
 
-    static func shared() -> NetworkManager {
-        if uniqueInstance == nil {
-            uniqueInstance = NetworkManager()
-        }
-        return uniqueInstance!
-    }
+    static var shared: NetworkManager = {
+        let networkManager = NetworkManager()
+        return networkManager
+    }()
 
-    func searchQuery (categoryName: String, complition: @escaping (Request?) -> Void) {
+    func searchQuery (categoryName: String, completion: @escaping (Request?) -> Void) {
         let urlString = "https://api.foursquare.com/v2/venues/search"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
@@ -38,7 +35,7 @@ class NetworkManager {
             do {
                 let json = try JSONDecoder().decode(Request.self, from: data)
 
-                complition(json)
+                completion(json)
             } catch {
                 print(error)
             }

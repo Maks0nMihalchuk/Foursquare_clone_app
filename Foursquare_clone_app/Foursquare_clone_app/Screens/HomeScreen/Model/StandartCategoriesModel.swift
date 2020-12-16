@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct StandardCategoriesModel {
+struct StandardCategory {
     let imageName: String
     let title: String
 }
 
-let arrayStandardCategories = [StandardCategoriesModel(imageName: "breakfast", title: "Breakfast"),
-                  StandardCategoriesModel(imageName: "lunch", title: "Lunch"),
-                  StandardCategoriesModel(imageName: "dinner", title: "Dinner"),
-                  StandardCategoriesModel(imageName: "coffee&tea", title: "Coffee & Tea"),
-                  StandardCategoriesModel(imageName: "nightlife", title: "Nightlife"),
-                  StandardCategoriesModel(imageName: "thingsToDo", title: "Things to do")]
+let arrayStandardCategories = [StandardCategory(imageName: "breakfast", title: "Breakfast"),
+                  StandardCategory(imageName: "lunch", title: "Lunch"),
+                  StandardCategory(imageName: "dinner", title: "Dinner"),
+                  StandardCategory(imageName: "coffee&tea", title: "Coffee & Tea"),
+                  StandardCategory(imageName: "nightlife", title: "Nightlife"),
+                  StandardCategory(imageName: "thingsToDo", title: "Things to do")]

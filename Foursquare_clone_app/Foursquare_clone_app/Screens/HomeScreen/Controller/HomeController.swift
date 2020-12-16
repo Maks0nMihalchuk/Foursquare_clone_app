@@ -17,12 +17,14 @@ class HomeController: UIViewController {
     private let standardCategories = arrayStandardCategories
     private let numberOfCellsInRow = 3
     private let numberOfRowInCollectionView = 2
+    private let numberOfHorizontalIndents: CGFloat = 4
+    private let numberOfVerticalIndents: CGFloat = 2
     private let offset: CGFloat = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(StandardCategoryCell.nib(),
-                                forCellWithReuseIdentifier: StandardCategoryCell.identifier)
+        collectionView.register(StandardCategoryCollectionCell.nib(),
+                                forCellWithReuseIdentifier: StandardCategoryCollectionCell.identifier)
     }
     @IBAction func searchButtonPress(_ sender: UIButton) {
 
@@ -30,11 +32,10 @@ class HomeController: UIViewController {
 }
 extension HomeController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        NetworkManager.shared().searchQuery(categoryName: standardCategories[indexPath.item].imageName) { (data) in
+        NetworkManager.shared.searchQuery(categoryName: standardCategories[indexPath.item].imageName) { (data) in
             guard let data = data else {return}
 
         }
-        print("didSelectItemAt")
     }
 }
 extension HomeController: UICollectionViewDataSource {
@@ -44,12 +45,14 @@ extension HomeController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let optionCell =
+            collectionView.dequeueReusableCell(withReuseIdentifier: StandardCategoryCollectionCell.identifier,
+                                                            for: indexPath) as? StandardCategoryCollectionCell
+        guard let cell = optionCell else {return UICollectionViewCell()}
         let imageName = standardCategories[indexPath.item].imageName
         let categoryTitle = standardCategories[indexPath.item].title
 
-        let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier: StandardCategoryCell.identifier,
-                                                      for: indexPath) as? StandardCategoryCell
-        guard let cell = optionCell else {return UICollectionViewCell()}
         cell.configure(imageName: imageName, categoryTitle: categoryTitle)
 
         return cell
@@ -60,11 +63,13 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
+        let topBottomPadding = offset * numberOfVerticalIndents
+
         let collectionViewBounds = collectionView.bounds
         let widthCell = collectionViewBounds.width / CGFloat(numberOfCellsInRow)
         let heightCell = collectionViewBounds.height / CGFloat(numberOfRowInCollectionView)
-        let spacing = (CGFloat(numberOfCellsInRow + 1)) * offset / CGFloat(numberOfCellsInRow)
+        let spacing = (numberOfHorizontalIndents) * offset / CGFloat(numberOfCellsInRow)
 
-        return CGSize(width: widthCell - spacing, height: heightCell - (offset * 2))
+        return CGSize(width: widthCell - spacing, height: heightCell - topBottomPadding)
     }
 }

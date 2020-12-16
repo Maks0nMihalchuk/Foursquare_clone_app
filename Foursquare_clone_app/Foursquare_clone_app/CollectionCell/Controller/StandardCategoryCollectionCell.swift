@@ -8,24 +8,19 @@
 
 import UIKit
 
-class StandardCategoryCell: UICollectionViewCell {
+class StandardCategoryCollectionCell: UICollectionViewCell {
 
     @IBOutlet private weak var categoryImage: UIImageView!
     @IBOutlet private weak var categotyLabel: UILabel!
 
-    static let identifier = "StandardCategoryCell"
+    static let identifier = "StandardCategoryCollectionCell"
 
     static func nib() -> UINib {
-        return UINib(nibName: "StandardCategoryCell", bundle: nil)
+        return UINib(nibName: "StandardCategoryCollectionCell", bundle: nil)
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-    }
-    public func configure (imageName: String, categoryTitle: String) {
+    func configure (imageName: String, categoryTitle: String) {
         self.categoryImage.image = UIImage(named: imageName)
         self.categotyLabel.text = categoryTitle
     }
-
 }
