@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,10 +31,79 @@
                     <view key="view" contentMode="scaleToFill" id="zfP-uj-jSY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-l7-K4t">
+                                <rect key="frame" x="0.0" y="44" width="414" height="392"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csS-jc-7hU">
+                                <rect key="frame" x="20" y="444" width="374" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="geg-aL-cq7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="What are looking for?" image="magnifyingglass" catalog="system">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sk8-3b-zb2">
+                                <rect key="frame" x="0.0" y="500" width="414" height="313"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="313" id="8SY-JR-HAQ"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="0.0" id="rly-fZ-8eu">
+                                    <size key="itemSize" width="111" height="118"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="xbd-67-AnV">
+                                        <rect key="frame" x="2" y="2" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="S4z-sp-sO1">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="100" height="100"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="8k5-bL-xfm" id="Pzl-xu-hbg"/>
+                                    <outlet property="delegate" destination="8k5-bL-xfm" id="aau-sN-a55"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="0.89761700913241993" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SpC-l7-K4t" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="4uM-5Z-Whq"/>
+                            <constraint firstItem="SpC-l7-K4t" firstAttribute="top" secondItem="ESO-gy-7jy" secondAttribute="top" id="ARk-t5-dJe"/>
+                            <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="csS-jc-7hU" secondAttribute="trailing" constant="20" id="Fgg-rF-BpJ"/>
+                            <constraint firstItem="csS-jc-7hU" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="LXg-AF-sda"/>
+                            <constraint firstItem="sk8-3b-zb2" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="OUp-pT-a6H"/>
+                            <constraint firstItem="sk8-3b-zb2" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="S1T-rl-aw1"/>
+                            <constraint firstItem="ESO-gy-7jy" firstAttribute="bottom" secondItem="sk8-3b-zb2" secondAttribute="bottom" id="STz-Pz-FHh"/>
+                            <constraint firstItem="csS-jc-7hU" firstAttribute="top" secondItem="SpC-l7-K4t" secondAttribute="bottom" constant="8" id="VFE-mC-qcX"/>
+                            <constraint firstItem="SpC-l7-K4t" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="fWB-Uh-mZq"/>
+                            <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="SpC-l7-K4t" secondAttribute="trailing" id="p9O-Fw-28Y"/>
+                            <constraint firstItem="csS-jc-7hU" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" constant="20" id="p9U-7X-xUw"/>
+                            <constraint firstItem="sk8-3b-zb2" firstAttribute="top" secondItem="csS-jc-7hU" secondAttribute="bottom" constant="16" id="tJt-DO-5xL"/>
+                            <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="sk8-3b-zb2" secondAttribute="trailing" id="xog-M6-Ov4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ESO-gy-7jy"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="jit-na-TJ7"/>
+                    <connections>
+                        <outlet property="collectionView" destination="sk8-3b-zb2" id="Ahs-lI-UOq"/>
+                        <outlet property="imageView" destination="SpC-l7-K4t" id="rpD-PX-4y9"/>
+                        <outlet property="searchButton" destination="csS-jc-7hU" id="v0d-4L-7EA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gns-8W-L3x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,5 +131,6 @@
     <resources>
         <image name="list.bullet" catalog="system" width="64" height="44"/>
         <image name="list.dash" catalog="system" width="64" height="42"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
 </document>
