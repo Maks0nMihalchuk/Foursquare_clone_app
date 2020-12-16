@@ -32,7 +32,7 @@ extension HomeController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         NetworkManager.shared().searchQuery(categoryName: standardCategories[indexPath.item].imageName) { (data) in
             guard let data = data else {return}
-            
+
         }
         print("didSelectItemAt")
     }
