@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="StandardCategoryCollectionCell" reuseIdentifier="StandardCategoryCollectionCell" id="gTV-IL-0wX" customClass="StandardCategoryCollectionCell" customModule="Foursquare_clone_app" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CategoryCollectionCell" reuseIdentifier="CategoryCollectionCell" id="gTV-IL-0wX" customClass="CategoryCollectionCell" customModule="Foursquare_clone_app" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -46,8 +46,8 @@
             </constraints>
             <size key="customSize" width="128" height="106"/>
             <connections>
-                <outlet property="categoryImage" destination="0Ir-7q-9rT" id="ZLu-KF-xgt"/>
-                <outlet property="categotyLabel" destination="VVa-vX-sZJ" id="yGX-93-9yp"/>
+                <outlet property="categoryImage" destination="0Ir-7q-9rT" id="AsU-Mr-n5W"/>
+                <outlet property="categotyLabel" destination="VVa-vX-sZJ" id="zMO-Cz-MnT"/>
             </connections>
             <point key="canvasLocation" x="188.40579710144928" y="117.1875"/>
         </collectionViewCell>

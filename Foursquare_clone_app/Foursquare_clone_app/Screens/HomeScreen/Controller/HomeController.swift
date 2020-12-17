@@ -23,8 +23,8 @@ class HomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(StandardCategoryCollectionCell.nib(),
-                                forCellWithReuseIdentifier: StandardCategoryCollectionCell.identifier)
+        collectionView.register(CategoryCollectionCell.nib(),
+                                forCellWithReuseIdentifier: CategoryCollectionCell.identifier)
     }
     @IBAction func searchButtonPress(_ sender: UIButton) {
 
@@ -47,8 +47,8 @@ extension HomeController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let optionCell =
-            collectionView.dequeueReusableCell(withReuseIdentifier: StandardCategoryCollectionCell.identifier,
-                                                            for: indexPath) as? StandardCategoryCollectionCell
+            collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionCell.identifier,
+                                                            for: indexPath) as? CategoryCollectionCell
         guard let cell = optionCell else {return UICollectionViewCell()}
         let imageName = standardCategories[indexPath.item].imageName
         let categoryTitle = standardCategories[indexPath.item].title
