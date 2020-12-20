@@ -28,7 +28,13 @@ class HomeController: UIViewController {
                                 forCellWithReuseIdentifier: StandardCategoryCollectionCell.identifier)
     }
     @IBAction func searchButtonPress(_ sender: UIButton) {
-
+        let searchController = self.main.instantiateViewController(identifier: "SearchController")
+        as? SearchController
+        guard let search = searchController else {return}
+        search.searchBarText = ""
+        search.launchSearchBar = true
+        search.modalPresentationStyle = .fullScreen
+        self.present(search, animated: true, completion: nil)
     }
 }
 extension HomeController: UICollectionViewDelegate {
@@ -41,6 +47,8 @@ extension HomeController: UICollectionViewDelegate {
 
                 guard let search = searchController else {return}
                 search.venues = venuesData.response.venues
+                search.searchBarText = self.standardCategories[indexPath.item].title
+                search.launchSearchBar = false
                 search.modalPresentationStyle = .fullScreen
                 self.present(search, animated: true, completion: nil)
             }
