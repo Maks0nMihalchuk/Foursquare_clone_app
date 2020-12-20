@@ -20,6 +20,7 @@ class HomeController: UIViewController {
     private let numberOfHorizontalIndents: CGFloat = 4
     private let numberOfVerticalIndents: CGFloat = 2
     private let offset: CGFloat = 2
+    private let main = UIStoryboard(name: "Main", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +33,17 @@ class HomeController: UIViewController {
 }
 extension HomeController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        NetworkManager.shared.searchQuery(categoryName: standardCategories[indexPath.item].imageName) { (data) in
-            guard let data = data else {return}
+        NetworkManager.shared.getVenues(categoryName: standardCategories[indexPath.item].imageName) { (venuesData) in
+            guard let venuesData = venuesData else {return}
+            DispatchQueue.main.async {
+                let searchController = self.main.instantiateViewController(identifier: "SearchController")
+                    as? SearchController
 
+                guard let search = searchController else {return}
+                search.venues = venuesData.response.venues
+                search.modalPresentationStyle = .fullScreen
+                self.present(search, animated: true, completion: nil)
+            }
         }
     }
 }

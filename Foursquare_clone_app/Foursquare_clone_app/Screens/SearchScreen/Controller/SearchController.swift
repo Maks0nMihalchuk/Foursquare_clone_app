@@ -11,26 +11,24 @@ import UIKit
 class SearchController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
 
-    private lazy var searchController: UISearchController = {
-        let search = UISearchController(searchResultsController: nil)
-        return search
-    }()
+    var venues = [Venue]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupSearchBar(searchController: searchController)
+        tableView.register(SearchTableCell.nib(), forCellReuseIdentifier: SearchTableCell.identifier)
+        setupSearchBar(searchBar: searchBar)
     }
-    private func setupSearchBar (searchController: UISearchController) {
-        searchController.searchBar.text = "12311321"
-        searchController.searchBar.delegate = self
-
-        navigationItem.searchController = searchController
-        
+    private func setupSearchBar (searchBar: UISearchBar) {
+        searchBar.delegate = self
+        searchBar.searchTextField.text = "132"
+        searchBar.searchTextField.backgroundColor = .white
+        searchBar.clipsToBounds = true
     }
-    @objc private func goToBack () {
-
+    @IBAction func goToBack(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 
 }
@@ -41,14 +39,31 @@ extension SearchController: UISearchBarDelegate {
 }
 extension SearchController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        NetworkManager.shared.getDetailInfoVenue(venueId: venues[indexPath.row].id) { (detailVenueInfo) in
+            guard let detailVenueInfo = detailVenueInfo else {return}
+
+        }
+    }
 }
 extension SearchController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return venues.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let optionCell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier,
+                                                       for: indexPath) as? SearchTableCell
+        guard let cell = optionCell else {return UITableViewCell()}
+        let venueName = "\(indexPath.row + 1). \(venues[indexPath.row].name)"
+        let address = venues[indexPath.row].location.formattedAddress
+        let category = venues[indexPath.row].categories.first?.name
+        cell.configure(venueName: venueName, address: address, category: category)
+        return cell
     }
 }

@@ -10,11 +10,4 @@ import Foundation
 
 struct Category: Codable {
     let name: String
-    let icon: CategoryIcon
-}
-
-struct CategoryIcon: Codable {
-    let prefix: String
-    let suffix: String
-
 }
