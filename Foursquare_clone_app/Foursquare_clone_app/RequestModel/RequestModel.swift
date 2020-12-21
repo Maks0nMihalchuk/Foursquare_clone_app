@@ -19,5 +19,4 @@ struct Response: Codable {
 struct Venue: Codable {
     let name: String
     let categories: [Category]
-
 }
