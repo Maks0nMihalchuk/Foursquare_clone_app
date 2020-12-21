@@ -18,46 +18,10 @@ struct DetailVenueResponse: Codable {
 
 struct DetailVenue: Codable {
     let name: String
-    let location: DetailLocation
-    let categories: [DetailCategory]
+    let location: DetailLocation?
+    let categories: [DetailCategory]?
     let rating: Double?
     let ratingColor: String?
     let photos: Listed?
     let tips: Listed?
-}
-
-struct DetailLocation: Codable {
-    let formattedAddress: [String]
-}
-
-struct DetailCategory: Codable {
-    let name: String
-}
-
-struct Photo: Codable {
-
-    let prefix: String
-    let suffix: String
-}
-
-struct Listed: Codable {
-    let groups: [HereNowGroup]?
-}
-
-struct HereNowGroup: Codable {
-    let items: [Item]?
-
-}
-
-struct Item: Codable {
-    let text: String?
-    let prefix: String?
-    let suffix: String?
-    let user: ItemUser?
-    let photo: String?
-}
-
-struct ItemUser: Codable {
-    let firstName: String?
-    let lastName: String?
 }

@@ -17,14 +17,14 @@ class Mapping {
     func dataMapping(apiModel: DetailVenue) -> LocalVenueModel {
         let categories: [String] = {
             var categories = [String]()
-            apiModel.categories.forEach {
+            apiModel.categories?.forEach {
                 categories.append($0.name)
             }
             return categories
         }()
         let location: String = {
             var location = String()
-            apiModel.location.formattedAddress.forEach {
+            apiModel.location?.formattedAddress.forEach {
                 location += "\($0) "
             }
             return location

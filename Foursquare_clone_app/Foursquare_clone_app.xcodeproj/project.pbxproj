@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */; };
 		2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */; };
+		2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAA25909AB3006E4A59 /* DetailLocation.swift */; };
+		2D326BAD25909B5D006E4A59 /* DetailCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAC25909B5D006E4A59 /* DetailCategory.swift */; };
+		2D326BAF25909CEB006E4A59 /* Listed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAE25909CEB006E4A59 /* Listed.swift */; };
+		2D326BB125909D59006E4A59 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BB025909D59006E4A59 /* Group.swift */; };
+		2D326BB325909F1E006E4A59 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BB225909F1E006E4A59 /* Item.swift */; };
+		2D326BB525909F4F006E4A59 /* ItemUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BB425909F4F006E4A59 /* ItemUser.swift */; };
 		2D390108258CE2E6003C2187 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D390107258CE2E6003C2187 /* LocationModel.swift */; };
 		2D39010B258CFB2C003C2187 /* LocalVenueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D39010A258CFB2C003C2187 /* LocalVenueModel.swift */; };
 		2D39010E258D13F9003C2187 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D39010D258D13F9003C2187 /* Mapping.swift */; };
@@ -34,6 +40,12 @@
 		1F9159912026B1D4A53895E9 /* Pods-Foursquare_clone_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foursquare_clone_app.release.xcconfig"; path = "Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app.release.xcconfig"; sourceTree = "<group>"; };
 		2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoModel.swift; sourceTree = "<group>"; };
+		2D326BAA25909AB3006E4A59 /* DetailLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocation.swift; sourceTree = "<group>"; };
+		2D326BAC25909B5D006E4A59 /* DetailCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategory.swift; sourceTree = "<group>"; };
+		2D326BAE25909CEB006E4A59 /* Listed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listed.swift; sourceTree = "<group>"; };
+		2D326BB025909D59006E4A59 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		2D326BB225909F1E006E4A59 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		2D326BB425909F4F006E4A59 /* ItemUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemUser.swift; sourceTree = "<group>"; };
 		2D390107258CE2E6003C2187 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		2D39010A258CFB2C003C2187 /* LocalVenueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVenueModel.swift; sourceTree = "<group>"; };
 		2D39010D258D13F9003C2187 /* Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapping.swift; sourceTree = "<group>"; };
@@ -99,6 +111,12 @@
 			isa = PBXGroup;
 			children = (
 				2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */,
+				2D326BAA25909AB3006E4A59 /* DetailLocation.swift */,
+				2D326BAC25909B5D006E4A59 /* DetailCategory.swift */,
+				2D326BAE25909CEB006E4A59 /* Listed.swift */,
+				2D326BB025909D59006E4A59 /* Group.swift */,
+				2D326BB225909F1E006E4A59 /* Item.swift */,
+				2D326BB425909F4F006E4A59 /* ItemUser.swift */,
 			);
 			path = DetailInfoVenueModel;
 			sourceTree = "<group>";
@@ -458,11 +476,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D326BB525909F4F006E4A59 /* ItemUser.swift in Sources */,
+				2D326BB325909F1E006E4A59 /* Item.swift in Sources */,
+				2D326BAF25909CEB006E4A59 /* Listed.swift in Sources */,
 				2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */,
 				2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */,
+				2D326BAD25909B5D006E4A59 /* DetailCategory.swift in Sources */,
 				2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */,
 				2DE67F19258800460092B998 /* StandardCategoryCollectionCell.swift in Sources */,
+				2D326BB125909D59006E4A59 /* Group.swift in Sources */,
 				2DE67F152587F1B50092B998 /* StandartCategoriesModel.swift in Sources */,
+				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeController.swift in Sources */,
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,
 				2D39010B258CFB2C003C2187 /* LocalVenueModel.swift in Sources */,
