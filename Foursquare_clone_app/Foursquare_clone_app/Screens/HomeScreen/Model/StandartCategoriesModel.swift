@@ -16,6 +16,6 @@ struct StandardCategory {
 let arrayStandardCategories = [StandardCategory(imageName: "breakfast", title: "Breakfast"),
                   StandardCategory(imageName: "lunch", title: "Lunch"),
                   StandardCategory(imageName: "dinner", title: "Dinner"),
-                  StandardCategory(imageName: "coffee&tea", title: "Coffee & Tea"),
+                  StandardCategory(imageName: "coffee&Tea", title: "Coffee & Tea"),
                   StandardCategory(imageName: "nightlife", title: "Nightlife"),
                   StandardCategory(imageName: "thingsToDo", title: "Things to do")]
