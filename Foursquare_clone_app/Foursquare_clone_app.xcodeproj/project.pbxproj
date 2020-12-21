@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D2607622590B33400D9E1DC /* StandartCategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE67F142587F1B50092B998 /* StandartCategoriesModel.swift */; };
+		2D2607642590B85000D9E1DC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2607632590B84F00D9E1DC /* Photo.swift */; };
 		2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */; };
 		2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */; };
 		2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAA25909AB3006E4A59 /* DetailLocation.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		1F9159912026B1D4A53895E9 /* Pods-Foursquare_clone_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foursquare_clone_app.release.xcconfig"; path = "Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app.release.xcconfig"; sourceTree = "<group>"; };
+		2D2607632590B84F00D9E1DC /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoModel.swift; sourceTree = "<group>"; };
 		2D326BAA25909AB3006E4A59 /* DetailLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocation.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				2D326BB025909D59006E4A59 /* Group.swift */,
 				2D326BB225909F1E006E4A59 /* Item.swift */,
 				2D326BB425909F4F006E4A59 /* ItemUser.swift */,
+				2D2607632590B84F00D9E1DC /* Photo.swift */,
 			);
 			path = DetailInfoVenueModel;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				2D39010E258D13F9003C2187 /* Mapping.swift in Sources */,
 				2D3BD9AA25875B6800389405 /* AppDelegate.swift in Sources */,
 				2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */,
+				2D2607642590B85000D9E1DC /* Photo.swift in Sources */,
 				2D390108258CE2E6003C2187 /* LocationModel.swift in Sources */,
 				2DEC31D5258AA75C009FA472 /* SearchController.swift in Sources */,
 				2D3BD9AC25875B6800389405 /* SceneDelegate.swift in Sources */,
