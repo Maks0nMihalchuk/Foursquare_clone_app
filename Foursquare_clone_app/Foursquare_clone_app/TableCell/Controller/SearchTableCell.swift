@@ -22,14 +22,16 @@ class SearchTableCell: UITableViewCell {
 
     func configure(venueName: String, address: [String], category: String?) {
 
-        self.venueNameLabel.text = venueName
+        venueNameLabel.text = venueName
         var fullAddress = ""
         address.forEach {
             fullAddress += "\($0) "
         }
-        self.venueAddressLabel.text = fullAddress
-        guard let category = category else {return}
-        self.venueCategoryLabel.text = category
+        venueAddressLabel.text = fullAddress
+        guard let category = category else {
+            return
+        }
+        venueCategoryLabel.text = category
     }
 
 }

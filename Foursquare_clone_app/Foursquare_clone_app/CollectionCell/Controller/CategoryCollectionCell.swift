@@ -20,7 +20,7 @@ class CategoryCollectionCell: UICollectionViewCell {
     }
 
     func configure (imageName: String, categoryTitle: String) {
-        self.categoryImage.image = UIImage(named: imageName)
-        self.categotyLabel.text = categoryTitle
+        categoryImage.image = UIImage(named: imageName)
+        categotyLabel.text = categoryTitle
     }
 }

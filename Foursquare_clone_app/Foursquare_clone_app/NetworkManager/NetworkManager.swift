@@ -26,11 +26,15 @@ class NetworkManager {
         + "&v=\(versionAPI)"
         + "&ll=40.7099,-73.9622&intent=checkin&radius=2000&query=\(categoryName)"
 
-        guard let url = URL(string: urlString) else {return}
+        guard let url = URL(string: urlString) else {
+            return
+        }
 
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
-            guard let data = data else {return}
+            guard let data = data else {
+                return
+            }
 
             do {
                 let venuesId = try JSONDecoder().decode(Request.self, from: data)
@@ -42,7 +46,7 @@ class NetworkManager {
         }.resume()
     }
 
-    func getDetailInfoVenue (venueId: String, completion: @escaping (LocalVenueModel?) -> Void) {
+    func getDetailInfoVenue (venueId: String, completion: @escaping (DetailsVenue?) -> Void) {
         let urlString = "https://api.foursquare.com/v2/venues/"
         + "\(venueId)"
         + "?client_id=\(clientId)"
@@ -53,13 +57,16 @@ class NetworkManager {
 
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
-            guard let data = data else {return}
+            guard let data = data else {
+                return
+            }
 
             do {
                 let detailInfoVenue = try JSONDecoder().decode(DetailInfo.self, from: data)
                 let detail = detailInfoVenue.response.venue
 
-                let localDetailVenue = Mapping.shared.dataMapping(apiModel: detail)
+                let localDetailVenue = MappingReceivedDataToDetailsVenue.shared
+                    .mappingReceivedDataToDetailsVenue(apiModel: detail)
                 completion(localDetailVenue)
 
             } catch {

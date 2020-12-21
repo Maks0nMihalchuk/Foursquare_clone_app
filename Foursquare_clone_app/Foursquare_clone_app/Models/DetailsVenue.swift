@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LocalVenueModel {
+struct DetailsVenue {
     let name: String
     let categories: [String]
     let location: String

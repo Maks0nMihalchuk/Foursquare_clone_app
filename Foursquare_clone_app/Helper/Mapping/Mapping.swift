@@ -8,13 +8,13 @@
 
 import Foundation
 
-class Mapping {
-    static var shared: Mapping = {
-        let mapping = Mapping()
+class MappingReceivedDataToDetailsVenue {
+    static var shared: MappingReceivedDataToDetailsVenue = {
+        let mapping = MappingReceivedDataToDetailsVenue()
         return mapping
     }()
 
-    func dataMapping(apiModel: DetailVenue) -> LocalVenueModel {
+    func mappingReceivedDataToDetailsVenue(apiModel: DetailVenue) -> DetailsVenue {
         let categories: [String] = {
             var categories = [String]()
             apiModel.categories?.forEach {
@@ -45,7 +45,9 @@ class Mapping {
             }
         }()
         let rating: String = {
-            guard let rating = apiModel.rating else {return "-"}
+            guard let rating = apiModel.rating else {
+                return "-"
+            }
             return String(rating)
         }()
         let tips: [String] = {
@@ -67,7 +69,7 @@ class Mapping {
             }
             return photo
         }()
-        return LocalVenueModel(name: apiModel.name,
+        return DetailsVenue(name: apiModel.name,
                                categories: categories,
                                location: location,
                                user: users,
