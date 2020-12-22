@@ -13,9 +13,9 @@ struct StandardCategory {
     let title: String
 }
 
-let arrayStandardCategories = [StandardCategory(imageName: "breakfast", title: "Breakfast"),
-                  StandardCategory(imageName: "lunch", title: "Lunch"),
-                  StandardCategory(imageName: "dinner", title: "Dinner"),
-                  StandardCategory(imageName: "coffee&Tea", title: "Coffee & Tea"),
-                  StandardCategory(imageName: "nightlife", title: "Nightlife"),
-                  StandardCategory(imageName: "thingsToDo", title: "Things to do")]
+let arrayStandardCategories = [StandardCategory(imageName: "breakfast", title: "BreakfastTitle".localized()),
+                  StandardCategory(imageName: "lunch", title: "LunchTitle".localized()),
+                  StandardCategory(imageName: "dinner", title: "DinnerTitle".localized()),
+                  StandardCategory(imageName: "coffee&Tea", title: "CoffeeAndTeaTitle".localized()),
+                  StandardCategory(imageName: "nightlife", title: "NightlifeTitle".localized()),
+                  StandardCategory(imageName: "thingsToDo", title: "ThingsToDoTitle".localized())]

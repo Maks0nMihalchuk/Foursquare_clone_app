@@ -1,0 +1,14 @@
+/* 
+  Localization.strings
+  Foursquare_clone_app
+
+  Created by maks on 22.12.2020.
+  Copyright © 2020 maks. All rights reserved.
+*/
+
+"BreakfastTitle" = "Завтрак";
+"LunchTitle" = "Обед";
+"DinnerTitle" = "Ужин";
+"CoffeeAndTeaTitle" = "Кофе и чай";
+"NightlifeTitle" = "Ночь";
+"ThingsToDoTitle" = "Дела";

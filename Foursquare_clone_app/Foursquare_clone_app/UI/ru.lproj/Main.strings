@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "What are looking for?"; ObjectID = "csS-jc-7hU"; */
+"csS-jc-7hU.normalTitle" = "Что ищете?";
+
+/* Class = "UITabBarItem"; title = "Lists"; ObjectID = "iiO-hs-K18"; */
+"iiO-hs-K18.title" = "Списки";
+
+/* Class = "UITabBarItem"; title = "Search"; ObjectID = "jit-na-TJ7"; */
+"jit-na-TJ7.title" = "Поиск";
