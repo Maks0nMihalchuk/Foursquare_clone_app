@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="1116" y="595"/>
         </scene>
-        <!--Search Controller-->
+        <!--Search View Controller-->
         <scene sceneID="pBD-9f-Ivw">
             <objects>
-                <viewController storyboardIdentifier="SearchController" id="ns8-iv-Gcy" customClass="SearchController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="ns8-iv-Gcy" customClass="SearchViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kOA-xe-AdL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,10 +130,10 @@
             </objects>
             <point key="canvasLocation" x="2089.8550724637685" y="293.97321428571428"/>
         </scene>
-        <!--Home Controller-->
+        <!--Home View Controller-->
         <scene sceneID="b8v-eD-JM1">
             <objects>
-                <viewController id="8k5-bL-xfm" customClass="HomeController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8k5-bL-xfm" customClass="HomeViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zfP-uj-jSY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

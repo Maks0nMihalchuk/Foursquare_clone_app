@@ -8,13 +8,13 @@
 
 import UIKit
 
-class HomeController: UIViewController {
+class HomeViewController: UIViewController {
 
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private let standardCategories = arrayStandardCategories
+    private let standardCategories = defaultCategoriesList
     private let numberOfCellsInRow = 3
     private let numberOfRowInCollectionView = 2
     private let numberOfHorizontalIndents: CGFloat = 4
@@ -33,8 +33,8 @@ class HomeController: UIViewController {
                                           searchBarText: String,
                                           venues: [Venue]) {
 
-        let searchController = main.instantiateViewController(identifier: "SearchController")
-        as? SearchController
+        let searchController = main.instantiateViewController(identifier: "SearchViewController")
+        as? SearchViewController
         guard let search = searchController else {
             return
         }
@@ -49,7 +49,7 @@ class HomeController: UIViewController {
         createdSearchController(main: main, isActiveSearchBar: true, searchBarText: "", venues: [Venue]())
     }
 }
-extension HomeController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         NetworkManager.shared.getVenues(categoryName: standardCategories[indexPath.item].imageName) { (venuesData) in
             guard let venuesData = venuesData else {
@@ -65,7 +65,7 @@ extension HomeController: UICollectionViewDelegate {
         }
     }
 }
-extension HomeController: UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return standardCategories.count
     }
@@ -87,7 +87,7 @@ extension HomeController: UICollectionViewDataSource {
         return cell
     }
 }
-extension HomeController: UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

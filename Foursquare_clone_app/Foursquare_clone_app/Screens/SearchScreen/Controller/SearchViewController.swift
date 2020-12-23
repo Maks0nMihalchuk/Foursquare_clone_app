@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchController: UIViewController {
+class SearchViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -42,7 +42,7 @@ class SearchController: UIViewController {
     }
 
 }
-extension SearchController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else {
             return
@@ -66,7 +66,7 @@ extension SearchController: UISearchBarDelegate {
         }
     }
 }
-extension SearchController: UITableViewDelegate {
+extension SearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -81,7 +81,7 @@ extension SearchController: UITableViewDelegate {
         }
     }
 }
-extension SearchController: UITableViewDataSource {
+extension SearchViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return venues.count

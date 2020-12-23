@@ -6,9 +6,9 @@
   Copyright © 2020 maks. All rights reserved.
 */
 
-"BreakfastTitle" = "Завтрак";
-"LunchTitle" = "Обед";
-"DinnerTitle" = "Ужин";
-"CoffeeAndTeaTitle" = "Кофе и чай";
-"NightlifeTitle" = "Ночь";
-"ThingsToDoTitle" = "Дела";
+"HomeViewController.BreakfastTitle" = "Завтрак";
+"HomeViewController.LunchTitle" = "Обед";
+"HomeViewController.DinnerTitle" = "Ужин";
+"HomeViewController.CoffeeAndTeaTitle" = "Кофе и чай";
+"HomeViewController.NightlifeTitle" = "Ночь";
+"HomeViewController.ThingsToDoTitle" = "Дела";
