@@ -29,6 +29,7 @@
 		2D9EC7B125923E71003FBBC3 /* SearchTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9EC7B025923E71003FBBC3 /* SearchTableCell.xib */; };
 		2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2D9EC7B725925AB1003FBBC3 /* Localizable.strings */; };
 		2D9EC7BB259260D5003FBBC3 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9EC7BA259260D5003FBBC3 /* StringExtension.swift */; };
+		2DC43C8E2599E3D400655B2F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC43C8D2599E3D400655B2F /* AccountViewController.swift */; };
 		2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269F925891EBC00EAEC68 /* NetworkManager.swift */; };
 		2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FC258A2D2700EAEC68 /* RequestModel.swift */; };
 		2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FE258A595800EAEC68 /* CategoryModel.swift */; };
@@ -67,6 +68,7 @@
 		2D9EC7B625925AB1003FBBC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2D9EC7B825925AB8003FBBC3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2D9EC7BA259260D5003FBBC3 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		2DC43C8D2599E3D400655B2F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		2DD269F925891EBC00EAEC68 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2DD269FC258A2D2700EAEC68 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		2DD269FE258A595800EAEC68 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				2DEC31D2258AA716009FA472 /* SearchScreen */,
 				2D3BD9C82587848C00389405 /* DetailScreen */,
 				2D3BD9C5258783D700389405 /* ListsScreen */,
+				2DC43C8B2599E2E700655B2F /* AccountScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -276,6 +279,22 @@
 				2D9EC7BA259260D5003FBBC3 /* StringExtension.swift */,
 			);
 			path = String;
+			sourceTree = "<group>";
+		};
+		2DC43C8B2599E2E700655B2F /* AccountScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2DC43C8C2599E30C00655B2F /* Controller */,
+			);
+			path = AccountScreen;
+			sourceTree = "<group>";
+		};
+		2DC43C8C2599E30C00655B2F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2DC43C8D2599E3D400655B2F /* AccountViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		2DD269F825891EA500EAEC68 /* NetworkManager */ = {
@@ -508,6 +527,7 @@
 			files = (
 				2D2607622590B33400D9E1DC /* DefaultCategoryModel.swift in Sources */,
 				2D326BB525909F4F006E4A59 /* ItemUser.swift in Sources */,
+				2DC43C8E2599E3D400655B2F /* AccountViewController.swift in Sources */,
 				2D326BB325909F1E006E4A59 /* Item.swift in Sources */,
 				2D326BAF25909CEB006E4A59 /* Listed.swift in Sources */,
 				2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */,
