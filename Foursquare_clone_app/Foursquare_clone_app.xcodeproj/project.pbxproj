@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D06D148259A22120090CF23 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D06D147259A22120090CF23 /* URLExtension.swift */; };
+		2D06D14B259A29290090CF23 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D06D14A259A29290090CF23 /* Model.swift */; };
 		2D2607622590B33400D9E1DC /* DefaultCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE67F142587F1B50092B998 /* DefaultCategoryModel.swift */; };
 		2D2607642590B85000D9E1DC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2607632590B84F00D9E1DC /* Photo.swift */; };
 		2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		1F9159912026B1D4A53895E9 /* Pods-Foursquare_clone_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foursquare_clone_app.release.xcconfig"; path = "Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app.release.xcconfig"; sourceTree = "<group>"; };
+		2D06D147259A22120090CF23 /* URLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
+		2D06D14A259A29290090CF23 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2D2607632590B84F00D9E1DC /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoModel.swift; sourceTree = "<group>"; };
@@ -93,6 +97,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D06D146259A21FA0090CF23 /* URL */ = {
+			isa = PBXGroup;
+			children = (
+				2D06D147259A22120090CF23 /* URLExtension.swift */,
+			);
+			path = URL;
+			sourceTree = "<group>";
+		};
+		2D06D149259A291D0090CF23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D06D14A259A29290090CF23 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2D2B00D4258BB87F00D49F32 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +125,7 @@
 		2D2B00D5258BB8AD00D49F32 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2D06D146259A21FA0090CF23 /* URL */,
 				2D9EC7B925926045003FBBC3 /* String */,
 				2D2B00D6258BB8B800D49F32 /* UI */,
 			);
@@ -284,6 +305,7 @@
 		2DC43C8B2599E2E700655B2F /* AccountScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2D06D149259A291D0090CF23 /* Model */,
 				2DC43C8C2599E30C00655B2F /* Controller */,
 			);
 			path = AccountScreen;
@@ -540,9 +562,11 @@
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,
 				2D39010B258CFB2C003C2187 /* DetailsVenue.swift in Sources */,
+				2D06D148259A22120090CF23 /* URLExtension.swift in Sources */,
 				2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */,
 				2D39010E258D13F9003C2187 /* Mapping.swift in Sources */,
 				2D3BD9AA25875B6800389405 /* AppDelegate.swift in Sources */,
+				2D06D14B259A29290090CF23 /* Model.swift in Sources */,
 				2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */,
 				2D2607642590B85000D9E1DC /* Photo.swift in Sources */,
 				2D390108258CE2E6003C2187 /* LocationModel.swift in Sources */,
@@ -706,6 +730,7 @@
 			baseConfigurationReference = B028462DEFB9CF5C6C51579F /* Pods-Foursquare_clone_app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Foursquare_clone_app/Foursquare_clone_app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F4698G65QQ;
 				INFOPLIST_FILE = Foursquare_clone_app/Resorces/Info.plist;
@@ -725,6 +750,7 @@
 			baseConfigurationReference = 1F9159912026B1D4A53895E9 /* Pods-Foursquare_clone_app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Foursquare_clone_app/Foursquare_clone_app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F4698G65QQ;
 				INFOPLIST_FILE = Foursquare_clone_app/Resorces/Info.plist;

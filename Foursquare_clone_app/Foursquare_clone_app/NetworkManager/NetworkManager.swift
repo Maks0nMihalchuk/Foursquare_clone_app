@@ -13,6 +13,7 @@ class NetworkManager {
     private let clientId = "Q4YNTPHGHLDSQ53JZKYRTME42RCAGUNE4DL5VBU15NLTQCQB"
     private let clientSecret = "B0F1TYQH1NDTXGCDPEHMRZ2JQKK4RBOZOJ22R5AACVUYRZ5P"
     private let versionAPI = "20201015"
+    private let redirectUrl = "https://myCloneApp.com"
 
     static var shared: NetworkManager = {
         let networkManager = NetworkManager()
@@ -71,6 +72,43 @@ class NetworkManager {
 
             } catch {
                 print("Could not get detail info venue: \(error)")
+            }
+        }.resume()
+    }
+
+    func autorizationFoursquare (completion: @escaping (URL?) -> Void) {
+        let urlString = "https://foursquare.com/oauth2/authenticate?"
+        + "client_id=\(clientId)&response_type=code&redirect_uri=\(redirectUrl)"
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        completion(url)
+    }
+
+    func getAccessToken (code: String?, completion: @escaping (String?) -> Void) {
+        guard let code = code else {
+            return
+        }
+        let urlString = "https://foursquare.com/oauth2/access_token?"
+        + "client_id=\(clientId)&client_secret=\(clientSecret)&"
+        + "grant_type=authorization_code&redirect_uri=\(redirectUrl)&code=\(code)"
+
+        guard let url = URL(string: urlString) else {
+            return
+        }
+
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                return
+            }
+
+            do {
+                let accessToken = try JSONDecoder().decode(Token.self, from: data)
+
+                completion(accessToken.access_token)
+            } catch {
+                print("Error: \(error)")
             }
         }.resume()
     }
