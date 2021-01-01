@@ -15,27 +15,51 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
 
     private let appearance = UITabBarAppearance()
+    private let tokenLabel = "accessToken"
     private var link: URL?
+    private var isAvailable = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
+
+        checkToken(label: tokenLabel, button: signInButton)
+    }
+
+    private func checkToken (label: String, button: UIButton) {
+        isAvailable = Keychain.shared.checkKeychain(for: label)
+
+        if isAvailable {
+            button.setTitle("Sign out", for: .normal)
+        } else {
+            button.setTitle("Sign in", for: .normal)
+        }
     }
 
     @IBAction func signInButtonPressed(_ sender: UIButton) {
 
-        NetworkManager.shared.autorizationFoursquare { (url) in
-            self.link = url
-        }
-        guard let url = link else {
-            return
-        }
+        if isAvailable {
+            sender.setTitle("Sign in", for: .normal)
+            do {
+                try Keychain.shared.removeToken(for: tokenLabel)
+                isAvailable = Keychain.shared.checkKeychain(for: tokenLabel)
+            } catch {
+                print("Failed to delete token: \(error.localizedDescription)")
+            }
+        } else {
+            NetworkManager.shared.autorizationFoursquare { (url) in
+                self.link = url
+            }
+            guard let url = link else {
+                return
+            }
 
-        let safariViewController = SFSafariViewController(url: url)
-        safariViewController.delegate = self
-        present(safariViewController, animated: true, completion: nil)
+            let safariViewController = SFSafariViewController(url: url)
+            safariViewController.delegate = self
+            present(safariViewController, animated: true, completion: nil)
+        }
     }
 }
 extension AccountViewController: SFSafariViewControllerDelegate {
@@ -43,7 +67,21 @@ extension AccountViewController: SFSafariViewControllerDelegate {
         let code = URL.valueOf("code")
 
         NetworkManager.shared.getAccessToken(code: code) { (accessToken) in
-        
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            do {
+                try Keychain.shared.saveToken(accessToken: accessToken,
+                                              for: self.tokenLabel)
+                DispatchQueue.main.async {
+                    self.signInButton.setTitle("Sign out", for: .normal)
+                    self.isAvailable = true
+                }
+            } catch {
+                print("failed to save token: \(error.localizedDescription)")
+            }
+
         }
     }
 }
