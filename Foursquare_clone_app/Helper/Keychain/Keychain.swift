@@ -15,19 +15,19 @@ class Keychain {
         return keychain
     }()
 
-    private func setupQuery (accessToken: Data?, for label: String) -> CFDictionary {
+    private func setupQuery (accessToken: Data?, for label: String) -> [String: Any] {
         if let token = accessToken {
             let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
                                         kSecAttrLabel as String: "\(label)",
                                         kSecValueData as String: token]
 
-            return query as CFDictionary
+            return query
         } else {
             let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
                                         kSecAttrLabel as String: "\(label)",
-                                        kSecReturnData as String: kCFBooleanTrue]
+                                        kSecReturnData as String: kCFBooleanTrue ?? true]
 
-            return query as CFDictionary
+            return query
         }
     }
 
@@ -35,7 +35,7 @@ class Keychain {
         let encodedToken = accessToken.data(using: .utf8)
         let query = setupQuery(accessToken: encodedToken, for: label)
 
-        let status = SecItemAdd(query, nil)
+        let status = SecItemAdd(query as CFDictionary, nil)
         if status != errSecSuccess {
             throw error(from: status)
         }
@@ -43,7 +43,7 @@ class Keychain {
 
     private func removeTokenFromKeychain (for label: String) throws {
         let query = setupQuery(accessToken: nil, for: label)
-        let status = SecItemDelete(query)
+        let status = SecItemDelete(query as CFDictionary)
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
             throw error(from: status)
@@ -52,7 +52,7 @@ class Keychain {
 
     private func checkTokenInKeychain (for label: String) -> Bool {
         let query = setupQuery(accessToken: nil, for: label)
-        let status = SecItemCopyMatching(query, nil)
+        let status = SecItemCopyMatching(query as CFDictionary, nil)
 
         switch status {
         case errSecSuccess:
@@ -69,12 +69,13 @@ class Keychain {
     }
 
     private func getTokenFromKeychain (for label: String) throws -> String? {
-
-        let query = setupQuery(accessToken: nil, for: label)
+        var query = setupQuery(accessToken: nil, for: label)
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnAttributes as String] = kCFBooleanTrue ?? true
 
         var queryResult: AnyObject?
         let status = withUnsafeMutablePointer(to: &queryResult) {
-            SecItemCopyMatching(query, $0)
+            SecItemCopyMatching(query as CFDictionary, $0)
         }
 
         switch status {
@@ -106,6 +107,14 @@ class Keychain {
 
     func removeToken (for label: String) throws {
         try removeTokenFromKeychain(for: label)
+    }
+
+    func getToken (for label: String) throws -> String {
+        guard let accessToken = try Keychain.shared.getTokenFromKeychain(for: label) else {
+            return "error when trying to get token from keychain"
+        }
+
+        return accessToken
     }
 }
 extension Keychain {

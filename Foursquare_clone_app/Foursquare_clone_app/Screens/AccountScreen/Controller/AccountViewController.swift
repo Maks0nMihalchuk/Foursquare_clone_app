@@ -76,8 +76,8 @@ extension AccountViewController: SFSafariViewControllerDelegate {
                                               for: self.tokenLabel)
                 DispatchQueue.main.async {
                     self.signInButton.setTitle("Sign out", for: .normal)
-                    self.isAvailable = true
                 }
+                self.isAvailable = Keychain.shared.checkKeychain(for: self.tokenLabel)
             } catch {
                 print("failed to save token: \(error.localizedDescription)")
             }
