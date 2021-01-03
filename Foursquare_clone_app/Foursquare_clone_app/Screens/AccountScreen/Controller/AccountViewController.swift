@@ -42,12 +42,8 @@ class AccountViewController: UIViewController {
 
         if isAvailable {
             sender.setTitle("Sign in", for: .normal)
-            do {
-                try Keychain.shared.removeToken(for: tokenLabel)
-                isAvailable = Keychain.shared.checkKeychain(for: tokenLabel)
-            } catch {
-                print("Failed to delete token: \(error.localizedDescription)")
-            }
+            Keychain.shared.removeToken(for: tokenLabel)
+            isAvailable = Keychain.shared.checkKeychain(for: tokenLabel)
         } else {
             NetworkManager.shared.autorizationFoursquare { (url) in
                 self.link = url
@@ -71,17 +67,11 @@ extension AccountViewController: SFSafariViewControllerDelegate {
             guard let accessToken = accessToken else {
                 return
             }
-            do {
-                try Keychain.shared.saveToken(accessToken: accessToken,
-                                              for: self.tokenLabel)
-                DispatchQueue.main.async {
-                    self.signInButton.setTitle("Sign out", for: .normal)
-                }
-                self.isAvailable = Keychain.shared.checkKeychain(for: self.tokenLabel)
-            } catch {
-                print("failed to save token: \(error.localizedDescription)")
+            Keychain.shared.saveToken(accessToken: accessToken, for: self.tokenLabel)
+            DispatchQueue.main.async {
+                self.signInButton.setTitle("Sign out", for: .normal)
             }
-
+            self.isAvailable = Keychain.shared.checkKeychain(for: self.tokenLabel)
         }
     }
 }

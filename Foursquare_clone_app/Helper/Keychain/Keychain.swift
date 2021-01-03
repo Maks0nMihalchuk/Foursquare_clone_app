@@ -95,8 +95,12 @@ class Keychain {
     }
 
 // MARK: - public methods
-    func saveToken (accessToken: String, for label: String) throws {
-        try saveTokenInKeychain(accessToken: accessToken, for: label)
+    func saveToken (accessToken: String, for label: String) {
+        do {
+            try saveTokenInKeychain(accessToken: accessToken, for: label)
+        } catch {
+            print("failed to save token: \(error.localizedDescription)")
+        }
     }
 
     func checkKeychain (for label: String) -> Bool {
@@ -105,13 +109,23 @@ class Keychain {
         return check
     }
 
-    func removeToken (for label: String) throws {
-        try removeTokenFromKeychain(for: label)
+    func removeToken (for label: String) {
+        do {
+            try removeTokenFromKeychain(for: label)
+        } catch {
+            print("Failed to delete token: \(error.localizedDescription)")
+        }
     }
 
-    func getToken (for label: String) throws -> String {
-        guard let accessToken = try Keychain.shared.getTokenFromKeychain(for: label) else {
-            return "error when trying to get token from keychain"
+    func getToken (for label: String) -> String {
+        var accessToken = String()
+        do {
+            guard let token = try Keychain.shared.getTokenFromKeychain(for: label) else {
+                return "error when trying to get token from keychain"
+            }
+            accessToken = token
+        } catch {
+            print(error.localizedDescription)
         }
 
         return accessToken
