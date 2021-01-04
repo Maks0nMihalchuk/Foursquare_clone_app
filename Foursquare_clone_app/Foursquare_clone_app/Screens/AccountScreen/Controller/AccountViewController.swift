@@ -15,7 +15,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
 
     private let appearance = UITabBarAppearance()
-    private let tokenLabel = "accessToken"
+    private let tokenLabel = "accessToken" // перенести в Keychain. Сделать enum KaichainKey +-
     private var link: URL?
     private var isAvailable = false
 
@@ -24,7 +24,7 @@ class AccountViewController: UIViewController {
 
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
-
+        print(Keychain.shared.getToken(for: tokenLabel))
         checkToken(label: tokenLabel, button: signInButton)
     }
 
@@ -43,7 +43,7 @@ class AccountViewController: UIViewController {
         if isAvailable {
             sender.setTitle("Sign in", for: .normal)
             Keychain.shared.removeToken(for: tokenLabel)
-            isAvailable = Keychain.shared.checkKeychain(for: tokenLabel)
+            isAvailable = false
         } else {
             NetworkManager.shared.autorizationFoursquare { (url) in
                 self.link = url
@@ -61,7 +61,7 @@ class AccountViewController: UIViewController {
 extension AccountViewController: SFSafariViewControllerDelegate {
     func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
         let code = URL.valueOf("code")
-
+        // проверить URL, если то что нужно, то дисмис
         NetworkManager.shared.getAccessToken(code: code) { (accessToken) in
 
             guard let accessToken = accessToken else {
@@ -71,7 +71,7 @@ extension AccountViewController: SFSafariViewControllerDelegate {
             DispatchQueue.main.async {
                 self.signInButton.setTitle("Sign out", for: .normal)
             }
-            self.isAvailable = Keychain.shared.checkKeychain(for: self.tokenLabel)
+            self.isAvailable = true
         }
     }
 }
