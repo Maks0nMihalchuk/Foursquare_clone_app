@@ -12,3 +12,11 @@
 "HomeViewController.CoffeeAndTeaTitle" = "Coffee & Tea";
 "HomeViewController.NightlifeTitle" = "Nightlife";
 "HomeViewController.ThingsToDoTitle" = "Things to do";
+
+"AccountViewController.UpdateDataButton" = "Press to update";
+"AccountViewController.SignInButton" = "Sign in";
+"AccountViewController.SignOutButton" = "Sign out";
+"AccountViewController.YourProfile" = "Your profile";
+"AccountViewController.AlertTitle" = "Error";
+"AccountViewController.AlertMessage" = "Login failed";
+"AccountViewController.AlertActionTitle" = "Proceed";

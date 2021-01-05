@@ -12,3 +12,11 @@
 "HomeViewController.CoffeeAndTeaTitle" = "Кофе и чай";
 "HomeViewController.NightlifeTitle" = "Ночь";
 "HomeViewController.ThingsToDoTitle" = "Дела";
+
+"AccountViewController.UpdateDataButton" = "Нажмите, чтобы обновить";
+"AccountViewController.SignInButton" = "Войти";
+"AccountViewController.SignOutButton" = "Выход";
+"AccountViewController.YourProfile" = "Ваш профиль";
+"AccountViewController.AlertTitle" = "Ошибка";
+"AccountViewController.AlertMessage" = "Не удалось войти в аккаунт";
+"AccountViewController.AlertActionTitle" = "Продолжить";

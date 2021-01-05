@@ -24,6 +24,7 @@ class AccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateDataButton.setTitle("AccountViewController.UpdateDataButton".localized(), for: .normal)
         updateDataButton.alpha = 0
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
@@ -36,10 +37,10 @@ class AccountViewController: UIViewController {
         isAvailable = keychainManager.checkValue(query: query)
         setupActivityIndecator(isHidden: isAvailable, indecator: activityIndecator)
         if isAvailable {
-            button.setTitle("Sign out", for: .normal)
+            button.setTitle("AccountViewController.SignOutButton".localized(), for: .normal)
             getUserInfo(isAvailableToken: isAvailable)
         } else {
-            button.setTitle("Sign in", for: .normal)
+            button.setTitle("AccountViewController.SignInButton".localized(), for: .normal)
             showRefreshButton(button: updateDataButton, isHidden: isAvailable)
         }
     }
@@ -76,7 +77,7 @@ class AccountViewController: UIViewController {
             }
         } else {
 
-            profileLabel.text = "Your profile"
+            profileLabel.text = "AccountViewController.YourProfile".localized()
         }
     }
 
@@ -90,10 +91,21 @@ class AccountViewController: UIViewController {
         }, completion: nil)
     }
 
+    private func showErrorAlert () {
+        let alertController = UIAlertController(title: "AccountViewController.AlertTitle".localized(),
+                                                message: "AccountViewController.AlertMessage".localized(),
+                                                preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
+    }
+
     @IBAction func signInButtonPressed (_ sender: UIButton) {
         if isAvailable {
             let keyToToken = getKeyToToken()
-            sender.setTitle("Sign in", for: .normal)
+            sender.setTitle("AccountViewController.SignInButton".localized(), for: .normal)
             let query = keychainManager.tokenRequest(accessToken: nil,
                                                             for: keyToToken)
 
@@ -138,12 +150,16 @@ extension AccountViewController: SFSafariViewControllerDelegate {
                     return
                 }
                 let tokenQuery = self.keychainManager.tokenRequest(accessToken: accessToken, for: self.getKeyToToken())
-                self.keychainManager.saveValue(query: tokenQuery)
-                self.isAvailable = true
                 DispatchQueue.main.async {
-                    self.signInButton.setTitle("Sign out", for: .normal)
-                    self.getUserInfo(isAvailableToken: self.isAvailable)
-                    self.setupActivityIndecator(isHidden: !self.isAvailable, indecator: self.activityIndecator)
+                    if self.keychainManager.saveValue(query: tokenQuery) {
+                        self.isAvailable = true
+                        self.signInButton.setTitle("AccountViewController.SignOutButton".localized(), for: .normal)
+                        self.getUserInfo(isAvailableToken: self.isAvailable)
+                        self.setupActivityIndecator(isHidden: !self.isAvailable, indecator: self.activityIndecator)
+                    } else {
+                        self.setupActivityIndecator(isHidden: self.isAvailable, indecator: self.activityIndecator)
+                        self.showErrorAlert()
+                    }
                 }
             }
         }

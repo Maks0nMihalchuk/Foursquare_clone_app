@@ -31,12 +31,14 @@ class KeychainManager {
         }
     }
 
-    private func saveValueInKaychain (query: [String: Any]) throws {
+    private func saveValueInKaychain (query: [String: Any]) throws -> Bool {
 
         let status = SecItemAdd(query as CFDictionary, nil)
         if status != errSecSuccess {
             throw error(from: status)
+            return false
         }
+        return true
     }
 
     private func removeValueInKaychain (query: [String: Any]) throws {
@@ -94,11 +96,14 @@ class KeychainManager {
     func tokenRequest (accessToken: Data?, for label: String) -> [String: Any] {
         return configureTokenRequest(accessToken: accessToken, for: label)
     }
-    func saveValue (query: [String: Any]) {
+
+    func saveValue (query: [String: Any]) -> Bool {
         do {
-            try saveValueInKaychain(query: query)
+            let isSuccess = try saveValueInKaychain(query: query)
+            return isSuccess
         } catch {
             print("failed to save token: \(error.localizedDescription)")
+            return false
         }
     }
 

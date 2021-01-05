@@ -168,13 +168,13 @@
                                         </constraints>
                                     </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg6-6j-uxj">
-                                        <rect key="frame" x="132" y="604" width="150" height="40"/>
+                                        <rect key="frame" x="24" y="604" width="366" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="v06-Ih-nmK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="press to update">
+                                        <state key="normal" title="Press to update">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -209,10 +209,10 @@
                                     <constraint firstItem="KCV-Ao-FDs" firstAttribute="leading" secondItem="mgw-ws-di9" secondAttribute="leading" constant="8" id="kMK-x0-fTB"/>
                                     <constraint firstItem="t2Z-zD-asL" firstAttribute="top" secondItem="FHJ-rl-pKv" secondAttribute="bottom" constant="8" id="kfC-xT-TSo"/>
                                     <constraint firstAttribute="trailing" secondItem="KCV-Ao-FDs" secondAttribute="trailing" constant="8" id="lcW-nC-TVh"/>
-                                    <constraint firstItem="Bg6-6j-uxj" firstAttribute="leading" secondItem="mgw-ws-di9" secondAttribute="leading" constant="132" id="oV6-Tq-xvE"/>
+                                    <constraint firstItem="Bg6-6j-uxj" firstAttribute="leading" secondItem="mgw-ws-di9" secondAttribute="leading" constant="24" id="oV6-Tq-xvE"/>
                                     <constraint firstItem="iHP-g4-LW7" firstAttribute="top" secondItem="KCV-Ao-FDs" secondAttribute="bottom" constant="8" id="pco-Yo-f4Y"/>
                                     <constraint firstItem="h57-QQ-inx" firstAttribute="leading" secondItem="iHP-g4-LW7" secondAttribute="trailing" constant="8" id="rIu-D4-Lhd"/>
-                                    <constraint firstAttribute="trailing" secondItem="Bg6-6j-uxj" secondAttribute="trailing" constant="132" id="tu6-Kv-z3O"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bg6-6j-uxj" secondAttribute="trailing" constant="24" id="tu6-Kv-z3O"/>
                                     <constraint firstItem="vr6-Dn-NKn" firstAttribute="centerY" secondItem="mgw-ws-di9" secondAttribute="centerY" id="xFs-a0-kfS"/>
                                 </constraints>
                             </view>
