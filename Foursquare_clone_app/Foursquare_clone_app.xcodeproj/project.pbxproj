@@ -179,8 +179,6 @@
 				2D3BD9AB25875B6800389405 /* SceneDelegate.swift */,
 				2D3BD9BF2587797700389405 /* Resorces */,
 				2D3BD9BE2587796A00389405 /* UI */,
-				2DE67F162587FEF30092B998 /* CollectionCell */,
-				2DDDCD46258B9B42008D2525 /* TableCell */,
 				2D3BD9C025877C4900389405 /* Screens */,
 			);
 			path = Foursquare_clone_app;
@@ -218,6 +216,7 @@
 		2D3BD9C1258782FE00389405 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2DE67F162587FEF30092B998 /* CollectionCell */,
 				2DE67F132587F1920092B998 /* Model */,
 				2D3BD9C22587833000389405 /* Controller */,
 			);
@@ -299,26 +298,10 @@
 		2DDDCD46258B9B42008D2525 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
-				2DDDCD47258B9B60008D2525 /* Controller */,
-				2DDDCD48258B9B67008D2525 /* View */,
-			);
-			path = TableCell;
-			sourceTree = "<group>";
-		};
-		2DDDCD47258B9B60008D2525 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 				2DDDCD49258B9C79008D2525 /* SearchTableCell.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2DDDCD48258B9B67008D2525 /* View */ = {
-			isa = PBXGroup;
-			children = (
 				2D9EC7B025923E71003FBBC3 /* SearchTableCell.xib */,
 			);
-			path = View;
+			path = TableCell;
 			sourceTree = "<group>";
 		};
 		2DE67F132587F1920092B998 /* Model */ = {
@@ -332,31 +315,16 @@
 		2DE67F162587FEF30092B998 /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				2DE67F1C258800590092B998 /* Controller */,
-				2DE67F1B2588004E0092B998 /* View */,
-			);
-			path = CollectionCell;
-			sourceTree = "<group>";
-		};
-		2DE67F1B2588004E0092B998 /* View */ = {
-			isa = PBXGroup;
-			children = (
+				2DE67F17258800460092B998 /* CategoryCollectionCell.swift */,
 				2DE67F18258800460092B998 /* CategoryCollectionCell.xib */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2DE67F1C258800590092B998 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2DE67F17258800460092B998 /* CategoryCollectionCell.swift */,
-			);
-			path = Controller;
+			path = CollectionCell;
 			sourceTree = "<group>";
 		};
 		2DEC31D2258AA716009FA472 /* SearchScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2DDDCD46258B9B42008D2525 /* TableCell */,
 				2DEC31D3258AA73E009FA472 /* Controller */,
 			);
 			path = SearchScreen;
