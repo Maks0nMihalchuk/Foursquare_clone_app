@@ -160,6 +160,32 @@
                                             <constraint firstAttribute="height" constant="1" id="yJN-91-zkb"/>
                                         </constraints>
                                     </view>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="vr6-Dn-NKn">
+                                        <rect key="frame" x="182" y="324.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="6Oz-ez-rlf"/>
+                                            <constraint firstAttribute="width" constant="50" id="AEB-ad-3qc"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg6-6j-uxj">
+                                        <rect key="frame" x="132" y="604" width="150" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="v06-Ih-nmK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="press to update">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dataRefreshButtonPressed:" destination="Eik-AX-efF" eventType="touchUpInside" id="4IE-0D-i9C"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.89761700909999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -167,9 +193,12 @@
                                     <constraint firstItem="FHJ-rl-pKv" firstAttribute="top" secondItem="ovK-J2-whw" secondAttribute="bottom" constant="15" id="4gc-hw-kKv"/>
                                     <constraint firstItem="9Ge-5q-7Oq" firstAttribute="leading" secondItem="mgw-ws-di9" secondAttribute="leading" constant="107" id="7US-hF-NxX"/>
                                     <constraint firstItem="t2Z-zD-asL" firstAttribute="centerX" secondItem="mgw-ws-di9" secondAttribute="centerX" id="ATL-3L-yCG"/>
+                                    <constraint firstItem="KCV-Ao-FDs" firstAttribute="top" secondItem="Bg6-6j-uxj" secondAttribute="bottom" constant="8" id="BGj-07-26K"/>
                                     <constraint firstAttribute="trailing" secondItem="FHJ-rl-pKv" secondAttribute="trailing" constant="24" id="COQ-2E-Em0"/>
+                                    <constraint firstItem="Bg6-6j-uxj" firstAttribute="centerX" secondItem="mgw-ws-di9" secondAttribute="centerX" id="CPD-pd-Qad"/>
                                     <constraint firstAttribute="trailing" secondItem="9Ge-5q-7Oq" secondAttribute="trailing" constant="107" id="D4W-Fk-5y3"/>
                                     <constraint firstAttribute="trailing" secondItem="ovK-J2-whw" secondAttribute="trailing" constant="8" id="D7q-cx-oqR"/>
+                                    <constraint firstItem="vr6-Dn-NKn" firstAttribute="centerX" secondItem="mgw-ws-di9" secondAttribute="centerX" id="Hh5-hF-B64"/>
                                     <constraint firstAttribute="trailing" secondItem="h57-QQ-inx" secondAttribute="trailing" constant="8" id="Ipy-nh-SWN"/>
                                     <constraint firstAttribute="bottom" secondItem="h57-QQ-inx" secondAttribute="bottom" constant="8" id="Mor-dr-7fG"/>
                                     <constraint firstItem="9Ge-5q-7Oq" firstAttribute="top" secondItem="mgw-ws-di9" secondAttribute="top" constant="70" id="Q0Y-P7-Aci"/>
@@ -180,8 +209,11 @@
                                     <constraint firstItem="KCV-Ao-FDs" firstAttribute="leading" secondItem="mgw-ws-di9" secondAttribute="leading" constant="8" id="kMK-x0-fTB"/>
                                     <constraint firstItem="t2Z-zD-asL" firstAttribute="top" secondItem="FHJ-rl-pKv" secondAttribute="bottom" constant="8" id="kfC-xT-TSo"/>
                                     <constraint firstAttribute="trailing" secondItem="KCV-Ao-FDs" secondAttribute="trailing" constant="8" id="lcW-nC-TVh"/>
+                                    <constraint firstItem="Bg6-6j-uxj" firstAttribute="leading" secondItem="mgw-ws-di9" secondAttribute="leading" constant="132" id="oV6-Tq-xvE"/>
                                     <constraint firstItem="iHP-g4-LW7" firstAttribute="top" secondItem="KCV-Ao-FDs" secondAttribute="bottom" constant="8" id="pco-Yo-f4Y"/>
                                     <constraint firstItem="h57-QQ-inx" firstAttribute="leading" secondItem="iHP-g4-LW7" secondAttribute="trailing" constant="8" id="rIu-D4-Lhd"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bg6-6j-uxj" secondAttribute="trailing" constant="132" id="tu6-Kv-z3O"/>
+                                    <constraint firstItem="vr6-Dn-NKn" firstAttribute="centerY" secondItem="mgw-ws-di9" secondAttribute="centerY" id="xFs-a0-kfS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -201,7 +233,10 @@
                         <color key="badgeColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="activityIndecator" destination="vr6-Dn-NKn" id="phc-4r-hbg"/>
+                        <outlet property="profileLabel" destination="Jj5-SG-idX" id="pLk-yv-ktv"/>
                         <outlet property="signInButton" destination="h57-QQ-inx" id="OBk-0T-hXb"/>
+                        <outlet property="updateDataButton" destination="Bg6-6j-uxj" id="Icm-0a-lNQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hlq-b7-ieC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

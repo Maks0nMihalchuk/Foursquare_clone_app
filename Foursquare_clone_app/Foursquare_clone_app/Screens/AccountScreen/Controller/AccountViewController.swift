@@ -12,41 +12,100 @@ import Security
 
 class AccountViewController: UIViewController {
 
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet private weak var signInButton: UIButton!
+    @IBOutlet private weak var profileLabel: UILabel!
+    @IBOutlet private weak var activityIndecator: UIActivityIndicatorView!
+    @IBOutlet private weak var updateDataButton: UIButton!
 
     private let appearance = UITabBarAppearance()
-    private let tokenLabel = "accessToken" // перенести в Keychain. Сделать enum KaichainKey +-
-    private var link: URL?
+    private let redirectUrl = NetworkManager.shared.redirectUrl.lowercased()
+    private let keychainManager = KeychainManager.shared
     private var isAvailable = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateDataButton.alpha = 0
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
-        print(Keychain.shared.getToken(for: tokenLabel))
-        checkToken(label: tokenLabel, button: signInButton)
+        checkToken(button: signInButton)
     }
 
-    private func checkToken (label: String, button: UIButton) {
-        isAvailable = Keychain.shared.checkKeychain(for: label)
-
+    private func checkToken (button: UIButton) {
+        let query = keychainManager.tokenRequest(accessToken: nil,
+                                                 for: getKeyToToken())
+        isAvailable = keychainManager.checkValue(query: query)
+        setupActivityIndecator(isHidden: isAvailable, indecator: activityIndecator)
         if isAvailable {
             button.setTitle("Sign out", for: .normal)
+            getUserInfo(isAvailableToken: isAvailable)
         } else {
             button.setTitle("Sign in", for: .normal)
+            showRefreshButton(button: updateDataButton, isHidden: isAvailable)
         }
     }
 
-    @IBAction func signInButtonPressed(_ sender: UIButton) {
-
-        if isAvailable {
-            sender.setTitle("Sign in", for: .normal)
-            Keychain.shared.removeToken(for: tokenLabel)
-            isAvailable = false
+    private func setupActivityIndecator (isHidden: Bool, indecator: UIActivityIndicatorView) {
+        if isHidden {
+            indecator.isHidden = !isHidden
+            indecator.startAnimating()
         } else {
+            indecator.isHidden = !isHidden
+            indecator.stopAnimating()
+        }
+    }
+
+    private func getKeyToToken () -> String {
+        return KeychainKey.accessToken.currentKey
+    }
+
+    private func getUserInfo (isAvailableToken: Bool) {
+        if isAvailableToken {
+
+            let keyToToken = getKeyToToken()
+            let query = keychainManager.tokenRequest(accessToken: nil, for: keyToToken)
+            let accessToken = keychainManager.getValue(query: query)
+            NetworkManager.shared.getUserInfo(accessToken: accessToken) { (userFullName) in
+                guard let userFullName = userFullName else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.profileLabel.text = userFullName
+                    self.setupActivityIndecator(isHidden: !self.isAvailable, indecator: self.activityIndecator)
+                    self.showRefreshButton(button: self.updateDataButton, isHidden: self.isAvailable)
+                }
+            }
+        } else {
+
+            profileLabel.text = "Your profile"
+        }
+    }
+
+    private func showRefreshButton (button: UIButton, isHidden: Bool) {
+        UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseOut, animations: {
+            if isHidden {
+                button.alpha = 1
+            } else {
+                button.alpha = 0
+            }
+        }, completion: nil)
+    }
+
+    @IBAction func signInButtonPressed (_ sender: UIButton) {
+        if isAvailable {
+            let keyToToken = getKeyToToken()
+            sender.setTitle("Sign in", for: .normal)
+            let query = keychainManager.tokenRequest(accessToken: nil,
+                                                            for: keyToToken)
+
+            keychainManager.removeValue(query: query)
+            isAvailable = false
+            getUserInfo(isAvailableToken: isAvailable)
+            showRefreshButton(button: updateDataButton, isHidden: isAvailable)
+
+        } else {
+            var link: URL?
             NetworkManager.shared.autorizationFoursquare { (url) in
-                self.link = url
+                link = url
             }
             guard let url = link else {
                 return
@@ -57,21 +116,36 @@ class AccountViewController: UIViewController {
             present(safariViewController, animated: true, completion: nil)
         }
     }
+
+    @IBAction func dataRefreshButtonPressed (_ sender: UIButton) {
+        setupActivityIndecator(isHidden: isAvailable, indecator: activityIndecator)
+        getUserInfo(isAvailableToken: isAvailable)
+    }
+
 }
 extension AccountViewController: SFSafariViewControllerDelegate {
     func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
-        let code = URL.valueOf("code")
-        // проверить URL, если то что нужно, то дисмис
-        NetworkManager.shared.getAccessToken(code: code) { (accessToken) in
 
-            guard let accessToken = accessToken else {
-                return
+        if URL.absoluteString.contains(redirectUrl) {
+            dismiss(animated: true, completion: nil)
+            setupActivityIndecator(isHidden: !isAvailable, indecator: activityIndecator)
+
+            let code = URL.valueOf("code")
+
+            NetworkManager.shared.getAccessToken(code: code) { (accessToken) in
+
+                guard let accessToken = accessToken?.data(using: .utf8) else {
+                    return
+                }
+                let tokenQuery = self.keychainManager.tokenRequest(accessToken: accessToken, for: self.getKeyToToken())
+                self.keychainManager.saveValue(query: tokenQuery)
+                self.isAvailable = true
+                DispatchQueue.main.async {
+                    self.signInButton.setTitle("Sign out", for: .normal)
+                    self.getUserInfo(isAvailableToken: self.isAvailable)
+                    self.setupActivityIndecator(isHidden: !self.isAvailable, indecator: self.activityIndecator)
+                }
             }
-            Keychain.shared.saveToken(accessToken: accessToken, for: self.tokenLabel)
-            DispatchQueue.main.async {
-                self.signInButton.setTitle("Sign out", for: .normal)
-            }
-            self.isAvailable = true
         }
     }
 }

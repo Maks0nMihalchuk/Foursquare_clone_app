@@ -8,14 +8,14 @@
 
 import Foundation
 
-class Keychain {
+class KeychainManager {
 
-    static var shared: Keychain = {
-        let keychain = Keychain()
+    static var shared: KeychainManager = {
+        let keychain = KeychainManager()
         return keychain
     }()
 
-    private func setupQuery (accessToken: Data?, for label: String) -> [String: Any] {
+    private func configureTokenRequest (accessToken: Data?, for label: String) -> [String: Any] {
         if let token = accessToken {
             let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
                                         kSecAttrLabel as String: "\(label)",
@@ -30,10 +30,8 @@ class Keychain {
             return query
         }
     }
-    // saveValue
-    private func saveTokenInKeychain (accessToken: String, for label: String) throws {
-        let encodedToken = accessToken.data(using: .utf8)
-        let query = setupQuery(accessToken: encodedToken, for: label)
+
+    private func saveValueInKaychain (query: [String: Any]) throws {
 
         let status = SecItemAdd(query as CFDictionary, nil)
         if status != errSecSuccess {
@@ -41,8 +39,7 @@ class Keychain {
         }
     }
 
-    private func removeTokenFromKeychain (for label: String) throws {
-        let query = setupQuery(accessToken: nil, for: label)
+    private func removeValueInKaychain (query: [String: Any]) throws {
         let status = SecItemDelete(query as CFDictionary)
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
@@ -50,8 +47,7 @@ class Keychain {
         }
     }
 
-    private func checkTokenInKeychain (for label: String) -> Bool {
-        let query = setupQuery(accessToken: nil, for: label)
+    private func checkValueInKaychain (query: [String: Any]) -> Bool {
         let status = SecItemCopyMatching(query as CFDictionary, nil)
 
         switch status {
@@ -68,14 +64,14 @@ class Keychain {
 
     }
 
-    private func getTokenFromKeychain (for label: String) throws -> String? {
-        var query = setupQuery(accessToken: nil, for: label)
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnAttributes as String] = kCFBooleanTrue ?? true
+    private func getTokenFromKeychain (query: [String: Any]) throws -> String? {
+        var setupQuery = query
+        setupQuery[kSecMatchLimit as String] = kSecMatchLimitOne
+        setupQuery[kSecReturnAttributes as String] = kCFBooleanTrue ?? true
 
         var queryResult: AnyObject?
         let status = withUnsafeMutablePointer(to: &queryResult) {
-            SecItemCopyMatching(query as CFDictionary, $0)
+            SecItemCopyMatching(setupQuery as CFDictionary, $0)
         }
 
         switch status {
@@ -95,32 +91,35 @@ class Keychain {
     }
 
 // MARK: - public methods
-    func saveToken (accessToken: String, for label: String) {
+    func tokenRequest (accessToken: Data?, for label: String) -> [String: Any] {
+        return configureTokenRequest(accessToken: accessToken, for: label)
+    }
+    func saveValue (query: [String: Any]) {
         do {
-            try saveTokenInKeychain(accessToken: accessToken, for: label)
+            try saveValueInKaychain(query: query)
         } catch {
             print("failed to save token: \(error.localizedDescription)")
         }
     }
 
-    func checkKeychain (for label: String) -> Bool {
-        let check = checkTokenInKeychain(for: label)
+    func checkValue (query: [String: Any]) -> Bool {
+        let check = checkValueInKaychain(query: query)
 
         return check
     }
 
-    func removeToken (for label: String) {
+    func removeValue (query: [String: Any]) {
         do {
-            try removeTokenFromKeychain(for: label)
+            try removeValueInKaychain(query: query)
         } catch {
             print("Failed to delete token: \(error.localizedDescription)")
         }
     }
 
-    func getToken (for label: String) -> String {
+    func getValue (query: [String: Any]) -> String {
         var accessToken = String()
         do {
-            guard let token = try Keychain.shared.getTokenFromKeychain(for: label) else {
+            guard let token = try getTokenFromKeychain(query: query) else {
                 return "error when trying to get token from keychain"
             }
             accessToken = token
@@ -131,7 +130,7 @@ class Keychain {
         return accessToken
     }
 }
-extension Keychain {
+extension KeychainManager {
     private func error (from status: OSStatus) -> SecureStoreError {
         let message = SecCopyErrorMessageString(status, nil)
             as String? ?? NSLocalizedString("Unhandled Error", comment: "")

@@ -13,7 +13,7 @@ class NetworkManager {
     private let clientId = "Q4YNTPHGHLDSQ53JZKYRTME42RCAGUNE4DL5VBU15NLTQCQB"
     private let clientSecret = "B0F1TYQH1NDTXGCDPEHMRZ2JQKK4RBOZOJ22R5AACVUYRZ5P"
     private let versionAPI = "20201015"
-    private let redirectUrl = "https://myCloneApp.com"
+    let redirectUrl = "https://myCloneApp.com"
 
     static var shared: NetworkManager = {
         let networkManager = NetworkManager()
@@ -110,6 +110,30 @@ class NetworkManager {
             } catch {
                 print("Error: \(error)")
             }
+        }.resume()
+    }
+
+    func getUserInfo (accessToken: String, completion: @escaping (String?) -> Void) {
+
+        let urlString = "https://api.foursquare.com/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                return
+            }
+            do {
+                let userInfo = try JSONDecoder().decode(User.self, from: data)
+                let userFullName = "\(userInfo.response.user.firstName) "
+                + "\(userInfo.response.user.lastName)"
+                completion(userFullName)
+
+            } catch {
+                print(error)
+            }
+
         }.resume()
     }
 }
