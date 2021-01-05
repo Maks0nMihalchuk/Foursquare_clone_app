@@ -189,7 +189,6 @@
 				2D3BD9BE2587796A00389405 /* UI */,
 				2DE67F162587FEF30092B998 /* CollectionCell */,
 				2DDDCD46258B9B42008D2525 /* TableCell */,
-				2D4CF36825A2440300C7006B /* ListsCollectionCell */,
 				2D3BD9C025877C4900389405 /* Screens */,
 			);
 			path = Foursquare_clone_app;
@@ -244,6 +243,7 @@
 		2D3BD9C5258783D700389405 /* ListsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2D4CF36825A2440300C7006B /* CollectionCell */,
 				2D3BD9C7258783F500389405 /* Model */,
 				2D3BD9C6258783EF00389405 /* Controller */,
 			);
@@ -273,29 +273,13 @@
 			path = DetailScreen;
 			sourceTree = "<group>";
 		};
-		2D4CF36825A2440300C7006B /* ListsCollectionCell */ = {
-			isa = PBXGroup;
-			children = (
-				2D4CF36D25A2450300C7006B /* Controller */,
-				2D4CF36E25A2450B00C7006B /* View */,
-			);
-			path = ListsCollectionCell;
-			sourceTree = "<group>";
-		};
-		2D4CF36D25A2450300C7006B /* Controller */ = {
+		2D4CF36825A2440300C7006B /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
 				2D4CF36925A2445100C7006B /* ListsCollectionCell.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2D4CF36E25A2450B00C7006B /* View */ = {
-			isa = PBXGroup;
-			children = (
 				2D4CF36A25A2445100C7006B /* ListsCollectionCell.xib */,
 			);
-			path = View;
+			path = CollectionCell;
 			sourceTree = "<group>";
 		};
 		2D9EC7B225925A6C003FBBC3 /* Localization */ = {
