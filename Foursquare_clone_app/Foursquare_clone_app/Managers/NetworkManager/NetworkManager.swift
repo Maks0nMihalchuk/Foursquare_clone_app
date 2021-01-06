@@ -13,6 +13,8 @@ class NetworkManager {
     private let clientId = "Q4YNTPHGHLDSQ53JZKYRTME42RCAGUNE4DL5VBU15NLTQCQB"
     private let clientSecret = "B0F1TYQH1NDTXGCDPEHMRZ2JQKK4RBOZOJ22R5AACVUYRZ5P"
     private let versionAPI = "20201015"
+    private let urlFoursquare = "https://api.foursquare.com"
+    private let urlFoursquareLogin = "https://foursquare.com/oauth2"
     let redirectUrl = "https://myCloneApp.com"
 
     static var shared: NetworkManager = {
@@ -21,7 +23,7 @@ class NetworkManager {
     }()
 
     func getVenues (categoryName: String, completion: @escaping (Request?) -> Void) {
-        let urlString = "https://api.foursquare.com/v2/venues/search"
+        let urlString = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
         + "&v=\(versionAPI)"
@@ -33,6 +35,7 @@ class NetworkManager {
 
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
+
             guard let data = data else {
                 return
             }
@@ -48,16 +51,19 @@ class NetworkManager {
     }
 
     func getDetailInfoVenue (venueId: String, completion: @escaping (DetailsVenue?) -> Void) {
-        let urlString = "https://api.foursquare.com/v2/venues/"
+        let urlString = "\(urlFoursquare)/v2/venues/"
         + "\(venueId)"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
         + "&v=\(versionAPI)"
 
-        guard let url = URL(string: urlString) else {return}
+        guard let url = URL(string: urlString) else {
+            return
+        }
 
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
+
             guard let data = data else {
                 return
             }
@@ -77,19 +83,22 @@ class NetworkManager {
     }
 
     func autorizationFoursquare (completion: @escaping (URL?) -> Void) {
-        let urlString = "https://foursquare.com/oauth2/authenticate?"
+        let urlString = "\(urlFoursquareLogin)/authenticate?"
         + "client_id=\(clientId)&response_type=code&redirect_uri=\(redirectUrl)"
+
         guard let url = URL(string: urlString) else {
             return
         }
         completion(url)
     }
 
-    func getAccessToken (code: String?, completion: @escaping (String?) -> Void) {
+    func getAccessToken (code: String?, completion: @escaping (String?, Bool) -> Void) {
+
         guard let code = code else {
             return
         }
-        let urlString = "https://foursquare.com/oauth2/access_token?"
+
+        let urlString = "\(urlFoursquareLogin)/access_token?"
         + "client_id=\(clientId)&client_secret=\(clientSecret)&"
         + "grant_type=authorization_code&redirect_uri=\(redirectUrl)&code=\(code)"
 
@@ -99,36 +108,43 @@ class NetworkManager {
 
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
+
             guard let data = data else {
+                completion(nil, false)
                 return
             }
 
             do {
                 let accessToken = try JSONDecoder().decode(Token.self, from: data)
 
-                completion(accessToken.access_token)
+                completion(accessToken.access_token, true)
             } catch {
                 print("Error: \(error)")
             }
         }.resume()
     }
 
-    func getUserInfo (accessToken: String, completion: @escaping (String?) -> Void) {
+    func getUserInfo (accessToken: String, completion: @escaping (String?, Bool) -> Void) {
 
-        let urlString = "https://api.foursquare.com/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
+        let urlString = "\(urlFoursquare)/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
+
         guard let url = URL(string: urlString) else {
             return
         }
+
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
+
             guard let data = data else {
+                completion(nil, false)
                 return
             }
+
             do {
                 let userInfo = try JSONDecoder().decode(User.self, from: data)
                 let userFullName = "\(userInfo.response.user.firstName) "
                 + "\(userInfo.response.user.lastName)"
-                completion(userFullName)
+                completion(userFullName, true)
 
             } catch {
                 print(error)

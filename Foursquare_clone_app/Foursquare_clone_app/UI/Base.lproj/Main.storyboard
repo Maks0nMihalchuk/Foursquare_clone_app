@@ -233,7 +233,7 @@
                         <color key="badgeColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="activityIndecator" destination="vr6-Dn-NKn" id="phc-4r-hbg"/>
+                        <outlet property="activityIndicator" destination="vr6-Dn-NKn" id="cKH-TX-cWj"/>
                         <outlet property="profileLabel" destination="Jj5-SG-idX" id="pLk-yv-ktv"/>
                         <outlet property="signInButton" destination="h57-QQ-inx" id="OBk-0T-hXb"/>
                         <outlet property="updateDataButton" destination="Bg6-6j-uxj" id="Icm-0a-lNQ"/>

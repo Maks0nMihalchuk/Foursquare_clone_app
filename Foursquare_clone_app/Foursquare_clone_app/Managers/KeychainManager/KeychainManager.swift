@@ -15,33 +15,34 @@ class KeychainManager {
         return keychain
     }()
 
-    private func configureTokenRequest (accessToken: Data?, for label: String) -> [String: Any] {
+    private func configureTokenRequest (accessToken: Data?, for key: String) -> [String: Any] {
+        var query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
+                                   kSecAttrLabel as String: "\(key)"]
+
         if let token = accessToken {
-            let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
-                                        kSecAttrLabel as String: "\(label)",
-                                        kSecValueData as String: token]
+            query[kSecValueData as String] = token
 
             return query
         } else {
-            let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
-                                        kSecAttrLabel as String: "\(label)",
-                                        kSecReturnData as String: kCFBooleanTrue ?? true]
+            query[kSecReturnData as String] = kCFBooleanTrue ?? true
 
             return query
         }
     }
 
-    private func saveValueInKaychain (query: [String: Any]) throws -> Bool {
-
+    private func saveData (value: Data?, with key: String) throws -> Bool {
+        let query = configureTokenRequest(accessToken: value, for: key)
         let status = SecItemAdd(query as CFDictionary, nil)
+
         if status != errSecSuccess {
-            throw error(from: status)
             return false
         }
+
         return true
     }
 
-    private func removeValueInKaychain (query: [String: Any]) throws {
+    private func removeData (for key: String) throws {
+        let query = configureTokenRequest(accessToken: nil, for: key)
         let status = SecItemDelete(query as CFDictionary)
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
@@ -49,25 +50,23 @@ class KeychainManager {
         }
     }
 
-    private func checkValueInKaychain (query: [String: Any]) -> Bool {
+    private func checkData (for key: String) -> Bool {
+        let query = configureTokenRequest(accessToken: nil, for: key)
         let status = SecItemCopyMatching(query as CFDictionary, nil)
 
         switch status {
         case errSecSuccess:
-            print("data availability: true")
             return true
         case errSecItemNotFound:
-            print("data availability: false")
             return false
         default:
-            print("Unhandled error")
             return false
         }
 
     }
 
-    private func getTokenFromKeychain (query: [String: Any]) throws -> String? {
-        var setupQuery = query
+    private func getToken (for key: String) throws -> String? {
+        var setupQuery = configureTokenRequest(accessToken: nil, for: key)
         setupQuery[kSecMatchLimit as String] = kSecMatchLimitOne
         setupQuery[kSecReturnAttributes as String] = kCFBooleanTrue ?? true
 
@@ -78,12 +77,14 @@ class KeychainManager {
 
         switch status {
         case errSecSuccess:
+
             guard
                 let queriedItem = queryResult as? [String: Any],
                 let token = queriedItem[kSecValueData as String] as? Data,
                 let accessToken = String(data: token, encoding: .utf8) else {
                     throw SecureStoreError.data2StringConversionError
             }
+
             return accessToken
         case errSecItemNotFound:
             return nil
@@ -93,13 +94,10 @@ class KeychainManager {
     }
 
 // MARK: - public methods
-    func tokenRequest (accessToken: Data?, for label: String) -> [String: Any] {
-        return configureTokenRequest(accessToken: accessToken, for: label)
-    }
 
-    func saveValue (query: [String: Any]) -> Bool {
+    func saveValue (value: Data?, with key: String) -> Bool {
         do {
-            let isSuccess = try saveValueInKaychain(query: query)
+            let isSuccess = try saveData(value: value, with: key)
             return isSuccess
         } catch {
             print("failed to save token: \(error.localizedDescription)")
@@ -107,26 +105,28 @@ class KeychainManager {
         }
     }
 
-    func checkValue (query: [String: Any]) -> Bool {
-        let check = checkValueInKaychain(query: query)
+    func checkForDataAvailability (for key: String) -> Bool {
+        let check = checkData(for: key)
 
         return check
     }
 
-    func removeValue (query: [String: Any]) {
+    func removeValue (for key: String) {
         do {
-            try removeValueInKaychain(query: query)
+            try removeData(for: key)
         } catch {
             print("Failed to delete token: \(error.localizedDescription)")
         }
     }
 
-    func getValue (query: [String: Any]) -> String {
+    func getValue (for key: String) -> String {
         var accessToken = String()
         do {
-            guard let token = try getTokenFromKeychain(query: query) else {
+
+            guard let token = try getToken(for: key) else {
                 return "error when trying to get token from keychain"
             }
+
             accessToken = token
         } catch {
             print(error.localizedDescription)
