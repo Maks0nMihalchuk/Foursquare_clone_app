@@ -25,26 +25,25 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateDataButton.setTitle("AccountViewController.UpdateDataButton".localized(), for: .normal)
-        setupView(updateButton: updateDataButton, appearance: appearance)
-
-        checkToken(button: signInButton)
+        setupView()
+        checkToken()
     }
 
-    private func setupView (updateButton: UIButton, appearance: UITabBarAppearance) {
-        updateButton.alpha = 0
+    private func setupView () {
+        updateDataButton.alpha = 0
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
     }
 
-    private func checkToken (button: UIButton) {
+    private func checkToken () {
         isAvailable = keychainManager.checkForDataAvailability(for: getKeyToToken())
         setupActivityIndicator(isHidden: isAvailable, indecator: activityIndicator)
 
         if isAvailable {
-            button.setTitle("AccountViewController.SignOutButton".localized(), for: .normal)
+            signInButton.setTitle("AccountViewController.SignOutButton".localized(), for: .normal)
             getUserInfo(isAvailableToken: isAvailable)
         } else {
-            button.setTitle("AccountViewController.SignInButton".localized(), for: .normal)
+            signInButton.setTitle("AccountViewController.SignInButton".localized(), for: .normal)
             showRefreshButton(button: updateDataButton, isHidden: isAvailable)
         }
     }
@@ -72,6 +71,7 @@ class AccountViewController: UIViewController {
                 if isSuccessful {
 
                     guard let userFullName = userFullName else {
+                        self.setupActivityIndicator(isHidden: !self.isAvailable, indecator: self.activityIndicator)
                         return
                     }
 
@@ -123,16 +123,21 @@ class AccountViewController: UIViewController {
             getUserInfo(isAvailableToken: isAvailable)
             showRefreshButton(button: updateDataButton, isHidden: isAvailable)
         } else {
-            NetworkManager.shared.autorizationFoursquare { (url) in
+            NetworkManager.shared.autorizationFoursquare { (url, isSuccessful) in
 
-                guard let url = url else {
-                    return
-                }
+                if isSuccessful {
 
-                DispatchQueue.main.async {
-                    let safariViewController = SFSafariViewController(url: url)
-                    safariViewController.delegate = self
-                    self.present(safariViewController, animated: true, completion: nil)
+                    guard let url = url else {
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        let safariViewController = SFSafariViewController(url: url)
+                        safariViewController.delegate = self
+                        self.present(safariViewController, animated: true, completion: nil)
+                    }
+                } else {
+                    self.showErrorAlert()
                 }
             }
         }

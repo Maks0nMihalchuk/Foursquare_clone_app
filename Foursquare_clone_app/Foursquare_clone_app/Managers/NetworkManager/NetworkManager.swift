@@ -82,19 +82,21 @@ class NetworkManager {
         }.resume()
     }
 
-    func autorizationFoursquare (completion: @escaping (URL?) -> Void) {
+    func autorizationFoursquare (completion: @escaping (URL?, Bool) -> Void) {
         let urlString = "\(urlFoursquareLogin)/authenticate?"
         + "client_id=\(clientId)&response_type=code&redirect_uri=\(redirectUrl)"
 
         guard let url = URL(string: urlString) else {
+            completion(nil, false)
             return
         }
-        completion(url)
+        completion(url, true)
     }
 
     func getAccessToken (code: String?, completion: @escaping (String?, Bool) -> Void) {
 
         guard let code = code else {
+            completion(nil, false)
             return
         }
 
@@ -103,6 +105,7 @@ class NetworkManager {
         + "grant_type=authorization_code&redirect_uri=\(redirectUrl)&code=\(code)"
 
         guard let url = URL(string: urlString) else {
+            completion(nil, false)
             return
         }
 
@@ -129,6 +132,7 @@ class NetworkManager {
         let urlString = "\(urlFoursquare)/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
 
         guard let url = URL(string: urlString) else {
+            completion(nil, false)
             return
         }
 
