@@ -13,7 +13,7 @@ class ListsViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
 
     private let defaultListsName = defaultLists
-
+    private let defaultHeaderLists = headerList
     private let numberOfCellsInRow = 2
     private let numberOfHorizontalIndents: CGFloat = 3
     private let numberOfVerticalIndents: CGFloat = 2
@@ -22,8 +22,15 @@ class ListsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Lists"
-        collectionView.register(ListsCollectionCell.unib(),
+        collectionView.register(ListsCollectionCell.nib(),
                                 forCellWithReuseIdentifier: ListsCollectionCell.identifier)
+        collectionView.register(HeaderCollectionView.nib(),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: HeaderCollectionView.identifier)
+    }
+
+    private func checkForAuthorization () {
+
     }
 
 }
@@ -37,12 +44,30 @@ extension ListsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 1 {
+        if section == 0 {
             return defaultListsName.count
         } else {
             return 0
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+
+        guard
+            let header = collectionView
+                .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                              withReuseIdentifier: HeaderCollectionView.identifier,
+                                              for: indexPath) as? HeaderCollectionView else {
+            return UICollectionReusableView()
+        }
+
+        header.configure(title: defaultHeaderLists[indexPath.section].title)
+
+        return header
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -73,4 +98,9 @@ extension ListsViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: widthCell - spacing, height: heightCell - topBottomPadding)
     }
 
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 35)
+    }
 }

@@ -17,7 +17,7 @@ class ListsCollectionCell: UICollectionViewCell {
 
     static let identifier = "ListsCollectionCell"
 
-    static func unib() -> UINib {
+    static func nib() -> UINib {
         return UINib(nibName: "ListsCollectionCell", bundle: nil)
     }
 
