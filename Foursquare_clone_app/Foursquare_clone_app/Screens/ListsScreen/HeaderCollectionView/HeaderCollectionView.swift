@@ -18,7 +18,11 @@ class HeaderCollectionView: UICollectionReusableView {
         return UINib(nibName: "HeaderCollectionView", bundle: nil)
     }
 
-    func configure (title: String) {
-        titleForHeader.text = title
+    func configure (title: String, numberOfLists: Int?) {
+        if let number = numberOfLists {
+            titleForHeader.text = title + " (\(number))"
+        } else {
+            titleForHeader.text = title
+        }
     }
 }

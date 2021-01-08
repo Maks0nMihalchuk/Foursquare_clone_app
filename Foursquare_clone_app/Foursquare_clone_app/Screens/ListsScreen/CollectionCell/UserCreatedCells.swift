@@ -8,22 +8,24 @@
 
 import UIKit
 
-class ListsCollectionCell: UICollectionViewCell {
+class UserCreatedCells: UICollectionViewCell {
 
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var userImageView: UIImageView!
     @IBOutlet private weak var listNameLabel: UILabel!
     @IBOutlet private weak var numberPlacesLabel: UILabel!
 
-    static let identifier = "ListsCollectionCell"
-
+    static let identifier = "UserCreatedCells"
+    //ListsCollectionCell
     static func nib() -> UINib {
-        return UINib(nibName: "ListsCollectionCell", bundle: nil)
+        return UINib(nibName: "UserCreatedCells", bundle: nil)
     }
 
-    func configure (backgroundImageName: String = "listsCellBackground", userImageName: String = "userListsImage",
-                    listName: String, numberPlaces: String = "No plasec") {
-        backgroundImageView.image = UIImage(named: backgroundImageName)
+    func configure (backgroundImageName: String = "listsCellBackground",
+                    userImageName: String,
+                    listName: String,
+                    numberPlaces: String = "No plasec") {
+        backgroundImageView.image = UIImage(named: backgroundImageName)?.cropCornerOfImage()
         userImageView.image = UIImage(named: userImageName)
         listNameLabel.text = listName
         numberPlacesLabel.text = numberPlaces

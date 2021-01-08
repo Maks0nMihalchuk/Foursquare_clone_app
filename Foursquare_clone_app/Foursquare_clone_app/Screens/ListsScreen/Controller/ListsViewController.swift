@@ -12,8 +12,9 @@ class ListsViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private let defaultListsName = defaultLists
-    private let defaultHeaderLists = headerList
+    private let defaultNamesForLists = defaultNameLists
+    private let defaultHeaderLists = listOfHeaderNames
+
     private let numberOfCellsInRow = 2
     private let numberOfHorizontalIndents: CGFloat = 3
     private let numberOfVerticalIndents: CGFloat = 2
@@ -22,8 +23,14 @@ class ListsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Lists"
-        collectionView.register(ListsCollectionCell.nib(),
-                                forCellWithReuseIdentifier: ListsCollectionCell.identifier)
+
+        setupCollectionCells()
+    }
+
+    private func setupCollectionCells () {
+        collectionView.register(UserCreatedCells.nib(),
+                                forCellWithReuseIdentifier: UserCreatedCells.identifier)
+        collectionView.register(ListsButtonCell.nib(), forCellWithReuseIdentifier: ListsButtonCell.identifier)
         collectionView.register(HeaderCollectionView.nib(),
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: HeaderCollectionView.identifier)
@@ -47,9 +54,9 @@ extension ListsViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return defaultListsName.count
+            return defaultNamesForLists.count
         } else {
-            return 0
+            return 1
         }
     }
 
@@ -65,21 +72,38 @@ extension ListsViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
 
-        header.configure(title: defaultHeaderLists[indexPath.section].title)
+        if indexPath.section == 0 {
+            header.configure(title: defaultHeaderLists[indexPath.section].title, numberOfLists: nil)
+        } else {
+            header.configure(title: defaultHeaderLists[indexPath.section].title, numberOfLists: 5)
+        }
 
         return header
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsCollectionCell.identifier,
-                                                            for: indexPath) as? ListsCollectionCell
-        guard let cell = optionCell else {
-            return UICollectionViewCell()
-        }
 
-        cell.configure(listName: defaultListsName[indexPath.item].listName)
-        return cell
+        if indexPath.section == 0 {
+            let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCreatedCells.identifier,
+                                                                for: indexPath) as? UserCreatedCells
+            guard let cell = optionCell else {
+                return UICollectionViewCell()
+            }
+
+            cell.configure(userImageName: defaultImageForLists[indexPath.item],
+                           listName: defaultNamesForLists[indexPath.item].listName)
+            return cell
+        } else {
+
+            if indexPath.item == 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsButtonCell.identifier,
+                                                              for: indexPath)
+                return cell
+            } else {
+                return UICollectionViewCell()
+            }
+        }
     }
 
 }
@@ -92,7 +116,7 @@ extension ListsViewController: UICollectionViewDelegateFlowLayout {
 
         let collectionViewBounds = collectionView.bounds
         let widthCell = collectionViewBounds.width / CGFloat(numberOfCellsInRow)
-        let heightCell = widthCell
+        let heightCell: CGFloat = widthCell
         let spacing = (numberOfHorizontalIndents) * offset / CGFloat(numberOfCellsInRow)
 
         return CGSize(width: widthCell - spacing, height: heightCell - topBottomPadding)

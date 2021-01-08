@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Header {
+struct HeaderName {
     let title: String
 }
 
-let headerList = [Header(title: "Your Places"),
-                  Header(title: "Lists You Created")]
+let listOfHeaderNames = [HeaderName(title: "Your Places"),
+                  HeaderName(title: "Lists You Created")]
