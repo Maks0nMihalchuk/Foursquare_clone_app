@@ -16,7 +16,12 @@ class UserCreatedCells: UICollectionViewCell {
     @IBOutlet private weak var numberPlacesLabel: UILabel!
 
     static let identifier = "UserCreatedCells"
-    //ListsCollectionCell
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+    }
+
     static func nib() -> UINib {
         return UINib(nibName: "UserCreatedCells", bundle: nil)
     }
@@ -25,10 +30,17 @@ class UserCreatedCells: UICollectionViewCell {
                     userImageName: String,
                     listName: String,
                     numberPlaces: String = "No plasec") {
+
         backgroundImageView.image = UIImage(named: backgroundImageName)?.cropCornerOfImage()
         userImageView.image = UIImage(named: userImageName)
         listNameLabel.text = listName
-        numberPlacesLabel.text = numberPlaces
+
+        if numberPlaces != "0" {
+            numberPlacesLabel.text = "\(numberPlaces) Places"
+        } else {
+            numberPlacesLabel.text = "No Places"
+        }
+
     }
 
 }

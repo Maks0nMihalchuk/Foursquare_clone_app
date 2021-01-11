@@ -10,7 +10,8 @@ import Foundation
 
 struct HeaderName {
     let title: String
+    let type: String
 }
 
-let listOfHeaderNames = [HeaderName(title: "Your Places"),
-                  HeaderName(title: "Lists You Created")]
+let listOfHeaderNames = [HeaderName(title: "Your Places", type: "yours"),
+                         HeaderName(title: "Lists You Created", type: "created")]

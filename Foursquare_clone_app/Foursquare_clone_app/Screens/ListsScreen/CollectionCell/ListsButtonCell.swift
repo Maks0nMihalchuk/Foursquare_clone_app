@@ -10,8 +10,8 @@ import UIKit
 
 class ListsButtonCell: UICollectionViewCell {
 
-    @IBOutlet private weak var addButton: UIButton!
     @IBOutlet private weak var createNewListLabel: UILabel!
+    @IBOutlet private weak var addImageView: UIImageView!
 
     static let identifier = "ListsButtonCell"
 

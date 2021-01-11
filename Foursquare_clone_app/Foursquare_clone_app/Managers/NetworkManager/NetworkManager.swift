@@ -156,4 +156,28 @@ class NetworkManager {
 
         }.resume()
     }
+    func getInfoAboutUserLists (token: String, completion: @escaping ([GetUserListsGroup]?) -> Void) {
+
+        let urlString = "\(urlFoursquare)/v2/users/self/lists?oauth_token=\(token)&v=\(versionAPI)"
+
+        guard let url = URL(string: urlString) else {
+            return
+        }
+
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, _, error) in
+
+            guard let data = data else {
+                return
+            }
+
+            do {
+                let infoAboutUserLists = try JSONDecoder().decode(GetUserLists.self, from: data)
+
+                completion(infoAboutUserLists.response.lists.groups)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
 }
