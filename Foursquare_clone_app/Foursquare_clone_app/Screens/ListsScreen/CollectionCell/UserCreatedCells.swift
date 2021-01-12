@@ -21,12 +21,17 @@ class UserCreatedCells: UICollectionViewCell {
         return UINib(nibName: "UserCreatedCells", bundle: nil)
     }
 
-    func configure (backgroundImageName: String = "listsCellBackground",
+    func configure (backgroundImage: Data?,
                     userImageName: String,
                     listName: String,
                     numberPlaces: String = "UserCreatedCells.NumberPlacesLabel".localized()) {
+        
+        if let imageData = backgroundImage {
+            backgroundImageView.image = UIImage(data: imageData)?.cropCornerOfImage()
+        } else {
+            backgroundImageView.image = UIImage(named: "listsCellBackground")?.cropCornerOfImage()
+        }
 
-        backgroundImageView.image = UIImage(named: backgroundImageName)?.cropCornerOfImage()
         userImageView.image = UIImage(named: userImageName)
         listNameLabel.text = listName
 

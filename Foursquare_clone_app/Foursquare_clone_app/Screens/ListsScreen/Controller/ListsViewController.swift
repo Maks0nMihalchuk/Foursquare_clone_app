@@ -42,9 +42,13 @@ class ListsViewController: UIViewController {
         super.viewDidLoad()
         title = "ListsViewController.Title".localized()
         collectionView.refreshControl = refreshControl
-        getInfoAboutUserLists()
         setupCollectionCells()
         setupVisualEffectView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getInfoAboutUserLists()
     }
 
     @objc private func refresh (sender: UIRefreshControl) {
@@ -179,7 +183,7 @@ extension ListsViewController: AlertDelegate {
 
     func collaborationSwitchAction(colloboraticeSwitch: UISwitch) {
         if colloboraticeSwitch.isOn {
-            configureListOptions[KeyForList.collaborative.currentKey] = colloboraticeSwitch.isOn
+            configureListOptions[KeyForList.collaborative.currentKey] = true
         } else {
             configureListOptions[KeyForList.collaborative.currentKey] = false
         }
@@ -272,7 +276,7 @@ extension ListsViewController: UICollectionViewDataSource {
         if infoAboutUserLists.isEmpty {
 
             if indexPath.section == 0 {
-                cell.configure(userImageName: defaultImageForLists[indexPath.item],
+                cell.configure(backgroundImage: nil, userImageName: defaultImageForLists[indexPath.item],
                                listName: defaultNamesForLists[indexPath.item].listName)
                 return cell
             } else {
@@ -288,17 +292,23 @@ extension ListsViewController: UICollectionViewDataSource {
 
             let listName = infoAboutUserLists[indexPath.section].items[indexPath.item].name
             let numberPlaces = infoAboutUserLists[indexPath.section].items[indexPath.item].listItems.count
+            let prefix = infoAboutUserLists[indexPath.section].items[indexPath.item].photo?.prefix
+            let suffix = infoAboutUserLists[indexPath.section].items[indexPath.item].photo?.suffix
+            var userImage = String()
 
             if indexPath.section == 0 {
-                cell.configure(backgroundImageName: "listsCellBackground",
-                               userImageName: defaultImageForLists[indexPath.item],
-                               listName: listName,
-                               numberPlaces: "\(numberPlaces)")
+                userImage = defaultImageForLists[indexPath.item]
             } else {
-                cell.configure(backgroundImageName: "listsCellBackground",
-                               userImageName: userImageDefault,
-                               listName: listName,
-                               numberPlaces: "\(numberPlaces)")
+                userImage = userImageDefault
+            }
+
+            networkManager.getPhoto(prefix: prefix, suffix: suffix) { (imageData) in
+                DispatchQueue.main.async {
+                    cell.configure(backgroundImage: imageData,
+                                   userImageName: userImage,
+                                   listName: listName,
+                                   numberPlaces: "\(numberPlaces)")
+                }
             }
 
             return cell

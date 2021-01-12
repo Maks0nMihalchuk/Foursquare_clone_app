@@ -184,12 +184,17 @@ class NetworkManager {
         }.resume()
     }
 
-    func getPhoto (prefix: String, suffix: String, completion: @escaping (Data?, Bool) -> Void) {
-
-        let urlString = "\(prefix)128x128\(suffix)"
+    func getPhoto (prefix: String?, suffix: String?, completion: @escaping (Data?) -> Void) {
+        guard let pref = prefix,
+              let suff = suffix
+        else {
+            completion(nil)
+            return
+        }
+        let urlString = "\(pref)128x128\(suff)"
 
         guard let url = URL(string: urlString) else {
-            completion(nil, false)
+            completion(nil)
             return
         }
 
@@ -198,13 +203,13 @@ class NetworkManager {
 
             if let error = error {
                 print(error.localizedDescription)
-                completion(nil, false)
+                completion(nil)
             }
             guard let data = data else {
-                completion(nil, false)
+                completion(nil)
                 return
             }
-            completion(data, true)
+            completion(data)
 
         }.resume()
     }
