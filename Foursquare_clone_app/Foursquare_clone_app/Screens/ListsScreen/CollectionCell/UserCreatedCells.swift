@@ -25,7 +25,7 @@ class UserCreatedCells: UICollectionViewCell {
                     userImageName: String,
                     listName: String,
                     numberPlaces: String = "UserCreatedCells.NumberPlacesLabel".localized()) {
-        
+
         if let imageData = backgroundImage {
             backgroundImageView.image = UIImage(data: imageData)?.cropCornerOfImage()
         } else {

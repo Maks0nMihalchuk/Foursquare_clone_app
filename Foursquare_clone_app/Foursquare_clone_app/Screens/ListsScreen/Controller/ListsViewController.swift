@@ -14,7 +14,6 @@ class ListsViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     private var alertToCreateNewList: AlertToCreateNewList!
-
     private let defaultNamesForLists = defaultNameLists
     private let defaultHeaderLists = listOfHeaderNames
     private var infoAboutUserLists = [GetUserListsGroup]()
