@@ -17,11 +17,6 @@ class UserCreatedCells: UICollectionViewCell {
 
     static let identifier = "UserCreatedCells"
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-    }
-
     static func nib() -> UINib {
         return UINib(nibName: "UserCreatedCells", bundle: nil)
     }
@@ -29,16 +24,16 @@ class UserCreatedCells: UICollectionViewCell {
     func configure (backgroundImageName: String = "listsCellBackground",
                     userImageName: String,
                     listName: String,
-                    numberPlaces: String = "No plasec") {
+                    numberPlaces: String = "UserCreatedCells.NumberPlacesLabel".localized()) {
 
         backgroundImageView.image = UIImage(named: backgroundImageName)?.cropCornerOfImage()
         userImageView.image = UIImage(named: userImageName)
         listNameLabel.text = listName
 
         if numberPlaces != "0" {
-            numberPlacesLabel.text = "\(numberPlaces) Places"
+            numberPlacesLabel.text = "\(numberPlaces) " + "UserCreatedCells.Places".localized()
         } else {
-            numberPlacesLabel.text = "No Places"
+            numberPlacesLabel.text = "UserCreatedCells.NumberPlacesLabel".localized()
         }
 
     }

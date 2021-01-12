@@ -5,6 +5,7 @@
   Created by maks on 22.12.2020.
   Copyright © 2020 maks. All rights reserved.
 */
+"AlertErrorTitle" = "Ошибка";
 
 "HomeViewController.BreakfastTitle" = "Завтрак";
 "HomeViewController.LunchTitle" = "Обед";
@@ -17,6 +18,28 @@
 "AccountViewController.SignInButton" = "Войти";
 "AccountViewController.SignOutButton" = "Выход";
 "AccountViewController.YourProfile" = "Ваш профиль";
-"AccountViewController.AlertTitle" = "Ошибка";
 "AccountViewController.AlertMessage" = "Не удалось войти в аккаунт";
 "AccountViewController.AlertActionTitle" = "Продолжить";
+
+"ListsViewController.Title" = "Списки";
+"ListsViewController.AlertToErrorMessage" = "Для добавления списков вам необходимо авторизоваться";
+
+"HeaderNameTitle.YourPlaces" = "Твои места";
+"HeaderNameTitle.ListsYouCreated" = "Списки, созданые тобой";
+
+"DefaultNameListsName.MySavedPlaces" = "Места, сохраненные мной";
+"DefaultNameListsName.MyLikedPlaces" = "Места, которые мне понравились";
+
+"ListsButtonCell.CreateNewListLabelTitle" = "Создать новый список";
+
+"UserCreatedCells.NumberPlacesLabel" = "Мест нет";
+"UserCreatedCells.Places" = "мест(-а)";
+
+"AlertToCreateNewList.CreateListButtonTitle" = "Готово";
+"AlertToCreateNewList.CancelButtonTitle" = "Закрыть";
+"AlertToCreateNewList.ListNameLabelText" = "Введи название списка";
+"AlertToCreateNewList.ListNameTextFieldPlaceholder" = "Напр.: места, где можно позавтракать; места, где мне нужно побывать";
+"AlertToCreateNewList.DescriptionLabelText" = "Описание";
+"AlertToCreateNewList.DescriptionTextFieldPlaceholder" = "Напр.: лучшие места, где можно позавтракать в воскресенье";
+"AlertToCreateNewList.MakeCollaborativeLabelText" = "Разрешить совместную работу?";
+"AlertToCreateNewList.MakeCollaborativeDescriptionLabel" = "Люди, которые подписаны на твой список, тоже смогут добавлять к нему места!";

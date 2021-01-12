@@ -16,6 +16,7 @@ class ListsButtonCell: UICollectionViewCell {
     static let identifier = "ListsButtonCell"
 
     override func awakeFromNib() {
+        createNewListLabel.text = "ListsButtonCell.CreateNewListLabelTitle".localized()
         super.awakeFromNib()
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor

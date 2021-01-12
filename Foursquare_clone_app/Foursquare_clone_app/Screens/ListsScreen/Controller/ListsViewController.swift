@@ -11,6 +11,7 @@ import UIKit
 class ListsViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     private var alertToCreateNewList: AlertToCreateNewList!
 
@@ -24,19 +25,32 @@ class ListsViewController: UIViewController {
     private let numberOfVerticalIndents: CGFloat = 2
     private let offset: CGFloat = 10
 
-    private let visualEffectView: UIVisualEffectView = {
+    private lazy var visualEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let view = UIVisualEffectView(effect: blurEffect)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Lists"
+        title = "ListsViewController.Title".localized()
+        collectionView.refreshControl = refreshControl
         getInfoAboutUserLists()
         setupCollectionCells()
         setupVisualEffectView()
+    }
+
+    @objc private func refresh (sender: UIRefreshControl) {
+        getInfoAboutUserLists()
+        sender.endRefreshing()
+        collectionView.reloadData()
     }
 
     private func setupCollectionCells () {
@@ -57,7 +71,37 @@ class ListsViewController: UIViewController {
         visualEffectView.alpha = 0
     }
 
-    private func showAlert () {
+    private func setupAlertForAddingNewList () {
+        alertToCreateNewList = Bundle.main.loadNibNamed("AlertToCreateNewList",
+                                                        owner: self,
+                                                        options: nil)?.first as? AlertToCreateNewList
+        view.addSubview(alertToCreateNewList)
+        alertToCreateNewList.center = view.center
+        alertToCreateNewList.configureAlert()
+        alertToCreateNewList.delegate = self
+        alertToCreateNewList.connectDelegateForTextFields()
+    }
+
+    private func setupAndShowErrorAlert () {
+        let controller = UIAlertController(title: "AlertErrorTitle".localized(),
+                                           message: "ListsViewController.AlertToErrorMessage".localized(),
+                                           preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        controller.addAction(cancel)
+        present(controller, animated: true, completion: nil)
+    }
+
+    private func setupActivityIndicator (isHidden: Bool) {
+        activityIndicator.isHidden = !isHidden
+
+        if isHidden {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
+    private func showAlertAddingNewList () {
         alertToCreateNewList.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         alertToCreateNewList.alpha = 0
 
@@ -68,7 +112,7 @@ class ListsViewController: UIViewController {
         }
     }
 
-    private func hideAlert () {
+    private func hideAlertAddingNewList () {
         UIView.animate(withDuration: 0.4, animations: {
             self.visualEffectView.alpha = 0
             self.alertToCreateNewList.alpha = 0
@@ -76,17 +120,6 @@ class ListsViewController: UIViewController {
         }) { (_) in
             self.alertToCreateNewList.removeFromSuperview()
         }
-    }
-
-    private func setupAlert () {
-        alertToCreateNewList = Bundle.main.loadNibNamed("AlertToCreateNewList",
-                                                        owner: self,
-                                                        options: nil)?.first as? AlertToCreateNewList
-        view.addSubview(alertToCreateNewList)
-        alertToCreateNewList.center = view.center
-        alertToCreateNewList.configureAlertImage()
-        alertToCreateNewList.delegate = self
-        alertToCreateNewList.connectDelegateForTextFields()
     }
 
     private func checkForAuthorization () -> Bool {
@@ -103,22 +136,30 @@ class ListsViewController: UIViewController {
     }
 
     private func getInfoAboutUserLists () {
-        networkManager.getInfoAboutUserLists(token: getToken()) { (userLists) in
-            print("networkManager")
-            guard let userLists = userLists else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.infoAboutUserLists = userLists
-                self.collectionView.reloadData()
+        if checkForAuthorization() {
+            setupActivityIndicator(isHidden: checkForAuthorization())
+            networkManager.getInfoAboutUserLists(token: getToken()) { (userLists, isSuccessful) in
+                if isSuccessful {
+                    guard let userLists = userLists else {
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        self.infoAboutUserLists = userLists
+                        self.setupActivityIndicator(isHidden: !self.checkForAuthorization())
+                        self.collectionView.reloadData()
+                    }
+                } else {
+                    self.setupActivityIndicator(isHidden: !self.checkForAuthorization())
+                }
+
             }
         }
     }
-
 }
 extension ListsViewController: AlertDelegate {
     func closeButtonPressed (cancelButton: UIButton) {
-        hideAlert()
+        hideAlertAddingNewList()
     }
 
     func createListButtonPressed (buttonCreate: UIButton) {
@@ -129,14 +170,14 @@ extension ListsViewController: AlertDelegate {
         }
 
         if !name.isEmpty {
-            hideAlert()
-            print("POST request")
+            hideAlertAddingNewList()
+            networkManager.postRequestForCreateNewList(token: getToken())
         } else {
             return
         }
     }
 
-    func collaborationSwitchAcrion(colloboraticeSwitch: UISwitch) {
+    func collaborationSwitchAction(colloboraticeSwitch: UISwitch) {
         if colloboraticeSwitch.isOn {
             configureListOptions[KeyForList.collaborative.currentKey] = colloboraticeSwitch.isOn
         } else {
@@ -146,20 +187,23 @@ extension ListsViewController: AlertDelegate {
     }
 }
 extension ListsViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let numberOfUserLists = infoAboutUserLists[indexPath.section].items.count
 
         if infoAboutUserLists.isEmpty {
             if indexPath.section == 1 {
-                setupAlert()
-                showAlert()
+                setupAndShowErrorAlert()
+            } else {
+                print("You clicked on a cell in the list")
             }
         } else {
+            let numberOfUserLists = infoAboutUserLists[indexPath.section].items.count
+
             if indexPath.item == numberOfUserLists {
-                setupAlert()
-                showAlert()
+                setupAlertForAddingNewList()
+                showAlertAddingNewList()
             } else {
-            // action
+                print("You clicked on a cell in the list")
             }
 
         }
@@ -168,26 +212,14 @@ extension ListsViewController: UICollectionViewDelegate {
 }
 extension ListsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if infoAboutUserLists.isEmpty {
-            return 2
-        } else {
-            return infoAboutUserLists.count
-        }
-
+        return 2
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         if section == 0 {
-
-            if infoAboutUserLists.isEmpty {
-                return defaultNamesForLists.count
-            } else {
-                return infoAboutUserLists[section].count
-            }
-
+            return defaultNamesForLists.count
         } else {
-
             if infoAboutUserLists.isEmpty {
                 return 1
             } else {
@@ -204,19 +236,16 @@ extension ListsViewController: UICollectionViewDataSource {
             let header = collectionView
                 .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                               withReuseIdentifier: HeaderCollectionView.identifier,
-                                              for: indexPath) as? HeaderCollectionView else {
+                                              for: indexPath) as? HeaderCollectionView
+        else {
             return UICollectionReusableView()
         }
+
         if infoAboutUserLists.isEmpty {
-            if indexPath.section == 0 {
-                header.configure(title: defaultHeaderLists[indexPath.section].title,
-                                 type: defaultHeaderLists[indexPath.section].type,
-                                 numberOfLists: nil)
-            } else {
-                header.configure(title: defaultHeaderLists[indexPath.section].title,
-                                 type: defaultHeaderLists[indexPath.section].type,
-                                 numberOfLists: nil)
-            }
+
+            header.configure(title: defaultHeaderLists[indexPath.section].title,
+                             type: defaultHeaderLists[indexPath.section].type,
+                             numberOfLists: nil)
         } else {
 
             let title = infoAboutUserLists[indexPath.section].name
@@ -233,13 +262,12 @@ extension ListsViewController: UICollectionViewDataSource {
 
         let optionDefaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCreatedCells.identifier,
                                                                    for: indexPath) as? UserCreatedCells
+        let addButtonCell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsButtonCell.identifier,
+                                                               for: indexPath)
 
         guard let cell = optionDefaultCell else {
             return UICollectionViewCell()
         }
-
-        let addButtonCell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsButtonCell.identifier,
-                                                               for: indexPath)
 
         if infoAboutUserLists.isEmpty {
 
@@ -248,16 +276,12 @@ extension ListsViewController: UICollectionViewDataSource {
                                listName: defaultNamesForLists[indexPath.item].listName)
                 return cell
             } else {
-
-                if indexPath.item == 0 {
-                    return addButtonCell
-                } else {
-                    return UICollectionViewCell()
-                }
-
+                return addButtonCell
             }
+
         } else {
             let numberOfUserLists = infoAboutUserLists[indexPath.section].items.count
+
             if indexPath.section != 0 && indexPath.item == numberOfUserLists {
                 return addButtonCell
             }
@@ -265,10 +289,18 @@ extension ListsViewController: UICollectionViewDataSource {
             let listName = infoAboutUserLists[indexPath.section].items[indexPath.item].name
             let numberPlaces = infoAboutUserLists[indexPath.section].items[indexPath.item].listItems.count
 
-            cell.configure(backgroundImageName: "listsCellBackground",
-                           userImageName: userImageDefault,
-                           listName: listName,
-                           numberPlaces: "\(numberPlaces)")
+            if indexPath.section == 0 {
+                cell.configure(backgroundImageName: "listsCellBackground",
+                               userImageName: defaultImageForLists[indexPath.item],
+                               listName: listName,
+                               numberPlaces: "\(numberPlaces)")
+            } else {
+                cell.configure(backgroundImageName: "listsCellBackground",
+                               userImageName: userImageDefault,
+                               listName: listName,
+                               numberPlaces: "\(numberPlaces)")
+            }
+
             return cell
         }
     }

@@ -12,5 +12,5 @@ struct DefaultNameListsModel {
     let listName: String
 }
 
-let defaultNameLists = [DefaultNameListsModel(listName: "My Saved Places"),
-                    DefaultNameListsModel(listName: "My Liked Places")]
+let defaultNameLists = [DefaultNameListsModel(listName: "DefaultNameListsName.MySavedPlaces".localized()),
+                        DefaultNameListsModel(listName: "DefaultNameListsName.MyLikedPlaces".localized())]

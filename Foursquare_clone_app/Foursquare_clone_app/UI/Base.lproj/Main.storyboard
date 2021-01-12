@@ -30,10 +30,16 @@
                                     <outlet property="delegate" destination="ftU-bp-X6e" id="4dD-3z-hQJ"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="tmF-yP-ela">
+                                <rect key="frame" x="188.5" y="432" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.37986247470000001" blue="0.78753569160000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Rfr-kf-tEg" firstAttribute="top" secondItem="a3U-DW-bXL" secondAttribute="top" id="6Ph-iQ-MO3"/>
+                            <constraint firstItem="tmF-yP-ela" firstAttribute="centerY" secondItem="a3U-DW-bXL" secondAttribute="centerY" id="C3T-4S-ExQ"/>
+                            <constraint firstItem="tmF-yP-ela" firstAttribute="centerX" secondItem="a3U-DW-bXL" secondAttribute="centerX" id="Oq1-py-sjz"/>
                             <constraint firstItem="a3U-DW-bXL" firstAttribute="bottom" secondItem="Rfr-kf-tEg" secondAttribute="bottom" id="Otr-Hp-JpX"/>
                             <constraint firstItem="a3U-DW-bXL" firstAttribute="trailing" secondItem="Rfr-kf-tEg" secondAttribute="trailing" id="Xns-JO-n5x"/>
                             <constraint firstItem="Rfr-kf-tEg" firstAttribute="leading" secondItem="a3U-DW-bXL" secondAttribute="leading" id="fnJ-io-Kg4"/>
@@ -42,6 +48,7 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="gLd-Ji-hua"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="tmF-yP-ela" id="UvA-At-Gz0"/>
                         <outlet property="collectionView" destination="Rfr-kf-tEg" id="L2x-fq-2EW"/>
                     </connections>
                 </viewController>
@@ -331,7 +338,7 @@
                                 <rect key="frame" x="0.0" y="114" width="414" height="699"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageToAccScreen" translatesAutoresizingMaskIntoConstraints="NO" id="nhX-2u-X3n">
-                                        <rect key="frame" x="107" y="70" width="200" height="32"/>
+                                        <rect key="frame" x="107" y="70" width="200" height="128"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sc6-lT-m5m">
                                         <rect key="frame" x="346" y="661" width="60" height="30"/>
@@ -356,19 +363,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Personal Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0u1-ZB-ahq">
-                                        <rect key="frame" x="8" y="138" width="398" height="20.5"/>
+                                        <rect key="frame" x="8" y="234" width="398" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By creating an account, you are able to follow friends and experts you trust and see the places they've recommended." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5P-yi-KiW">
-                                        <rect key="frame" x="24" y="173.5" width="366" height="26.5"/>
+                                        <rect key="frame" x="24" y="269.5" width="366" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NUP-hY-vhx">
-                                        <rect key="frame" x="113" y="208" width="188" height="58"/>
+                                        <rect key="frame" x="113" y="304" width="188" height="58"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-RH-Lcw">
                                                 <rect key="frame" x="8" y="8" width="45" height="42"/>
@@ -501,9 +508,9 @@
     </scenes>
     <resources>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
-        <image name="email" width="16" height="16"/>
-        <image name="facebook" width="16" height="16"/>
-        <image name="imageToAccScreen" width="16" height="16"/>
+        <image name="email" width="32" height="32"/>
+        <image name="facebook" width="32" height="32"/>
+        <image name="imageToAccScreen" width="128" height="128"/>
         <image name="list.bullet" catalog="system" width="64" height="44"/>
         <image name="list.dash" catalog="system" width="64" height="42"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>

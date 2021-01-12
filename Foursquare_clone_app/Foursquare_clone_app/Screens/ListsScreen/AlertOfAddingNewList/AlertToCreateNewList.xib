@@ -21,16 +21,16 @@
                         <constraint firstAttribute="height" constant="79" id="QY8-Ck-DbK"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter List Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBp-TE-a1f">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBp-TE-a1f">
                     <rect key="frame" x="37" y="104" width="323" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="GCu-zL-CuI"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.77698683375634514" green="0.77698683375634514" blue="0.77698683375634514" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ex: Branch Places, Paris Trip" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CQs-zj-g36">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CQs-zj-g36">
                     <rect key="frame" x="37" y="127" width="323" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="29" id="kk4-tl-R3d"/>
@@ -42,7 +42,7 @@
                     <rect key="frame" x="37" y="164" width="323" height="2"/>
                     <color key="backgroundColor" white="0.89761700909999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ex: The best breakfast places to get eggs on a Sunday" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tSQ-9L-SV4">
+                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tSQ-9L-SV4">
                     <rect key="frame" x="37" y="195" width="323" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="pPZ-tV-9Zg"/>
@@ -50,13 +50,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLk-o9-wbt">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLk-o9-wbt">
                     <rect key="frame" x="37" y="174" width="323" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="X2k-VC-wP8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.7769868338" green="0.7769868338" blue="0.7769868338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxg-SY-SWy">
@@ -75,17 +75,17 @@
                         <action selector="createListButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="B2P-T5-VGO"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make Collaborative?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g08-f9-mVc">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g08-f9-mVc">
                     <rect key="frame" x="37" y="245" width="240" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="xQD-2u-LQM"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.7769868338" green="0.7769868338" blue="0.7769868338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People why follow your lists can add places? too!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1N-Ye-DdF">
-                    <rect key="frame" x="37" y="266" width="240" height="38"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1N-Ye-DdF">
+                    <rect key="frame" x="37" y="266" width="271" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="QcZ-Mk-hLT"/>
                     </constraints>
@@ -126,6 +126,7 @@
                 <constraint firstItem="aLk-o9-wbt" firstAttribute="top" secondItem="WLy-d5-rgW" secondAttribute="bottom" constant="8" id="AV8-TM-Ssz"/>
                 <constraint firstItem="tSQ-9L-SV4" firstAttribute="top" secondItem="aLk-o9-wbt" secondAttribute="bottom" id="C2S-le-ZTh"/>
                 <constraint firstItem="VEm-0R-E3i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EWZ-s5-0fL"/>
+                <constraint firstItem="ZG2-lD-qzF" firstAttribute="leading" secondItem="d1N-Ye-DdF" secondAttribute="trailing" constant="1" id="EgN-xt-ZNI"/>
                 <constraint firstItem="d1N-Ye-DdF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37" id="FyA-pV-42e"/>
                 <constraint firstAttribute="trailing" secondItem="CQs-zj-g36" secondAttribute="trailing" constant="20" id="Iqn-tT-3Av"/>
                 <constraint firstItem="eXL-FB-p82" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="KSI-tR-AqZ"/>
@@ -150,7 +151,6 @@
                 <constraint firstAttribute="trailing" secondItem="GYM-37-Fr6" secondAttribute="trailing" constant="20" id="eOy-0d-a0E"/>
                 <constraint firstItem="lxg-SY-SWy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="fA4-9O-pKO"/>
                 <constraint firstItem="CQs-zj-g36" firstAttribute="top" secondItem="HBp-TE-a1f" secondAttribute="bottom" constant="2" id="h27-hZ-PTa"/>
-                <constraint firstAttribute="trailing" secondItem="d1N-Ye-DdF" secondAttribute="trailing" constant="103" id="hi7-6V-fkG"/>
                 <constraint firstItem="HBp-TE-a1f" firstAttribute="top" secondItem="VEm-0R-E3i" secondAttribute="bottom" constant="24" id="hvc-dE-YLJ"/>
                 <constraint firstItem="aLk-o9-wbt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37" id="nJR-fh-lJt"/>
                 <constraint firstAttribute="trailing" secondItem="aLk-o9-wbt" secondAttribute="trailing" constant="20" id="opg-ti-gFA"/>
@@ -169,8 +169,8 @@
                 <outlet property="descriptionTextField" destination="tSQ-9L-SV4" id="zpx-9c-zLw"/>
                 <outlet property="listNameLabel" destination="HBp-TE-a1f" id="Qz7-2J-poo"/>
                 <outlet property="listNameTextField" destination="CQs-zj-g36" id="v55-CY-Mrn"/>
-                <outlet property="makeCollaborativeLabel" destination="d1N-Ye-DdF" id="gdE-Nq-R94"/>
-                <outlet property="makeCollaborativeTextField" destination="g08-f9-mVc" id="Z6v-Ms-9nV"/>
+                <outlet property="makeCollaborativeDescriptionLabel" destination="d1N-Ye-DdF" id="AOB-xZ-6sl"/>
+                <outlet property="makeCollaborativeLabel" destination="g08-f9-mVc" id="k5W-5P-q8f"/>
                 <outlet property="userImage" destination="NaT-Cn-7Ve" id="2vA-gb-CpM"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="224.66517857142856"/>

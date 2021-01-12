@@ -103,7 +103,7 @@ class AccountViewController: UIViewController {
     }
 
     private func showErrorAlert () {
-        let alertController = UIAlertController(title: "AccountViewController.AlertTitle".localized(),
+        let alertController = UIAlertController(title: "AlertErrorTitle".localized(),
                                                 message: "AccountViewController.AlertMessage".localized(),
                                                 preferredStyle: .alert)
         let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),

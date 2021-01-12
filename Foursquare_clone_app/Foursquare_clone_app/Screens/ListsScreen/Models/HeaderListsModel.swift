@@ -13,5 +13,5 @@ struct HeaderName {
     let type: String
 }
 
-let listOfHeaderNames = [HeaderName(title: "Your Places", type: "yours"),
-                         HeaderName(title: "Lists You Created", type: "created")]
+let listOfHeaderNames = [HeaderName(title: "HeaderNameTitle.YourPlaces".localized(), type: "yours"),
+                         HeaderName(title: "HeaderNameTitle.ListsYouCreated".localized(), type: "created")]

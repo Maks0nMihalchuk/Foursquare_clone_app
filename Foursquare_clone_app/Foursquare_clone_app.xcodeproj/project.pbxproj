@@ -54,6 +54,10 @@
 		2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269F925891EBC00EAEC68 /* NetworkManager.swift */; };
 		2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FC258A2D2700EAEC68 /* RequestModel.swift */; };
 		2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FE258A595800EAEC68 /* CategoryModel.swift */; };
+		2DD6DCC225AC9F5900B0E948 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6DCC125AC9F5900B0E948 /* StorageManager.swift */; };
+		2DD6DCC425ACA68600B0E948 /* GetUserListsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6DCC325ACA68600B0E948 /* GetUserListsGroup.swift */; };
+		2DD6DCC625ACA6C200B0E948 /* GetUserListsGroupItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6DCC525ACA6C200B0E948 /* GetUserListsGroupItems.swift */; };
+		2DD6DCC825ACA70E00B0E948 /* GetPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6DCC725ACA70E00B0E948 /* GetPhoto.swift */; };
 		2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDDCD49258B9C79008D2525 /* SearchTableCell.swift */; };
 		2DE67F19258800460092B998 /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE67F17258800460092B998 /* CategoryCollectionCell.swift */; };
 		2DE67F1A258800460092B998 /* CategoryCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DE67F18258800460092B998 /* CategoryCollectionCell.xib */; };
@@ -114,6 +118,10 @@
 		2DD269F925891EBC00EAEC68 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2DD269FC258A2D2700EAEC68 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		2DD269FE258A595800EAEC68 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		2DD6DCC125AC9F5900B0E948 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		2DD6DCC325ACA68600B0E948 /* GetUserListsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserListsGroup.swift; sourceTree = "<group>"; };
+		2DD6DCC525ACA6C200B0E948 /* GetUserListsGroupItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserListsGroupItems.swift; sourceTree = "<group>"; };
+		2DD6DCC725ACA70E00B0E948 /* GetPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPhoto.swift; sourceTree = "<group>"; };
 		2DDDCD49258B9C79008D2525 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		2DE67F142587F1B50092B998 /* DefaultCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryModel.swift; sourceTree = "<group>"; };
 		2DE67F17258800460092B998 /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 		2D292EA125A3624900A67F36 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2DD6DCC025AC9F3500B0E948 /* StorageManager */,
 				2DD269F825891EA500EAEC68 /* NetworkManager */,
 				2D49B9C9259B2752009AC096 /* KeychainManager */,
 			);
@@ -435,6 +444,9 @@
 			isa = PBXGroup;
 			children = (
 				2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */,
+				2DD6DCC325ACA68600B0E948 /* GetUserListsGroup.swift */,
+				2DD6DCC525ACA6C200B0E948 /* GetUserListsGroupItems.swift */,
+				2DD6DCC725ACA70E00B0E948 /* GetPhoto.swift */,
 			);
 			path = UserListModel;
 			sourceTree = "<group>";
@@ -455,6 +467,14 @@
 				2D390107258CE2E6003C2187 /* LocationModel.swift */,
 			);
 			path = VenuesModels;
+			sourceTree = "<group>";
+		};
+		2DD6DCC025AC9F3500B0E948 /* StorageManager */ = {
+			isa = PBXGroup;
+			children = (
+				2DD6DCC125AC9F5900B0E948 /* StorageManager.swift */,
+			);
+			path = StorageManager;
 			sourceTree = "<group>";
 		};
 		2DDDCD46258B9B42008D2525 /* TableCell */ = {
@@ -643,11 +663,13 @@
 				2D2607622590B33400D9E1DC /* DefaultCategoryModel.swift in Sources */,
 				2D326BB525909F4F006E4A59 /* ItemUser.swift in Sources */,
 				2D2F495225A917F100A61FBB /* AlertToCreateNewList.swift in Sources */,
+				2DD6DCC225AC9F5900B0E948 /* StorageManager.swift in Sources */,
 				2D4CF36725A2289E00C7006B /* ListsViewController.swift in Sources */,
 				2DC43C8E2599E3D400655B2F /* AccountViewController.swift in Sources */,
 				2D326BB325909F1E006E4A59 /* Item.swift in Sources */,
 				2D4F073825A77C8000C9230E /* DefaultImage.swift in Sources */,
 				2D326BAF25909CEB006E4A59 /* Listed.swift in Sources */,
+				2DD6DCC625ACA6C200B0E948 /* GetUserListsGroupItems.swift in Sources */,
 				2D4CF36B25A2445100C7006B /* UserCreatedCells.swift in Sources */,
 				2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */,
 				2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */,
@@ -658,6 +680,7 @@
 				2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */,
 				2D25472825A5CDEB008151FF /* HeaderCollectionView.swift in Sources */,
 				2D326BB125909D59006E4A59 /* Group.swift in Sources */,
+				2DD6DCC825ACA70E00B0E948 /* GetPhoto.swift in Sources */,
 				2DE67F19258800460092B998 /* CategoryCollectionCell.swift in Sources */,
 				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
@@ -676,6 +699,7 @@
 				2D3561F325A746D10015987D /* UIImageExtension.swift in Sources */,
 				2D4F073B25A857DC00C9230E /* ListsButtonCell.swift in Sources */,
 				2D4E54DF25AA5541002E0E41 /* RequestModelPOST.swift in Sources */,
+				2DD6DCC425ACA68600B0E948 /* GetUserListsGroup.swift in Sources */,
 				2DEC31D5258AA75C009FA472 /* SearchViewController.swift in Sources */,
 				2D4CF37025A24DA100C7006B /* DefaultNameListsModel.swift in Sources */,
 				2D9EC7BB259260D5003FBBC3 /* StringExtension.swift in Sources */,
