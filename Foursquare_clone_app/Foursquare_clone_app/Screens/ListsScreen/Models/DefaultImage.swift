@@ -24,7 +24,3 @@ enum DefaultImage {
         }
     }
 }
-
-let defaultImageForLists = [DefaultImage.userImageWithBookmark.switchImage,
-                            DefaultImage.userImageWithHeart.switchImage]
-let userImageDefault = DefaultImage.userImageDefault.switchImage

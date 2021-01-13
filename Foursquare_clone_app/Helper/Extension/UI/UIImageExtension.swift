@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 
+enum KeyForCropCorner {
+    case bottomLeftCorner
+    case upperRightCorner
+}
+
 extension UIImage {
-    func cropCornerOfImage () -> UIImage {
+    func cropCornerOfImage (by key: KeyForCropCorner) -> UIImage {
         let path = UIBezierPath()
         let imageSize = self.size
         let scale: CGFloat = 0
@@ -19,18 +24,32 @@ extension UIImage {
 
         self.draw(at: .zero)
 
-        let startingPoint = CGPoint(x: 0, y: imageSize.height)
-        let intermediatePoint = CGPoint(x: 0, y: imageSize.height * 0.85)
-        let finalPoint = CGPoint(x: imageSize.width + 10, y: imageSize.height)
+        var startingPoint: CGPoint
+        var intermediatePoint: CGPoint
+        var finalPoint: CGPoint
+        var color: UIColor
+        switch key {
+        case .bottomLeftCorner:
+            startingPoint = CGPoint(x: 0, y: imageSize.height)
+            intermediatePoint = CGPoint(x: 0, y: imageSize.height * 0.85)
+            finalPoint = CGPoint(x: imageSize.width + 10, y: imageSize.height)
+
+            color = .white
+        case .upperRightCorner:
+           startingPoint = CGPoint(x: imageSize.width * 0.65, y: 0)
+           intermediatePoint = CGPoint(x: imageSize.width, y: imageSize.height * 0.5)
+           finalPoint = CGPoint(x: imageSize.width, y: 0)
+
+           color = .blue
+        }
+
+        color.setFill()
 
         path.move(to: startingPoint)
         path.addLine(to: intermediatePoint)
         path.addLine(to: finalPoint)
 
         path.lineWidth = 2
-
-        let color: UIColor = .white
-        color.setFill()
 
         path.fill()
 

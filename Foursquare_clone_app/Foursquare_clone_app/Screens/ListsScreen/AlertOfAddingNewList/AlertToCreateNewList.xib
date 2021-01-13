@@ -95,9 +95,6 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZG2-lD-qzF">
                     <rect key="frame" x="309" y="269" width="51" height="31"/>
-                    <connections>
-                        <action selector="collaborationSwitchAcrion:" destination="iN0-l3-epB" eventType="valueChanged" id="E9x-ar-hKp"/>
-                    </connections>
                 </switch>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXL-FB-p82">
                     <rect key="frame" x="301" y="17" width="57" height="34"/>

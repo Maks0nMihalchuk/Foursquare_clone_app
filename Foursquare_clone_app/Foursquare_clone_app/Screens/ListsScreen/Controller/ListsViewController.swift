@@ -14,15 +14,11 @@ class ListsViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     private var alertToCreateNewList: AlertToCreateNewList!
-    private let defaultNamesForLists = defaultNameLists
-    private let defaultHeaderLists = listOfHeaderNames
-    private var infoAboutUserLists = [GetUserListsGroup]()
+    private var userLists = [GetUserListsGroup]()
     private let networkManager = NetworkManager.shared
     private let keychainManager = KeychainManager.shared
-    private let numberOfCellsInRow = 2
-    private let numberOfHorizontalIndents: CGFloat = 3
-    private let numberOfVerticalIndents: CGFloat = 2
-    private let offset: CGFloat = 10
+    private let defaultNameLists = [DefaultNameListsModel(listName: "DefaultNameListsName.MySavedPlaces".localized()),
+                                    DefaultNameListsModel(listName: "DefaultNameListsName.MyLikedPlaces".localized())]
 
     private lazy var visualEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
@@ -39,195 +35,81 @@ class ListsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "ListsViewController.Title".localized()
         collectionView.refreshControl = refreshControl
+        setupScreen()
         setupCollectionCells()
         setupVisualEffectView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getInfoAboutUserLists()
-    }
-
-    @objc private func refresh (sender: UIRefreshControl) {
-        getInfoAboutUserLists()
-        sender.endRefreshing()
-        collectionView.reloadData()
-    }
-
-    private func setupCollectionCells () {
-        collectionView.register(UserCreatedCells.nib(),
-                                forCellWithReuseIdentifier: UserCreatedCells.identifier)
-        collectionView.register(ListsButtonCell.nib(), forCellWithReuseIdentifier: ListsButtonCell.identifier)
-        collectionView.register(HeaderCollectionView.nib(),
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: HeaderCollectionView.identifier)
-    }
-
-    private func setupVisualEffectView () {
-        view.addSubview(visualEffectView)
-        visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        visualEffectView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        visualEffectView.alpha = 0
-    }
-
-    private func setupAlertForAddingNewList () {
-        alertToCreateNewList = Bundle.main.loadNibNamed("AlertToCreateNewList",
-                                                        owner: self,
-                                                        options: nil)?.first as? AlertToCreateNewList
-        view.addSubview(alertToCreateNewList)
-        alertToCreateNewList.center = view.center
-        alertToCreateNewList.configureAlert()
-        alertToCreateNewList.delegate = self
-        alertToCreateNewList.connectDelegateForTextFields()
-    }
-
-    private func setupAndShowErrorAlert () {
-        let controller = UIAlertController(title: "AlertErrorTitle".localized(),
-                                           message: "ListsViewController.AlertToErrorMessage".localized(),
-                                           preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        controller.addAction(cancel)
-        present(controller, animated: true, completion: nil)
-    }
-
-    private func setupActivityIndicator (isHidden: Bool) {
-        activityIndicator.isHidden = !isHidden
-
-        if isHidden {
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
-        }
-    }
-
-    private func showAlertAddingNewList () {
-        alertToCreateNewList.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        alertToCreateNewList.alpha = 0
-
-        UIView.animate(withDuration: 0.4) {
-            self.visualEffectView.alpha = 1
-            self.alertToCreateNewList.alpha = 1
-            self.alertToCreateNewList.transform = CGAffineTransform.identity
-        }
-    }
-
-    private func hideAlertAddingNewList () {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.visualEffectView.alpha = 0
-            self.alertToCreateNewList.alpha = 0
-            self.alertToCreateNewList.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        }) { (_) in
-            self.alertToCreateNewList.removeFromSuperview()
-        }
-    }
-
-    private func checkForAuthorization () -> Bool {
-
-        return keychainManager.checkForDataAvailability(for: getTokenKey())
-    }
-
-    private func getTokenKey () -> String {
-        return KeychainKey.accessToken.currentKey
-    }
-
-    private func getToken () -> String {
-        return keychainManager.getValue(for: getTokenKey())
-    }
-
-    private func getInfoAboutUserLists () {
-        if checkForAuthorization() {
-            setupActivityIndicator(isHidden: checkForAuthorization())
-            networkManager.getInfoAboutUserLists(token: getToken()) { (userLists, isSuccessful) in
-                if isSuccessful {
-                    guard let userLists = userLists else {
-                        return
-                    }
-
-                    DispatchQueue.main.async {
-                        self.infoAboutUserLists = userLists
-                        self.setupActivityIndicator(isHidden: !self.checkForAuthorization())
-                        self.collectionView.reloadData()
-                    }
-                } else {
-                    self.setupActivityIndicator(isHidden: !self.checkForAuthorization())
-                }
-
-            }
-        }
+        updateDataOnScreen()
     }
 }
 extension ListsViewController: AlertDelegate {
-    func closeButtonPressed (cancelButton: UIButton) {
-        hideAlertAddingNewList()
+    func closeButtonPressed (_ sender: AlertToCreateNewList) {
+        startAnimationForAlert(key: .hide)
     }
 
-    func createListButtonPressed (buttonCreate: UIButton) {
-        let listName = configureListOptions[KeyForList.listName.currentKey] as? String
+    func createListButtonPressed (_ sender: AlertToCreateNewList,
+                                  listName: String?,
+                                  description: String?,
+                                  collaborativeFlag: Bool) {
 
-        guard let name = listName else {
+        guard
+            let name = listName,
+            let description = description
+        else {
             return
         }
 
         if !name.isEmpty {
-            hideAlertAddingNewList()
-            networkManager.postRequestForCreateNewList(token: getToken())
+            startAnimationForAlert(key: .hide)
+            networkManager.postRequestForCreateNewList(token: getToken(),
+                                                       listName: name,
+                                                       descriptionList: description,
+                                                       collaborativeFlag: collaborativeFlag)
+
         } else {
             return
         }
-    }
-
-    func collaborationSwitchAction(colloboraticeSwitch: UISwitch) {
-        if colloboraticeSwitch.isOn {
-            configureListOptions[KeyForList.collaborative.currentKey] = true
-        } else {
-            configureListOptions[KeyForList.collaborative.currentKey] = false
-        }
-
     }
 }
 extension ListsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if infoAboutUserLists.isEmpty {
-            if indexPath.section == 1 {
+        if userLists.isEmpty {
+            switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
+            case .sectionOfStandardCells:
+                break
+            case .sectionOfUserCells:
                 setupAndShowErrorAlert()
-            } else {
-                print("You clicked on a cell in the list")
             }
         } else {
-            let numberOfUserLists = infoAboutUserLists[indexPath.section].items.count
+            let numberOfUserLists = userLists[indexPath.section].items.count
 
             if indexPath.item == numberOfUserLists {
                 setupAlertForAddingNewList()
-                showAlertAddingNewList()
+                startAnimationForAlert(key: .show)
             } else {
-                print("You clicked on a cell in the list")
-            }
 
+            }
         }
     }
-
 }
 extension ListsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return KeysForSections.arrayOfKeysForSection.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        if section == 0 {
-            return defaultNamesForLists.count
-        } else {
-            if infoAboutUserLists.isEmpty {
-                return 1
-            } else {
-                return infoAboutUserLists[section].count + 1
-            }
+        switch KeysForSections.arrayOfKeysForSection[section] {
+        case .sectionOfStandardCells:
+            return defaultNameLists.count
+        case .sectionOfUserCells:
+            return userLists.isEmpty ? 1 : userLists[section].count + 1
         }
     }
 
@@ -244,16 +126,16 @@ extension ListsViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
 
-        if infoAboutUserLists.isEmpty {
+        if userLists.isEmpty {
 
-            header.configure(title: defaultHeaderLists[indexPath.section].title,
-                             type: defaultHeaderLists[indexPath.section].type,
+            header.configure(title: listOfHeaderNames[indexPath.section].title,
+                             type: listOfHeaderNames[indexPath.section].type,
                              numberOfLists: nil)
         } else {
 
-            let title = infoAboutUserLists[indexPath.section].name
-            let type = infoAboutUserLists[indexPath.section].type
-            let numberOfLists = infoAboutUserLists[indexPath.section].count
+            let title = userLists[indexPath.section].name
+            let type = userLists[indexPath.section].type
+            let numberOfLists = userLists[indexPath.section].count
             header.configure(title: title, type: type, numberOfLists: numberOfLists)
         }
 
@@ -262,77 +144,237 @@ extension ListsViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cellWithButton = dequeueReusableCellWithButton(collectionView, indexPath: indexPath)
+        let userCell = dequeueReusableUserCell(collectionView, indexPath: indexPath)
 
-        let optionDefaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCreatedCells.identifier,
-                                                                   for: indexPath) as? UserCreatedCells
-        let addButtonCell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsButtonCell.identifier,
-                                                               for: indexPath)
-
-        guard let cell = optionDefaultCell else {
+        guard let cell = userCell else {
             return UICollectionViewCell()
         }
 
-        if infoAboutUserLists.isEmpty {
+        let defaultImageForLists = [DefaultImage.userImageWithBookmark.switchImage,
+                                    DefaultImage.userImageWithHeart.switchImage]
+        let userImageDefault = DefaultImage.userImageDefault.switchImage
 
-            if indexPath.section == 0 {
+        if userLists.isEmpty {
+
+            switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
+            case .sectionOfStandardCells:
                 cell.configure(backgroundImage: nil, userImageName: defaultImageForLists[indexPath.item],
-                               listName: defaultNamesForLists[indexPath.item].listName)
+                               listName: defaultNameLists[indexPath.item].listName, numberPlaces: nil)
                 return cell
-            } else {
-                return addButtonCell
+            case .sectionOfUserCells:
+                return cellWithButton
             }
-
         } else {
-            let numberOfUserLists = infoAboutUserLists[indexPath.section].items.count
+            let numberOfUserLists = userLists[indexPath.section].items.count
 
-            if indexPath.section != 0 && indexPath.item == numberOfUserLists {
-                return addButtonCell
+            if indexPath.item == numberOfUserLists {
+                return cellWithButton
             }
 
-            let listName = infoAboutUserLists[indexPath.section].items[indexPath.item].name
-            let numberPlaces = infoAboutUserLists[indexPath.section].items[indexPath.item].listItems.count
-            let prefix = infoAboutUserLists[indexPath.section].items[indexPath.item].photo?.prefix
-            let suffix = infoAboutUserLists[indexPath.section].items[indexPath.item].photo?.suffix
-            var userImage = String()
-
-            if indexPath.section == 0 {
-                userImage = defaultImageForLists[indexPath.item]
-            } else {
-                userImage = userImageDefault
-            }
+            let listName = userLists[indexPath.section].items[indexPath.item].name
+            let numberPlaces = userLists[indexPath.section].items[indexPath.item].listItems.count
+            let prefix = userLists[indexPath.section].items[indexPath.item].photo?.prefix
+            let suffix = userLists[indexPath.section].items[indexPath.item].photo?.suffix
+            let userImage = setImageName(indexPath: indexPath,
+                                         defaultImageForLists: defaultImageForLists,
+                                         userImageDefault: userImageDefault)
 
             networkManager.getPhoto(prefix: prefix, suffix: suffix) { (imageData) in
                 DispatchQueue.main.async {
                     cell.configure(backgroundImage: imageData,
                                    userImageName: userImage,
                                    listName: listName,
-                                   numberPlaces: "\(numberPlaces)")
+                                   numberPlaces: numberPlaces)
                 }
             }
-
             return cell
         }
     }
-
 }
 extension ListsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let topBottomPadding = offset * numberOfVerticalIndents
+        let numberOfCellsInRow: CGFloat = 2
+        let numberOfHorizontalIndents: CGFloat = 3
+        let numberOfVerticalIndents: CGFloat = 2
+        let offset: CGFloat = 10
 
         let collectionViewBounds = collectionView.bounds
-        let widthCell = collectionViewBounds.width / CGFloat(numberOfCellsInRow)
+        let widthCell = collectionViewBounds.width / numberOfCellsInRow
         let heightCell: CGFloat = widthCell
-        let spacing = (numberOfHorizontalIndents) * offset / CGFloat(numberOfCellsInRow)
+        let spacing = numberOfHorizontalIndents * offset / numberOfCellsInRow
 
-        return CGSize(width: widthCell - spacing, height: heightCell - topBottomPadding)
+        return CGSize(width: widthCell - spacing, height: heightCell - offset * numberOfVerticalIndents)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.bounds.size.width, height: 35)
+    }
+}
+// MARK: - Setup showing and hiding alerts
+private extension ListsViewController {
+    func setupAlertForAddingNewList () {
+        alertToCreateNewList = Bundle.main.loadNibNamed("AlertToCreateNewList",
+                                                        owner: self,
+                                                        options: nil)?.first as? AlertToCreateNewList
+        view.addSubview(alertToCreateNewList)
+        alertToCreateNewList.center = view.center
+        alertToCreateNewList.delegate = self
+    }
+
+    func startAnimationForAlert (key animation: AlertAnimationKeys) {
+        let scale: CGFloat = 1.3
+        let duration = 0.4
+
+        switch animation {
+        case .show:
+            showAlertAddingNewList(scale: scale, duration: duration)
+        case .hide:
+            hideAlertAddingNewList(scale: scale, duration: duration)
+        }
+    }
+
+    func showAlertAddingNewList (scale: CGFloat, duration: Double) {
+        alertToCreateNewList.transform = CGAffineTransform(scaleX: scale, y: scale)
+        alertToCreateNewList.alpha = 0
+
+        UIView.animate(withDuration: duration) {
+            self.visualEffectView.alpha = 1
+            self.alertToCreateNewList.alpha = 1
+            self.alertToCreateNewList.transform = CGAffineTransform.identity
+        }
+    }
+
+    func hideAlertAddingNewList (scale: CGFloat, duration: Double) {
+        UIView.animate(withDuration: duration) {
+            self.visualEffectView.alpha = 0
+            self.alertToCreateNewList.alpha = 0
+            self.alertToCreateNewList.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self.alertToCreateNewList.removeFromSuperview()
+        }
+    }
+
+    func setupVisualEffectView () {
+        view.addSubview(visualEffectView)
+        visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        visualEffectView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        visualEffectView.alpha = 0
+    }
+
+    func setupAndShowErrorAlert () {
+        let controller = UIAlertController(title: "AlertErrorTitle".localized(),
+                                           message: "ListsViewController.AlertToErrorMessage".localized(),
+                                           preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        controller.addAction(cancel)
+        present(controller, animated: true, completion: nil)
+    }
+}
+// MARK: - Setup screen
+private extension ListsViewController {
+    func setImageName (indexPath: IndexPath, defaultImageForLists: [String], userImageDefault: String) -> String {
+        switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
+        case .sectionOfStandardCells:
+            return defaultImageForLists[indexPath.item]
+        case  .sectionOfUserCells:
+            return userImageDefault
+        }
+    }
+
+    func dequeueReusableCellWithButton (_ collectionView: UICollectionView,
+                                        indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellWithButton.identifier, for: indexPath)
+        return cell
+
+    }
+
+    func dequeueReusableUserCell (_ collectionView: UICollectionView, indexPath: IndexPath) -> UserCreatedCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCreatedCell.identifier,
+                                                            for: indexPath) as? UserCreatedCell
+        return cell
+    }
+
+    func setupScreen () {
+        title = "ListsViewController.Title".localized()
+        collectionView.refreshControl = refreshControl
+    }
+    func updateDataOnScreen () {
+        if userLists.isEmpty {
+            getUserLists()
+        }
+    }
+
+    func setupCollectionCells () {
+        collectionView.register(UserCreatedCell.nib(),
+                                forCellWithReuseIdentifier: UserCreatedCell.identifier)
+        collectionView.register(CellWithButton.nib(), forCellWithReuseIdentifier: CellWithButton.identifier)
+        collectionView.register(HeaderCollectionView.nib(),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: HeaderCollectionView.identifier)
+    }
+
+    func setupActivityIndicator (isHidden: Bool) {
+        activityIndicator.isHidden = !isHidden
+
+        if isHidden {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
+    @objc func refresh (sender: UIRefreshControl) {
+        getUserLists()
+        sender.endRefreshing()
+        collectionView.reloadData()
+    }
+}
+// MARK: - Work with a keychain
+private extension ListsViewController {
+    func checkForAuthorization () -> Bool {
+        return keychainManager.checkForDataAvailability(for: getTokenKey())
+    }
+
+    func getTokenKey () -> String {
+        return KeychainKey.accessToken.currentKey
+    }
+
+    func getToken () -> String {
+        return keychainManager.getValue(for: getTokenKey())
+    }
+
+    func getUserLists () {
+        let checkToken = checkForAuthorization()
+
+        if checkToken {
+            if userLists.isEmpty {
+                setupActivityIndicator(isHidden: checkToken)
+            }
+            networkManager.getUserLists(token: getToken()) { (userLists, isSuccessful) in
+                if isSuccessful {
+                    guard let userLists = userLists else {
+                        self.setupActivityIndicator(isHidden: !checkToken)
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        self.userLists = userLists
+                        self.setupActivityIndicator(isHidden: !checkToken)
+                        self.collectionView.reloadData()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.setupActivityIndicator(isHidden: !checkToken)
+                    }
+                }
+
+            }
+        }
     }
 }

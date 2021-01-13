@@ -30,7 +30,7 @@
                                     <outlet property="delegate" destination="ftU-bp-X6e" id="4dD-3z-hQJ"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="tmF-yP-ela">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="tmF-yP-ela">
                                 <rect key="frame" x="188.5" y="432" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.37986247470000001" blue="0.78753569160000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>

@@ -30,10 +30,10 @@
 "DefaultNameListsName.MySavedPlaces" = "Места, сохраненные мной";
 "DefaultNameListsName.MyLikedPlaces" = "Места, которые мне понравились";
 
-"ListsButtonCell.CreateNewListLabelTitle" = "Создать новый список";
+"CellWithButton.CreateNewListLabelTitle" = "Создать новый список";
 
-"UserCreatedCells.NumberPlacesLabel" = "Мест нет";
-"UserCreatedCells.Places" = "мест(-а)";
+"UserCreatedCell.NumberPlacesLabel" = "Мест нет";
+"UserCreatedCell.Places" = "мест(-а)";
 
 "AlertToCreateNewList.CreateListButtonTitle" = "Готово";
 "AlertToCreateNewList.CancelButtonTitle" = "Закрыть";

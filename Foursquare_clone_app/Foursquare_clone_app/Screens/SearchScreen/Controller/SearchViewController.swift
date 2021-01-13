@@ -52,14 +52,20 @@ extension SearchViewController: UISearchBarDelegate {
             venues.removeAll()
             tableView.reloadData()
         } else {
-            NetworkManager.shared.getVenues(categoryName: text) { (venuesData) in
-                guard let venuesData = venuesData else {
-                    return
-                }
-                DispatchQueue.main.async {
+            NetworkManager.shared.getVenues(categoryName: text) { (venuesData, isSuccessful)  in
+                if isSuccessful {
 
-                    self.venues = venuesData.response.venues
-                    self.tableView.reloadData()
+                    guard let venuesData = venuesData else {
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+
+                        self.venues = venuesData
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    return
                 }
             }
             searchBar.resignFirstResponder()
@@ -74,8 +80,14 @@ extension SearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        NetworkManager.shared.getDetailInfoVenue(venueId: venues[indexPath.row].id) { (detailVenueInfo) in
-            guard let detailVenueInfo = detailVenueInfo else {
+        NetworkManager.shared.getDetailInfoVenue(venueId: venues[indexPath.row].id) { (detailVenueInfo, isSuccessful) in
+            if isSuccessful {
+
+                guard let detailVenueInfo = detailVenueInfo else {
+                    return
+                }
+
+            } else {
                 return
             }
         }

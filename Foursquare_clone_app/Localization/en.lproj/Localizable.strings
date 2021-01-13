@@ -30,10 +30,10 @@
 "DefaultNameListsName.MySavedPlaces" = "My Saved Places";
 "DefaultNameListsName.MyLikedPlaces" = "My Liked Places";
 
-"ListsButtonCell.CreateNewListLabelTitle" = "Create a new list";
+"CellWithButton.CreateNewListLabelTitle" = "Create a new list";
 
-"UserCreatedCells.NumberPlacesLabel" = "No places";
-"UserCreatedCells.Places" = "places";
+"UserCreatedCell.NumberPlacesLabel" = "No places";
+"UserCreatedCell.Places" = "places";
 
 "AlertToCreateNewList.CreateListButtonTitle" = "Create List";
 "AlertToCreateNewList.CancelButtonTitle" = "Cancel";

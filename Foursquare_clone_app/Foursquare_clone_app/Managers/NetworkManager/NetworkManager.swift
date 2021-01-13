@@ -22,7 +22,18 @@ class NetworkManager {
         return networkManager
     }()
 
-    func getVenues (categoryName: String, completion: @escaping (Request?) -> Void) {
+    private func makeDataTaskRequest (with url: URL, completion: @escaping (Data?, Error?) -> Void) {
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            completion(data, nil)
+        }.resume()
+    }
+
+    func getVenues (categoryName: String, completion: @escaping ([Venue]?, Bool) -> Void) {
         let urlString = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
@@ -30,27 +41,33 @@ class NetworkManager {
         + "&ll=40.7099,-73.9622&intent=checkin&radius=2000&query=\(categoryName)"
 
         guard let url = URL(string: urlString) else {
+            completion(nil, false)
             return
         }
 
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
+        makeDataTaskRequest(with: url) { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
 
             guard let data = data else {
+                completion(nil, false)
                 return
             }
 
             do {
-                let venuesId = try JSONDecoder().decode(Request.self, from: data)
-                StorageManager.shared.venues = venuesId.response.venues
-                completion(venuesId)
+                let venues = try JSONDecoder().decode(Request.self, from: data)
+                StorageManager.shared.putVenues(of: venues.response.venues)
+                completion(StorageManager.shared.getVenues(), true)
             } catch {
                 print(error)
             }
-        }.resume()
+        }
     }
 
-    func getDetailInfoVenue (venueId: String, completion: @escaping (DetailsVenue?) -> Void) {
+    func getDetailInfoVenue (venueId: String, completion: @escaping (DetailsVenue?, Bool) -> Void) {
         let urlString = "\(urlFoursquare)/v2/venues/"
         + "\(venueId)"
         + "?client_id=\(clientId)"
@@ -58,13 +75,19 @@ class NetworkManager {
         + "&v=\(versionAPI)"
 
         guard let url = URL(string: urlString) else {
+            completion(nil, false)
             return
         }
 
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
+        makeDataTaskRequest(with: url) { (data, error) in
+            if let error = error {
+                completion(nil, false)
+                print(error.localizedDescription)
+                return
+            }
 
             guard let data = data else {
+                completion(nil, false)
                 return
             }
 
@@ -74,13 +97,13 @@ class NetworkManager {
 
                 let localDetailVenue = MappingReceivedDataToDetailsVenue.shared
                     .mappingReceivedDataToDetailsVenue(apiModel: detail)
-                StorageManager.shared.detailsVanue = localDetailVenue
-                completion(localDetailVenue)
+                StorageManager.shared.putDetailsVanue(of: localDetailVenue)
+                completion(StorageManager.shared.getDetailsVanue(), true)
 
             } catch {
                 print("Could not get detail info venue: \(error)")
             }
-        }.resume()
+        }
     }
 
     func autorizationFoursquare (completion: @escaping (URL?, Bool) -> Void) {
@@ -110,8 +133,12 @@ class NetworkManager {
             return
         }
 
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
+        makeDataTaskRequest(with: url) { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
 
             guard let data = data else {
                 completion(nil, false)
@@ -125,7 +152,7 @@ class NetworkManager {
             } catch {
                 print("Error: \(error)")
             }
-        }.resume()
+        }
     }
 
     func getUserInfo (accessToken: String, completion: @escaping (String?, Bool) -> Void) {
@@ -137,8 +164,12 @@ class NetworkManager {
             return
         }
 
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
+        makeDataTaskRequest(with: url) { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
 
             guard let data = data else {
                 completion(nil, false)
@@ -154,10 +185,10 @@ class NetworkManager {
             } catch {
                 print(error)
             }
-
-        }.resume()
+        }
     }
-    func getInfoAboutUserLists (token: String, completion: @escaping ([GetUserListsGroup]?, Bool) -> Void) {
+
+    func getUserLists (token: String, completion: @escaping ([GetUserListsGroup]?, Bool) -> Void) {
 
         let urlString = "\(urlFoursquare)/v2/users/self/lists?oauth_token=\(token)&v=\(versionAPI)"
 
@@ -166,8 +197,12 @@ class NetworkManager {
             return
         }
 
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
+        makeDataTaskRequest(with: url) { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
 
             guard let data = data else {
                 completion(nil, false)
@@ -175,13 +210,14 @@ class NetworkManager {
             }
 
             do {
-                let infoAboutUserLists = try JSONDecoder().decode(GetUserLists.self, from: data)
-                StorageManager.shared.infoAboutUserLists = infoAboutUserLists.response.lists.groups
-                completion(StorageManager.shared.infoAboutUserLists, true)
+                let userLists = try JSONDecoder().decode(GetUserLists.self, from: data)
+                StorageManager.shared.putUserIntoArray(of: userLists.response.lists.groups)
+                completion(StorageManager.shared.getUserLists(), true)
             } catch {
+                completion(nil, false)
                 print(error)
             }
-        }.resume()
+        }
     }
 
     func getPhoto (prefix: String?, suffix: String?, completion: @escaping (Data?) -> Void) {
@@ -198,39 +234,51 @@ class NetworkManager {
             return
         }
 
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
-
+        makeDataTaskRequest(with: url) { (data, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil)
+                return
             }
             guard let data = data else {
                 completion(nil)
                 return
             }
             completion(data)
-
-        }.resume()
-    }
-
-    func postRequestForCreateNewList (token: String) {
-
-        guard
-            let listName = configureListOptions[KeyForList.listName.currentKey] as? String,
-            let descriptionList = configureListOptions[KeyForList.description.currentKey] as? String,
-            let collaborativeFlag = configureListOptions[KeyForList.collaborative.currentKey] as? Bool
-        else {
-            return
         }
-
+    }
+    private func urlFormation (token: String,
+                               listName: String,
+                               description: String,
+                               collaborative: Bool) -> URL? {
         let urlHostAllowed = "\(urlFoursquare)/v2/lists/add?"
         + "oauth_token=\(token)&client_id=\(clientId)"
         + "&client_secret=\(clientSecret)&v=\(versionAPI)"
-        + "&name=\(listName)&description=\(descriptionList)&collaborative =\(collaborativeFlag)"
+        + "&name=\(listName)&description=\(description)&collaborative =\(collaborative)"
 
-        let urlString = urlHostAllowed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        guard let url = URL(string: urlString!) else {
+        guard
+            let urlString = urlHostAllowed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        guard let url = URL(string: urlString) else {
+            return nil
+        }
+        return url
+    }
+
+    func postRequestForCreateNewList (token: String,
+                                      listName: String,
+                                      descriptionList: String,
+                                      collaborativeFlag: Bool) {
+
+        let optionUrl = urlFormation(token: token,
+                               listName: listName,
+                               description: descriptionList,
+                               collaborative: collaborativeFlag)
+
+        guard let url = optionUrl else {
             return
         }
 

@@ -8,22 +8,22 @@
 
 import UIKit
 
-class ListsButtonCell: UICollectionViewCell {
+class CellWithButton: UICollectionViewCell {
 
     @IBOutlet private weak var createNewListLabel: UILabel!
     @IBOutlet private weak var addImageView: UIImageView!
 
-    static let identifier = "ListsButtonCell"
+    static let identifier = "CellWithButton"
 
     override func awakeFromNib() {
-        createNewListLabel.text = "ListsButtonCell.CreateNewListLabelTitle".localized()
+        createNewListLabel.text = "CellWithButton.CreateNewListLabelTitle".localized()
         super.awakeFromNib()
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     static func nib() -> UINib {
-        return UINib(nibName: "ListsButtonCell", bundle: nil)
+        return UINib(nibName: "CellWithButton", bundle: nil)
     }
 
 }

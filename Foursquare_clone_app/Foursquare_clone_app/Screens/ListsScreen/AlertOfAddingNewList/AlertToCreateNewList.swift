@@ -9,9 +9,11 @@
 import UIKit
 
 protocol AlertDelegate: class {
-    func closeButtonPressed (cancelButton: UIButton)
-    func createListButtonPressed (buttonCreate: UIButton)
-    func collaborationSwitchAction (colloboraticeSwitch: UISwitch)
+    func closeButtonPressed (_ sender: AlertToCreateNewList)
+    func createListButtonPressed (_ sender: AlertToCreateNewList,
+                                  listName: String?,
+                                  description: String?,
+                                  collaborativeFlag: Bool)
 }
 
 class AlertToCreateNewList: UIView {
@@ -33,57 +35,57 @@ class AlertToCreateNewList: UIView {
 
     weak var delegate: AlertDelegate?
 
-    func configureAlert () {
+    override func awakeFromNib() {
+        super.awakeFromNib()
         self.layer.cornerRadius = 5
+        listNameTextField.delegate = self
+        descriptionTextField.delegate = self
+        setupButton()
+        setupTextField()
+        setupLabel()
+        setupImage()
+    }
+
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        delegate?.closeButtonPressed(self)
+    }
+
+    @IBAction func createListButtonPressed (_ sender: UIButton) {
+        delegate?.createListButtonPressed(self,
+                                          listName: listNameTextField.text,
+                                          description: descriptionTextField.text,
+                                          collaborativeFlag: collaborationSwitch.isOn)
+    }
+}
+// MARK: - Setup alert elements
+private extension AlertToCreateNewList {
+    func setupButton () {
         createListButton.setTitle("AlertToCreateNewList.CreateListButtonTitle".localized(),
                                   for: .normal)
         cancelButton.setTitle("AlertToCreateNewList.CancelButtonTitle".localized(),
                               for: .normal)
-        listNameLabel.text = "AlertToCreateNewList.ListNameLabelText".localized()
+    }
+
+    func setupTextField () {
         listNameTextField.placeholder = "AlertToCreateNewList.ListNameTextFieldPlaceholder".localized()
-        descriptionLabel.text = "AlertToCreateNewList.DescriptionLabelText".localized()
         descriptionTextField.placeholder = "AlertToCreateNewList.DescriptionTextFieldPlaceholder".localized()
+    }
+    func setupLabel () {
+        listNameLabel.text = "AlertToCreateNewList.ListNameLabelText".localized()
+        descriptionLabel.text = "AlertToCreateNewList.DescriptionLabelText".localized()
         makeCollaborativeLabel.text = "AlertToCreateNewList.MakeCollaborativeLabelText".localized()
         makeCollaborativeDescriptionLabel.text = "AlertToCreateNewList.MakeCollaborativeDescriptionLabel".localized()
+    }
 
-        blueBackgroundImage.image = UIImage(named: "listsCellBackground")?.cropCornerOfImage()
+    func setupImage () {
+        blueBackgroundImage.image = UIImage(named: "listsCellBackground")?.cropCornerOfImage(by: .bottomLeftCorner)
         blueBackgroundImage.layer.cornerRadius = 5
         blueBackgroundImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         userImage.image = UIImage(named: "userImageDefault")
-    }
-
-    func connectDelegateForTextFields () {
-        listNameTextField.delegate = self
-        descriptionTextField.delegate = self
-    }
-
-    @IBAction func collaborationSwitchAcrion(_ sender: UISwitch) {
-        delegate?.collaborationSwitchAction(colloboraticeSwitch: sender)
-    }
-
-    @IBAction func closeButtonPressed(_ sender: UIButton) {
-        delegate?.closeButtonPressed(cancelButton: sender)
-    }
-
-    @IBAction func createListButtonPressed (_ sender: UIButton) {
-        delegate?.createListButtonPressed(buttonCreate: sender)
     }
 }
 extension AlertToCreateNewList: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-
-        guard let text = textField.text else {
-            return
-        }
-
-        if textField === listNameTextField {
-            configureListOptions[KeyForList.listName.currentKey] = text
-        } else {
-            configureListOptions[KeyForList.description.currentKey] = text
-        }
     }
 }

@@ -51,16 +51,23 @@ class HomeViewController: UIViewController {
 }
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        NetworkManager.shared.getVenues(categoryName: standardCategories[indexPath.item].imageName) { (venuesData) in
-            guard let venuesData = venuesData else {
-                return
-            }
-            DispatchQueue.main.async {
+        let standardCategory = standardCategories[indexPath.item].imageName
+        NetworkManager.shared.getVenues(categoryName: standardCategory) { (venuesData, isSuccessful) in
+            if isSuccessful {
 
-                self.createdSearchController(main: self.main,
-                                             isActiveSearchBar: false,
-                                             searchBarText: self.standardCategories[indexPath.item].title,
-                                             venues: venuesData.response.venues)
+                guard let venuesData = venuesData else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+
+                    self.createdSearchController(main: self.main,
+                                                 isActiveSearchBar: false,
+                                                 searchBarText: self.standardCategories[indexPath.item].title,
+                                                 venues: venuesData)
+                }
+            } else {
+                return
             }
         }
     }
