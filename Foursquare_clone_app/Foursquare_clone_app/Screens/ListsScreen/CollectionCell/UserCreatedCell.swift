@@ -25,7 +25,7 @@ class UserCreatedCell: UICollectionViewCell {
     func configure (backgroundImage: Data?,
                     userImageName: String,
                     listName: String,
-                    numberPlaces: Int?) {
+                    numberPlaces: String) {
 
         if let imageData = backgroundImage {
             backgroundImageView.image = UIImage(data: imageData)?
@@ -39,15 +39,6 @@ class UserCreatedCell: UICollectionViewCell {
 
         userImageView.image = UIImage(named: userImageName)
         listNameLabel.text = listName
-
-        guard let number = numberPlaces else {
-            numberPlacesLabel.text = "UserCreatedCell.NumberPlacesLabel".localized()
-            return
-        }
-        if number != zero {
-            numberPlacesLabel.text = "\(number) " + "UserCreatedCell.Places".localized()
-        } else {
-            numberPlacesLabel.text = "UserCreatedCell.NumberPlacesLabel".localized()
-        }
+        numberPlacesLabel.text = numberPlaces
     }
 }

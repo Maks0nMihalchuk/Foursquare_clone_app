@@ -22,17 +22,6 @@ class NetworkManager {
         return networkManager
     }()
 
-    private func makeDataTaskRequest (with url: URL, completion: @escaping (Data?, Error?) -> Void) {
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, _, error) in
-            guard let data = data else {
-                completion(nil, error)
-                return
-            }
-            completion(data, nil)
-        }.resume()
-    }
-
     func getVenues (categoryName: String, completion: @escaping ([Venue]?, Bool) -> Void) {
         let urlString = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
@@ -46,8 +35,7 @@ class NetworkManager {
         }
 
         makeDataTaskRequest(with: url) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
                 completion(nil, false)
                 return
             }
@@ -62,7 +50,7 @@ class NetworkManager {
                 StorageManager.shared.putVenues(of: venues.response.venues)
                 completion(StorageManager.shared.getVenues(), true)
             } catch {
-                print(error)
+                completion(nil, false)
             }
         }
     }
@@ -80,9 +68,8 @@ class NetworkManager {
         }
 
         makeDataTaskRequest(with: url) { (data, error) in
-            if let error = error {
+            if error != nil {
                 completion(nil, false)
-                print(error.localizedDescription)
                 return
             }
 
@@ -101,7 +88,7 @@ class NetworkManager {
                 completion(StorageManager.shared.getDetailsVanue(), true)
 
             } catch {
-                print("Could not get detail info venue: \(error)")
+                completion(nil, false)
             }
         }
     }
@@ -134,8 +121,7 @@ class NetworkManager {
         }
 
         makeDataTaskRequest(with: url) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
                 completion(nil, false)
                 return
             }
@@ -150,7 +136,7 @@ class NetworkManager {
 
                 completion(accessToken.access_token, true)
             } catch {
-                print("Error: \(error)")
+                completion(nil, false)
             }
         }
     }
@@ -165,8 +151,7 @@ class NetworkManager {
         }
 
         makeDataTaskRequest(with: url) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
                 completion(nil, false)
                 return
             }
@@ -183,7 +168,7 @@ class NetworkManager {
                 completion(userFullName, true)
 
             } catch {
-                print(error)
+                completion(nil, false)
             }
         }
     }
@@ -198,8 +183,7 @@ class NetworkManager {
         }
 
         makeDataTaskRequest(with: url) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
                 completion(nil, false)
                 return
             }
@@ -215,7 +199,7 @@ class NetworkManager {
                 completion(StorageManager.shared.getUserLists(), true)
             } catch {
                 completion(nil, false)
-                print(error)
+
             }
         }
     }
@@ -235,8 +219,7 @@ class NetworkManager {
         }
 
         makeDataTaskRequest(with: url) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
                 completion(nil)
                 return
             }
@@ -247,10 +230,56 @@ class NetworkManager {
             completion(data)
         }
     }
-    private func urlFormation (token: String,
-                               listName: String,
-                               description: String,
-                               collaborative: Bool) -> URL? {
+
+    func postRequestForCreateNewList (token: String,
+                                      listName: String,
+                                      descriptionList: String,
+                                      collaborativeFlag: Bool) {
+
+        let optionUrl = setupUrlToCreateUserList(token: token,
+                               listName: listName,
+                               description: descriptionList,
+                               collaborative: collaborativeFlag)
+
+        guard let url = optionUrl else {
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, _, _) in
+
+            guard let data = data else {
+                return
+            }
+
+            do {
+                _ = try JSONSerialization.jsonObject(with: data, options: [])
+            } catch {
+
+            }
+        }.resume()
+    }
+}
+private extension NetworkManager {
+    func makeDataTaskRequest (with url: URL, completion: @escaping (Data?, Error?) -> Void) {
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            completion(data, nil)
+        }.resume()
+    }
+
+    func setupUrlToCreateUserList (token: String,
+                                   listName: String,
+                                   description: String,
+                                   collaborative: Bool) -> URL? {
         let urlHostAllowed = "\(urlFoursquare)/v2/lists/add?"
         + "oauth_token=\(token)&client_id=\(clientId)"
         + "&client_secret=\(clientSecret)&v=\(versionAPI)"
@@ -266,38 +295,5 @@ class NetworkManager {
             return nil
         }
         return url
-    }
-
-    func postRequestForCreateNewList (token: String,
-                                      listName: String,
-                                      descriptionList: String,
-                                      collaborativeFlag: Bool) {
-
-        let optionUrl = urlFormation(token: token,
-                               listName: listName,
-                               description: descriptionList,
-                               collaborative: collaborativeFlag)
-
-        guard let url = optionUrl else {
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, _, error) in
-
-            guard let data = data else {
-                return
-            }
-
-            do {
-                _ = try JSONSerialization.jsonObject(with: data, options: [])
-            } catch {
-                print("error: \(error.localizedDescription)")
-            }
-        }.resume()
     }
 }

@@ -9,11 +9,11 @@
 import UIKit
 
 protocol AlertDelegate: class {
-    func closeButtonPressed (_ sender: AlertToCreateNewList)
-    func createListButtonPressed (_ sender: AlertToCreateNewList,
-                                  listName: String?,
-                                  description: String?,
-                                  collaborativeFlag: Bool)
+    func alertToCreateNewListDidEndInteraction (_ alertToCreateNewList: AlertToCreateNewList)
+    func alertToCreateNewList (_ alertToCreateNewList: AlertToCreateNewList,
+                               createListWith name: String?,
+                               description: String?,
+                               collaborativeFlag: Bool)
 }
 
 class AlertToCreateNewList: UIView {
@@ -37,7 +37,7 @@ class AlertToCreateNewList: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 5
+        setupCornerRadiusForAlert()
         listNameTextField.delegate = self
         descriptionTextField.delegate = self
         setupButton()
@@ -47,18 +47,22 @@ class AlertToCreateNewList: UIView {
     }
 
     @IBAction func closeButtonPressed(_ sender: UIButton) {
-        delegate?.closeButtonPressed(self)
+        delegate?.alertToCreateNewListDidEndInteraction(self)
     }
 
     @IBAction func createListButtonPressed (_ sender: UIButton) {
-        delegate?.createListButtonPressed(self,
-                                          listName: listNameTextField.text,
-                                          description: descriptionTextField.text,
-                                          collaborativeFlag: collaborationSwitch.isOn)
+        delegate?.alertToCreateNewList(self,
+                                        createListWith: listNameTextField.text,
+                                        description: descriptionTextField.text,
+                                        collaborativeFlag: collaborationSwitch.isOn)
     }
 }
 // MARK: - Setup alert elements
 private extension AlertToCreateNewList {
+    func setupCornerRadiusForAlert () {
+        layer.cornerRadius = 5
+    }
+
     func setupButton () {
         createListButton.setTitle("AlertToCreateNewList.CreateListButtonTitle".localized(),
                                   for: .normal)

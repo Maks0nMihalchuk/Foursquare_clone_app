@@ -47,29 +47,28 @@ class ListsViewController: UIViewController {
     }
 }
 extension ListsViewController: AlertDelegate {
-    func closeButtonPressed (_ sender: AlertToCreateNewList) {
+    func alertToCreateNewListDidEndInteraction (_ alertToCreateNewList: AlertToCreateNewList) {
         startAnimationForAlert(key: .hide)
     }
 
-    func createListButtonPressed (_ sender: AlertToCreateNewList,
-                                  listName: String?,
-                                  description: String?,
-                                  collaborativeFlag: Bool) {
+    func alertToCreateNewList (_ alertToCreateNewList: AlertToCreateNewList,
+                               createListWith name: String?,
+                               description: String?,
+                               collaborativeFlag: Bool) {
 
         guard
-            let name = listName,
+            let listName = name,
             let description = description
         else {
             return
         }
 
-        if !name.isEmpty {
+        if !listName.isEmpty {
             startAnimationForAlert(key: .hide)
             networkManager.postRequestForCreateNewList(token: getToken(),
-                                                       listName: name,
+                                                       listName: listName,
                                                        descriptionList: description,
                                                        collaborativeFlag: collaborativeFlag)
-
         } else {
             return
         }
@@ -92,8 +91,6 @@ extension ListsViewController: UICollectionViewDelegate {
             if indexPath.item == numberOfUserLists {
                 setupAlertForAddingNewList()
                 startAnimationForAlert(key: .show)
-            } else {
-
             }
         }
     }
@@ -127,16 +124,15 @@ extension ListsViewController: UICollectionViewDataSource {
         }
 
         if userLists.isEmpty {
-
-            header.configure(title: listOfHeaderNames[indexPath.section].title,
-                             type: listOfHeaderNames[indexPath.section].type,
-                             numberOfLists: nil)
+            let title = setupHeaderTitle(title: listOfHeaderNames[indexPath.section].title,
+                                         type: listOfHeaderNames[indexPath.section].type,
+                                         numberOfLists: nil)
+            header.configure(title: title)
         } else {
-
-            let title = userLists[indexPath.section].name
-            let type = userLists[indexPath.section].type
-            let numberOfLists = userLists[indexPath.section].count
-            header.configure(title: title, type: type, numberOfLists: numberOfLists)
+            let title = setupHeaderTitle(title: userLists[indexPath.section].name,
+                                         type: userLists[indexPath.section].type,
+                                         numberOfLists: userLists[indexPath.section].count)
+            header.configure(title: title)
         }
 
         return header
@@ -160,7 +156,8 @@ extension ListsViewController: UICollectionViewDataSource {
             switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
             case .sectionOfStandardCells:
                 cell.configure(backgroundImage: nil, userImageName: defaultImageForLists[indexPath.item],
-                               listName: defaultNameLists[indexPath.item].listName, numberPlaces: nil)
+                               listName: defaultNameLists[indexPath.item].listName,
+                               numberPlaces: setupNumberPlaces(numberPlaces: userLists.count))
                 return cell
             case .sectionOfUserCells:
                 return cellWithButton
@@ -171,11 +168,12 @@ extension ListsViewController: UICollectionViewDataSource {
             if indexPath.item == numberOfUserLists {
                 return cellWithButton
             }
-
-            let listName = userLists[indexPath.section].items[indexPath.item].name
-            let numberPlaces = userLists[indexPath.section].items[indexPath.item].listItems.count
-            let prefix = userLists[indexPath.section].items[indexPath.item].photo?.prefix
-            let suffix = userLists[indexPath.section].items[indexPath.item].photo?.suffix
+            let userListsItems = userLists[indexPath.section].items[indexPath.item]
+            let listName = userListsItems.name
+            let numberPlaces = userListsItems.listItems.count
+            let number = setupNumberPlaces(numberPlaces: numberPlaces)
+            let prefix = userListsItems.photo?.prefix
+            let suffix = userListsItems.photo?.suffix
             let userImage = setImageName(indexPath: indexPath,
                                          defaultImageForLists: defaultImageForLists,
                                          userImageDefault: userImageDefault)
@@ -185,7 +183,7 @@ extension ListsViewController: UICollectionViewDataSource {
                     cell.configure(backgroundImage: imageData,
                                    userImageName: userImage,
                                    listName: listName,
-                                   numberPlaces: numberPlaces)
+                                   numberPlaces: number)
                 }
             }
             return cell
@@ -278,6 +276,27 @@ private extension ListsViewController {
 }
 // MARK: - Setup screen
 private extension ListsViewController {
+    func setupHeaderTitle (title: String, type: String, numberOfLists: Int?) -> String {
+        if type == "yours" {
+            return title
+        } else {
+
+            guard let number = numberOfLists else {
+                return title
+            }
+
+            return title + " (\(number))"
+        }
+    }
+
+    func setupNumberPlaces (numberPlaces: Int) -> String {
+        if numberPlaces == 0 {
+            return "UserCreatedCell.NumberPlacesLabel".localized()
+        } else {
+            return "\(numberPlaces) " + "UserCreatedCell.Places".localized()
+        }
+    }
+
     func setImageName (indexPath: IndexPath, defaultImageForLists: [String], userImageDefault: String) -> String {
         switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
         case .sectionOfStandardCells:
