@@ -156,4 +156,8 @@ class NetworkManager {
 
         }.resume()
     }
+
+    func getPhotoForVenue () {
+        
+    }
 }
