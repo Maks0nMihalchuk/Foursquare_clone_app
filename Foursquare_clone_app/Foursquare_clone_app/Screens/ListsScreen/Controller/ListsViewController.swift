@@ -13,7 +13,7 @@ class ListsViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
-    private var alertToCreateNewList: AlertToCreateNewList!
+    private var createNewListAlert: CreateNewListAlert!
     private var userLists = [GetUserListsGroup]()
     private let networkManager = NetworkManager.shared
     private let keychainManager = KeychainManager.shared
@@ -47,14 +47,14 @@ class ListsViewController: UIViewController {
     }
 }
 extension ListsViewController: AlertDelegate {
-    func alertToCreateNewListDidEndInteraction (_ alertToCreateNewList: AlertToCreateNewList) {
+    func createNewListAlertDidEndInteraction (_ createNewListAlert: CreateNewListAlert) {
         startAnimationForAlert(key: .hide)
     }
 
-    func alertToCreateNewList (_ alertToCreateNewList: AlertToCreateNewList,
-                               createListWith name: String?,
-                               description: String?,
-                               collaborativeFlag: Bool) {
+    func createNewListAlert (_ createNewListAlert: CreateNewListAlert,
+                             createListWith name: String?,
+                             description: String?,
+                             collaborativeFlag: Bool) {
 
         guard
             let listName = name,
@@ -216,12 +216,12 @@ extension ListsViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Setup showing and hiding alerts
 private extension ListsViewController {
     func setupAlertForAddingNewList () {
-        alertToCreateNewList = Bundle.main.loadNibNamed("AlertToCreateNewList",
+        createNewListAlert = Bundle.main.loadNibNamed("CreateNewListAlert",
                                                         owner: self,
-                                                        options: nil)?.first as? AlertToCreateNewList
-        view.addSubview(alertToCreateNewList)
-        alertToCreateNewList.center = view.center
-        alertToCreateNewList.delegate = self
+                                                        options: nil)?.first as? CreateNewListAlert
+        view.addSubview(createNewListAlert)
+        createNewListAlert.center = view.center
+        createNewListAlert.delegate = self
     }
 
     func startAnimationForAlert (key animation: AlertAnimationKeys) {
@@ -237,22 +237,22 @@ private extension ListsViewController {
     }
 
     func showAlertAddingNewList (scale: CGFloat, duration: Double) {
-        alertToCreateNewList.transform = CGAffineTransform(scaleX: scale, y: scale)
-        alertToCreateNewList.alpha = 0
+        createNewListAlert.transform = CGAffineTransform(scaleX: scale, y: scale)
+        createNewListAlert.alpha = 0
 
         UIView.animate(withDuration: duration) {
             self.visualEffectView.alpha = 1
-            self.alertToCreateNewList.alpha = 1
-            self.alertToCreateNewList.transform = CGAffineTransform.identity
+            self.createNewListAlert.alpha = 1
+            self.createNewListAlert.transform = CGAffineTransform.identity
         }
     }
 
     func hideAlertAddingNewList (scale: CGFloat, duration: Double) {
         UIView.animate(withDuration: duration) {
             self.visualEffectView.alpha = 0
-            self.alertToCreateNewList.alpha = 0
-            self.alertToCreateNewList.transform = CGAffineTransform(scaleX: scale, y: scale)
-            self.alertToCreateNewList.removeFromSuperview()
+            self.createNewListAlert.alpha = 0
+            self.createNewListAlert.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self.createNewListAlert.removeFromSuperview()
         }
     }
 

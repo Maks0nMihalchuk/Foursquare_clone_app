@@ -18,8 +18,8 @@
 		2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D292EA525A3770A00A67F36 /* UserInfo.swift */; };
 		2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */; };
 		2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */; };
-		2D2F495225A917F100A61FBB /* AlertToCreateNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2F495125A917F100A61FBB /* AlertToCreateNewList.swift */; };
-		2D2F495425A9181800A61FBB /* AlertToCreateNewList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2F495325A9181800A61FBB /* AlertToCreateNewList.xib */; };
+		2D2F495225A917F100A61FBB /* CreateNewListAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2F495125A917F100A61FBB /* CreateNewListAlert.swift */; };
+		2D2F495425A9181800A61FBB /* CreateNewListAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2F495325A9181800A61FBB /* CreateNewListAlert.xib */; };
 		2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAA25909AB3006E4A59 /* DetailLocation.swift */; };
 		2D326BAD25909B5D006E4A59 /* DetailCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAC25909B5D006E4A59 /* DetailCategory.swift */; };
 		2D326BAF25909CEB006E4A59 /* Listed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BAE25909CEB006E4A59 /* Listed.swift */; };
@@ -79,8 +79,8 @@
 		2D292EA525A3770A00A67F36 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoModel.swift; sourceTree = "<group>"; };
-		2D2F495125A917F100A61FBB /* AlertToCreateNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToCreateNewList.swift; sourceTree = "<group>"; };
-		2D2F495325A9181800A61FBB /* AlertToCreateNewList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertToCreateNewList.xib; sourceTree = "<group>"; };
+		2D2F495125A917F100A61FBB /* CreateNewListAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewListAlert.swift; sourceTree = "<group>"; };
+		2D2F495325A9181800A61FBB /* CreateNewListAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNewListAlert.xib; sourceTree = "<group>"; };
 		2D326BAA25909AB3006E4A59 /* DetailLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocation.swift; sourceTree = "<group>"; };
 		2D326BAC25909B5D006E4A59 /* DetailCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategory.swift; sourceTree = "<group>"; };
 		2D326BAE25909CEB006E4A59 /* Listed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listed.swift; sourceTree = "<group>"; };
@@ -237,8 +237,8 @@
 		2D2F495025A9171A00A61FBB /* AlertOfAddingNewList */ = {
 			isa = PBXGroup;
 			children = (
-				2D2F495125A917F100A61FBB /* AlertToCreateNewList.swift */,
-				2D2F495325A9181800A61FBB /* AlertToCreateNewList.xib */,
+				2D2F495125A917F100A61FBB /* CreateNewListAlert.swift */,
+				2D2F495325A9181800A61FBB /* CreateNewListAlert.xib */,
 				2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */,
 			);
 			path = AlertOfAddingNewList;
@@ -616,7 +616,7 @@
 				2D25472925A5CDEB008151FF /* HeaderCollectionView.xib in Resources */,
 				2D4CF36C25A2445100C7006B /* UserCreatedCell.xib in Resources */,
 				2D4F073C25A857DC00C9230E /* CellWithButton.xib in Resources */,
-				2D2F495425A9181800A61FBB /* AlertToCreateNewList.xib in Resources */,
+				2D2F495425A9181800A61FBB /* CreateNewListAlert.xib in Resources */,
 				2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */,
 				2D3BD9B625875B6E00389405 /* LaunchScreen.storyboard in Resources */,
 				2D3BD9B325875B6E00389405 /* Assets.xcassets in Resources */,
@@ -676,7 +676,7 @@
 			files = (
 				2D2607622590B33400D9E1DC /* DefaultCategoryModel.swift in Sources */,
 				2D326BB525909F4F006E4A59 /* ItemUser.swift in Sources */,
-				2D2F495225A917F100A61FBB /* AlertToCreateNewList.swift in Sources */,
+				2D2F495225A917F100A61FBB /* CreateNewListAlert.swift in Sources */,
 				2DD6DCC225AC9F5900B0E948 /* StorageManager.swift in Sources */,
 				2D4CF36725A2289E00C7006B /* ListsViewController.swift in Sources */,
 				2DC43C8E2599E3D400655B2F /* AccountViewController.swift in Sources */,

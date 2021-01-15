@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="AlertToCreateNewList" id="iN0-l3-epB" customClass="AlertToCreateNewList" customModule="Foursquare_clone_app" customModuleProvider="target">
+        <view contentMode="scaleToFill" restorationIdentifier="CreateNewListAlert" id="iN0-l3-epB" customClass="CreateNewListAlert" customModule="Foursquare_clone_app" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="380" height="345"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -72,7 +72,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="createListButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="B2P-T5-VGO"/>
+                        <action selector="createListButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="pK5-Z6-pLW"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g08-f9-mVc">
@@ -103,7 +103,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="closeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="wYT-FA-hTV"/>
+                        <action selector="closeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="31t-Bf-Ecu"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYM-37-Fr6">
@@ -158,17 +158,17 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="blueBackgroundImage" destination="VEm-0R-E3i" id="Vem-2v-Ehf"/>
-                <outlet property="cancelButton" destination="eXL-FB-p82" id="FLt-hF-Ral"/>
-                <outlet property="collaborationSwitch" destination="ZG2-lD-qzF" id="RKa-MT-0sL"/>
-                <outlet property="createListButton" destination="lxg-SY-SWy" id="x2h-v0-ZtO"/>
-                <outlet property="descriptionLabel" destination="aLk-o9-wbt" id="pfA-8J-Paf"/>
-                <outlet property="descriptionTextField" destination="tSQ-9L-SV4" id="zpx-9c-zLw"/>
-                <outlet property="listNameLabel" destination="HBp-TE-a1f" id="Qz7-2J-poo"/>
-                <outlet property="listNameTextField" destination="CQs-zj-g36" id="v55-CY-Mrn"/>
-                <outlet property="makeCollaborativeDescriptionLabel" destination="d1N-Ye-DdF" id="AOB-xZ-6sl"/>
-                <outlet property="makeCollaborativeLabel" destination="g08-f9-mVc" id="k5W-5P-q8f"/>
-                <outlet property="userImage" destination="NaT-Cn-7Ve" id="2vA-gb-CpM"/>
+                <outlet property="cancelButton" destination="eXL-FB-p82" id="8Mk-yf-qet"/>
+                <outlet property="collaborationSwitch" destination="ZG2-lD-qzF" id="JtN-1x-fOL"/>
+                <outlet property="createListButton" destination="lxg-SY-SWy" id="1KD-dk-skr"/>
+                <outlet property="descriptionLabel" destination="aLk-o9-wbt" id="xaW-Ff-2ib"/>
+                <outlet property="descriptionTextField" destination="tSQ-9L-SV4" id="RCd-H3-CmJ"/>
+                <outlet property="listNameLabel" destination="HBp-TE-a1f" id="lwy-gA-zWh"/>
+                <outlet property="listNameTextField" destination="CQs-zj-g36" id="pRQ-xN-5eS"/>
+                <outlet property="makeCollaborativeDescriptionLabel" destination="d1N-Ye-DdF" id="CY6-TW-P6u"/>
+                <outlet property="makeCollaborativeLabel" destination="g08-f9-mVc" id="ERH-iJ-l5U"/>
+                <outlet property="topImageView" destination="VEm-0R-E3i" id="D7B-EE-eXb"/>
+                <outlet property="userImage" destination="NaT-Cn-7Ve" id="vtF-Ps-Afu"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="224.66517857142856"/>
         </view>

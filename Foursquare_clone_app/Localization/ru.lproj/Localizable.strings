@@ -35,11 +35,11 @@
 "UserCreatedCell.NumberPlacesLabel" = "Мест нет";
 "UserCreatedCell.Places" = "мест(-а)";
 
-"AlertToCreateNewList.CreateListButtonTitle" = "Готово";
-"AlertToCreateNewList.CancelButtonTitle" = "Закрыть";
-"AlertToCreateNewList.ListNameLabelText" = "Введи название списка";
-"AlertToCreateNewList.ListNameTextFieldPlaceholder" = "Напр.: места, где можно позавтракать; места, где мне нужно побывать";
-"AlertToCreateNewList.DescriptionLabelText" = "Описание";
-"AlertToCreateNewList.DescriptionTextFieldPlaceholder" = "Напр.: лучшие места, где можно позавтракать в воскресенье";
-"AlertToCreateNewList.MakeCollaborativeLabelText" = "Разрешить совместную работу?";
-"AlertToCreateNewList.MakeCollaborativeDescriptionLabel" = "Люди, которые подписаны на твой список, тоже смогут добавлять к нему места!";
+"CreateNewListAlert.CreateListButtonTitle" = "Готово";
+"CreateNewListAlert.CancelButtonTitle" = "Закрыть";
+"CreateNewListAlert.ListNameLabelText" = "Введи название списка";
+"CreateNewListAlert.ListNameTextFieldPlaceholder" = "Напр.: места, где можно позавтракать; места, где мне нужно побывать";
+"CreateNewListAlert.DescriptionLabelText" = "Описание";
+"CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Напр.: лучшие места, где можно позавтракать в воскресенье";
+"CreateNewListAlert.MakeCollaborativeLabelText" = "Разрешить совместную работу?";
+"CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "Люди, которые подписаны на твой список, тоже смогут добавлять к нему места!";

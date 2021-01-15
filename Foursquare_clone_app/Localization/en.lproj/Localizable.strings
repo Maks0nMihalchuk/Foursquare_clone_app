@@ -35,11 +35,11 @@
 "UserCreatedCell.NumberPlacesLabel" = "No places";
 "UserCreatedCell.Places" = "places";
 
-"AlertToCreateNewList.CreateListButtonTitle" = "Create List";
-"AlertToCreateNewList.CancelButtonTitle" = "Cancel";
-"AlertToCreateNewList.ListNameLabelText" = "Enter List Name";
-"AlertToCreateNewList.ListNameTextFieldPlaceholder" = "Ex: Branch Places, Paris Trip";
-"AlertToCreateNewList.DescriptionLabelText" = "Description";
-"AlertToCreateNewList.DescriptionTextFieldPlaceholder" = "Ex: The best breakfast places to get eggs on a Sunday";
-"AlertToCreateNewList.MakeCollaborativeLabelText" = "Make Collaborative?";
-"AlertToCreateNewList.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
+"CreateNewListAlert.CreateListButtonTitle" = "Create List";
+"CreateNewListAlert.CancelButtonTitle" = "Cancel";
+"CreateNewListAlert.ListNameLabelText" = "Enter List Name";
+"CreateNewListAlert.ListNameTextFieldPlaceholder" = "Ex: Branch Places, Paris Trip";
+"CreateNewListAlert.DescriptionLabelText" = "Description";
+"CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Ex: The best breakfast places to get eggs on a Sunday";
+"CreateNewListAlert.MakeCollaborativeLabelText" = "Make Collaborative?";
+"CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
