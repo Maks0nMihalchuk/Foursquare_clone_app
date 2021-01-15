@@ -11,7 +11,7 @@ import Foundation
 enum KeychainKey {
     case accessToken
 
-    public var currentKey: String {
+    var currentKey: String {
         switch self {
         case .accessToken: return "accessToken"
         }

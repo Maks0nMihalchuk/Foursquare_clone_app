@@ -5,6 +5,7 @@
   Created by maks on 22.12.2020.
   Copyright © 2020 maks. All rights reserved.
 */
+"AlertErrorTitle" = "Error";
 
 "HomeViewController.BreakfastTitle" = "Breakfast";
 "HomeViewController.LunchTitle" = "Lunch";
@@ -17,6 +18,28 @@
 "AccountViewController.SignInButton" = "Sign in";
 "AccountViewController.SignOutButton" = "Sign out";
 "AccountViewController.YourProfile" = "Your profile";
-"AccountViewController.AlertTitle" = "Error";
 "AccountViewController.AlertMessage" = "Login failed";
 "AccountViewController.AlertActionTitle" = "Proceed";
+
+"ListsViewController.Title" = "Lists";
+"ListsViewController.AlertToErrorMessage" = "To add lists you need to log in";
+
+"HeaderNameTitle.YourPlaces" = "Your Places";
+"HeaderNameTitle.ListsYouCreated" = "Lists You Created";
+
+"DefaultNameListsName.MySavedPlaces" = "My Saved Places";
+"DefaultNameListsName.MyLikedPlaces" = "My Liked Places";
+
+"CellWithButton.CreateNewListLabelTitle" = "Create a new list";
+
+"UserCreatedCell.NumberPlacesLabel" = "No places";
+"UserCreatedCell.Places" = "places";
+
+"CreateNewListAlert.CreateListButtonTitle" = "Create List";
+"CreateNewListAlert.CancelButtonTitle" = "Cancel";
+"CreateNewListAlert.ListNameLabelText" = "Enter List Name";
+"CreateNewListAlert.ListNameTextFieldPlaceholder" = "Ex: Branch Places, Paris Trip";
+"CreateNewListAlert.DescriptionLabelText" = "Description";
+"CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Ex: The best breakfast places to get eggs on a Sunday";
+"CreateNewListAlert.MakeCollaborativeLabelText" = "Make Collaborative?";
+"CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
