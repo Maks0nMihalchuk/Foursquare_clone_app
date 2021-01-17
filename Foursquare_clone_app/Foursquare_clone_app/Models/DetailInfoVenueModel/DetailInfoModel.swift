@@ -18,10 +18,13 @@ struct DetailVenueResponse: Codable {
 
 struct DetailVenue: Codable {
     let name: String
-    let location: DetailLocation?
-    let categories: [DetailCategory]?
+    let contact: Contact?
+    let location: DetailLocation
+    let url: String?
+    let price: Price?
+    let categories: [DetailCategory]
     let rating: Double?
     let ratingColor: String?
-    let photos: Listed?
-    let tips: Listed?
+    let bestPhoto: ItemBestPhoto?
+    let hours: Hours?
 }

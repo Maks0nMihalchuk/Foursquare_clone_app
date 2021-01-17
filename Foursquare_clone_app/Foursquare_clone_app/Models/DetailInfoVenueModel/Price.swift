@@ -1,5 +1,5 @@
 //
-//  Group.swift
+//  Listed.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 21.12.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Group: Codable {
-    let items: [Item]?
-
+struct Price: Codable {
+    let tier: Int
+    let message: String
+    let currency: String
 }

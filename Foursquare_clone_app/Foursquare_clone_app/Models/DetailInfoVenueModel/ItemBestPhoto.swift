@@ -1,5 +1,5 @@
 //
-//  Listed.swift
+//  Item.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 21.12.2020.
@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct Listed: Codable {
-    let groups: [Group]?
+struct ItemBestPhoto: Codable {
+    let prefix: String
+    let suffix: String
 }

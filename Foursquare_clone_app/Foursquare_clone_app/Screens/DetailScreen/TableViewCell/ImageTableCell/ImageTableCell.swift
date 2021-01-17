@@ -11,8 +11,8 @@ import UIKit
 class ImageTableCell: UITableViewCell {
 
     @IBOutlet private weak var venueImageView: UIImageView!
-    @IBOutlet weak var nameVenueLabel: UILabel!
-    @IBOutlet weak var shortDescriptionLabel: UILabel!
+    @IBOutlet private weak var nameVenueLabel: UILabel!
+    @IBOutlet private weak var shortDescriptionLabel: UILabel!
 
     static let identifier = "ImageTableCell"
 
@@ -20,9 +20,17 @@ class ImageTableCell: UITableViewCell {
         return UINib(nibName: "ImageTableCell", bundle: nil)
     }
 
-    func configure (imageData: String, nameVenue: String, shortDescription: String) {
-        venueImageView.image = UIImage(named: imageData)
+    func configure (imageData: Data?, nameVenue: String, shortDescription: String) {
+
+        if let image = imageData {
+
+            venueImageView.image = UIImage(data: image)
+        } else {
+            venueImageView.image = UIImage(named: "unknown")
+        }
+
         nameVenueLabel.text = nameVenue
         shortDescriptionLabel.text = shortDescription
     }
+
 }

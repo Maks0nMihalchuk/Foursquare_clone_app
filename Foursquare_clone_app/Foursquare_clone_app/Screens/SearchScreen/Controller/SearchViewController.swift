@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
 
+    private let main = UIStoryboard(name: "Main", bundle: nil)
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
@@ -24,19 +25,6 @@ class SearchViewController: UIViewController {
         setupSearchBar(searchBar: searchBar, text: searchBarText, isActive: launchSearchBar)
     }
 
-    private func setupSearchBar (searchBar: UISearchBar, text: String, isActive: Bool) {
-        searchBar.delegate = self
-        searchBar.searchTextField.text = text
-        searchBar.searchTextField.backgroundColor = .white
-        searchBar.clipsToBounds = true
-
-        if isActive {
-            searchBar.becomeFirstResponder()
-        } else {
-            searchBar.resignFirstResponder()
-        }
-    }
-
     @IBAction func goToBack(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -44,15 +32,18 @@ class SearchViewController: UIViewController {
 }
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+
         guard let text = searchBar.text else {
             return
         }
+
         if text == "" {
             searchBar.resignFirstResponder()
             venues.removeAll()
             tableView.reloadData()
         } else {
             NetworkManager.shared.getVenues(categoryName: text) { (venuesData, isSuccessful)  in
+
                 if isSuccessful {
 
                     guard let venuesData = venuesData else {
@@ -67,6 +58,7 @@ extension SearchViewController: UISearchBarDelegate {
                 } else {
                     return
                 }
+
             }
             searchBar.resignFirstResponder()
         }
@@ -81,15 +73,24 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         NetworkManager.shared.getDetailInfoVenue(venueId: venues[indexPath.row].id) { (detailVenueInfo, isSuccessful) in
+
             if isSuccessful {
 
                 guard let detailVenueInfo = detailVenueInfo else {
                     return
                 }
 
+                NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix, suffix: detailVenueInfo.suffix) { (imageData) in
+                    DispatchQueue.main.async {
+                        self.setupAndPresentDetailController(detailVenue: detailVenueInfo, dataImageVenue: imageData)
+                    }
+                }
+
             } else {
+                self.showAlertError()
                 return
             }
+
         }
     }
 }
@@ -105,10 +106,48 @@ extension SearchViewController: UITableViewDataSource {
         guard let cell = optionCell else {
             return UITableViewCell()
         }
+
         let venueName = "\(indexPath.row + 1). \(venues[indexPath.row].name)"
         let address = venues[indexPath.row].location.formattedAddress
         let category = venues[indexPath.row].categories.first?.name
         cell.configure(venueName: venueName, address: address, category: category)
         return cell
+    }
+}
+private extension SearchViewController {
+    func setupSearchBar (searchBar: UISearchBar, text: String, isActive: Bool) {
+        searchBar.delegate = self
+        searchBar.searchTextField.text = text
+        searchBar.searchTextField.backgroundColor = .white
+        searchBar.clipsToBounds = true
+
+        if isActive {
+            searchBar.becomeFirstResponder()
+        } else {
+            searchBar.resignFirstResponder()
+        }
+    }
+
+    func setupAndPresentDetailController (detailVenue: DetailVenueModel, dataImageVenue: Data?) {
+        let detailController = main.instantiateViewController(identifier: "DetailViewController") as? DetailViewController
+
+        guard let detail = detailController else {
+            return
+        }
+
+        detail.detailVenue = detailVenue
+        detail.dataImageVenue = dataImageVenue
+        detail.modalPresentationStyle = .fullScreen
+        present(detail, animated: true, completion: nil)
+    }
+
+    func showAlertError () {
+        let alertController = UIAlertController(title: "Error",
+                                                message: "when downloading data error occurred", preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
     }
 }

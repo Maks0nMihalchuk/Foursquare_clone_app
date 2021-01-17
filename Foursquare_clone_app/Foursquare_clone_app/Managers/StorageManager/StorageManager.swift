@@ -17,7 +17,7 @@ class StorageManager {
 
     private var userLists = [GetUserListsGroup]()
 
-    private var detailsVanue: DetailsVenue?
+    private var detailsVanue: DetailVenueModel?
     private var venues = [Venue]()
 
     func putUserIntoArray (of list: [GetUserListsGroup]) {
@@ -28,11 +28,11 @@ class StorageManager {
         return userLists
     }
 
-    func putDetailsVanue (of detailVenues: DetailsVenue) {
+    func putDetailVanue (of detailVenues: DetailVenueModel) {
         detailsVanue = detailVenues
     }
 
-    func getDetailsVanue () -> DetailsVenue? {
+    func getDetailVanue () -> DetailVenueModel? {
         return detailsVanue
     }
 

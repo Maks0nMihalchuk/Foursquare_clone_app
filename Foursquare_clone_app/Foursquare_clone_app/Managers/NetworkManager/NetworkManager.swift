@@ -22,12 +22,20 @@ class NetworkManager {
         return networkManager
     }()
 
-    func getVenues (categoryName: String, completion: @escaping ([Venue]?, Bool) -> Void) {
-        let urlString = "\(urlFoursquare)/v2/venues/search"
+    func getVenues (categoryName: String,
+                    completion: @escaping ([Venue]?, Bool) -> Void) {
+
+        let urlHostAllowed = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
         + "&v=\(versionAPI)"
         + "&ll=40.7099,-73.9622&intent=checkin&radius=2000&query=\(categoryName)"
+        guard
+            let urlString = urlHostAllowed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        else {
+            completion(nil, false)
+            return
+        }
 
         guard let url = URL(string: urlString) else {
             completion(nil, false)
@@ -55,7 +63,7 @@ class NetworkManager {
         }
     }
 
-    func getDetailInfoVenue (venueId: String, completion: @escaping (DetailsVenue?, Bool) -> Void) {
+    func getDetailInfoVenue (venueId: String, completion: @escaping (DetailVenueModel?, Bool) -> Void) {
         let urlString = "\(urlFoursquare)/v2/venues/"
         + "\(venueId)"
         + "?client_id=\(clientId)"
@@ -80,14 +88,15 @@ class NetworkManager {
 
             do {
                 let detailInfoVenue = try JSONDecoder().decode(DetailInfo.self, from: data)
-                let detail = detailInfoVenue.response.venue
-
-                let localDetailVenue = MappingReceivedDataToDetailsVenue.shared
-                    .mappingReceivedDataToDetailsVenue(apiModel: detail)
-                StorageManager.shared.putDetailsVanue(of: localDetailVenue)
-                completion(StorageManager.shared.getDetailsVanue(), true)
-
+                let detailVenue = detailInfoVenue.response.venue
+                let mapping = MappingReceivedDataToDetailsVenue.shared
+                let convertedDeteilVenue =
+                    mapping.mappingReceivedDataToDetailsVenue(apiModel: detailVenue)
+                StorageManager.shared.putDetailVanue(of: convertedDeteilVenue)
+                completion(StorageManager.shared.getDetailVanue(), true)
             } catch {
+                print("Localized: \(error.localizedDescription)")
+                print("Error: \(error)")
                 completion(nil, false)
             }
         }
@@ -211,7 +220,7 @@ class NetworkManager {
             completion(nil)
             return
         }
-        let urlString = "\(pref)128x128\(suff)"
+        let urlString = "\(pref)400x400\(suff)"
 
         guard let url = URL(string: urlString) else {
             completion(nil)

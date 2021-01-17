@@ -1,5 +1,5 @@
 //
-//  ItemUser.swift
+//  Group.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 21.12.2020.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct ItemUser: Codable {
-    let firstName: String?
-    let lastName: String?
+struct Contact: Codable {
+    let formattedPhone: String?
 }
