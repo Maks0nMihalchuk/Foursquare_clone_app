@@ -20,6 +20,13 @@ class ShortInfoTableCell: UITableViewCell {
 
     static let identifier = "ShortInfoTableCell"
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        adressLabel.text = "ShortInfoTableCell.AdressLabelText".localized()
+        hoursLabel.text = "HoursLabelText".localized()
+        categoriesLabel.text = "ShortInfoTableCell.CategoriesLabelText".localized()
+    }
+
     static func nib () -> UINib {
         return UINib(nibName: "ShortInfoTableCell", bundle: nil)
 

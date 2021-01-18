@@ -19,6 +19,7 @@ class DetailViewController: UIViewController {
     private let contentOffsetY: CGFloat = 250
     var detailVenue: DetailVenueModel?
     var dataImageVenue: Data?
+    private var indexPathForHoursCell = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +30,36 @@ class DetailViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-
 }
 extension DetailViewController: HoursTableCellDelegate {
-    func hoursTableCell(_ hoursTableCell: HoursTableCell, displayDetailedInfo byPressedButton: Bool) {
-        
+    func hoursTableCell(_ hoursTableCell: HoursTableCell, for button: UIButton, isRotationImage: Bool) {
+        if isRotationImage {
+            button.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        } else {
+            button.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.zero)
+        }
     }
 
+    func hoursTableCell(_ hoursTableCell: HoursTableCell,
+                        displayDetailedInfo byPressedButton: Bool,
+                        heightView: NSLayoutConstraint,
+                        stockHeightView: CGFloat,
+                        detailStackView: UIStackView) {
+        let duration = 0.25
+        let heightMuliplier = 2.2 * heightView.constant
+
+        UIView.animate(withDuration: duration) {
+            if !byPressedButton {
+                heightView.constant = heightMuliplier
+            } else {
+                heightView.constant = stockHeightView
+            }
+            detailStackView.isHidden = !detailStackView.isHidden
+            self.tableView.reloadRows(at: [IndexPath(row: self.indexPathForHoursCell, section: 0)], with: .automatic)
+
+            hoursTableCell.layoutIfNeeded()
+        }
+    }
 }
 extension DetailViewController: UITableViewDelegate {
 
@@ -72,7 +96,8 @@ extension DetailViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
 
-            cell.configure(imageData: dataImageVenue, nameVenue: detailVenue.name, shortDescription: "")
+            cell.configure(imageData: dataImageVenue, nameVenue: detailVenue.name,
+                           shortDescription: detailVenue.tierPrice)
             return cell
         case .shortInfoCell:
             let optionCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.identifier,
@@ -86,14 +111,17 @@ extension DetailViewController: UITableViewDataSource {
                             rating: detailVenue.rating, ratingColor: getRatingColor(with: detailVenue.ratingColor))
             return cell
         case .hoursCell:
+            indexPathForHoursCell = indexPath.row
             let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.identifier,
                                                                 for: indexPath) as? HoursTableCell
 
             guard let hoursCell = optionHoursCell else {
                 return UITableViewCell()
             }
-
-            hoursCell.configure(hoursStatus: detailVenue.hoursStatus)
+            hoursCell.delegate = self
+            hoursCell.configure(hoursStatus: detailVenue.hoursStatus,
+                                days: detailVenue.timeframesDays,
+                                detailHours: detailVenue.timeframesRenderedTime)
 
             return hoursCell
         case .contactsCell:

@@ -9,10 +9,12 @@
 import UIKit
 
 protocol HoursTableCellDelegate: class {
+    func hoursTableCell(_ hoursTableCell: HoursTableCell, for button: UIButton, isRotationImage: Bool)
     func hoursTableCell (_ hoursTableCell: HoursTableCell,
                          displayDetailedInfo byPressedButton: Bool,
                          heightView: NSLayoutConstraint,
-                         stockHeightView: CGFloat)
+                         stockHeightView: CGFloat,
+                         detailStackView: UIStackView)
 }
 
 class HoursTableCell: UITableViewCell {
@@ -35,29 +37,26 @@ class HoursTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         stockHeight = heightView.constant
+        hoursLabel.text = "HoursLabelText".localized()
     }
 
     static func nib () -> UINib {
         return UINib(nibName: "HoursTableCell", bundle: nil)
     }
 
-    func configure (hoursStatus: String) {
+    func configure (hoursStatus: String, days: String, detailHours: String) {
         hoursStatusLabel.text = hoursStatus
+        daysLabel.text = days
+        hoursDetailLabel.text = detailHours
     }
 
     @IBAction func detailHoursButtonPressed (_ sender: UIButton) {
 
-        delegate?.hoursTableCell(self, displayDetailedInfo: isDisplay, heightView: heightView, stockHeightView: stockHeight)
-//        UIView.animate(withDuration: 0.25) {
-//            if !self.buttonPressed {
-//                self.heghtView.constant = 100
-//                self.buttonPressed = !self.buttonPressed
-//            } else {
-//                self.heghtView.constant = self.stockHeight
-//                self.buttonPressed = !self.buttonPressed
-//            }
-//            self.detailHoursInfoStackView.isHidden = !self.detailHoursInfoStackView.isHidden
-//            self.superview?.layoutIfNeeded()
-//        }
+        delegate?.hoursTableCell(self, displayDetailedInfo: isDisplay,
+                                 heightView: heightView,
+                                 stockHeightView: stockHeight,
+                                 detailStackView: detailHoursInfoStackView)
+        isDisplay = !isDisplay
+        delegate?.hoursTableCell(self, for: sender, isRotationImage: isDisplay)
     }
 }

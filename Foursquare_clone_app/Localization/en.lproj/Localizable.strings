@@ -43,3 +43,10 @@
 "CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Ex: The best breakfast places to get eggs on a Sunday";
 "CreateNewListAlert.MakeCollaborativeLabelText" = "Make Collaborative?";
 "CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
+
+"ShortInfoTableCell.AdressLabelText" = "ADRESS";
+"HoursLabelText" = "HOURS";
+"ShortInfoTableCell.CategoriesLabelText" = "CATEGORIES";
+
+"ContactTableCell.PhoneLabelText" = "PHONE";
+"ContactTableCell.WebSiteLabelText" = "WEBSITE";

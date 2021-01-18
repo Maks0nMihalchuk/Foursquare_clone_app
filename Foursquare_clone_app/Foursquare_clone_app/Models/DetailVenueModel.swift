@@ -18,7 +18,8 @@ struct DetailVenueModel {
     let suffix: String?
     let hoursStatus: String
     let phone: String
-    let timeframes: [String: String]
+    let timeframesDays: String
+    let timeframesRenderedTime: String
     let webSite: String
     let tierPrice: String
     let messagePrice: String

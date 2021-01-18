@@ -12,7 +12,6 @@ class ImageTableCell: UITableViewCell {
 
     @IBOutlet private weak var venueImageView: UIImageView!
     @IBOutlet private weak var nameVenueLabel: UILabel!
-    @IBOutlet private weak var shortDescriptionLabel: UILabel!
 
     static let identifier = "ImageTableCell"
 
@@ -29,8 +28,7 @@ class ImageTableCell: UITableViewCell {
             venueImageView.image = UIImage(named: "unknown")
         }
 
-        nameVenueLabel.text = nameVenue
-        shortDescriptionLabel.text = shortDescription
+        nameVenueLabel.text = nameVenue + "\n \(shortDescription)"
     }
 
 }

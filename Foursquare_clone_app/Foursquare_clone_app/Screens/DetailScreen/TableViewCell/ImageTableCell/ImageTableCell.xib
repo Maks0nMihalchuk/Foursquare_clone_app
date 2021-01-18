@@ -18,26 +18,17 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jxp-dr-gtT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqa-2G-bf7">
-                        <rect key="frame" x="16" y="146" width="288" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqa-2G-bf7">
+                        <rect key="frame" x="16" y="165" width="288" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1G-FM-HRb">
-                        <rect key="frame" x="16" y="170" width="288" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jxp-dr-gtT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="35h-wu-uEA"/>
                     <constraint firstItem="Jxp-dr-gtT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ege-sX-zrx"/>
-                    <constraint firstItem="P1G-FM-HRb" firstAttribute="top" secondItem="sqa-2G-bf7" secondAttribute="bottom" id="Epa-G8-Hdd"/>
-                    <constraint firstItem="P1G-FM-HRb" firstAttribute="bottom" secondItem="Jxp-dr-gtT" secondAttribute="bottom" constant="-12" id="FRX-ce-ZJq"/>
-                    <constraint firstItem="P1G-FM-HRb" firstAttribute="trailing" secondItem="Jxp-dr-gtT" secondAttribute="trailing" constant="-16" id="Y56-aB-hkI"/>
-                    <constraint firstItem="P1G-FM-HRb" firstAttribute="leading" secondItem="Jxp-dr-gtT" secondAttribute="leading" constant="16" id="YuT-Im-OLG"/>
+                    <constraint firstAttribute="bottom" secondItem="sqa-2G-bf7" secondAttribute="bottom" constant="11" id="b2b-rP-qIv"/>
                     <constraint firstItem="sqa-2G-bf7" firstAttribute="leading" secondItem="Jxp-dr-gtT" secondAttribute="leading" constant="16" id="hOe-y0-k0L"/>
                     <constraint firstAttribute="bottom" secondItem="Jxp-dr-gtT" secondAttribute="bottom" id="mvP-yc-36g"/>
                     <constraint firstItem="sqa-2G-bf7" firstAttribute="trailing" secondItem="Jxp-dr-gtT" secondAttribute="trailing" constant="-16" id="vKm-LE-9K1"/>
@@ -46,10 +37,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameVenueLabel" destination="sqa-2G-bf7" id="Dw0-Rr-xER"/>
-                <outlet property="shortDescriptionLabel" destination="P1G-FM-HRb" id="aal-GS-EPo"/>
                 <outlet property="venueImageView" destination="Jxp-dr-gtT" id="dwV-jp-4YB"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="148.66071428571428"/>
+            <point key="canvasLocation" x="244.92753623188409" y="125.89285714285714"/>
         </tableViewCell>
     </objects>
 </document>

@@ -43,3 +43,10 @@
 "CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Напр.: лучшие места, где можно позавтракать в воскресенье";
 "CreateNewListAlert.MakeCollaborativeLabelText" = "Разрешить совместную работу?";
 "CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "Люди, которые подписаны на твой список, тоже смогут добавлять к нему места!";
+
+"ShortInfoTableCell.AdressLabelText" = "АДРЕС";
+"HoursLabelText" = "ЧАСЫ";
+"ShortInfoTableCell.CategoriesLabelText" = "КАТЕГОРИИ";
+
+"ContactTableCell.PhoneLabelText" = "ТЕЛЕФОН";
+"ContactTableCell.WebSiteLabelText" = "ВЕБ-САЙТ";

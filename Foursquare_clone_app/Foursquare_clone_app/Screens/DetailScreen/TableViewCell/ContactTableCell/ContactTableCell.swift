@@ -17,6 +17,12 @@ class ContactTableCell: UITableViewCell {
 
     static let identifier = "ContactTableCell"
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        phoneLabel.text = "ContactTableCell.PhoneLabelText".localized()
+        webSiteLabel.text = "ContactTableCell.WebSiteLabelText".localized()
+    }
+
     static func nib () -> UINib {
         return UINib(nibName: "ContactTableCell", bundle: nil)
     }

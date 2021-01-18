@@ -529,7 +529,7 @@
                                         </view>
                                         <blurEffect style="systemUltraThinMaterialDark"/>
                                     </visualEffectView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krO-G9-oeF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krO-G9-oeF">
                                         <rect key="frame" x="56" y="52" width="262" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="4ed-fR-210"/>

@@ -14,6 +14,26 @@ enum PriceKey {
     case currency
 }
 
+enum TierKeys {
+    case firstLevelPrice
+    case secondLevelPrice
+    case thirdLevelPrice
+    case fourthLevelPrice
+
+    var currentLevelPrice: String {
+        switch self {
+        case .firstLevelPrice:
+            return "$"
+        case .secondLevelPrice:
+            return "$$"
+        case .thirdLevelPrice:
+            return "$$$"
+        case .fourthLevelPrice:
+            return "$$$$"
+        }
+    }
+}
+
 class MappingReceivedDataToDetailsVenue {
     static var shared: MappingReceivedDataToDetailsVenue = {
         let mapping = MappingReceivedDataToDetailsVenue()
@@ -27,9 +47,10 @@ class MappingReceivedDataToDetailsVenue {
         let suffix = apiModel.bestPhoto?.suffix
 
         let location = getLocation(location: apiModel.location.formattedAddress)
-        let timeFrames = getTimeFrames(of: apiModel.hours?.timeframes)
-        let tierPrice = getPrice(with: price, by: .tier)
+        let timeFramesDays = getTimeFramesDays(of: apiModel.hours?.timeframes)
+        let timeFramesRenderedTime = getTimeFramesRenderedTime(of: apiModel.hours?.timeframes)
         let messagePrice = getPrice(with: price, by: .message)
+        let tierPrice = "\(messagePrice) - \(getPrice(with: price, by: .tier))"
         let currencyPrice = getPrice(with: price, by: .currency)
         let categories = getCetegories(model: apiModel)
 
@@ -82,7 +103,8 @@ class MappingReceivedDataToDetailsVenue {
                                 location: location, rating: rating,
                                 ratingColor: ratingColor, prefix: prefix,
                                 suffix: suffix, hoursStatus: hoursStatus,
-                                phone: phone, timeframes: timeFrames,
+                                phone: phone, timeframesDays: timeFramesDays,
+                                timeframesRenderedTime: timeFramesRenderedTime,
                                 webSite: webSite, tierPrice: tierPrice,
                                 messagePrice: messagePrice, currencyPrice: currencyPrice)
     }
@@ -117,7 +139,7 @@ private extension MappingReceivedDataToDetailsVenue {
 
         switch key {
         case .tier:
-            return getPriceTier(price: price)
+            return tierKeyForPrice(tier: getPriceTier(price: price))
         case .message:
             return getPriceMessage(price: price)
         case .currency:
@@ -125,46 +147,63 @@ private extension MappingReceivedDataToDetailsVenue {
         }
     }
 
-    func getPriceTier (price: Price) -> String {
-        return "\(price.tier)"
+    func getPriceTier (price: Price) -> Int {
+        return price.tier
     }
 
     func getPriceMessage (price: Price) -> String {
-        return "\(price.message)"
+        return price.message
     }
 
     func getPriceCurrency (price: Price) -> String {
         return price.currency
     }
 
-    func getTimeFrames (of timeframes: [TimeFrames]?) -> [String: String] {
-        guard let timeframes = timeframes else {
-            return ["Add Hours": ""]
+    func tierKeyForPrice (tier: Int) -> String {
+        switch tier {
+        case 1:
+            return TierKeys.firstLevelPrice.currentLevelPrice
+        case 2:
+            return TierKeys.secondLevelPrice.currentLevelPrice
+        case 3:
+            return TierKeys.thirdLevelPrice.currentLevelPrice
+        case 4:
+            return TierKeys.fourthLevelPrice.currentLevelPrice
+        default:
+            return ""
         }
-         let timeFramesDays: [String] = {
-            var days = [String]()
+    }
+
+    func getTimeFramesDays (of timeframes: [TimeFrames]?) -> String {
+        guard let timeframes = timeframes else {
+            return "Add Hours"
+        }
+
+        let timeFramesDays: String = {
+            var days = String()
             timeframes.forEach {
-                days.append($0.days)
+                days += "\($0.days) \n"
             }
             return days
         }()
-        let timeFramesTime: [String] = {
-            var renderedTime = [String]()
+        return timeFramesDays
+    }
+
+    func getTimeFramesRenderedTime (of timeframes: [TimeFrames]?) -> String {
+        guard let timeframes = timeframes else {
+            return "Add Hours"
+        }
+
+        let timeFramesTime: String = {
+            var renderedTime = String()
             timeframes.forEach({ (time) in
                 time.open?.forEach({
-                    renderedTime.append($0.renderedTime)
+                    renderedTime += "\($0.renderedTime) \n"
                 })
             })
             return renderedTime
         }()
-
-        var timeFrames = [String: String]()
-
-        timeFramesDays.enumerated().forEach {
-            timeFrames[$0.element] = timeFramesTime[$0.offset]
-        }
-
-        return timeFrames
+        return timeFramesTime
     }
 
     func getLocation (location: [String]) -> String {
