@@ -14,6 +14,13 @@ class ImageTableCell: UITableViewCell {
     @IBOutlet private weak var nameVenueLabel: UILabel!
 
     static let identifier = "ImageTableCell"
+    private let gradient = CAGradientLayer()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        gradientSetup()
+        venueImageView.layer.addSublayer(gradient)
+    }
 
     static func nib () -> UINib {
         return UINib(nibName: "ImageTableCell", bundle: nil)
@@ -31,4 +38,14 @@ class ImageTableCell: UITableViewCell {
         nameVenueLabel.text = nameVenue + "\n \(shortDescription)"
     }
 
+}
+private extension ImageTableCell {
+    func gradientSetup () {
+        gradient.frame = venueImageView.bounds
+        gradient.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
+                           UIColor.black.withAlphaComponent(0.0).cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.locations = [0, 0.75, 1]
+    }
 }

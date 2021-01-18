@@ -46,7 +46,8 @@ extension DetailViewController: HoursTableCellDelegate {
                         stockHeightView: CGFloat,
                         detailStackView: UIStackView) {
         let duration = 0.25
-        let heightMuliplier = 2.2 * heightView.constant
+        let muliplier: CGFloat = 2.2
+        let heightMuliplier = muliplier * heightView.constant
 
         UIView.animate(withDuration: duration) {
             if !byPressedButton {
@@ -55,9 +56,10 @@ extension DetailViewController: HoursTableCellDelegate {
                 heightView.constant = stockHeightView
             }
             detailStackView.isHidden = !detailStackView.isHidden
-            self.tableView.reloadRows(at: [IndexPath(row: self.indexPathForHoursCell, section: 0)], with: .automatic)
 
+            self.tableView.beginUpdates()
             hoursTableCell.layoutIfNeeded()
+            self.tableView.endUpdates()
         }
     }
 }
