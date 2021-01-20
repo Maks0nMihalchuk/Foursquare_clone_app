@@ -238,7 +238,7 @@ private extension ListsViewController {
         createNewListAlert.delegate = self
     }
 
-    func startAnimationForAlert (key animation: AlertAnimationKeys) {
+    func startAnimationForAlert(key animation: AlertAnimationKeys) {
         let scale: CGFloat = 1.3
         let duration = 0.4
 

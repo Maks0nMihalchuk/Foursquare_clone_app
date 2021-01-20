@@ -29,7 +29,7 @@ class AccountViewController: UIViewController {
         checkToken()
     }
 
-    @IBAction func signInButtonPressed (_ sender: UIButton) {
+    @IBAction func signInButtonPressed(_ sender: UIButton) {
 
         if isAvailable {
             sender.setTitle("AccountViewController.SignInButton".localized(), for: .normal)
@@ -59,7 +59,7 @@ class AccountViewController: UIViewController {
         }
     }
 
-    @IBAction func dataRefreshButtonPressed (_ sender: UIButton) {
+    @IBAction func dataRefreshButtonPressed(_ sender: UIButton) {
         setupActivityIndicator(isHidden: isAvailable, indicator: activityIndicator)
         getUserInfo(isAvailableToken: isAvailable)
     }
@@ -106,13 +106,13 @@ extension AccountViewController: SFSafariViewControllerDelegate {
 // MARK: - setup view
 private extension AccountViewController {
 
-    func setupView () {
+    func setupView() {
         updateDataButton.alpha = 0
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
     }
 
-    func setupActivityIndicator (isHidden: Bool, indicator: UIActivityIndicatorView) {
+    func setupActivityIndicator(isHidden: Bool, indicator: UIActivityIndicatorView) {
         indicator.isHidden = !isHidden
 
         if isHidden {
@@ -122,7 +122,7 @@ private extension AccountViewController {
         }
     }
 
-    func showRefreshButton (button: UIButton, isHidden: Bool) {
+    func showRefreshButton(button: UIButton, isHidden: Bool) {
         UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseOut, animations: {
 
             if isHidden {
@@ -134,7 +134,7 @@ private extension AccountViewController {
         }, completion: nil)
     }
 
-    func showErrorAlert () {
+    func showErrorAlert() {
         let alertController = UIAlertController(title: "AlertErrorTitle".localized(),
                                                 message: "AccountViewController.AlertMessage".localized(),
                                                 preferredStyle: .alert)
@@ -149,7 +149,7 @@ private extension AccountViewController {
 // MARK: - work with token
 private extension AccountViewController {
 
-    func checkToken () {
+    func checkToken() {
         isAvailable = keychainManager.checkForDataAvailability(for: getKeyToToken())
         setupActivityIndicator(isHidden: isAvailable, indicator: activityIndicator)
 
@@ -162,7 +162,7 @@ private extension AccountViewController {
         }
     }
 
-    func getKeyToToken () -> String {
+    func getKeyToToken() -> String {
         return KeychainKey.accessToken.currentKey
     }
 }
@@ -170,7 +170,7 @@ private extension AccountViewController {
 // MARK: - work with user data
 private extension AccountViewController {
 
-    func getUserInfo (isAvailableToken: Bool) {
+    func getUserInfo(isAvailableToken: Bool) {
         if isAvailableToken {
             let accessToken = keychainManager.getValue(for: getKeyToToken())
             NetworkManager.shared.getUserInfo(accessToken: accessToken) { (userFullName, isSuccessful) in
