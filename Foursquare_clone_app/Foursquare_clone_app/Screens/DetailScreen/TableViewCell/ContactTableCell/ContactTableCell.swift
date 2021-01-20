@@ -15,21 +15,15 @@ class ContactTableCell: UITableViewCell {
     @IBOutlet private weak var phoneNumberLabel: UILabel!
     @IBOutlet private weak var webSiteURLLabel: UILabel!
 
-    static let identifier = "ContactTableCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         phoneLabel.text = "ContactTableCell.PhoneLabelText".localized()
         webSiteLabel.text = "ContactTableCell.WebSiteLabelText".localized()
     }
 
-    static func nib () -> UINib {
-        return UINib(nibName: "ContactTableCell", bundle: nil)
-    }
-
-    func configure (numberText: String, webSiteURL: String) {
-        phoneNumberLabel.text = numberText
-        webSiteURLLabel.text = webSiteURL
+    func configure(with content: ContactCellModel) {
+        phoneNumberLabel.text = content.phone
+        webSiteURLLabel.text = content.webSiteURL
     }
 
 }

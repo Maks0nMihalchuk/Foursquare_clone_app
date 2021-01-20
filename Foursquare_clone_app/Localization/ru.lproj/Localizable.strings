@@ -44,8 +44,12 @@
 "CreateNewListAlert.MakeCollaborativeLabelText" = "Разрешить совместную работу?";
 "CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "Люди, которые подписаны на твой список, тоже смогут добавлять к нему места!";
 
-"ShortInfoTableCell.AdressLabelText" = "АДРЕС";
+"DetailViewController.Add Hours" = "Добавить часы";
+"DetailViewController.Add Phone" = "Добавить телефон";
+"DetailViewController.Add Website" = "Добавить веб-сайт";
 "HoursLabelText" = "ЧАСЫ";
+
+"ShortInfoTableCell.AdressLabelText" = "АДРЕС";
 "ShortInfoTableCell.CategoriesLabelText" = "КАТЕГОРИИ";
 
 "ContactTableCell.PhoneLabelText" = "ТЕЛЕФОН";

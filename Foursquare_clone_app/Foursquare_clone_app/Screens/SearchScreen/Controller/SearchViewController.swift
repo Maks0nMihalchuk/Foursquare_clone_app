@@ -13,7 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
 
-    private let main = UIStoryboard(name: "Main", bundle: nil)
+    private let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
@@ -30,14 +30,15 @@ class SearchViewController: UIViewController {
     }
 
 }
+
+// MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
         guard let text = searchBar.text else {
             return
         }
 
-        if text == "" {
+        if text.isEmpty {
             searchBar.resignFirstResponder()
             venues.removeAll()
             tableView.reloadData()
@@ -64,6 +65,8 @@ extension SearchViewController: UISearchBarDelegate {
         }
     }
 }
+
+// MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -75,17 +78,16 @@ extension SearchViewController: UITableViewDelegate {
         NetworkManager.shared.getDetailInfoVenue(venueId: venues[indexPath.row].id) { (detailVenueInfo, isSuccessful) in
 
             if isSuccessful {
-
                 guard let detailVenueInfo = detailVenueInfo else {
                     return
                 }
 
-                NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix, suffix: detailVenueInfo.suffix) { (imageData) in
+                NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix,
+                                               suffix: detailVenueInfo.suffix) { (imageData) in
                     DispatchQueue.main.async {
                         self.setupAndPresentDetailController(detailVenue: detailVenueInfo, dataImageVenue: imageData)
                     }
                 }
-
             } else {
                 self.showAlertError()
                 return
@@ -94,6 +96,8 @@ extension SearchViewController: UITableViewDelegate {
         }
     }
 }
+
+// MARK: - UITableViewDataSource
 extension SearchViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,8 +118,10 @@ extension SearchViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
-    func setupSearchBar (searchBar: UISearchBar, text: String, isActive: Bool) {
+    func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
         searchBar.delegate = self
         searchBar.searchTextField.text = text
         searchBar.searchTextField.backgroundColor = .white
@@ -128,8 +134,9 @@ private extension SearchViewController {
         }
     }
 
-    func setupAndPresentDetailController (detailVenue: DetailVenueModel, dataImageVenue: Data?) {
-        let detailController = main.instantiateViewController(identifier: "DetailViewController") as? DetailViewController
+    func setupAndPresentDetailController(detailVenue: DetailVenueModel, dataImageVenue: Data?) {
+        let detailController = mainStoryboard
+            .instantiateViewController(identifier: "DetailViewController") as? DetailViewController
 
         guard let detail = detailController else {
             return
@@ -141,7 +148,7 @@ private extension SearchViewController {
         present(detail, animated: true, completion: nil)
     }
 
-    func showAlertError () {
+    func showAlertError() {
         let alertController = UIAlertController(title: "Error",
                                                 message: "when downloading data error occurred", preferredStyle: .alert)
         let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),

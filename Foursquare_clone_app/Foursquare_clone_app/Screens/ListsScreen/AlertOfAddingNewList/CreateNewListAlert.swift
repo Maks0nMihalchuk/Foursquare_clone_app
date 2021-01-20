@@ -9,11 +9,11 @@
 import UIKit
 
 protocol AlertDelegate: class {
-    func createNewListAlertDidEndInteraction (_ alertToCreateNewList: CreateNewListAlert)
-    func createNewListAlert (_ alertToCreateNewList: CreateNewListAlert,
-                             createListWith name: String?,
-                             description: String?,
-                             collaborativeFlag: Bool)
+    func createNewListAlertDidEndInteraction(_ alertToCreateNewList: CreateNewListAlert)
+    func createNewListAlert(_ alertToCreateNewList: CreateNewListAlert,
+                            createListWith name: String?,
+                            description: String?,
+                            collaborativeFlag: Bool)
 }
 
 class CreateNewListAlert: UIView {
@@ -50,43 +50,46 @@ class CreateNewListAlert: UIView {
         delegate?.createNewListAlertDidEndInteraction(self)
     }
 
-    @IBAction func createListButtonPressed (_ sender: UIButton) {
+    @IBAction func createListButtonPressed(_ sender: UIButton) {
         delegate?.createNewListAlert(self,
                                         createListWith: listNameTextField.text,
                                         description: descriptionTextField.text,
                                         collaborativeFlag: collaborationSwitch.isOn)
     }
 }
+
+// MARK: - UITextFieldDelegate
 extension CreateNewListAlert: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
 }
+
 // MARK: - Setup alert elements
 private extension CreateNewListAlert {
-    func setupCornerRadiusForAlert () {
+    func setupCornerRadiusForAlert() {
         layer.cornerRadius = 5
     }
 
-    func setupButton () {
+    func setupButton() {
         createListButton.setTitle("CreateNewListAlert.CreateListButtonTitle".localized(),
                                   for: .normal)
         cancelButton.setTitle("CreateNewListAlert.CancelButtonTitle".localized(),
                               for: .normal)
     }
 
-    func setupTextField () {
+    func setupTextField() {
         listNameTextField.placeholder = "CreateNewListAlert.ListNameTextFieldPlaceholder".localized()
         descriptionTextField.placeholder = "CreateNewListAlert.DescriptionTextFieldPlaceholder".localized()
     }
-    func setupLabel () {
+    func setupLabel() {
         listNameLabel.text = "CreateNewListAlert.ListNameLabelText".localized()
         descriptionLabel.text = "CreateNewListAlert.DescriptionLabelText".localized()
         makeCollaborativeLabel.text = "CreateNewListAlert.MakeCollaborativeLabelText".localized()
         makeCollaborativeDescriptionLabel.text = "CreateNewListAlert.MakeCollaborativeDescriptionLabel".localized()
     }
 
-    func setupImage () {
+    func setupImage() {
         topImageView.image = UIImage(named: "listsCellBackground")?.cropCornerOfImage(by: .bottomLeftCorner)
         topImageView.layer.cornerRadius = 5
         topImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

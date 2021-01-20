@@ -28,27 +28,12 @@ class HomeViewController: UIViewController {
                                 forCellWithReuseIdentifier: CategoryCollectionCell.identifier)
     }
 
-    private func createdSearchController (main: UIStoryboard,
-                                          isActiveSearchBar: Bool,
-                                          searchBarText: String,
-                                          venues: [Venue]) {
-
-        let searchController = main.instantiateViewController(identifier: "SearchViewController")
-        as? SearchViewController
-        guard let search = searchController else {
-            return
-        }
-        search.searchBarText = searchBarText
-        search.launchSearchBar = isActiveSearchBar
-        search.venues = venues
-        search.modalPresentationStyle = .fullScreen
-        present(search, animated: true, completion: nil)
-    }
-
     @IBAction func searchButtonPress(_ sender: UIButton) {
         createdSearchController(main: main, isActiveSearchBar: true, searchBarText: "", venues: [Venue]())
     }
 }
+
+// MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let standardCategory = standardCategories[indexPath.item].imageName
@@ -72,6 +57,8 @@ extension HomeViewController: UICollectionViewDelegate {
         }
     }
 }
+
+// MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return standardCategories.count
@@ -82,7 +69,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
         let optionCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionCell.identifier,
-                                                            for: indexPath) as? CategoryCollectionCell
+                                               for: indexPath) as? CategoryCollectionCell
         guard let cell = optionCell else {
             return UICollectionViewCell()
         }
@@ -94,6 +81,8 @@ extension HomeViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -107,5 +96,26 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         let spacing = (numberOfHorizontalIndents) * offset / CGFloat(numberOfCellsInRow)
 
         return CGSize(width: widthCell - spacing, height: heightCell - topBottomPadding)
+    }
+}
+
+// MARK: - creating and showing a SearchController
+private extension HomeViewController {
+    func createdSearchController(main: UIStoryboard,
+                                 isActiveSearchBar: Bool,
+                                 searchBarText: String,
+                                 venues: [Venue]) {
+        let searchController = main.instantiateViewController(identifier: "SearchViewController")
+            as? SearchViewController
+
+        guard let search = searchController else {
+            return
+        }
+
+        search.searchBarText = searchBarText
+        search.launchSearchBar = isActiveSearchBar
+        search.venues = venues
+        search.modalPresentationStyle = .fullScreen
+        present(search, animated: true, completion: nil)
     }
 }

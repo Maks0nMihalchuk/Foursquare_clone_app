@@ -22,8 +22,8 @@ class NetworkManager {
         return networkManager
     }()
 
-    func getVenues (categoryName: String,
-                    completion: @escaping ([Venue]?, Bool) -> Void) {
+    func getVenues(categoryName: String,
+                   completion: @escaping ([Venue]?, Bool) -> Void) {
 
         let urlHostAllowed = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
@@ -63,7 +63,7 @@ class NetworkManager {
         }
     }
 
-    func getDetailInfoVenue (venueId: String, completion: @escaping (DetailVenueModel?, Bool) -> Void) {
+    func getDetailInfoVenue(venueId: String, completion: @escaping (DetailVenueModel?, Bool) -> Void) {
         let urlString = "\(urlFoursquare)/v2/venues/"
         + "\(venueId)"
         + "?client_id=\(clientId)"
@@ -102,7 +102,7 @@ class NetworkManager {
         }
     }
 
-    func autorizationFoursquare (completion: @escaping (URL?, Bool) -> Void) {
+    func autorizationFoursquare(completion: @escaping (URL?, Bool) -> Void) {
         let urlString = "\(urlFoursquareLogin)/authenticate?"
         + "client_id=\(clientId)&response_type=code&redirect_uri=\(redirectUrl)"
 
@@ -113,7 +113,7 @@ class NetworkManager {
         completion(url, true)
     }
 
-    func getAccessToken (code: String?, completion: @escaping (String?, Bool) -> Void) {
+    func getAccessToken(code: String?, completion: @escaping (String?, Bool) -> Void) {
 
         guard let code = code else {
             completion(nil, false)
@@ -150,7 +150,7 @@ class NetworkManager {
         }
     }
 
-    func getUserInfo (accessToken: String, completion: @escaping (String?, Bool) -> Void) {
+    func getUserInfo(accessToken: String, completion: @escaping (String?, Bool) -> Void) {
 
         let urlString = "\(urlFoursquare)/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
 
@@ -182,7 +182,7 @@ class NetworkManager {
         }
     }
 
-    func getUserLists (token: String, completion: @escaping ([GetUserListsGroup]?, Bool) -> Void) {
+    func getUserLists(token: String, completion: @escaping ([GetUserListsGroup]?, Bool) -> Void) {
 
         let urlString = "\(urlFoursquare)/v2/users/self/lists?oauth_token=\(token)&v=\(versionAPI)"
 
@@ -213,7 +213,7 @@ class NetworkManager {
         }
     }
 
-    func getPhoto (prefix: String?, suffix: String?, completion: @escaping (Data?) -> Void) {
+    func getPhoto(prefix: String?, suffix: String?, completion: @escaping (Data?) -> Void) {
         guard let pref = prefix,
               let suff = suffix
         else {
@@ -240,10 +240,10 @@ class NetworkManager {
         }
     }
 
-    func postRequestForCreateNewList (token: String,
-                                      listName: String,
-                                      descriptionList: String,
-                                      collaborativeFlag: Bool) {
+    func postRequestForCreateNewList(token: String,
+                                     listName: String,
+                                     descriptionList: String,
+                                     collaborativeFlag: Bool) {
 
         let optionUrl = setupUrlToCreateUserList(token: token,
                                listName: listName,
@@ -273,8 +273,10 @@ class NetworkManager {
         }.resume()
     }
 }
+
+// MARK: - setting request tasks and setup url to create user list
 private extension NetworkManager {
-    func makeDataTaskRequest (with url: URL, completion: @escaping (Data?, Error?) -> Void) {
+    func makeDataTaskRequest(with url: URL, completion: @escaping (Data?, Error?) -> Void) {
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
@@ -285,10 +287,10 @@ private extension NetworkManager {
         }.resume()
     }
 
-    func setupUrlToCreateUserList (token: String,
-                                   listName: String,
-                                   description: String,
-                                   collaborative: Bool) -> URL? {
+    func setupUrlToCreateUserList(token: String,
+                                  listName: String,
+                                  description: String,
+                                  collaborative: Bool) -> URL? {
         let urlHostAllowed = "\(urlFoursquare)/v2/lists/add?"
         + "oauth_token=\(token)&client_id=\(clientId)"
         + "&client_secret=\(clientSecret)&v=\(versionAPI)"

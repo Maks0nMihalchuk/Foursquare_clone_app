@@ -16,7 +16,6 @@ class StorageManager {
     }()
 
     private var userLists = [GetUserListsGroup]()
-
     private var detailsVanue: DetailVenueModel?
     private var venues = [Venue]()
 
@@ -39,6 +38,7 @@ class StorageManager {
     func putVenues (of venues: [Venue]) {
         self.venues = venues
     }
+
     func getVenues () -> [Venue] {
         return venues
     }

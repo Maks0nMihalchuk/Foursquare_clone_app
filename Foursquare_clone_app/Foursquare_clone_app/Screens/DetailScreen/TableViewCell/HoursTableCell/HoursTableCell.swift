@@ -9,17 +9,11 @@
 import UIKit
 
 protocol HoursTableCellDelegate: class {
-    func hoursTableCell(_ hoursTableCell: HoursTableCell, for button: UIButton, isRotationImage: Bool)
-    func hoursTableCell (_ hoursTableCell: HoursTableCell,
-                         displayDetailedInfo byPressedButton: Bool,
-                         heightView: NSLayoutConstraint,
-                         stockHeightView: CGFloat,
-                         detailStackView: UIStackView)
+    func changeStateHoursCell(_ hoursTableCell: HoursTableCell)
 }
 
 class HoursTableCell: UITableViewCell {
 
-    @IBOutlet private weak var heightView: NSLayoutConstraint!
     @IBOutlet private weak var detailHoursButton: UIButton!
     @IBOutlet private weak var hoursLabel: UILabel!
     @IBOutlet private weak var hoursStatusLabel: UILabel!
@@ -29,34 +23,27 @@ class HoursTableCell: UITableViewCell {
 
     weak var delegate: HoursTableCellDelegate?
 
-    static let identifier = "HoursTableCell"
-
-    private var stockHeight: CGFloat = 0
-    private var isDisplay = false
-
+    var contentModel: HoursCellModel?
     override func awakeFromNib() {
         super.awakeFromNib()
-        stockHeight = heightView.constant
+        setupHoursLabel()
+    }
+
+    func configure(with content: HoursCellModel, state: Bool) {
+        detailHoursInfoStackView.isHidden = state
+        hoursStatusLabel.text = content.hoursStatus
+        daysLabel.text = content.detailHours.days
+        hoursDetailLabel.text = content.detailHours.detailHours
+    }
+
+    @IBAction func detailHoursButtonPressed(_ sender: UIButton) {
+        delegate?.changeStateHoursCell(self)
+    }
+}
+
+// MARK: - setup HoursLabel
+private extension HoursTableCell {
+    func setupHoursLabel() {
         hoursLabel.text = "HoursLabelText".localized()
-    }
-
-    static func nib () -> UINib {
-        return UINib(nibName: "HoursTableCell", bundle: nil)
-    }
-
-    func configure (hoursStatus: String, days: String, detailHours: String) {
-        hoursStatusLabel.text = hoursStatus
-        daysLabel.text = days
-        hoursDetailLabel.text = detailHours
-    }
-
-    @IBAction func detailHoursButtonPressed (_ sender: UIButton) {
-
-        delegate?.hoursTableCell(self, displayDetailedInfo: isDisplay,
-                                 heightView: heightView,
-                                 stockHeightView: stockHeight,
-                                 detailStackView: detailHoursInfoStackView)
-        isDisplay = !isDisplay
-        delegate?.hoursTableCell(self, for: sender, isRotationImage: isDisplay)
     }
 }

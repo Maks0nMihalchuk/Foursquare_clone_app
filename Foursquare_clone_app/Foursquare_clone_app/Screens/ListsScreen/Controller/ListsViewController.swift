@@ -46,15 +46,17 @@ class ListsViewController: UIViewController {
         updateDataOnScreen()
     }
 }
+
+// MARK: - AlertDelegate
 extension ListsViewController: AlertDelegate {
-    func createNewListAlertDidEndInteraction (_ createNewListAlert: CreateNewListAlert) {
+    func createNewListAlertDidEndInteraction(_ createNewListAlert: CreateNewListAlert) {
         startAnimationForAlert(key: .hide)
     }
 
-    func createNewListAlert (_ createNewListAlert: CreateNewListAlert,
-                             createListWith name: String?,
-                             description: String?,
-                             collaborativeFlag: Bool) {
+    func createNewListAlert(_ createNewListAlert: CreateNewListAlert,
+                            createListWith name: String?,
+                            description: String?,
+                            collaborativeFlag: Bool) {
 
         guard
             let listName = name,
@@ -74,6 +76,8 @@ extension ListsViewController: AlertDelegate {
         }
     }
 }
+
+// MARK: - UICollectionViewDelegate
 extension ListsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -95,6 +99,8 @@ extension ListsViewController: UICollectionViewDelegate {
         }
     }
 }
+
+// MARK: - UICollectionViewDataSource
 extension ListsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return KeysForSections.arrayOfKeysForSection.count
@@ -168,6 +174,7 @@ extension ListsViewController: UICollectionViewDataSource {
             if indexPath.item == numberOfUserLists {
                 return cellWithButton
             }
+
             let userListsItems = userLists[indexPath.section].items[indexPath.item]
             let listName = userListsItems.name
             let numberPlaces = userListsItems.listItems.count
@@ -190,6 +197,8 @@ extension ListsViewController: UICollectionViewDataSource {
         }
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 extension ListsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -213,9 +222,10 @@ extension ListsViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.bounds.size.width, height: 35)
     }
 }
+
 // MARK: - Setup showing and hiding alerts
 private extension ListsViewController {
-    func setupAlertForAddingNewList () {
+    func setupAlertForAddingNewList() {
         createNewListAlert = Bundle.main.loadNibNamed("CreateNewListAlert",
                                                         owner: self,
                                                         options: nil)?.first as? CreateNewListAlert
@@ -236,7 +246,7 @@ private extension ListsViewController {
         }
     }
 
-    func showAlertAddingNewList (scale: CGFloat, duration: Double) {
+    func showAlertAddingNewList(scale: CGFloat, duration: Double) {
         createNewListAlert.transform = CGAffineTransform(scaleX: scale, y: scale)
         createNewListAlert.alpha = 0
 
@@ -247,7 +257,7 @@ private extension ListsViewController {
         }
     }
 
-    func hideAlertAddingNewList (scale: CGFloat, duration: Double) {
+    func hideAlertAddingNewList(scale: CGFloat, duration: Double) {
         UIView.animate(withDuration: duration) {
             self.visualEffectView.alpha = 0
             self.createNewListAlert.alpha = 0
@@ -256,7 +266,7 @@ private extension ListsViewController {
         }
     }
 
-    func setupVisualEffectView () {
+    func setupVisualEffectView() {
         view.addSubview(visualEffectView)
         visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -265,7 +275,7 @@ private extension ListsViewController {
         visualEffectView.alpha = 0
     }
 
-    func setupAndShowErrorAlert () {
+    func setupAndShowErrorAlert() {
         let controller = UIAlertController(title: "AlertErrorTitle".localized(),
                                            message: "ListsViewController.AlertToErrorMessage".localized(),
                                            preferredStyle: .alert)
@@ -274,9 +284,10 @@ private extension ListsViewController {
         present(controller, animated: true, completion: nil)
     }
 }
+
 // MARK: - Setup screen
 private extension ListsViewController {
-    func setupHeaderTitle (title: String, type: String, numberOfLists: Int?) -> String {
+    func setupHeaderTitle(title: String, type: String, numberOfLists: Int?) -> String {
         if type == "yours" {
             return title
         } else {
@@ -289,7 +300,7 @@ private extension ListsViewController {
         }
     }
 
-    func setupNumberPlaces (numberPlaces: Int) -> String {
+    func setupNumberPlaces(numberPlaces: Int) -> String {
         if numberPlaces == 0 {
             return "UserCreatedCell.NumberPlacesLabel".localized()
         } else {
@@ -297,7 +308,7 @@ private extension ListsViewController {
         }
     }
 
-    func setImageName (indexPath: IndexPath, defaultImageForLists: [String], userImageDefault: String) -> String {
+    func setImageName(indexPath: IndexPath, defaultImageForLists: [String], userImageDefault: String) -> String {
         switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
         case .sectionOfStandardCells:
             return defaultImageForLists[indexPath.item]
@@ -306,30 +317,30 @@ private extension ListsViewController {
         }
     }
 
-    func dequeueReusableCellWithButton (_ collectionView: UICollectionView,
-                                        indexPath: IndexPath) -> UICollectionViewCell {
+    func dequeueReusableCellWithButton(_ collectionView: UICollectionView,
+                                       indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellWithButton.identifier, for: indexPath)
         return cell
 
     }
 
-    func dequeueReusableUserCell (_ collectionView: UICollectionView, indexPath: IndexPath) -> UserCreatedCell? {
+    func dequeueReusableUserCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UserCreatedCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCreatedCell.identifier,
                                                             for: indexPath) as? UserCreatedCell
         return cell
     }
 
-    func setupScreen () {
+    func setupScreen() {
         title = "ListsViewController.Title".localized()
         collectionView.refreshControl = refreshControl
     }
-    func updateDataOnScreen () {
+    func updateDataOnScreen() {
         if userLists.isEmpty {
             getUserLists()
         }
     }
 
-    func setupCollectionCells () {
+    func setupCollectionCells() {
         collectionView.register(UserCreatedCell.nib(),
                                 forCellWithReuseIdentifier: UserCreatedCell.identifier)
         collectionView.register(CellWithButton.nib(), forCellWithReuseIdentifier: CellWithButton.identifier)
@@ -338,7 +349,7 @@ private extension ListsViewController {
                                 withReuseIdentifier: HeaderCollectionView.identifier)
     }
 
-    func setupActivityIndicator (isHidden: Bool) {
+    func setupActivityIndicator(isHidden: Bool) {
         activityIndicator.isHidden = !isHidden
 
         if isHidden {
@@ -348,27 +359,28 @@ private extension ListsViewController {
         }
     }
 
-    @objc func refresh (sender: UIRefreshControl) {
+    @objc func refresh(sender: UIRefreshControl) {
         getUserLists()
         sender.endRefreshing()
         collectionView.reloadData()
     }
 }
+
 // MARK: - Work with a keychain
 private extension ListsViewController {
-    func checkForAuthorization () -> Bool {
+    func checkForAuthorization() -> Bool {
         return keychainManager.checkForDataAvailability(for: getTokenKey())
     }
 
-    func getTokenKey () -> String {
+    func getTokenKey() -> String {
         return KeychainKey.accessToken.currentKey
     }
 
-    func getToken () -> String {
+    func getToken() -> String {
         return keychainManager.getValue(for: getTokenKey())
     }
 
-    func getUserLists () {
+    func getUserLists() {
         let checkToken = checkForAuthorization()
 
         if checkToken {

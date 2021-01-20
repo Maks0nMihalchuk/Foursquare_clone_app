@@ -8,14 +8,13 @@
 
 import Foundation
 
-enum KeysToCells {
+enum KeysForCells {
     case imageCell
     case shortInfoCell
     case hoursCell
     case contactsCell
 
-    static var arrayOfKeysForCells: [KeysToCells] {
+    static var arrayOfKeysForCells: [KeysForCells] {
         return [.imageCell, .shortInfoCell, .hoursCell, .contactsCell]
     }
 }
-

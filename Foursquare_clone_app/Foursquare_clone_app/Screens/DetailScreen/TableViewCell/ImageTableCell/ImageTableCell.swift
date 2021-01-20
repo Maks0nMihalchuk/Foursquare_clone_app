@@ -13,39 +13,29 @@ class ImageTableCell: UITableViewCell {
     @IBOutlet private weak var venueImageView: UIImageView!
     @IBOutlet private weak var nameVenueLabel: UILabel!
 
-    static let identifier = "ImageTableCell"
     private let gradient = CAGradientLayer()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        gradientSetup()
-        venueImageView.layer.addSublayer(gradient)
-    }
-
-    static func nib () -> UINib {
-        return UINib(nibName: "ImageTableCell", bundle: nil)
-    }
-
-    func configure (imageData: Data?, nameVenue: String, shortDescription: String) {
-
-        if let image = imageData {
-
+    func configure(with content: ImageCellModel) {
+        if let image = content.imageData {
             venueImageView.image = UIImage(data: image)
         } else {
             venueImageView.image = UIImage(named: "unknown")
         }
-
-        nameVenueLabel.text = nameVenue + "\n \(shortDescription)"
+        gradientSetup()
+        nameVenueLabel.text = content.nameVenue + "\n \(content.shortDescription)"
     }
 
 }
+
+// MARK: - gradientSetup
 private extension ImageTableCell {
-    func gradientSetup () {
+    func gradientSetup() {
         gradient.frame = venueImageView.bounds
         gradient.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
                            UIColor.black.withAlphaComponent(0.0).cgColor]
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.locations = [0, 0.75, 1]
+        venueImageView.layer.addSublayer(gradient)
     }
 }

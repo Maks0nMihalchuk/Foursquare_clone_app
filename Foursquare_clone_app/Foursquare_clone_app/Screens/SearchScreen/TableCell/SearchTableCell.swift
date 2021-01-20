@@ -28,10 +28,11 @@ class SearchTableCell: UITableViewCell {
             fullAddress += "\($0) "
         }
         venueAddressLabel.text = fullAddress
+
         guard let category = category else {
             return
         }
+
         venueCategoryLabel.text = category
     }
-
 }

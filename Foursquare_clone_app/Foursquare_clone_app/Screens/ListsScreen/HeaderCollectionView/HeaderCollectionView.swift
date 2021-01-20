@@ -18,7 +18,7 @@ class HeaderCollectionView: UICollectionReusableView {
         return UINib(nibName: "HeaderCollectionView", bundle: nil)
     }
 
-    func configure (title: String) {
+    func configure(title: String) {
             titleForHeader.text = title
 
     }

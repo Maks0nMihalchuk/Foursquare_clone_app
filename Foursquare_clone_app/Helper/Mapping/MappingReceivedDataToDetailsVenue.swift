@@ -55,7 +55,6 @@ class MappingReceivedDataToDetailsVenue {
         let categories = getCetegories(model: apiModel)
 
         let rating: String = {
-
             guard let rating = apiModel.rating else {
                 return "-"
             }
@@ -64,7 +63,6 @@ class MappingReceivedDataToDetailsVenue {
         }()
 
         let ratingColor: String = {
-
             guard let color = apiModel.ratingColor else {
                 return "858585"
             }
@@ -73,27 +71,24 @@ class MappingReceivedDataToDetailsVenue {
         }()
 
         let hoursStatus: String = {
-
             guard let hoursStatus = apiModel.hours?.status else {
-                return "Add Hours"
+                return "DetailViewController.Add Hours".localized()
             }
 
             return hoursStatus
         }()
 
         let phone: String =  {
-
             guard let phone = apiModel.contact?.formattedPhone else {
-                return "Add Phone"
+                return "DetailViewController.Add Phone".localized()
             }
 
             return phone
         }()
 
         let webSite: String = {
-
             guard let urlString = apiModel.url else {
-                return "Add Website"
+                return "DetailViewController.Add Website".localized()
             }
 
             return urlString
@@ -111,7 +106,7 @@ class MappingReceivedDataToDetailsVenue {
 }
 
 private extension MappingReceivedDataToDetailsVenue {
-    func getCetegories (model: DetailVenue) -> String {
+    func getCetegories(model: DetailVenue) -> String {
         let categories: String = {
             var category = ""
 
@@ -131,8 +126,8 @@ private extension MappingReceivedDataToDetailsVenue {
         }()
         return categories
     }
-    func getPrice (with price: Price?, by key: PriceKey) -> String {
 
+    func getPrice (with price: Price?, by key: PriceKey) -> String {
         guard let price = price else {
             return ""
         }
@@ -184,6 +179,11 @@ private extension MappingReceivedDataToDetailsVenue {
             timeframes.forEach {
                 days += "\($0.days) \n"
             }
+
+            if days.hasSuffix("\n") {
+                days.removeLast(2)
+            }
+
             return days
         }()
         return timeFramesDays
@@ -191,7 +191,7 @@ private extension MappingReceivedDataToDetailsVenue {
 
     func getTimeFramesRenderedTime (of timeframes: [TimeFrames]?) -> String {
         guard let timeframes = timeframes else {
-            return "Add Hours"
+            return "DetailViewController.Add Hours".localized()
         }
 
         let timeFramesTime: String = {
@@ -201,13 +201,17 @@ private extension MappingReceivedDataToDetailsVenue {
                     renderedTime += "\($0.renderedTime) \n"
                 })
             })
+
+            if renderedTime.hasSuffix("\n") {
+                renderedTime.removeLast(2)
+            }
+
             return renderedTime
         }()
         return timeFramesTime
     }
 
     func getLocation (location: [String]) -> String {
-
         var getLocation = String()
         location.forEach {
             getLocation += "\($0), "

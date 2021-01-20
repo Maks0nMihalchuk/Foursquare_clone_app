@@ -13,6 +13,8 @@ enum SecureStoreError: Error {
     case data2StringConversionError
     case unhandledError(message: String)
 }
+
+// MARK: - LocalizedError
 extension SecureStoreError: LocalizedError {
     public var errorDescription: String? {
         switch self {

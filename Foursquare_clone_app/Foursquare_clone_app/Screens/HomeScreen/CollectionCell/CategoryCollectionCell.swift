@@ -19,7 +19,7 @@ class CategoryCollectionCell: UICollectionViewCell {
         return UINib(nibName: "CategoryCollectionCell", bundle: nil)
     }
 
-    func configure (imageName: String, categoryTitle: String) {
+    func configure(imageName: String, categoryTitle: String) {
         categoryImage.image = UIImage(named: imageName)
         categotyLabel.text = categoryTitle
     }

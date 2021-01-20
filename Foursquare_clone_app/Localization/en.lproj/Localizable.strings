@@ -44,6 +44,11 @@
 "CreateNewListAlert.MakeCollaborativeLabelText" = "Make Collaborative?";
 "CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
 
+"DetailViewController.Add Hours" = "Add Hours";
+"DetailViewController.Add Phone" = "Add Phone";
+"DetailViewController.Add Website" = "Add Website";
+"HoursLabelText" = "HOURS";
+
 "ShortInfoTableCell.AdressLabelText" = "ADRESS";
 "HoursLabelText" = "HOURS";
 "ShortInfoTableCell.CategoriesLabelText" = "CATEGORIES";

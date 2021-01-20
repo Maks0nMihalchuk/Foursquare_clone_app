@@ -15,7 +15,7 @@ class KeychainManager {
         return keychain
     }()
 
-    func saveValue (value: Data?, with key: String) -> Bool {
+    func saveValue(value: Data?, with key: String) -> Bool {
         do {
             let isSuccess = try saveData(value: value, with: key)
             return isSuccess
@@ -25,13 +25,13 @@ class KeychainManager {
         }
     }
 
-    func checkForDataAvailability (for key: String) -> Bool {
+    func checkForDataAvailability(for key: String) -> Bool {
         let check = checkData(for: key)
 
         return check
     }
 
-    func removeValue (for key: String) {
+    func removeValue(for key: String) {
         do {
             try removeData(for: key)
         } catch {
@@ -39,7 +39,7 @@ class KeychainManager {
         }
     }
 
-    func getValue (for key: String) -> String {
+    func getValue(for key: String) -> String {
         var accessToken = String()
         do {
 
@@ -55,16 +55,20 @@ class KeychainManager {
         return accessToken
     }
 }
+
+// MARK: - error function setting
 extension KeychainManager {
-    private func error (from status: OSStatus) -> SecureStoreError {
+    private func error(from status: OSStatus) -> SecureStoreError {
         let message = SecCopyErrorMessageString(status, nil)
             as String? ?? NSLocalizedString("Unhandled Error", comment: "")
         return SecureStoreError.unhandledError(message: message)
     }
 }
+
+// MARK: - functions for working with a keychain
 private extension KeychainManager {
 
-    func configureTokenRequest (accessToken: Data?, for key: String) -> [String: Any] {
+    func configureTokenRequest(accessToken: Data?, for key: String) -> [String: Any] {
         var query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
                                    kSecAttrLabel as String: "\(key)"]
 
@@ -79,7 +83,7 @@ private extension KeychainManager {
         }
     }
 
-    func saveData (value: Data?, with key: String) throws -> Bool {
+    func saveData(value: Data?, with key: String) throws -> Bool {
         let query = configureTokenRequest(accessToken: value, for: key)
         let status = SecItemAdd(query as CFDictionary, nil)
 
@@ -90,7 +94,7 @@ private extension KeychainManager {
         return true
     }
 
-    func removeData (for key: String) throws {
+    func removeData(for key: String) throws {
         let query = configureTokenRequest(accessToken: nil, for: key)
         let status = SecItemDelete(query as CFDictionary)
 
@@ -99,7 +103,7 @@ private extension KeychainManager {
         }
     }
 
-    func checkData (for key: String) -> Bool {
+    func checkData(for key: String) -> Bool {
         let query = configureTokenRequest(accessToken: nil, for: key)
         let status = SecItemCopyMatching(query as CFDictionary, nil)
 
@@ -114,7 +118,7 @@ private extension KeychainManager {
 
     }
 
-    func getToken (for key: String) throws -> String? {
+    func getToken(for key: String) throws -> String? {
         var setupQuery = configureTokenRequest(accessToken: nil, for: key)
         setupQuery[kSecMatchLimit as String] = kSecMatchLimitOne
         setupQuery[kSecReturnAttributes as String] = kCFBooleanTrue ?? true

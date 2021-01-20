@@ -512,7 +512,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cgK-na-74h">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <outlet property="dataSource" destination="WMX-8d-zp3" id="Zhl-vQ-MiZ"/>
                                     <outlet property="delegate" destination="WMX-8d-zp3" id="SNr-Vf-ebI"/>
@@ -592,7 +592,7 @@
                         <constraints>
                             <constraint firstItem="te5-uP-sNN" firstAttribute="height" secondItem="WQo-Jb-SdJ" secondAttribute="height" multiplier="0.122249" id="5xT-jn-nxW"/>
                             <constraint firstItem="cgK-na-74h" firstAttribute="leading" secondItem="WQo-Jb-SdJ" secondAttribute="leading" id="ERe-W3-if3"/>
-                            <constraint firstItem="cgK-na-74h" firstAttribute="bottom" secondItem="WQo-Jb-SdJ" secondAttribute="bottom" id="Egs-Y6-QEh"/>
+                            <constraint firstItem="cgK-na-74h" firstAttribute="bottom" secondItem="GPf-v7-efH" secondAttribute="bottom" id="Egs-Y6-QEh"/>
                             <constraint firstAttribute="top" secondItem="te5-uP-sNN" secondAttribute="top" id="FJ2-c5-sUm"/>
                             <constraint firstItem="WQo-Jb-SdJ" firstAttribute="trailing" secondItem="cgK-na-74h" secondAttribute="trailing" id="LA9-ns-PCh"/>
                             <constraint firstItem="te5-uP-sNN" firstAttribute="leading" secondItem="WQo-Jb-SdJ" secondAttribute="leading" id="O1C-Mz-kPR"/>

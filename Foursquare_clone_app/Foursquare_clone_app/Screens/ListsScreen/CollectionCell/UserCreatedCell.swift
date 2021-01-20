@@ -16,16 +16,15 @@ class UserCreatedCell: UICollectionViewCell {
     @IBOutlet private weak var numberPlacesLabel: UILabel!
 
     static let identifier = "UserCreatedCell"
-    private let zero = 0
 
     static func nib() -> UINib {
         return UINib(nibName: "UserCreatedCell", bundle: nil)
     }
 
-    func configure (backgroundImage: Data?,
-                    userImageName: String,
-                    listName: String,
-                    numberPlaces: String) {
+    func configure(backgroundImage: Data?,
+                   userImageName: String,
+                   listName: String,
+                   numberPlaces: String) {
 
         if let imageData = backgroundImage {
             backgroundImageView.image = UIImage(data: imageData)?

@@ -18,8 +18,6 @@ class ShortInfoTableCell: UITableViewCell {
     @IBOutlet private weak var categoriesLabel: UILabel!
     @IBOutlet private weak var categoriesVenueLabel: UILabel!
 
-    static let identifier = "ShortInfoTableCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         adressLabel.text = "ShortInfoTableCell.AdressLabelText".localized()
@@ -27,17 +25,11 @@ class ShortInfoTableCell: UITableViewCell {
         categoriesLabel.text = "ShortInfoTableCell.CategoriesLabelText".localized()
     }
 
-    static func nib () -> UINib {
-        return UINib(nibName: "ShortInfoTableCell", bundle: nil)
-
-    }
-
-    func configure (adressVenue: String, hoursVenue: String,
-                    categoriesVenue: String, rating: String, ratingColor: UIColor) {
-        adressVenueLabel.text = adressVenue
-        hoursVenueLabel.text = hoursVenue
-        categoriesVenueLabel.text = categoriesVenue
-        ratingLabel.text = rating
-        ratingLabel.backgroundColor = ratingColor
+    func configure(with content: ShortInfoCellModel) {
+        adressVenueLabel.text = content.adressVenue
+        hoursVenueLabel.text = content.hoursVenue
+        categoriesVenueLabel.text = content.categoriesVenue
+        ratingLabel.text = content.rating
+        ratingLabel.backgroundColor = content.ratingColor
     }
 }

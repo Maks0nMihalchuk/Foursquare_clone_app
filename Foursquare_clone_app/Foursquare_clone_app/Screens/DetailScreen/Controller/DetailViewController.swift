@@ -15,11 +15,11 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var blurEffectView: UIVisualEffectView!
     @IBOutlet private weak var venueNameLabel: UILabel!
 
-    private let numberOfCells = KeysToCells.arrayOfKeysForCells.count
+    private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
+    private var hoursCellStatus = true
     var detailVenue: DetailVenueModel?
     var dataImageVenue: Data?
-    private var indexPathForHoursCell = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,38 +31,18 @@ class DetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: - HoursTableCellDelegate
 extension DetailViewController: HoursTableCellDelegate {
-    func hoursTableCell(_ hoursTableCell: HoursTableCell, for button: UIButton, isRotationImage: Bool) {
-        if isRotationImage {
-            button.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        } else {
-            button.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.zero)
-        }
-    }
-
-    func hoursTableCell(_ hoursTableCell: HoursTableCell,
-                        displayDetailedInfo byPressedButton: Bool,
-                        heightView: NSLayoutConstraint,
-                        stockHeightView: CGFloat,
-                        detailStackView: UIStackView) {
-        let duration = 0.25
-        let muliplier: CGFloat = 2.2
-        let heightMuliplier = muliplier * heightView.constant
-
-        UIView.animate(withDuration: duration) {
-            if !byPressedButton {
-                heightView.constant = heightMuliplier
-            } else {
-                heightView.constant = stockHeightView
-            }
-            detailStackView.isHidden = !detailStackView.isHidden
-
-            self.tableView.beginUpdates()
-            hoursTableCell.layoutIfNeeded()
-            self.tableView.endUpdates()
-        }
+    func changeStateHoursCell(_ hoursTableCell: HoursTableCell) {
+        let indexPath = self.tableView.indexPath(for: hoursTableCell)
+        self.tableView.reloadRows(at: [IndexPath(row: indexPath!.row,
+                                                 section: indexPath!.section)],
+                                  with: .fade)
     }
 }
+
+// MARK: - UITableViewDelegate
 extension DetailViewController: UITableViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -78,6 +58,8 @@ extension DetailViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 }
+
+// MARK: - UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,62 +72,32 @@ extension DetailViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        switch KeysToCells.arrayOfKeysForCells[indexPath.row] {
+        switch KeysForCells.arrayOfKeysForCells[indexPath.row] {
         case .imageCell:
-            let optionImageCell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.identifier,
-                                                                for: indexPath) as? ImageTableCell
-            guard let cell = optionImageCell else {
-                return UITableViewCell()
-            }
-
-            cell.configure(imageData: dataImageVenue, nameVenue: detailVenue.name,
-                           shortDescription: detailVenue.tierPrice)
-            return cell
+            let imageCell = getImageTableCell(tableView, indexPath, dataModel: detailVenue)
+            return imageCell
         case .shortInfoCell:
-            let optionCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.identifier,
-                                                           for: indexPath) as? ShortInfoTableCell
-            guard let cell = optionCell else {
-                return UITableViewCell()
-            }
-            cell.configure(adressVenue: detailVenue.location,
-                            hoursVenue: detailVenue.hoursStatus,
-                            categoriesVenue: detailVenue.categories,
-                            rating: detailVenue.rating, ratingColor: getRatingColor(with: detailVenue.ratingColor))
-            return cell
+            let shortInfoCell = getShortInfoTableCell(tableView, indexPath, dataModel: detailVenue)
+            return shortInfoCell
         case .hoursCell:
-            indexPathForHoursCell = indexPath.row
-            let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.identifier,
-                                                                for: indexPath) as? HoursTableCell
-
-            guard let hoursCell = optionHoursCell else {
-                return UITableViewCell()
-            }
+            let hoursCell = getHoursTableCell(tableView, indexPath, dataModel: detailVenue)
             hoursCell.delegate = self
-            hoursCell.configure(hoursStatus: detailVenue.hoursStatus,
-                                days: detailVenue.timeframesDays,
-                                detailHours: detailVenue.timeframesRenderedTime)
-
             return hoursCell
         case .contactsCell:
-            let optionContactCell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.identifier,
-                                                                  for: indexPath) as? ContactTableCell
-
-            guard let contactCell = optionContactCell else {
-                return UITableViewCell()
-            }
-
-            contactCell.configure(numberText: detailVenue.phone, webSiteURL: detailVenue.webSite)
+            let contactCell = getContactTableCell(tableView, indexPath, dataModel: detailVenue)
             return contactCell
         }
     }
 }
-private extension DetailViewController {
 
-    func getRatingColor (with colorHEXString: String ) -> UIColor {
-        return UIColor.init(hexString: colorHEXString)
+// MARK: - setup, show and hide customNavBar
+private extension DetailViewController {
+    func setupBlurEffectView() {
+        blurEffectView.effect = UIBlurEffect(style: .systemMaterialDark)
+        blurEffectView.alpha = 0
     }
 
-    func showCustomNavBar () {
+    func showCustomNavBar() {
         let duration = 0.6
 
         UIView.animate(withDuration: duration) {
@@ -154,7 +106,7 @@ private extension DetailViewController {
         }
     }
 
-    func hideCustopNavBar () {
+    func hideCustopNavBar() {
         let duration = 0.6
 
         UIView.animate(withDuration: duration) {
@@ -162,17 +114,99 @@ private extension DetailViewController {
             self.customViewNavBar.backgroundColor = .clear
         }
     }
+}
 
-    func setupTableView () {
-        tableView.contentInsetAdjustmentBehavior = .never
-        tableView.register(ImageTableCell.nib(), forCellReuseIdentifier: ImageTableCell.identifier)
-        tableView.register(ShortInfoTableCell.nib(), forCellReuseIdentifier: ShortInfoTableCell.identifier)
-        tableView.register(HoursTableCell.nib(), forCellReuseIdentifier: HoursTableCell.identifier)
-        tableView.register(ContactTableCell.nib(), forCellReuseIdentifier: ContactTableCell.identifier)
+// MARK: - setup tableViewCell
+private extension DetailViewController {
+    func getImageTableCell(_ tableView: UITableView,
+                           _ indexPath: IndexPath,
+                           dataModel: DetailVenueModel) -> ImageTableCell {
+        let optionImageCell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.getIdentifier(),
+                                                            for: indexPath) as? ImageTableCell
+
+        guard let cell = optionImageCell else {
+            return ImageTableCell()
+        }
+
+        let content = ImageCellModel(imageData: dataImageVenue,
+                                     nameVenue: dataModel.name,
+                                     shortDescription: dataModel.tierPrice)
+        cell.configure(with: content)
+        return cell
     }
 
-    func setupBlurEffectView () {
-        blurEffectView.effect = UIBlurEffect(style: .systemMaterialDark)
-        blurEffectView.alpha = 0
+    func getShortInfoTableCell(_ tableView: UITableView,
+                               _ indexPath: IndexPath,
+                               dataModel: DetailVenueModel) -> ShortInfoTableCell {
+        let optionShortInfoCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.getIdentifier(),
+                                                                for: indexPath) as? ShortInfoTableCell
+
+        guard let cell = optionShortInfoCell else {
+            return ShortInfoTableCell()
+        }
+
+        let content = ShortInfoCellModel(adressVenue: dataModel.location,
+                                         hoursVenue: dataModel.hoursStatus,
+                                         categoriesVenue: dataModel.categories,
+                                         rating: dataModel.rating,
+                                         ratingColor: getRatingColor(with: dataModel.ratingColor))
+        cell.configure(with: content)
+        return cell
+    }
+
+    func getHoursTableCell(_ tableView: UITableView,
+                           _ indexPath: IndexPath,
+                           dataModel: DetailVenueModel) -> HoursTableCell {
+        let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.getIdentifier(),
+                                                            for: indexPath) as? HoursTableCell
+
+        guard let cell = optionHoursCell else {
+            return HoursTableCell()
+        }
+
+        let detailContent = DetailHours(days: dataModel.timeframesDays,
+                                        detailHours: dataModel.timeframesRenderedTime)
+        let content = HoursCellModel(hoursStatus: dataModel.hoursStatus,
+                                     detailHours: detailContent,
+                                     state: hoursCellStatus)
+        cell.configure(with: content, state: hoursCellStatus)
+        hoursCellStatus = !hoursCellStatus
+        return cell
+    }
+
+    func getContactTableCell(_ tableView: UITableView,
+                             _ indexPath: IndexPath,
+                             dataModel: DetailVenueModel) -> ContactTableCell {
+        let optionContactCell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.getIdentifier(),
+                                                              for: indexPath) as? ContactTableCell
+
+        guard let cell = optionContactCell else {
+            return ContactTableCell()
+        }
+
+        let content = ContactCellModel(phone: dataModel.phone, webSiteURL: dataModel.webSite)
+        cell.configure(with: content)
+
+        return cell
+    }
+
+    func getRatingColor(with colorHEXString: String ) -> UIColor {
+        return UIColor.init(hexString: colorHEXString)
+    }
+}
+
+// MARK: - setup tableView
+private extension DetailViewController {
+    func setupTableView() {
+        tableView.contentInset.bottom = 16
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.register(ImageTableCell.getNib(),
+                           forCellReuseIdentifier: ImageTableCell.getIdentifier())
+        tableView.register(ShortInfoTableCell.getNib(),
+                           forCellReuseIdentifier: ShortInfoTableCell.getIdentifier())
+        tableView.register(HoursTableCell.getNib(),
+                           forCellReuseIdentifier: HoursTableCell.getIdentifier())
+        tableView.register(ContactTableCell.getNib(),
+                           forCellReuseIdentifier: ContactTableCell.getIdentifier())
     }
 }
