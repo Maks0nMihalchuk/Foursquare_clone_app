@@ -22,6 +22,12 @@ class NetworkManager {
         return networkManager
     }()
 
+    var mapper: Mapper
+
+    init () {
+       mapper = Mapper()
+    }
+
     func getVenues(categoryName: String,
                    completion: @escaping ([Venue]?, Bool) -> Void) {
 
@@ -89,14 +95,11 @@ class NetworkManager {
             do {
                 let detailInfoVenue = try JSONDecoder().decode(DetailInfo.self, from: data)
                 let detailVenue = detailInfoVenue.response.venue
-                let mapping = MappingReceivedDataToDetailsVenue.shared
-                let convertedDeteilVenue =
-                    mapping.mappingReceivedDataToDetailsVenue(apiModel: detailVenue)
+                let mapper = NetworkManager.shared.mapper
+                let convertedDeteilVenue = mapper.mapReceivedDataFromDetailsVenue(apiModel: detailVenue)
                 StorageManager.shared.putDetailVanue(of: convertedDeteilVenue)
                 completion(StorageManager.shared.getDetailVanue(), true)
             } catch {
-                print("Localized: \(error.localizedDescription)")
-                print("Error: \(error)")
                 completion(nil, false)
             }
         }
@@ -276,6 +279,7 @@ class NetworkManager {
 
 // MARK: - setting request tasks and setup url to create user list
 private extension NetworkManager {
+
     func makeDataTaskRequest(with url: URL, completion: @escaping (Data?, Error?) -> Void) {
         let session = URLSession.shared
         session.dataTask(with: url) { (data, _, error) in

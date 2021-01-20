@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
 
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
-    private var hoursCellStatus = true
+    private var defaultHoursCellStatus = true
     var detailVenue: DetailVenueModel?
     var dataImageVenue: Data?
 
@@ -34,8 +34,9 @@ class DetailViewController: UIViewController {
 
 // MARK: - HoursTableCellDelegate
 extension DetailViewController: HoursTableCellDelegate {
-    func changeStateHoursCell(_ hoursTableCell: HoursTableCell) {
-        let indexPath = self.tableView.indexPath(for: hoursTableCell)
+
+    func hoursTableViewCell(_ cell: HoursTableCell, didCahngeStateTo state: State.Type) {
+        let indexPath = self.tableView.indexPath(for: cell)
         self.tableView.reloadRows(at: [IndexPath(row: indexPath!.row,
                                                  section: indexPath!.section)],
                                   with: .fade)
@@ -92,6 +93,7 @@ extension DetailViewController: UITableViewDataSource {
 
 // MARK: - setup, show and hide customNavBar
 private extension DetailViewController {
+
     func setupBlurEffectView() {
         blurEffectView.effect = UIBlurEffect(style: .systemMaterialDark)
         blurEffectView.alpha = 0
@@ -118,6 +120,7 @@ private extension DetailViewController {
 
 // MARK: - setup tableViewCell
 private extension DetailViewController {
+
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
                            dataModel: DetailVenueModel) -> ImageTableCell {
@@ -168,9 +171,9 @@ private extension DetailViewController {
                                         detailHours: dataModel.timeframesRenderedTime)
         let content = HoursCellModel(hoursStatus: dataModel.hoursStatus,
                                      detailHours: detailContent,
-                                     state: hoursCellStatus)
-        cell.configure(with: content, state: hoursCellStatus)
-        hoursCellStatus = !hoursCellStatus
+                                     state: defaultHoursCellStatus)
+        cell.configure(with: content)
+        defaultHoursCellStatus = !defaultHoursCellStatus
         return cell
     }
 
@@ -197,6 +200,7 @@ private extension DetailViewController {
 
 // MARK: - setup tableView
 private extension DetailViewController {
+
     func setupTableView() {
         tableView.contentInset.bottom = 16
         tableView.contentInsetAdjustmentBehavior = .never

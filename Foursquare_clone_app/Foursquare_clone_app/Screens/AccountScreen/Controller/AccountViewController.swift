@@ -60,7 +60,7 @@ class AccountViewController: UIViewController {
     }
 
     @IBAction func dataRefreshButtonPressed (_ sender: UIButton) {
-        setupActivityIndicator(isHidden: isAvailable, indecator: activityIndicator)
+        setupActivityIndicator(isHidden: isAvailable, indicator: activityIndicator)
         getUserInfo(isAvailableToken: isAvailable)
     }
 
@@ -68,11 +68,12 @@ class AccountViewController: UIViewController {
 
 // MARK: - SFSafariViewControllerDelegate
 extension AccountViewController: SFSafariViewControllerDelegate {
+
     func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
 
         if URL.absoluteString.contains(redirectUrl) {
             dismiss(animated: true, completion: nil)
-            setupActivityIndicator(isHidden: !isAvailable, indecator: activityIndicator)
+            setupActivityIndicator(isHidden: !isAvailable, indicator: activityIndicator)
 
             let code = URL.valueOf("code")
 
@@ -86,15 +87,15 @@ extension AccountViewController: SFSafariViewControllerDelegate {
                             self.isAvailable = true
                             self.signInButton.setTitle("AccountViewController.SignOutButton".localized(), for: .normal)
                             self.getUserInfo(isAvailableToken: self.isAvailable)
-                            self.setupActivityIndicator(isHidden: !self.isAvailable, indecator: self.activityIndicator)
+                            self.setupActivityIndicator(isHidden: !self.isAvailable, indicator: self.activityIndicator)
                         } else {
-                            self.setupActivityIndicator(isHidden: self.isAvailable, indecator: self.activityIndicator)
+                            self.setupActivityIndicator(isHidden: self.isAvailable, indicator: self.activityIndicator)
                             self.showErrorAlert()
                         }
                     }
 
                 } else {
-                    self.setupActivityIndicator(isHidden: self.isAvailable, indecator: self.activityIndicator)
+                    self.setupActivityIndicator(isHidden: self.isAvailable, indicator: self.activityIndicator)
                     self.showErrorAlert()
                 }
             }
@@ -104,19 +105,20 @@ extension AccountViewController: SFSafariViewControllerDelegate {
 
 // MARK: - setup view
 private extension AccountViewController {
+
     func setupView () {
         updateDataButton.alpha = 0
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
     }
 
-    func setupActivityIndicator (isHidden: Bool, indecator: UIActivityIndicatorView) {
-        indecator.isHidden = !isHidden
+    func setupActivityIndicator (isHidden: Bool, indicator: UIActivityIndicatorView) {
+        indicator.isHidden = !isHidden
 
         if isHidden {
-            indecator.startAnimating()
+            indicator.startAnimating()
         } else {
-            indecator.stopAnimating()
+            indicator.stopAnimating()
         }
     }
 
@@ -146,9 +148,10 @@ private extension AccountViewController {
 
 // MARK: - work with token
 private extension AccountViewController {
+
     func checkToken () {
         isAvailable = keychainManager.checkForDataAvailability(for: getKeyToToken())
-        setupActivityIndicator(isHidden: isAvailable, indecator: activityIndicator)
+        setupActivityIndicator(isHidden: isAvailable, indicator: activityIndicator)
 
         if isAvailable {
             signInButton.setTitle("AccountViewController.SignOutButton".localized(), for: .normal)
@@ -166,6 +169,7 @@ private extension AccountViewController {
 
 // MARK: - work with user data
 private extension AccountViewController {
+
     func getUserInfo (isAvailableToken: Bool) {
         if isAvailableToken {
             let accessToken = keychainManager.getValue(for: getKeyToToken())
@@ -174,18 +178,18 @@ private extension AccountViewController {
                 if isSuccessful {
 
                     guard let userFullName = userFullName else {
-                        self.setupActivityIndicator(isHidden: !self.isAvailable, indecator: self.activityIndicator)
+                        self.setupActivityIndicator(isHidden: !self.isAvailable, indicator: self.activityIndicator)
                         return
                     }
 
                     DispatchQueue.main.async {
                         self.profileLabel.text = userFullName
                         self.setupActivityIndicator(isHidden: !self.isAvailable,
-                                                    indecator: self.activityIndicator)
+                                                    indicator: self.activityIndicator)
                         self.showRefreshButton(button: self.updateDataButton, isHidden: self.isAvailable)
                     }
                 } else {
-                    self.setupActivityIndicator(isHidden: !self.isAvailable, indecator: self.activityIndicator)
+                    self.setupActivityIndicator(isHidden: !self.isAvailable, indicator: self.activityIndicator)
                 }
             }
         } else {

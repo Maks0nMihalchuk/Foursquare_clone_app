@@ -19,27 +19,27 @@ class StorageManager {
     private var detailsVanue: DetailVenueModel?
     private var venues = [Venue]()
 
-    func putUserIntoArray (of list: [GetUserListsGroup]) {
+    func putUserIntoArray(of list: [GetUserListsGroup]) {
         userLists = list
     }
 
-    func getUserLists () -> [GetUserListsGroup] {
+    func getUserLists() -> [GetUserListsGroup] {
         return userLists
     }
 
-    func putDetailVanue (of detailVenues: DetailVenueModel) {
+    func putDetailVanue(of detailVenues: DetailVenueModel) {
         detailsVanue = detailVenues
     }
 
-    func getDetailVanue () -> DetailVenueModel? {
+    func getDetailVanue() -> DetailVenueModel? {
         return detailsVanue
     }
 
-    func putVenues (of venues: [Venue]) {
+    func putVenues(of venues: [Venue]) {
         self.venues = venues
     }
 
-    func getVenues () -> [Venue] {
+    func getVenues() -> [Venue] {
         return venues
     }
 }

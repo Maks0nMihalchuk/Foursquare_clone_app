@@ -33,6 +33,7 @@ class SearchViewController: UIViewController {
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else {
             return
@@ -107,6 +108,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let optionCell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier,
                                                        for: indexPath) as? SearchTableCell
+
         guard let cell = optionCell else {
             return UITableViewCell()
         }
@@ -114,13 +116,17 @@ extension SearchViewController: UITableViewDataSource {
         let venueName = "\(indexPath.row + 1). \(venues[indexPath.row].name)"
         let address = venues[indexPath.row].location.formattedAddress
         let category = venues[indexPath.row].categories.first?.name
-        cell.configure(venueName: venueName, address: address, category: category)
+        let content = SearchCellModel(venueName: venueName,
+                                      adress: address,
+                                      category: category)
+        cell.configure(with: content)
         return cell
     }
 }
 
 // MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
+
     func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
         searchBar.delegate = self
         searchBar.searchTextField.text = text

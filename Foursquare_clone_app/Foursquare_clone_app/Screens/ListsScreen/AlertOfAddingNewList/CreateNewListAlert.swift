@@ -60,6 +60,7 @@ class CreateNewListAlert: UIView {
 
 // MARK: - UITextFieldDelegate
 extension CreateNewListAlert: UITextFieldDelegate {
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
@@ -67,6 +68,7 @@ extension CreateNewListAlert: UITextFieldDelegate {
 
 // MARK: - Setup alert elements
 private extension CreateNewListAlert {
+
     func setupCornerRadiusForAlert() {
         layer.cornerRadius = 5
     }

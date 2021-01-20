@@ -49,6 +49,7 @@ class ListsViewController: UIViewController {
 
 // MARK: - AlertDelegate
 extension ListsViewController: AlertDelegate {
+
     func createNewListAlertDidEndInteraction(_ createNewListAlert: CreateNewListAlert) {
         startAnimationForAlert(key: .hide)
     }
@@ -102,6 +103,7 @@ extension ListsViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension ListsViewController: UICollectionViewDataSource {
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return KeysForSections.arrayOfKeysForSection.count
     }
@@ -200,6 +202,7 @@ extension ListsViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ListsViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -225,6 +228,7 @@ extension ListsViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Setup showing and hiding alerts
 private extension ListsViewController {
+
     func setupAlertForAddingNewList() {
         createNewListAlert = Bundle.main.loadNibNamed("CreateNewListAlert",
                                                         owner: self,
@@ -287,8 +291,9 @@ private extension ListsViewController {
 
 // MARK: - Setup screen
 private extension ListsViewController {
+
     func setupHeaderTitle(title: String, type: String, numberOfLists: Int?) -> String {
-        if type == "yours" {
+        if type == TypeHeader.yours.rawValue {
             return title
         } else {
 
@@ -368,6 +373,7 @@ private extension ListsViewController {
 
 // MARK: - Work with a keychain
 private extension ListsViewController {
+
     func checkForAuthorization() -> Bool {
         return keychainManager.checkForDataAvailability(for: getTokenKey())
     }

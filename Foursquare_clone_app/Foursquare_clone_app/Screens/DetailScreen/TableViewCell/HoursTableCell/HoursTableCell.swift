@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HoursTableCellDelegate: class {
-    func changeStateHoursCell(_ hoursTableCell: HoursTableCell)
+    func hoursTableViewCell(_ cell: HoursTableCell, didCahngeStateTo state: State.Type)
 }
 
 class HoursTableCell: UITableViewCell {
@@ -29,20 +29,21 @@ class HoursTableCell: UITableViewCell {
         setupHoursLabel()
     }
 
-    func configure(with content: HoursCellModel, state: Bool) {
-        detailHoursInfoStackView.isHidden = state
+    func configure(with content: HoursCellModel) {
+        detailHoursInfoStackView.isHidden = content.state
         hoursStatusLabel.text = content.hoursStatus
         daysLabel.text = content.detailHours.days
         hoursDetailLabel.text = content.detailHours.detailHours
     }
 
     @IBAction func detailHoursButtonPressed(_ sender: UIButton) {
-        delegate?.changeStateHoursCell(self)
+        delegate?.hoursTableViewCell(self, didCahngeStateTo: State.self)
     }
 }
 
 // MARK: - setup HoursLabel
 private extension HoursTableCell {
+
     func setupHoursLabel() {
         hoursLabel.text = "HoursLabelText".localized()
     }

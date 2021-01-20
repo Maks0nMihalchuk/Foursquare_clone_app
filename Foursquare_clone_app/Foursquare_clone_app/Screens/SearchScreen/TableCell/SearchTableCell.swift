@@ -20,16 +20,19 @@ class SearchTableCell: UITableViewCell {
         return UINib(nibName: "SearchTableCell", bundle: nil)
     }
 
-    func configure(venueName: String, address: [String], category: String?) {
+    func configure(with content: SearchCellModel?) {
+        guard let content = content else {
+            return
+        }
 
-        venueNameLabel.text = venueName
+        venueNameLabel.text = content.venueName
         var fullAddress = ""
-        address.forEach {
-            fullAddress += "\($0) "
+        content.adress.forEach {
+            fullAddress +=  "\($0 )"
         }
         venueAddressLabel.text = fullAddress
 
-        guard let category = category else {
+        guard let category = content.category else {
             return
         }
 

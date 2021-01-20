@@ -34,13 +34,11 @@ enum TierKeys {
     }
 }
 
-class MappingReceivedDataToDetailsVenue {
-    static var shared: MappingReceivedDataToDetailsVenue = {
-        let mapping = MappingReceivedDataToDetailsVenue()
-        return mapping
-    }()
+class Mapper {
+    private let defaultColorHEX = "858585"
+    private let defualtRatingForVenue = "-"
 
-    func mappingReceivedDataToDetailsVenue(apiModel: DetailVenue) -> DetailVenueModel {
+    func mapReceivedDataFromDetailsVenue(apiModel: DetailVenue) -> DetailVenueModel {
         let price = apiModel.price
         let venueName = apiModel.name
         let prefix = apiModel.bestPhoto?.prefix
@@ -56,7 +54,7 @@ class MappingReceivedDataToDetailsVenue {
 
         let rating: String = {
             guard let rating = apiModel.rating else {
-                return "-"
+                return defualtRatingForVenue
             }
 
             return String(rating)
@@ -64,7 +62,7 @@ class MappingReceivedDataToDetailsVenue {
 
         let ratingColor: String = {
             guard let color = apiModel.ratingColor else {
-                return "858585"
+                return defaultColorHEX
             }
 
             return color
@@ -105,7 +103,9 @@ class MappingReceivedDataToDetailsVenue {
     }
 }
 
-private extension MappingReceivedDataToDetailsVenue {
+// MARK: - converting the received data into a convenient form
+private extension Mapper {
+
     func getCetegories(model: DetailVenue) -> String {
         let categories: String = {
             var category = ""

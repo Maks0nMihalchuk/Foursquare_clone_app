@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let standardCategory = standardCategories[indexPath.item].imageName
         NetworkManager.shared.getVenues(categoryName: standardCategory) { (venuesData, isSuccessful) in
@@ -60,6 +61,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return standardCategories.count
     }
@@ -84,6 +86,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -101,6 +104,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - creating and showing a SearchController
 private extension HomeViewController {
+
     func createdSearchController(main: UIStoryboard,
                                  isActiveSearchBar: Bool,
                                  searchBarText: String,

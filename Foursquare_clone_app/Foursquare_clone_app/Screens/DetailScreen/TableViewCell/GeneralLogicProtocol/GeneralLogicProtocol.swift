@@ -16,6 +16,7 @@ protocol GeneralLogicCellProtocol {
 
 // MARK: - GeneralLogicCellProtocol
 extension UITableViewCell: GeneralLogicCellProtocol {
+
     static func getNib() -> UINib {
         return UINib(nibName: getIdentifier(),
                      bundle: nil)

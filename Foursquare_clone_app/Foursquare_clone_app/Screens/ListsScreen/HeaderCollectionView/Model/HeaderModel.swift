@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum TypeHeader: String {
+    case yours
+}
+
 struct HeaderName {
     let title: String
     let type: String

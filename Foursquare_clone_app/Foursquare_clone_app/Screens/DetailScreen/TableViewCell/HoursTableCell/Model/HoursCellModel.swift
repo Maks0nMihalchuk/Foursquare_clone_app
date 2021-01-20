@@ -18,3 +18,8 @@ struct DetailHours {
     let days: String
     let detailHours: String
 }
+
+enum State {
+    case folded
+    case decomposed
+}

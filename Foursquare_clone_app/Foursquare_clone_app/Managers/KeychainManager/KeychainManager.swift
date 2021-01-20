@@ -58,6 +58,7 @@ class KeychainManager {
 
 // MARK: - error function setting
 extension KeychainManager {
+
     private func error(from status: OSStatus) -> SecureStoreError {
         let message = SecCopyErrorMessageString(status, nil)
             as String? ?? NSLocalizedString("Unhandled Error", comment: "")

@@ -19,7 +19,7 @@ class ImageTableCell: UITableViewCell {
         if let image = content.imageData {
             venueImageView.image = UIImage(data: image)
         } else {
-            venueImageView.image = UIImage(named: "unknown")
+            venueImageView.image = UIImage(named: "img_placeholder")
         }
         gradientSetup()
         nameVenueLabel.text = content.nameVenue + "\n \(content.shortDescription)"
@@ -29,6 +29,7 @@ class ImageTableCell: UITableViewCell {
 
 // MARK: - gradientSetup
 private extension ImageTableCell {
+
     func gradientSetup() {
         gradient.frame = venueImageView.bounds
         gradient.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
