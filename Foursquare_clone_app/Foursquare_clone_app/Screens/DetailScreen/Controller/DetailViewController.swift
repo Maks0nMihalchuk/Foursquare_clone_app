@@ -131,10 +131,10 @@ private extension DetailViewController {
             return ImageTableCell()
         }
 
-        let content = ImageCellModel(imageData: dataImageVenue,
-                                     nameVenue: dataModel.name,
-                                     shortDescription: dataModel.tierPrice)
-        cell.configure(with: content)
+//        let content = ImageCellModel(imageData: dataImageVenue,
+//                                     nameVenue: dataModel.name,
+//                                     shortDescription: dataModel.tierPrice)
+//        cell.configure(with: content)
         return cell
     }
 
@@ -148,12 +148,12 @@ private extension DetailViewController {
             return ShortInfoTableCell()
         }
 
-        let content = ShortInfoCellModel(adressVenue: dataModel.location,
-                                         hoursVenue: dataModel.hoursStatus,
-                                         categoriesVenue: dataModel.categories,
-                                         rating: dataModel.rating,
-                                         ratingColor: getRatingColor(with: dataModel.ratingColor))
-        cell.configure(with: content)
+//        let content = ShortInfoCellModel(adressVenue: dataModel.location,
+//                                         hoursVenue: dataModel.hoursStatus,
+//                                         categoriesVenue: dataModel.categories,
+//                                         rating: dataModel.rating,
+//                                         ratingColor: getRatingColor(with: dataModel.ratingColor))
+//        cell.configure(with: content)
         return cell
     }
 
@@ -167,12 +167,12 @@ private extension DetailViewController {
             return HoursTableCell()
         }
 
-        let detailContent = DetailHours(days: dataModel.timeframesDays,
-                                        detailHours: dataModel.timeframesRenderedTime)
-        let content = HoursCellModel(hoursStatus: dataModel.hoursStatus,
-                                     detailHours: detailContent,
-                                     state: defaultHoursCellStatus)
-        cell.configure(with: content)
+//        let detailContent = DetailHours(days: dataModel.timeframesDays,
+//                                        detailHours: dataModel.timeframesRenderedTime)
+//        let content = HoursCellModel(hoursStatus: dataModel.hoursStatus,
+//                                     detailHours: detailContent,
+//                                     state: defaultHoursCellStatus)
+//        cell.configure(with: content)
         defaultHoursCellStatus = !defaultHoursCellStatus
         return cell
     }
@@ -187,8 +187,8 @@ private extension DetailViewController {
             return ContactTableCell()
         }
 
-        let content = ContactCellModel(phone: dataModel.phone, webSiteURL: dataModel.webSite)
-        cell.configure(with: content)
+//        let content = ContactCellModel(phone: dataModel.phone, webSiteURL: dataModel.webSite)
+//        cell.configure(with: content)
 
         return cell
     }

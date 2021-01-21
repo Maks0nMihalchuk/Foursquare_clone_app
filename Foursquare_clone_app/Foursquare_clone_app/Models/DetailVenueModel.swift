@@ -10,18 +10,17 @@ import Foundation
 
 struct DetailVenueModel {
     let name: String
-    let categories: String
-    let location: String
-    let rating: String
-    let ratingColor: String
+    let categories: [String]
+    let location: [String]
+    let rating: Double?
+    let ratingColor: String?
     let prefix: String?
     let suffix: String?
-    let hoursStatus: String
-    let phone: String
-    let timeframesDays: String
-    let timeframesRenderedTime: String
-    let webSite: String
-    let tierPrice: String
-    let messagePrice: String
-    let currencyPrice: String
+    let hoursStatus: String?
+    let phone: String?
+    let timeframesDays: [String]?
+    let timeframesRenderedTime: [String]?
+    let webSite: String?
+    let tierPrice: Int?
+    let messagePrice: String?
 }
