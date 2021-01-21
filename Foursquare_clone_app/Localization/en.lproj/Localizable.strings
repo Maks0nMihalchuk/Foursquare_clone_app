@@ -44,14 +44,15 @@
 "CreateNewListAlert.MakeCollaborativeLabelText" = "Make Collaborative?";
 "CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
 
-"DetailViewController.Add Hours" = "Add Hours";
-"DetailViewController.Add Phone" = "Add Phone";
-"DetailViewController.Add Website" = "Add Website";
-"HoursLabelText" = "HOURS";
+"LabelTextPlaceholder" = "No Data!";
+"VenueNameLabelText" = "Venue Name";
+"Add Hours" = "Add Hours";
+"Add Phone" = "Add Phone";
+"Add Website" = "Add Website";
 
-"ShortInfoTableCell.AdressLabelText" = "ADRESS";
 "HoursLabelText" = "HOURS";
-"ShortInfoTableCell.CategoriesLabelText" = "CATEGORIES";
+"AdressLabelText" = "ADRESS";
+"CategoriesLabelText" = "CATEGORIES";
 
-"ContactTableCell.PhoneLabelText" = "PHONE";
-"ContactTableCell.WebSiteLabelText" = "WEBSITE";
+"PhoneLabelText" = "PHONE";
+"WebSiteLabelText" = "WEBSITE";

@@ -45,10 +45,26 @@ class DetailViewControllerWithScrollView: UIViewController {
 private extension DetailViewControllerWithScrollView {
 
     func setupUI() {
-
+        imageView.image = UIImage(named: "img_placeholder")
+        venueNameLabel.text = "LabelTextPlaceholder".localized()
+        staticAddressLabel.text = "AdressLabelText".localized()
+        staticHoursStatusLabel.text = "HoursLabelText".localized()
+        staticCategoryLabel.text = "CategoriesLabelText".localized()
+        staticHoursLabel.text = "HoursLabelText".localized()
+        staticPhoneLabel.text = "PhoneLabelText".localized()
+        staticWebsiteLabel.text = "WebSiteLabelText".localized()
+        addressVenueLabel.text = "LabelTextPlaceholder".localized()
+        ratingLabel.text = "-"
+        hoursStatusVenueLabel.text = "LabelTextPlaceholder".localized()
+        categoriesVenueLabel.text = "LabelTextPlaceholder".localized()
+        hoursVenueLabel.text = "LabelTextPlaceholder".localized()
+        detailHoursVenueLabel.text = "LabelTextPlaceholder".localized()
+        detailDaysVenueLabel.text = "LabelTextPlaceholder".localized()
+        phoneVenueLabel.text = "LabelTextPlaceholder".localized()
+        websiteVenueLabel.text = "LabelTextPlaceholder".localized()
     }
 
-    func reloadUI(with viewModel: String) {
+    func reloadUI(with viewModel: ViewModel) {
 
     }
 }
@@ -56,19 +72,19 @@ private extension DetailViewControllerWithScrollView {
 // MARK: - UI configuration
 private extension DetailViewControllerWithScrollView {
 
-    func configureShortInfo(viewModel: String) {
+    func configureShortInfo(viewModel: ViewModel) {
 
     }
 
-    func configureBestPhotoContainerView(viewModel: String) {
+    func configureBestPhotoContainerView(viewModel: ViewModel) {
 
     }
 
-    func configureHoursContainer(viewModel: String) {
+    func configureHoursContainer(viewModel: ViewModel) {
 
     }
 
-    func configureContactsContainer(viewModel: String) {
+    func configureContactsContainer(viewModel: ViewModel) {
 
     }
 }
