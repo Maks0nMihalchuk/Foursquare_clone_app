@@ -38,7 +38,11 @@ struct ViewModel {
         self.dataModel = dataModel
     }
 
-    var name: String {
+    var imageData: Data {
+        return Data()
+    }
+
+    var nameVenueAndPrice: String {
         return "\(dataModel.name) \n \(price)"
     }
 
@@ -52,6 +56,7 @@ struct ViewModel {
     var location: String {
         return getLocation()
     }
+
     var categories: String {
         return getCategories()
     }
@@ -78,7 +83,30 @@ struct ViewModel {
     }
 
     var rating: String {
+        return getRating()
+    }
 
+    var ratingColor: UIColor {
+        return getratingColor()
+    }
+
+    var hoursStatus: String {
+        return getHoursStatus()
+    }
+
+    var detailDays: String {
+        return getDetailDays()
+    }
+
+    var detailHours: String {
+        return getDetailHours()
+    }
+}
+
+// MARK: - converting data from DetailVenueModel to ViewModel
+private extension ViewModel {
+
+    func getRating() -> String {
         guard let rating = dataModel.rating else {
             return defaultRating
         }
@@ -86,7 +114,7 @@ struct ViewModel {
         return String(rating)
     }
 
-    var ratingColor: UIColor {
+    func getratingColor() -> UIColor {
         guard let hexColor = dataModel.ratingColor else {
             return UIColor(hexString: defaultColor)
         }
@@ -94,17 +122,13 @@ struct ViewModel {
         return UIColor(hexString: hexColor)
     }
 
-    var hoursStatus: String {
+    func getHoursStatus() -> String {
         guard let status = dataModel.hoursStatus else {
             return "Add Hours".localized()
         }
 
         return status
     }
-}
-
-// MARK: - converting data from DetailVenueModel to ViewModel
-private extension ViewModel {
 
     func getURLForBestPhoto() -> URL? {
         guard

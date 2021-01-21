@@ -34,9 +34,24 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var phoneVenueLabel: UILabel!
     @IBOutlet private weak var websiteVenueLabel: UILabel!
 
+    var viewModel: ViewModel? {
+        didSet {
+            guard let requireViewModel = viewModel else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                guard self.isViewLoaded else {
+                    return
+                }
+
+                self.reloadUI(with: requireViewModel)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
 }
@@ -72,19 +87,27 @@ private extension DetailViewControllerWithScrollView {
 // MARK: - UI configuration
 private extension DetailViewControllerWithScrollView {
 
-    func configureShortInfo(viewModel: ViewModel) {
-
+    func configureBestPhotoContainerView(viewModel: ViewModel) {
+        imageView.image = UIImage(data: viewModel.imageData)
+        venueNameLabel.text = viewModel.nameVenueAndPrice
     }
 
-    func configureBestPhotoContainerView(viewModel: ViewModel) {
-
+    func configureShortInfo(viewModel: ViewModel) {
+        addressVenueLabel.text = viewModel.location
+        ratingLabel.text = viewModel.rating
+        ratingLabel.backgroundColor = viewModel.ratingColor
+        hoursStatusVenueLabel.text = viewModel.hoursStatus
+        categoriesVenueLabel.text = viewModel.categories
     }
 
     func configureHoursContainer(viewModel: ViewModel) {
-
+        hoursVenueLabel.text = viewModel.hoursStatus
+        detailDaysVenueLabel.text = viewModel.detailDays
+        detailHoursVenueLabel.text = viewModel.detailHours
     }
 
     func configureContactsContainer(viewModel: ViewModel) {
-
+        phoneVenueLabel.text = viewModel.phone
+        websiteVenueLabel.text = viewModel.website
     }
 }
