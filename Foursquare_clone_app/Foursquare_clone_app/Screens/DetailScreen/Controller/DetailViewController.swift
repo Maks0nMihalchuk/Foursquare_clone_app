@@ -18,11 +18,24 @@ class DetailViewController: UIViewController {
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
     private var defaultHoursCellStatus = true
-    var detailVenue: DetailVenueModel?
-    var dataImageVenue: Data?
+//    var detailVenue: DetailVenueModel?
+//    var dataImageVenue: Data?
+
+    var viewModel: ViewModel? {
+        didSet {
+            guard let requireViewModel = viewModel else { return }
+
+            DispatchQueue.main.async {
+                guard self.isViewLoaded else { return }
+                print(requireViewModel)
+                //self.reloadUI(with: requireViewModel)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupTableView()
         setupBlurEffectView()
     }
@@ -69,25 +82,37 @@ extension DetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let detailVenue = detailVenue else {
+        guard let requiredViewModel = viewModel else {
             return UITableViewCell()
         }
 
         switch KeysForCells.arrayOfKeysForCells[indexPath.row] {
         case .imageCell:
-            let imageCell = getImageTableCell(tableView, indexPath, dataModel: detailVenue)
+            let imageCell = getImageTableCell(tableView, indexPath, with: requiredViewModel)
             return imageCell
         case .shortInfoCell:
-            let shortInfoCell = getShortInfoTableCell(tableView, indexPath, dataModel: detailVenue)
+            let shortInfoCell = getShortInfoTableCell(tableView, indexPath, with: requiredViewModel)
             return shortInfoCell
         case .hoursCell:
-            let hoursCell = getHoursTableCell(tableView, indexPath, dataModel: detailVenue)
+            let hoursCell = getHoursTableCell(tableView, indexPath, with: requiredViewModel)
             hoursCell.delegate = self
             return hoursCell
         case .contactsCell:
-            let contactCell = getContactTableCell(tableView, indexPath, dataModel: detailVenue)
+            let contactCell = getContactTableCell(tableView, indexPath, with: requiredViewModel)
             return contactCell
         }
+    }
+}
+
+// MARK: - setup UI
+private extension DetailViewController {
+
+    func setupUI() {
+
+    }
+
+    func reloadUI(with viewModel: ViewModel) {
+
     }
 }
 
@@ -123,7 +148,7 @@ private extension DetailViewController {
 
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           dataModel: DetailVenueModel) -> ImageTableCell {
+                           with viewModel: ViewModel) -> ImageTableCell {
         let optionImageCell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.getIdentifier(),
                                                             for: indexPath) as? ImageTableCell
 
@@ -131,16 +156,15 @@ private extension DetailViewController {
             return ImageTableCell()
         }
 
-//        let content = ImageCellModel(imageData: dataImageVenue,
-//                                     nameVenue: dataModel.name,
-//                                     shortDescription: dataModel.tierPrice)
-//        cell.configure(with: content)
+        let content = ImageCellModel(image: viewModel.image,
+                                     nameVenue: viewModel.nameVenueAndPrice)
+        cell.configure(with: content)
         return cell
     }
 
     func getShortInfoTableCell(_ tableView: UITableView,
                                _ indexPath: IndexPath,
-                               dataModel: DetailVenueModel) -> ShortInfoTableCell {
+                               with viewModel: ViewModel) -> ShortInfoTableCell {
         let optionShortInfoCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.getIdentifier(),
                                                                 for: indexPath) as? ShortInfoTableCell
 
@@ -148,18 +172,18 @@ private extension DetailViewController {
             return ShortInfoTableCell()
         }
 
-//        let content = ShortInfoCellModel(adressVenue: dataModel.location,
-//                                         hoursVenue: dataModel.hoursStatus,
-//                                         categoriesVenue: dataModel.categories,
-//                                         rating: dataModel.rating,
-//                                         ratingColor: getRatingColor(with: dataModel.ratingColor))
-//        cell.configure(with: content)
+        let content = ShortInfoCellModel(adressVenue: viewModel.location,
+                                         hoursVenue: viewModel.hoursStatus,
+                                         categoriesVenue: viewModel.categories,
+                                         rating: viewModel.rating,
+                                         ratingColor: viewModel.ratingColor)
+        cell.configure(with: content)
         return cell
     }
 
     func getHoursTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           dataModel: DetailVenueModel) -> HoursTableCell {
+                           with viewModel: ViewModel) -> HoursTableCell {
         let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.getIdentifier(),
                                                             for: indexPath) as? HoursTableCell
 
@@ -167,19 +191,19 @@ private extension DetailViewController {
             return HoursTableCell()
         }
 
-//        let detailContent = DetailHours(days: dataModel.timeframesDays,
-//                                        detailHours: dataModel.timeframesRenderedTime)
-//        let content = HoursCellModel(hoursStatus: dataModel.hoursStatus,
-//                                     detailHours: detailContent,
-//                                     state: defaultHoursCellStatus)
-//        cell.configure(with: content)
+        let detailContent = DetailHours(days: viewModel.detailDays,
+                                        detailHours: viewModel.detailHours)
+        let content = HoursCellModel(hoursStatus: viewModel.hoursStatus,
+                                     detailHours: detailContent,
+                                     state: defaultHoursCellStatus)
+        cell.configure(with: content)
         defaultHoursCellStatus = !defaultHoursCellStatus
         return cell
     }
 
     func getContactTableCell(_ tableView: UITableView,
                              _ indexPath: IndexPath,
-                             dataModel: DetailVenueModel) -> ContactTableCell {
+                             with viewModel: ViewModel) -> ContactTableCell {
         let optionContactCell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.getIdentifier(),
                                                               for: indexPath) as? ContactTableCell
 
@@ -187,15 +211,16 @@ private extension DetailViewController {
             return ContactTableCell()
         }
 
-//        let content = ContactCellModel(phone: dataModel.phone, webSiteURL: dataModel.webSite)
-//        cell.configure(with: content)
+        let content = ContactCellModel(phone: viewModel.phone,
+                                       webSiteURL: viewModel.website)
+        cell.configure(with: content)
 
         return cell
     }
 
-    func getRatingColor(with colorHEXString: String ) -> UIColor {
-        return UIColor.init(hexString: colorHEXString)
-    }
+//    func getRatingColor(with colorHEXString: String ) -> UIColor {
+//        return UIColor.init(hexString: colorHEXString)
+//    }
 }
 
 // MARK: - setup tableView

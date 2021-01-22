@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
 struct ImageCellModel {
-    let imageData: Data?
+    let image: UIImage
     let nameVenue: String
-    let shortDescription: String
 }

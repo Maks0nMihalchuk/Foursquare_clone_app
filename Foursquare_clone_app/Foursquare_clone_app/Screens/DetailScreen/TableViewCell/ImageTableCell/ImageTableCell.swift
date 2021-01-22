@@ -16,15 +16,10 @@ class ImageTableCell: UITableViewCell {
     private let gradient = CAGradientLayer()
 
     func configure(with content: ImageCellModel) {
-        if let image = content.imageData {
-            venueImageView.image = UIImage(data: image)
-        } else {
-            venueImageView.image = UIImage(named: "img_placeholder")
-        }
+        venueImageView.image = content.image
         gradientSetup()
-        nameVenueLabel.text = content.nameVenue + "\n \(content.shortDescription)"
+        nameVenueLabel.text = content.nameVenue
     }
-
 }
 
 // MARK: - gradientSetup

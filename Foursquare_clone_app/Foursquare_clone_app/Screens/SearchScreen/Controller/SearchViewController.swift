@@ -89,7 +89,7 @@ extension SearchViewController: UITableViewDelegate {
                         //self.setupAndPresentDetailController(detailVenue: detailVenueInfo, dataImageVenue: imageData)
                         let viewModel = ViewModel(dataModel: detailVenueInfo, imageData: imageData)
 
-                        self.setupDetailControllerWithScrollView(viewModel: viewModel)
+                        self.showAlertForSelection(viewModel: viewModel)
                     }
                 }
             } else {
@@ -130,7 +130,26 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
 
-    func setupDetailControllerWithScrollView (viewModel: ViewModel?) {
+    func showAlertForSelection(viewModel: ViewModel) {
+        let title = "make your choice"
+        let message = "choose which controller you want to run"
+        let detailWithScrollViewTitle = "detailWithScrollView"
+        let detailWithTableViewTitle = "detailWithTableView"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
+                                                 style: .default) { (_) in
+                                                    self.setupDetailControllerWithScrollView(viewModel: viewModel)
+        }
+        let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
+                                                 style: .default) { (_) in
+                                                    self.setupAndPresentDetailController(viewModel: viewModel)
+        }
+        alertController.addAction(detailWithScrollView)
+        alertController.addAction(detailWithTableView)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func setupDetailControllerWithScrollView(viewModel: ViewModel?) {
         let detailController = mainStoryboard
             .instantiateViewController(identifier: "DetailViewControllerWithScrollView")
             as? DetailViewControllerWithScrollView
@@ -160,7 +179,7 @@ private extension SearchViewController {
         }
     }
 
-    func setupAndPresentDetailController(detailVenue: DetailVenueModel, dataImageVenue: Data?) {
+    func setupAndPresentDetailController(viewModel: ViewModel) {
         let detailController = mainStoryboard
             .instantiateViewController(identifier: "DetailViewController") as? DetailViewController
 
@@ -168,8 +187,7 @@ private extension SearchViewController {
             return
         }
 
-        detail.detailVenue = detailVenue
-        detail.dataImageVenue = dataImageVenue
+        detail.viewModel = viewModel
         detail.modalPresentationStyle = .fullScreen
         present(detail, animated: true, completion: nil)
     }
