@@ -20,9 +20,9 @@ class ShortInfoTableCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        adressLabel.text = "ShortInfoTableCell.AdressLabelText".localized()
+        adressLabel.text = "AdressLabelText".localized()
         hoursLabel.text = "HoursLabelText".localized()
-        categoriesLabel.text = "ShortInfoTableCell.CategoriesLabelText".localized()
+        categoriesLabel.text = "CategoriesLabelText".localized()
     }
 
     func configure(with content: ShortInfoCellModel) {

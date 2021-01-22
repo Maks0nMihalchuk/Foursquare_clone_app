@@ -18,20 +18,8 @@ class DetailViewController: UIViewController {
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
     private var defaultHoursCellStatus = true
-//    var detailVenue: DetailVenueModel?
-//    var dataImageVenue: Data?
 
-    var viewModel: ViewModel? {
-        didSet {
-            guard let requireViewModel = viewModel else { return }
-
-            DispatchQueue.main.async {
-                guard self.isViewLoaded else { return }
-                print(requireViewModel)
-                //self.reloadUI(with: requireViewModel)
-            }
-        }
-    }
+    var viewModel: ViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,18 +89,6 @@ extension DetailViewController: UITableViewDataSource {
             let contactCell = getContactTableCell(tableView, indexPath, with: requiredViewModel)
             return contactCell
         }
-    }
-}
-
-// MARK: - setup UI
-private extension DetailViewController {
-
-    func setupUI() {
-
-    }
-
-    func reloadUI(with viewModel: ViewModel) {
-
     }
 }
 
@@ -217,10 +193,6 @@ private extension DetailViewController {
 
         return cell
     }
-
-//    func getRatingColor(with colorHEXString: String ) -> UIColor {
-//        return UIColor.init(hexString: colorHEXString)
-//    }
 }
 
 // MARK: - setup tableView
