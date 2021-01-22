@@ -86,7 +86,10 @@ extension SearchViewController: UITableViewDelegate {
                 NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix,
                                                suffix: detailVenueInfo.suffix) { (imageData) in
                     DispatchQueue.main.async {
-                        self.setupAndPresentDetailController(detailVenue: detailVenueInfo, dataImageVenue: imageData)
+                        //self.setupAndPresentDetailController(detailVenue: detailVenueInfo, dataImageVenue: imageData)
+                        let viewModel = ViewModel(dataModel: detailVenueInfo, imageData: imageData)
+
+                        self.setupDetailControllerWithScrollView(viewModel: viewModel)
                     }
                 }
             } else {
@@ -126,6 +129,23 @@ extension SearchViewController: UITableViewDataSource {
 
 // MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
+
+    func setupDetailControllerWithScrollView (viewModel: ViewModel?) {
+        let detailController = mainStoryboard
+            .instantiateViewController(identifier: "DetailViewControllerWithScrollView")
+            as? DetailViewControllerWithScrollView
+
+        guard
+            let detail = detailController,
+            let viewModel = viewModel
+        else {
+            return
+        }
+
+        detail.viewModel = viewModel
+        detail.modalPresentationStyle = .fullScreen
+        present(detail, animated: true, completion: nil)
+    }
 
     func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
         searchBar.delegate = self

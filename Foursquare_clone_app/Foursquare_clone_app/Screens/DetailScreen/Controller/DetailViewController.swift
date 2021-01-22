@@ -35,7 +35,7 @@ class DetailViewController: UIViewController {
 // MARK: - HoursTableCellDelegate
 extension DetailViewController: HoursTableCellDelegate {
 
-    func hoursTableViewCell(_ cell: HoursTableCell, didCahngeStateTo state: State.Type) {
+    func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: State.Type) {
         let indexPath = self.tableView.indexPath(for: cell)
         self.tableView.reloadRows(at: [IndexPath(row: indexPath!.row,
                                                  section: indexPath!.section)],

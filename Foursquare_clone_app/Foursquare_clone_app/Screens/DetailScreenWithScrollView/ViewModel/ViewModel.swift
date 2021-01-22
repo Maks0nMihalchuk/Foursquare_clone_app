@@ -33,13 +33,15 @@ struct ViewModel {
     private let defaultRating = "-"
     private let defaultColor = "858585"
     private let dataModel: DetailVenueModel
+    private var imageData: Data?
 
-    init(dataModel: DetailVenueModel) {
+    init(dataModel: DetailVenueModel, imageData: Data?) {
         self.dataModel = dataModel
+        self.imageData = imageData
     }
 
-    var imageData: Data {
-        return Data()
+    var image: UIImage {
+        return getImage()
     }
 
     var nameVenueAndPrice: String {
@@ -50,7 +52,12 @@ struct ViewModel {
         let tier = getTierPrice()
         let message = getMessagePrice()
 
-        return "\(message) - \(tier)"
+        if message.isEmpty {
+            return message
+        } else {
+            return "\(message) - \(tier)"
+        }
+
     }
 
     var location: String {
@@ -59,11 +66,6 @@ struct ViewModel {
 
     var categories: String {
         return getCategories()
-    }
-
-    var urlForPhoto: URL? {
-        let url = getURLForBestPhoto()
-        return url
     }
 
     var phone: String {
@@ -87,7 +89,7 @@ struct ViewModel {
     }
 
     var ratingColor: UIColor {
-        return getratingColor()
+        return getRatingColor()
     }
 
     var hoursStatus: String {
@@ -106,6 +108,18 @@ struct ViewModel {
 // MARK: - converting data from DetailVenueModel to ViewModel
 private extension ViewModel {
 
+    func getImage() -> UIImage {
+        guard let imageData = imageData else {
+            return UIImage(named: "img_placeholder") ?? UIImage()
+        }
+
+        guard let image = UIImage(data: imageData) else {
+            return UIImage()
+        }
+
+        return image
+    }
+
     func getRating() -> String {
         guard let rating = dataModel.rating else {
             return defaultRating
@@ -114,7 +128,7 @@ private extension ViewModel {
         return String(rating)
     }
 
-    func getratingColor() -> UIColor {
+    func getRatingColor() -> UIColor {
         guard let hexColor = dataModel.ratingColor else {
             return UIColor(hexString: defaultColor)
         }
@@ -128,20 +142,6 @@ private extension ViewModel {
         }
 
         return status
-    }
-
-    func getURLForBestPhoto() -> URL? {
-        guard
-            let prefix = dataModel.prefix,
-            let suffix = dataModel.suffix
-        else {
-            return nil
-        }
-
-        let urlString = "\(prefix)500x500\(suffix)"
-        let url = URL(string: urlString)
-
-        return url
     }
 
     func getDetailDays() -> String {

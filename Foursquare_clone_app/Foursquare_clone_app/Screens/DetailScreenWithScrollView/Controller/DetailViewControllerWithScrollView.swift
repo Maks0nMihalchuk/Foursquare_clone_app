@@ -36,31 +36,66 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     var viewModel: ViewModel? {
         didSet {
-            guard let requireViewModel = viewModel else {
-                return
-            }
+            guard let requireViewModel = viewModel else { return }
 
             DispatchQueue.main.async {
-                guard self.isViewLoaded else {
-                    return
-                }
+                guard self.isViewLoaded else { return }
 
                 self.reloadUI(with: requireViewModel)
             }
         }
     }
 
+    private let gradient = CAGradientLayer()
+    private let duration = 0.25
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+
+        guard let requiredViewModel = viewModel else { return }
+
+        reloadUI(with: requiredViewModel)
+        checkForDataAvailability(with: requiredViewModel)
+    }
+
+    @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+
+
+    @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
+        let transform = CGAffineTransform(rotationAngle: .zero)
+        UIView.animate(withDuration: duration) {
+            sender.imageView?.transform = self.checkState() == State.decomposed
+                ? transform.rotated(by: .pi)
+                : transform.rotated(by: .zero)
+            self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
+        }
+
     }
 }
 
 // MARK: - SetupUI
 private extension DetailViewControllerWithScrollView {
 
+    func checkForDataAvailability(with viewModel: ViewModel) {
+        let defaultTest = "Add Hours".localized()
+
+        if viewModel.hoursStatus != defaultTest {
+            detailHoursInfoButton.isHidden = false
+        } else {
+            detailHoursInfoButton.isHidden = true
+        }
+    }
+
+    func checkState() -> State {
+        return detailInfoStackView.isHidden ? .decomposed : .folded
+    }
+
     func setupUI() {
         imageView.image = UIImage(named: "img_placeholder")
+        gradientSetup()
         venueNameLabel.text = "LabelTextPlaceholder".localized()
         staticAddressLabel.text = "AdressLabelText".localized()
         staticHoursStatusLabel.text = "HoursLabelText".localized()
@@ -80,19 +115,33 @@ private extension DetailViewControllerWithScrollView {
     }
 
     func reloadUI(with viewModel: ViewModel) {
-
+        configureBestPhotoContainerView(with: viewModel)
+        configureShortInfo(with: viewModel)
+        configureHoursContainer(with: viewModel)
+        configureContactsContainer(with: viewModel)
     }
 }
 
 // MARK: - UI configuration
 private extension DetailViewControllerWithScrollView {
 
-    func configureBestPhotoContainerView(viewModel: ViewModel) {
-        imageView.image = UIImage(data: viewModel.imageData)
+    func gradientSetup() {
+        gradient.frame = imageView.bounds
+        gradient.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
+                           UIColor.black.withAlphaComponent(0.0).cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.locations = [0, 0.75, 1]
+        imageView.layer.addSublayer(gradient)
+    }
+
+    func configureBestPhotoContainerView(with viewModel: ViewModel) {
+        imageView.image = viewModel.image
+        gradientSetup()
         venueNameLabel.text = viewModel.nameVenueAndPrice
     }
 
-    func configureShortInfo(viewModel: ViewModel) {
+    func configureShortInfo(with viewModel: ViewModel) {
         addressVenueLabel.text = viewModel.location
         ratingLabel.text = viewModel.rating
         ratingLabel.backgroundColor = viewModel.ratingColor
@@ -100,13 +149,13 @@ private extension DetailViewControllerWithScrollView {
         categoriesVenueLabel.text = viewModel.categories
     }
 
-    func configureHoursContainer(viewModel: ViewModel) {
+    func configureHoursContainer(with viewModel: ViewModel) {
         hoursVenueLabel.text = viewModel.hoursStatus
         detailDaysVenueLabel.text = viewModel.detailDays
         detailHoursVenueLabel.text = viewModel.detailHours
     }
 
-    func configureContactsContainer(viewModel: ViewModel) {
+    func configureContactsContainer(with viewModel: ViewModel) {
         phoneVenueLabel.text = viewModel.phone
         websiteVenueLabel.text = viewModel.website
     }
