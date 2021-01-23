@@ -33,6 +33,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var staticWebsiteLabel: UILabel!
     @IBOutlet private weak var phoneVenueLabel: UILabel!
     @IBOutlet private weak var websiteVenueLabel: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
 
     var viewModel: ViewModel? {
         didSet {
@@ -51,6 +52,7 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.delegate = self
         setupUI()
 
         guard let requiredViewModel = viewModel else { return }
@@ -63,7 +65,6 @@ class DetailViewControllerWithScrollView: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-
     @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
         let transform = CGAffineTransform(rotationAngle: .zero)
         UIView.animate(withDuration: duration) {
@@ -73,6 +74,13 @@ class DetailViewControllerWithScrollView: UIViewController {
             self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
         }
 
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension DetailViewControllerWithScrollView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset)
     }
 }
 

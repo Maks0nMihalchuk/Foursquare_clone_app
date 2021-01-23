@@ -694,7 +694,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jyQ-Tt-6pX">
-                                                                <rect key="frame" x="0.0" y="49.999999999999943" width="382" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnK-dG-RmB">
                                                                         <rect key="frame" x="0.0" y="0.0" width="187" height="0.0"/>
@@ -855,6 +855,7 @@
                         <outlet property="imageView" destination="Lie-Ry-pz5" id="9Gn-zt-Ig1"/>
                         <outlet property="phoneVenueLabel" destination="Bc0-93-mLf" id="GxK-gp-LJR"/>
                         <outlet property="ratingLabel" destination="G2T-FG-oDe" id="PKC-1G-LC2"/>
+                        <outlet property="scrollView" destination="kRD-ML-Irq" id="SH0-i9-aX2"/>
                         <outlet property="staticAddressLabel" destination="eaq-cc-QtX" id="bLh-J0-aGZ"/>
                         <outlet property="staticCategoryLabel" destination="FRl-5x-N0k" id="kCW-JK-kzY"/>
                         <outlet property="staticHoursLabel" destination="DVP-9y-rqt" id="Ysc-7F-MLj"/>
