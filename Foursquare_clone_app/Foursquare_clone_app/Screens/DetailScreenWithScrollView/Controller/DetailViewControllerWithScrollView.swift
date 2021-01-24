@@ -10,7 +10,6 @@ import UIKit
 
 class DetailViewControllerWithScrollView: UIViewController {
 
-
     @IBOutlet private weak var imageContainerView: UpNavigationViewAnimation!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var venueNameLabel: UILabel!
@@ -49,12 +48,15 @@ class DetailViewControllerWithScrollView: UIViewController {
         }
     }
 
+    private let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    private let tapGestureRecognizer = UITapGestureRecognizer()
     private let gradient = CAGradientLayer()
     private let duration = 0.25
 
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        setuptapGesture()
         setupImageContainerView()
         setupUI()
 
@@ -99,6 +101,36 @@ extension DetailViewControllerWithScrollView: UIScrollViewDelegate {
         imageContainerView.scrollViewDidEndDecelerating(scrollView)
     }
 }
+
+// MARK: - setup tap gesture
+private extension DetailViewControllerWithScrollView {
+
+    func setuptapGesture() {
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTapPressGesture(_:)))
+    }
+
+    @objc func handleTapPressGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard tapGestureRecognizer === gestureRecognizer else { return }
+
+        let fullPhotoScreenControllre = mainStoryboard
+            .instantiateViewController(identifier: "FullScreenImageViewController") as? FullScreenImageViewController
+
+        guard let fullPhotoScreen = fullPhotoScreenControllre else { return }
+
+        guard
+            let fullScreenImage = imageView.image,
+            let venueName = venueNameLabel.text
+        else { return }
+
+        fullPhotoScreen.venueName = venueName
+        fullPhotoScreen.venueImage = fullScreenImage
+
+        let navigationController = UINavigationController(rootViewController: fullPhotoScreen)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+    }
+}
+
 
 // MARK: - SetupUI
 private extension DetailViewControllerWithScrollView {
@@ -149,6 +181,7 @@ private extension DetailViewControllerWithScrollView {
         imageContainerView.setupFor(Scrollview: scrollView, viewController: self)
         imageContainerView.topbarMinimumSpace = .custom(height: 85)
         imageContainerView.isBlurrBackground = false
+        imageContainerView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 

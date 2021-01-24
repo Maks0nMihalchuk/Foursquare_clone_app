@@ -692,7 +692,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jyQ-Tt-6pX">
-                                                                <rect key="frame" x="0.0" y="50" width="382" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnK-dG-RmB">
                                                                         <rect key="frame" x="0.0" y="0.0" width="187" height="0.0"/>
@@ -891,6 +891,46 @@
             </objects>
             <point key="canvasLocation" x="1992.753623188406" y="923.4375"/>
         </scene>
+        <!--Full Screen Image View Controller-->
+        <scene sceneID="cCU-rp-aXZ">
+            <objects>
+                <viewController restorationIdentifier="FullScreenImageViewController" storyboardIdentifier="FullScreenImageViewController" id="gsA-Ii-L7Z" customClass="FullScreenImageViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iBg-o5-Gek">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="33H-G7-AiT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="33H-G7-AiT" firstAttribute="leading" secondItem="a1a-vd-Je0" secondAttribute="leading" id="R0V-qL-tsC"/>
+                            <constraint firstItem="33H-G7-AiT" firstAttribute="top" secondItem="a1a-vd-Je0" secondAttribute="top" id="l47-7Q-T7n"/>
+                            <constraint firstItem="a1a-vd-Je0" firstAttribute="bottom" secondItem="33H-G7-AiT" secondAttribute="bottom" id="lla-ve-KSJ"/>
+                            <constraint firstItem="a1a-vd-Je0" firstAttribute="trailing" secondItem="33H-G7-AiT" secondAttribute="trailing" id="sae-fj-yYQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a1a-vd-Je0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rhp-Jx-Fe6">
+                        <barButtonItem key="leftBarButtonItem" image="backWhiteArrow" style="plain" id="Wjo-dh-EDT">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="screenCloseButtonPressed:" destination="gsA-Ii-L7Z" id="M2B-OC-SXq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" style="done" id="1MZ-gx-fFX">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="33H-G7-AiT" id="jzj-Ph-cSc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xvL-bN-jmJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3618.840579710145" y="1224.7767857142856"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="wfz-oh-cw2">
             <objects>
@@ -1000,6 +1040,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHN-6Y-x1K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2658" y="566"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="stf-Ql-1vQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="myx-if-jFi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="wdO-hh-1oO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gsA-Ii-L7Z" kind="relationship" relationship="rootViewController" id="j7y-Tl-Stu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aF0-SA-Tf5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2658" y="1225"/>
         </scene>
     </scenes>
     <resources>
