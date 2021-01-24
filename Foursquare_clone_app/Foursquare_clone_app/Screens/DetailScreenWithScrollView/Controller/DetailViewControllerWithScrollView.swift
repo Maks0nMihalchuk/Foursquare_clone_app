@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewControllerWithScrollView: UIViewController {
 
+
+    @IBOutlet private weak var imageContainerView: UpNavigationViewAnimation!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var venueNameLabel: UILabel!
 
@@ -53,6 +55,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        setupImageContainerView()
         setupUI()
 
         guard let requiredViewModel = viewModel else { return }
@@ -79,8 +82,21 @@ class DetailViewControllerWithScrollView: UIViewController {
 
 // MARK: - UIScrollViewDelegate
 extension DetailViewControllerWithScrollView: UIScrollViewDelegate {
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset)
+        imageContainerView.scrollViewDidScroll(scrollView)
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        imageContainerView.scrollViewWillBeginDragging(scrollView)
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        imageContainerView.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        imageContainerView.scrollViewDidEndDecelerating(scrollView)
     }
 }
 
@@ -127,6 +143,12 @@ private extension DetailViewControllerWithScrollView {
         configureShortInfo(with: viewModel)
         configureHoursContainer(with: viewModel)
         configureContactsContainer(with: viewModel)
+    }
+
+    func setupImageContainerView() {
+        imageContainerView.setupFor(Scrollview: scrollView, viewController: self)
+        imageContainerView.topbarMinimumSpace = .custom(height: 85)
+        imageContainerView.isBlurrBackground = false
     }
 }
 

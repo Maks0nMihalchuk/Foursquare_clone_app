@@ -11,6 +11,8 @@
 		2D06D14B259A29290090CF23 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D06D14A259A29290090CF23 /* Model.swift */; };
 		2D0D357D25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D357C25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift */; };
 		2D0D358625B9D79B0053FDB0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D358525B9D79B0053FDB0 /* ViewModel.swift */; };
+		2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */; };
+		2D10DC3925BDC16200C7B9BC /* UpNavigationViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10DC3825BDC16200C7B9BC /* UpNavigationViewAnimation.swift */; };
 		2D25472825A5CDEB008151FF /* HeaderCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25472625A5CDEB008151FF /* HeaderCollectionView.swift */; };
 		2D25472925A5CDEB008151FF /* HeaderCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D25472725A5CDEB008151FF /* HeaderCollectionView.xib */; };
 		2D25472B25A5CF70008151FF /* HeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25472A25A5CF70008151FF /* HeaderModel.swift */; };
@@ -90,6 +92,9 @@
 		2D06D14A259A29290090CF23 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2D0D357C25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerWithScrollView.swift; sourceTree = "<group>"; };
 		2D0D358525B9D79B0053FDB0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
+		2D10DC3825BDC16200C7B9BC /* UpNavigationViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpNavigationViewAnimation.swift; path = ../../../../../../Downloads/UpNavigationViewAnimation.swift; sourceTree = "<group>"; };
+		2D10DC3B25BDC16900C7B9BC /* UpNavigationViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNavigationViewAnimation.swift; sourceTree = "<group>"; };
 		2D25472625A5CDEB008151FF /* HeaderCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionView.swift; sourceTree = "<group>"; };
 		2D25472725A5CDEB008151FF /* HeaderCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionView.xib; sourceTree = "<group>"; };
 		2D25472A25A5CF70008151FF /* HeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderModel.swift; sourceTree = "<group>"; };
@@ -222,6 +227,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		2D10DC3525BDB8BD00C7B9BC /* FullScreenPhotoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */,
+			);
+			path = FullScreenPhotoViewController;
+			sourceTree = "<group>";
+		};
+		2D10DC3A25BDC16800C7B9BC /* UpNavigationViewAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				2D10DC3B25BDC16900C7B9BC /* UpNavigationViewAnimation.swift */,
+			);
+			path = UpNavigationViewAnimation;
+			sourceTree = "<group>";
+		};
 		2D25472025A5C849008151FF /* HeaderCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +282,8 @@
 		2D2B00D4258BB87F00D49F32 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2D10DC3A25BDC16800C7B9BC /* UpNavigationViewAnimation */,
+				2D10DC3825BDC16200C7B9BC /* UpNavigationViewAnimation.swift */,
 				2D39010C258D13E2003C2187 /* Mapping */,
 				2D2B00D5258BB8AD00D49F32 /* Extension */,
 			);
@@ -410,6 +433,7 @@
 				2DEC31D2258AA716009FA472 /* SearchScreen */,
 				2D0D357E25B9C5250053FDB0 /* DetailScreenWithScrollView */,
 				2D3BD9C82587848C00389405 /* DetailScreen */,
+				2D10DC3525BDB8BD00C7B9BC /* FullScreenPhotoViewController */,
 				2D3BD9C5258783D700389405 /* ListsScreen */,
 				2DC43C8B2599E2E700655B2F /* AccountScreen */,
 			);
@@ -873,6 +897,7 @@
 				2D4CF36B25A2445100C7006B /* UserCreatedCell.swift in Sources */,
 				2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */,
 				2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */,
+				2D10DC3925BDC16200C7B9BC /* UpNavigationViewAnimation.swift in Sources */,
 				2D5CB38625B1B000007C6ED2 /* DetailViewController.swift in Sources */,
 				2D38F7EA25B35CCF007CAE19 /* ContactTableCell.swift in Sources */,
 				2DCC68B125A8AC6A00639B93 /* GetUserLists.swift in Sources */,
@@ -886,6 +911,7 @@
 				2DD6DCC825ACA70E00B0E948 /* GetPhoto.swift in Sources */,
 				2DE67F19258800460092B998 /* CategoryCollectionCell.swift in Sources */,
 				2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */,
+				2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */,
 				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
