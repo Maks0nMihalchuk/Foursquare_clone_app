@@ -1,0 +1,5 @@
+included:
+- Foursquare_clone_app
+
+excluded:
+- Pods

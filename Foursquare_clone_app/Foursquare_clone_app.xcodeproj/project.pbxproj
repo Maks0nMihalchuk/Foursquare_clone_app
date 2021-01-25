@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -100,6 +100,7 @@
 		2D292EA525A3770A00A67F36 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2D2B00DA258BE7AB00D49F32 /* DetailInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoModel.swift; sourceTree = "<group>"; };
+		2D2B279125BF092500D7CD9E /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D2F495125A917F100A61FBB /* CreateNewListAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewListAlert.swift; sourceTree = "<group>"; };
 		2D2F495325A9181800A61FBB /* CreateNewListAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNewListAlert.xib; sourceTree = "<group>"; };
 		2D326BAA25909AB3006E4A59 /* DetailLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocation.swift; sourceTree = "<group>"; };
@@ -736,6 +737,7 @@
 		B32EA95B97018AD12E99880A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D2B279125BF092500D7CD9E /* Kingfisher.framework */,
 				E43C3487CFBC085209AB5FC5 /* Pods_Foursquare_clone_app.framework */,
 			);
 			name = Frameworks;
@@ -753,6 +755,7 @@
 				2D3BD9A325875B6800389405 /* Frameworks */,
 				2D3BD9A425875B6800389405 /* Resources */,
 				2D3BD9BD25875B7B00389405 /* ShellScript */,
+				29030FB4E9E29FCCA1AED665 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -822,6 +825,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		29030FB4E9E29FCCA1AED665 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D3BD9BD25875B7B00389405 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1016,7 +1036,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1071,7 +1091,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1089,6 +1109,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F4698G65QQ;
 				INFOPLIST_FILE = Foursquare_clone_app/Resorces/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1108,6 +1129,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F4698G65QQ;
 				INFOPLIST_FILE = Foursquare_clone_app/Resorces/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

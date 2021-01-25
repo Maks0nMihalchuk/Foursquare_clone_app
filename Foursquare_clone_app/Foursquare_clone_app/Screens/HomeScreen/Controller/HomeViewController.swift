@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeViewController: UIViewController {
 
@@ -21,11 +22,13 @@ class HomeViewController: UIViewController {
     private let numberOfVerticalIndents: CGFloat = 2
     private let offset: CGFloat = 2
     private let main = UIStoryboard(name: "Main", bundle: nil)
+    private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(CategoryCollectionCell.nib(),
                                 forCellWithReuseIdentifier: CategoryCollectionCell.identifier)
+        setupImageView()
     }
 
     @IBAction func searchButtonPress(_ sender: UIButton) {
@@ -121,5 +124,18 @@ private extension HomeViewController {
         search.venues = venues
         search.modalPresentationStyle = .fullScreen
         present(search, animated: true, completion: nil)
+    }
+}
+
+// MARK: - setup imageView
+private extension HomeViewController {
+
+    func setupImageView() {
+        let url = URL(string: stringURL)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: url,
+                              placeholder: UIImage(named: "img_placeholder"),
+                              options: [.transition(.fade(1.0))],
+                              progressBlock: nil)
     }
 }

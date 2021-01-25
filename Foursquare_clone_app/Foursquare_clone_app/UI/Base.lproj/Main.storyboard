@@ -65,9 +65,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-l7-K4t">
-                                <rect key="frame" x="0.0" y="44" width="414" height="392"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csS-jc-7hU">
                                 <rect key="frame" x="20" y="444" width="374" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -105,11 +102,14 @@
                                     <outlet property="delegate" destination="8k5-bL-xfm" id="aau-sN-a55"/>
                                 </connections>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-l7-K4t">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="436"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.89761700913241993" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="4uM-5Z-Whq"/>
-                            <constraint firstItem="SpC-l7-K4t" firstAttribute="top" secondItem="ESO-gy-7jy" secondAttribute="top" id="ARk-t5-dJe"/>
+                            <constraint firstItem="SpC-l7-K4t" firstAttribute="top" secondItem="zfP-uj-jSY" secondAttribute="top" id="ARk-t5-dJe"/>
                             <constraint firstItem="csS-jc-7hU" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="LXg-AF-sda"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="OUp-pT-a6H"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="S1T-rl-aw1"/>
@@ -132,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gns-8W-L3x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1112" y="-416"/>
+            <point key="canvasLocation" x="1111.5942028985507" y="-416.51785714285711"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lqM-GW-KJc">
