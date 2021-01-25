@@ -19,7 +19,7 @@ struct DetailHours {
     let detailHours: String
 }
 
-enum State {
+enum HoursTableCallState {
     case folded
     case decomposed
 }

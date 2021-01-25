@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 struct ImageCellModel {
-    let image: UIImage
+    let image: UIImage?
     let nameVenue: String
 }

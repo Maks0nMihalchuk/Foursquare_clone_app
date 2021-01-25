@@ -72,7 +72,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
         let transform = CGAffineTransform(rotationAngle: .zero)
         UIView.animate(withDuration: duration) {
-            sender.imageView?.transform = self.checkState() == State.decomposed
+            sender.imageView?.transform = self.checkState() == HoursTableCallState.decomposed
                 ? transform.rotated(by: .pi)
                 : transform.rotated(by: .zero)
             self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
@@ -93,6 +93,7 @@ class DetailViewControllerWithScrollView: UIViewController {
         let navigationController = UINavigationController(rootViewController: fullPhotoScreen)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
+
     }
 
 }
@@ -120,7 +121,7 @@ private extension DetailViewControllerWithScrollView {
         }
     }
 
-    func checkState() -> State {
+    func checkState() -> HoursTableCallState {
         return detailInfoStackView.isHidden ? .decomposed : .folded
     }
 

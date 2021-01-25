@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HoursTableCellDelegate: class {
-    func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: State.Type)
+    func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: HoursTableCallState.Type)
 }
 
 class HoursTableCell: UITableViewCell {
@@ -37,7 +37,7 @@ class HoursTableCell: UITableViewCell {
     }
 
     @IBAction func detailHoursButtonPressed(_ sender: UIButton) {
-        delegate?.hoursTableViewCell(self, didChangeStateTo: State.self)
+        delegate?.hoursTableViewCell(self, didChangeStateTo: HoursTableCallState.self)
     }
 }
 
