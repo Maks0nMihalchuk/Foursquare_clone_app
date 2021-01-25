@@ -13,7 +13,7 @@ class FullScreenImageViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
 
     var venueName = String()
-    var venueImage = UIImage()
+    var venueImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ private extension FullScreenImageViewController {
     }
 
     func setupImageView() {
-        imageView.image = venueImage
+        guard let image = venueImage else { return }
+        imageView.image = image
     }
 }

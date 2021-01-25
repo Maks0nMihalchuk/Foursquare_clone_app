@@ -85,13 +85,10 @@ class DetailViewControllerWithScrollView: UIViewController {
 
         guard let fullPhotoScreen = fullPhotoScreenControllre else { return }
 
-        guard
-            let fullScreenImage = imageView.image,
-            let venueName = venueNameLabel.text
-        else { return }
+        guard let venueName = venueNameLabel.text else { return }
 
         fullPhotoScreen.venueName = venueName
-        fullPhotoScreen.venueImage = fullScreenImage
+        fullPhotoScreen.venueImage = imageView.image
 
         let navigationController = UINavigationController(rootViewController: fullPhotoScreen)
         navigationController.modalPresentationStyle = .fullScreen
