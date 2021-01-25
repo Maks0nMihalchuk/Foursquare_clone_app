@@ -36,6 +36,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var phoneVenueLabel: UILabel!
     @IBOutlet private weak var websiteVenueLabel: UILabel!
     @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
 
     var viewModel: ViewModel? {
         didSet {
@@ -56,12 +57,7 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.delegate = self
-        setuptapGesture()
-        setupImageContainerView()
         setupUI()
-        print("constant: \(imageContainerViewHeight.constant)")
-        print("contentInset: \(scrollView.contentInset.top)")
 
         guard let requiredViewModel = viewModel else { return }
 
@@ -70,7 +66,6 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
-        print("1165651")
         dismiss(animated: true, completion: nil)
     }
 
@@ -82,23 +77,9 @@ class DetailViewControllerWithScrollView: UIViewController {
                 : transform.rotated(by: .zero)
             self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
         }
-
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-extension DetailViewControllerWithScrollView: UIScrollViewDelegate { }
-
-// MARK: - setup tap gesture
-private extension DetailViewControllerWithScrollView {
-
-    func setuptapGesture() {
-        tapGestureRecognizer.addTarget(self, action: #selector(handleTapPressGesture(_:)))
     }
 
-    @objc func handleTapPressGesture(_ gestureRecognizer: UITapGestureRecognizer) {
-        guard tapGestureRecognizer === gestureRecognizer else { return }
-
+    @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
         let fullPhotoScreenControllre = mainStoryboard
             .instantiateViewController(identifier: "FullScreenImageViewController") as? FullScreenImageViewController
 
@@ -116,13 +97,20 @@ private extension DetailViewControllerWithScrollView {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
     }
+
 }
 
 // MARK: - SetupUI
 private extension DetailViewControllerWithScrollView {
 
     func setupScrollView() {
-        scrollView.contentInset.top = imageContainerViewHeight.constant
+        let window = UIApplication.shared.windows[0]
+        scrollView.contentInset.top = imageContainerViewHeight.constant - window.safeAreaInsets.top
+    }
+
+    func setupHeightfullScreenButton() {
+        let window = UIApplication.shared.windows[0]
+        fullScreenButtonHeight.constant = imageContainerViewHeight.constant - window.safeAreaInsets.top
     }
 
     func checkForDataAvailability(with viewModel: ViewModel) {
@@ -143,6 +131,7 @@ private extension DetailViewControllerWithScrollView {
         imageView.image = UIImage(named: "img_placeholder")
         gradientSetup()
         setupScrollView()
+        setupHeightfullScreenButton()
         venueNameLabel.text = "LabelTextPlaceholder".localized()
         staticAddressLabel.text = "AdressLabelText".localized()
         staticHoursStatusLabel.text = "HoursLabelText".localized()
@@ -167,10 +156,7 @@ private extension DetailViewControllerWithScrollView {
         configureHoursContainer(with: viewModel)
         configureContactsContainer(with: viewModel)
         setupScrollView()
-    }
-
-    func setupImageContainerView() {
-        imageContainerView.addGestureRecognizer(tapGestureRecognizer)
+        setupHeightfullScreenButton()
     }
 }
 

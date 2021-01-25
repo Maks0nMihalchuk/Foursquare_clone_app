@@ -18,16 +18,7 @@ class FullScreenImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImageView()
-        self.setNeedsStatusBarAppearanceUpdate()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupNavigationController()
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIBarButtonItem) {
@@ -41,7 +32,6 @@ private extension FullScreenImageViewController {
     func setupNavigationController() {
         let navBar = navigationController?.navigationBar
         title = venueName
-
         navBar?.barTintColor = .black
         navBar?.backgroundColor = .black
         navBar?.barTintColor = .black
