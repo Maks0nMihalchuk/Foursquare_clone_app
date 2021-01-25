@@ -78,7 +78,7 @@ class DetailViewControllerWithScrollView: UIViewController {
             self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
         }
     }
-
+    // метод делегата в роутер. Роутер реализовывает 
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
         let fullPhotoScreenControllre = mainStoryboard
             .instantiateViewController(identifier: "FullScreenImageViewController") as? FullScreenImageViewController
@@ -93,9 +93,7 @@ class DetailViewControllerWithScrollView: UIViewController {
         let navigationController = UINavigationController(rootViewController: fullPhotoScreen)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
-
     }
-
 }
 
 // MARK: - SetupUI
