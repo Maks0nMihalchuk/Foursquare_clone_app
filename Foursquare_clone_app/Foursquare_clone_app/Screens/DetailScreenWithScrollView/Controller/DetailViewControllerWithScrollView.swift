@@ -10,7 +10,8 @@ import UIKit
 
 class DetailViewControllerWithScrollView: UIViewController {
 
-    @IBOutlet private weak var imageContainerView: UpNavigationViewAnimation!
+    @IBOutlet private weak var imageContainerViewHeight: NSLayoutConstraint!
+    @IBOutlet private weak var imageContainerView: UIView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var venueNameLabel: UILabel!
 
@@ -59,6 +60,8 @@ class DetailViewControllerWithScrollView: UIViewController {
         setuptapGesture()
         setupImageContainerView()
         setupUI()
+        print("constant: \(imageContainerViewHeight.constant)")
+        print("contentInset: \(scrollView.contentInset.top)")
 
         guard let requiredViewModel = viewModel else { return }
 
@@ -67,6 +70,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
+        print("1165651")
         dismiss(animated: true, completion: nil)
     }
 
@@ -83,24 +87,7 @@ class DetailViewControllerWithScrollView: UIViewController {
 }
 
 // MARK: - UIScrollViewDelegate
-extension DetailViewControllerWithScrollView: UIScrollViewDelegate {
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        imageContainerView.scrollViewDidScroll(scrollView)
-    }
-
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        imageContainerView.scrollViewWillBeginDragging(scrollView)
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        imageContainerView.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        imageContainerView.scrollViewDidEndDecelerating(scrollView)
-    }
-}
+extension DetailViewControllerWithScrollView: UIScrollViewDelegate { }
 
 // MARK: - setup tap gesture
 private extension DetailViewControllerWithScrollView {
@@ -131,9 +118,12 @@ private extension DetailViewControllerWithScrollView {
     }
 }
 
-
 // MARK: - SetupUI
 private extension DetailViewControllerWithScrollView {
+
+    func setupScrollView() {
+        scrollView.contentInset.top = imageContainerViewHeight.constant
+    }
 
     func checkForDataAvailability(with viewModel: ViewModel) {
         let defaultTest = "Add Hours".localized()
@@ -152,6 +142,7 @@ private extension DetailViewControllerWithScrollView {
     func setupUI() {
         imageView.image = UIImage(named: "img_placeholder")
         gradientSetup()
+        setupScrollView()
         venueNameLabel.text = "LabelTextPlaceholder".localized()
         staticAddressLabel.text = "AdressLabelText".localized()
         staticHoursStatusLabel.text = "HoursLabelText".localized()
@@ -175,12 +166,10 @@ private extension DetailViewControllerWithScrollView {
         configureShortInfo(with: viewModel)
         configureHoursContainer(with: viewModel)
         configureContactsContainer(with: viewModel)
+        setupScrollView()
     }
 
     func setupImageContainerView() {
-        imageContainerView.setupFor(Scrollview: scrollView, viewController: self)
-        imageContainerView.topbarMinimumSpace = .custom(height: 85)
-        imageContainerView.isBlurrBackground = false
         imageContainerView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
