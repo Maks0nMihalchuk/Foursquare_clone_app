@@ -86,9 +86,7 @@ extension SearchViewController: UITableViewDelegate {
                 NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix,
                                                suffix: detailVenueInfo.suffix) { (imageData) in
                     DispatchQueue.main.async {
-                        //self.setupAndPresentDetailController(detailVenue: detailVenueInfo, dataImageVenue: imageData)
                         let viewModel = ViewModel(dataModel: detailVenueInfo, imageData: imageData)
-
                         self.showAlertForSelection(viewModel: viewModel)
                     }
                 }
@@ -131,10 +129,11 @@ extension SearchViewController: UITableViewDataSource {
 private extension SearchViewController {
 
     func showAlertForSelection(viewModel: ViewModel) {
-        let title = "make your choice"
-        let message = "choose which controller you want to run"
+        let title = "AlertSelectController.Title".localized()
+        let message = "AlertSelectController.Message".localized()
         let detailWithScrollViewTitle = "detailWithScrollView"
         let detailWithTableViewTitle = "detailWithTableView"
+        let cancelButtonTitle = "AlertSelectController.CancelButton".localized()
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
                                                  style: .default) { (_) in
@@ -144,8 +143,10 @@ private extension SearchViewController {
                                                  style: .default) { (_) in
                                                     self.setupAndPresentDetailController(viewModel: viewModel)
         }
+        let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alertController.addAction(detailWithScrollView)
         alertController.addAction(detailWithTableView)
+        alertController.addAction(cancelButton)
         present(alertController, animated: true, completion: nil)
     }
 

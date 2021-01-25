@@ -40,7 +40,7 @@ struct ViewModel {
         self.imageData = imageData
     }
 
-    var image: UIImage {
+    var image: UIImage? {
         return getImage()
     }
 
@@ -108,16 +108,12 @@ struct ViewModel {
 // MARK: - converting data from DetailVenueModel to ViewModel
 private extension ViewModel {
 
-    func getImage() -> UIImage {
+    func getImage() -> UIImage? {
         guard let imageData = imageData else {
-            return UIImage(named: "img_placeholder") ?? UIImage()
+            return UIImage(named: "img_placeholder")
         }
 
-        guard let image = UIImage(data: imageData) else {
-            return UIImage()
-        }
-
-        return image
+        return UIImage(data: imageData)
     }
 
     func getRating() -> String {

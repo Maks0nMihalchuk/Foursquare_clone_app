@@ -56,3 +56,7 @@
 
 "PhoneLabelText" = "ТЕЛЕФОН";
 "WebSiteLabelText" = "ВЕБ-САЙТ";
+
+"AlertSelectController.Title" = "Сделайте свой выбор";
+"AlertSelectController.Message" = "Выберите, какой контроллер вы хотите запустить";
+"AlertSelectController.CancelButton" = "Отменить";
