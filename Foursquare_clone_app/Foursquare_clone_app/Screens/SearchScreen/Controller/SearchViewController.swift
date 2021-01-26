@@ -13,10 +13,10 @@ class SearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
 
-    private let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
+    private let assembly = VenueDetailsAssembly()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,21 +150,14 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func setupDetailControllerWithScrollView(viewModel: ViewModel?) {
-        let detailController = mainStoryboard
-            .instantiateViewController(identifier: "DetailViewControllerWithScrollView")
-            as? DetailViewControllerWithScrollView
+    func setupDetailControllerWithScrollView(viewModel: ViewModel) {
+        let controller = assembly.assemblyDetailWithScrollViewVC()
 
-        guard
-            let detail = detailController,
-            let viewModel = viewModel
-        else {
-            return
-        }
+        guard let detailController = controller else { return }
 
-        detail.viewModel = viewModel
-        detail.modalPresentationStyle = .fullScreen
-        present(detail, animated: true, completion: nil)
+        detailController.viewModel = viewModel
+        detailController.modalPresentationStyle = .fullScreen
+        present(detailController, animated: true, completion: nil)
     }
 
     func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
@@ -181,16 +174,13 @@ private extension SearchViewController {
     }
 
     func setupAndPresentDetailController(viewModel: ViewModel) {
-        let detailController = mainStoryboard
-            .instantiateViewController(identifier: "DetailViewController") as? DetailViewController
+        let controller = assembly.assemblyDetailWithTableViewVC()
 
-        guard let detail = detailController else {
-            return
-        }
+        guard let detailController = controller else { return }
 
-        detail.viewModel = viewModel
-        detail.modalPresentationStyle = .fullScreen
-        present(detail, animated: true, completion: nil)
+        detailController.viewModel = viewModel
+        detailController.modalPresentationStyle = .fullScreen
+        present(detailController, animated: true, completion: nil)
     }
 
     func showAlertError() {

@@ -132,8 +132,6 @@ private extension DetailViewController {
             return ImageTableCell()
         }
 
-
-
         let content = ImageCellModel(image: viewModel.image,
                                      nameVenue: viewModel.nameVenueAndPrice)
         cell.configure(with: content)

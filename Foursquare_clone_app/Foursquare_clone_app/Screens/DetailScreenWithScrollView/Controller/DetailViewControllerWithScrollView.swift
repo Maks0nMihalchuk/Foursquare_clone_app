@@ -50,10 +50,10 @@ class DetailViewControllerWithScrollView: UIViewController {
         }
     }
 
-    private let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
     private let tapGestureRecognizer = UITapGestureRecognizer()
     private let gradient = CAGradientLayer()
     private let duration = 0.25
+    private let assembly = VenueDetailsAssembly()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,17 +80,17 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
     // метод делегата в роутер. Роутер реализовывает 
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
-        let fullPhotoScreenControllre = mainStoryboard
-            .instantiateViewController(identifier: "FullScreenImageViewController") as? FullScreenImageViewController
+        let controller = assembly.assemblyFullScreenImageVC()
 
-        guard let fullPhotoScreen = fullPhotoScreenControllre else { return }
+        guard
+            let imageController = controller,
+            let venueName = venueNameLabel.text
+        else { return }
 
-        guard let venueName = venueNameLabel.text else { return }
+        imageController.venueImage = imageView.image
+        imageController.venueName = venueName
 
-        fullPhotoScreen.venueName = venueName
-        fullPhotoScreen.venueImage = imageView.image
-
-        let navigationController = UINavigationController(rootViewController: fullPhotoScreen)
+        let navigationController = UINavigationController(rootViewController: imageController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
     }

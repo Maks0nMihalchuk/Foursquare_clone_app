@@ -30,6 +30,9 @@
 		2D326BB325909F1E006E4A59 /* ItemBestPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BB225909F1E006E4A59 /* ItemBestPhoto.swift */; };
 		2D326BB525909F4F006E4A59 /* Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326BB425909F4F006E4A59 /* Hours.swift */; };
 		2D3561F325A746D10015987D /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3561F225A746D10015987D /* UIImageExtension.swift */; };
+		2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D36A6FB25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift */; };
+		2D36A70025C0198F002B0E8A /* VenueDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D36A6FF25C0198F002B0E8A /* VenueDetailsAssembly.swift */; };
+		2D36A70325C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D36A70225C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard */; };
 		2D38F7E525B34ECA007CAE19 /* HoursTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D38F7E325B34ECA007CAE19 /* HoursTableCell.swift */; };
 		2D38F7E625B34ECA007CAE19 /* HoursTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D38F7E425B34ECA007CAE19 /* HoursTableCell.xib */; };
 		2D38F7EA25B35CCF007CAE19 /* ContactTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D38F7E825B35CCF007CAE19 /* ContactTableCell.swift */; };
@@ -110,6 +113,9 @@
 		2D326BB225909F1E006E4A59 /* ItemBestPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBestPhoto.swift; sourceTree = "<group>"; };
 		2D326BB425909F4F006E4A59 /* Hours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hours.swift; sourceTree = "<group>"; };
 		2D3561F225A746D10015987D /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		2D36A6FB25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2D36A6FF25C0198F002B0E8A /* VenueDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsAssembly.swift; sourceTree = "<group>"; };
+		2D36A70225C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailsVenueStoryboard.storyboard; sourceTree = "<group>"; };
 		2D38F7E325B34ECA007CAE19 /* HoursTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursTableCell.swift; sourceTree = "<group>"; };
 		2D38F7E425B34ECA007CAE19 /* HoursTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoursTableCell.xib; sourceTree = "<group>"; };
 		2D38F7E825B35CCF007CAE19 /* ContactTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableCell.swift; sourceTree = "<group>"; };
@@ -321,6 +327,80 @@
 			path = AlertOfAddingNewList;
 			sourceTree = "<group>";
 		};
+		2D36A6F425C00C28002B0E8A /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				2D36A6F525C00C38002B0E8A /* VenueDetails */,
+			);
+			path = Stories;
+			sourceTree = "<group>";
+		};
+		2D36A6F525C00C38002B0E8A /* VenueDetails */ = {
+			isa = PBXGroup;
+			children = (
+				2D36A6FA25C00CF8002B0E8A /* Router */,
+				2D36A6F925C00C89002B0E8A /* Assembly */,
+				2D36A6F825C00C83002B0E8A /* Cells */,
+				2D36A6F725C00C76002B0E8A /* ViewControllers */,
+				2D36A6F625C00C60002B0E8A /* Storyboard */,
+			);
+			path = VenueDetails;
+			sourceTree = "<group>";
+		};
+		2D36A6F625C00C60002B0E8A /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				2D36A70225C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		2D36A6F725C00C76002B0E8A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2D36A6F825C00C83002B0E8A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2D36A6F925C00C89002B0E8A /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2D36A6FD25C0196C002B0E8A /* AssemblyProtocol */,
+				2D36A70125C01A0E002B0E8A /* VenueDetailsAssembly */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		2D36A6FA25C00CF8002B0E8A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2D36A6FD25C0196C002B0E8A /* AssemblyProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2D36A6FB25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift */,
+			);
+			path = AssemblyProtocol;
+			sourceTree = "<group>";
+		};
+		2D36A70125C01A0E002B0E8A /* VenueDetailsAssembly */ = {
+			isa = PBXGroup;
+			children = (
+				2D36A6FF25C0198F002B0E8A /* VenueDetailsAssembly.swift */,
+			);
+			path = VenueDetailsAssembly;
+			sourceTree = "<group>";
+		};
 		2D38F7E225B34E74007CAE19 /* HoursTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +479,7 @@
 		2D3BD9BE2587796A00389405 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2D36A6F425C00C28002B0E8A /* Stories */,
 				2D3BD9AF25875B6800389405 /* Main.storyboard */,
 			);
 			path = UI;
@@ -819,6 +900,7 @@
 				2D38F7EB25B35CCF007CAE19 /* ContactTableCell.xib in Resources */,
 				2D5CB38B25B1B259007C6ED2 /* ImageTableCell.xib in Resources */,
 				2D38F7E625B34ECA007CAE19 /* HoursTableCell.xib in Resources */,
+				2D36A70325C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +1001,7 @@
 				2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */,
 				2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */,
 				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
+				2D36A70025C0198F002B0E8A /* VenueDetailsAssembly.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,
@@ -932,6 +1015,7 @@
 				2D39010E258D13F9003C2187 /* MappingReceivedDataToDetailsVenue.swift in Sources */,
 				2D3BD9AA25875B6800389405 /* AppDelegate.swift in Sources */,
 				2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */,
+				2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */,
 				2D06D14B259A29290090CF23 /* Model.swift in Sources */,
 				2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */,
 				2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */,
