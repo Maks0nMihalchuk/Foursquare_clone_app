@@ -46,8 +46,11 @@ extension DetailViewController: HoursTableCellDelegate {
 
     func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: HoursTableCallState.Type) {
         let indexPath = self.tableView.indexPath(for: cell)
-        self.tableView.reloadRows(at: [IndexPath(row: indexPath!.row,
-                                                 section: indexPath!.section)],
+
+        guard let index = indexPath else { return }
+
+        self.tableView.reloadRows(at: [IndexPath(row: index.row,
+                                                 section: index.section)],
                                   with: .fade)
     }
 }
