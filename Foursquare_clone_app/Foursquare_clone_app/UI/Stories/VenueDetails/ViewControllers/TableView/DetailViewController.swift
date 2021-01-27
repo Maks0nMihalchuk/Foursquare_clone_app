@@ -11,7 +11,7 @@ import UIKit
 protocol DetailViewControllerDelegate: class {
     func detailViewController(_ viewController: DetailViewController,
                               didTapFullScreenImage button: UIButton,
-                              with model: ViewModel)
+                              with image: UIImage, _ name: String)
     func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton)
 }
 
@@ -42,7 +42,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.isNavigationBarHidden = true
         setupTableView()
         setupBlurEffectView()
         tableView.reloadData()
@@ -50,6 +50,15 @@ class DetailViewController: UIViewController {
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
         delegate?.detailViewController(self, didTapBack: sender)
+    }
+}
+
+// MARK: - ImageTableCellDelegate
+extension DetailViewController: ImageTableCellDelegate {
+    func imageTableCell(_ tableViewCell: ImageTableCell,
+                        didTapFullScreenImage button: UIButton,
+                        with image: UIImage, _ name: String) {
+        delegate?.detailViewController(self, didTapFullScreenImage: button, with: image, name)
     }
 }
 
@@ -154,9 +163,11 @@ private extension DetailViewController {
         guard let cell = optionImageCell else {
             return ImageTableCell()
         }
+
+        cell.delegate = self
         let image = getImage(url: viewModel.imageURL)
         let content = ImageCellModel(image: image, nameVenue: viewModel.nameVenueAndPrice)
-        cell.configure(with: content)
+        cell.configure(with: content, venueName: viewModel.venueName)
         return cell
     }
 

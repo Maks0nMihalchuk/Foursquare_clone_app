@@ -35,9 +35,10 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
             controller.viewModel = model
             controller.delegate = self
+            let navigationController = UINavigationController(rootViewController: controller)
             detailConroller = controller
-            controller.modalPresentationStyle = .fullScreen
-            from.present(controller, animated: animated, completion: nil)
+            navigationController.modalPresentationStyle = .fullScreen
+            from.present(navigationController, animated: animated, completion: nil)
         case .scrollView:
             let detailController = assembly.assemblyDetailWithScrollViewVC()
 
@@ -91,9 +92,19 @@ extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
 extension VenueDetailsRouting: DetailViewControllerDelegate {
     func detailViewController(_ viewController: DetailViewController,
                               didTapFullScreenImage button: UIButton,
-                              with model: ViewModel) {
+                              with image: UIImage, _ name: String) {
+        let fullScreenImage = assembly.assemblyFullScreenImageVC()
 
+        guard let imageScreen = fullScreenImage else { return }
+
+        imageScreen.venueImage = image
+        imageScreen.venueName = name
+        imageScreen.delegate = self
+
+        viewController.navigationController?.pushViewController(imageScreen, animated: true)
     }
+
+
 
     func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton) {
         finalizeStory()

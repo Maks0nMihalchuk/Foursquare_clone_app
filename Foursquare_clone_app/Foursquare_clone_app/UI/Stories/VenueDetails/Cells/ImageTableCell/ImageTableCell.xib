@@ -24,14 +24,24 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RFh-Rh-K7i">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="400"/>
+                        <connections>
+                            <action selector="fullScreenImageButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2hQ-un-Zzz"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jxp-dr-gtT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="35h-wu-uEA"/>
+                    <constraint firstAttribute="bottom" secondItem="RFh-Rh-K7i" secondAttribute="bottom" id="CIs-nH-zSe"/>
                     <constraint firstItem="Jxp-dr-gtT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ege-sX-zrx"/>
+                    <constraint firstAttribute="trailing" secondItem="RFh-Rh-K7i" secondAttribute="trailing" id="I4L-Ui-Nlg"/>
+                    <constraint firstItem="RFh-Rh-K7i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IQX-TU-3q6"/>
                     <constraint firstAttribute="bottom" secondItem="sqa-2G-bf7" secondAttribute="bottom" constant="11" id="b2b-rP-qIv"/>
                     <constraint firstItem="sqa-2G-bf7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="hOe-y0-k0L"/>
                     <constraint firstAttribute="bottom" secondItem="Jxp-dr-gtT" secondAttribute="bottom" id="mvP-yc-36g"/>
                     <constraint firstItem="sqa-2G-bf7" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-16" id="vKm-LE-9K1"/>
+                    <constraint firstItem="RFh-Rh-K7i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xfB-ft-e3G"/>
                     <constraint firstAttribute="trailing" secondItem="Jxp-dr-gtT" secondAttribute="trailing" id="xiB-5o-QCG"/>
                 </constraints>
             </tableViewCellContentView>

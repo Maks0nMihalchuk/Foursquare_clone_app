@@ -8,17 +8,33 @@
 
 import UIKit
 
+protocol ImageTableCellDelegate: class {
+    func imageTableCell(_ tableViewCell: ImageTableCell,
+                        didTapFullScreenImage button: UIButton,
+                        with image: UIImage, _ name: String)
+
+}
+
 class ImageTableCell: UITableViewCell {
 
     @IBOutlet private weak var venueImageView: UIImageView!
     @IBOutlet private weak var nameVenueLabel: UILabel!
 
-    private let gradient = CAGradientLayer()
+    weak var delegate: ImageTableCellDelegate?
 
-    func configure(with content: ImageCellModel) {
+    private let gradient = CAGradientLayer()
+    private var name = String()
+
+    func configure(with content: ImageCellModel, venueName: String) {
         venueImageView.image = content.image
         gradientSetup()
         nameVenueLabel.text = content.nameVenue
+        name = venueName
+    }
+    @IBAction func fullScreenImageButtonPressed(_ sender: UIButton) {
+        guard let image = venueImageView.image else { return }
+
+        delegate?.imageTableCell(self, didTapFullScreenImage: sender, with: image, name)
     }
 }
 
