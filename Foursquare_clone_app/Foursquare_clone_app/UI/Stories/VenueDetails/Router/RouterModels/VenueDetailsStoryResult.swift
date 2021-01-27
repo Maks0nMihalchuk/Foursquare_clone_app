@@ -9,7 +9,7 @@
 import Foundation
 
 enum VenueDetailsStoryResult {
-//    case success
+    case success
     case userCancelation
-//    case failure(error: Error?)
+    case failure(error: Error?)
 }

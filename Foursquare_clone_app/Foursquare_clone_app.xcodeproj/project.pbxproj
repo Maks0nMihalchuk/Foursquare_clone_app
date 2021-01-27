@@ -214,37 +214,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2D0D357E25B9C5250053FDB0 /* DetailScreenWithScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				2D0D358425B9D78A0053FDB0 /* ViewModel */,
-				2D0D357F25B9C5480053FDB0 /* Controller */,
-			);
-			path = DetailScreenWithScrollView;
-			sourceTree = "<group>";
-		};
-		2D0D357F25B9C5480053FDB0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2D0D357C25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		2D0D358425B9D78A0053FDB0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				2D0D358525B9D79B0053FDB0 /* ViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2D10DC3525BDB8BD00C7B9BC /* FullScreenPhotoViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2DC5D57A25C05902005ABFFF /* Controller */,
-			);
-			path = FullScreenPhotoViewController;
 			sourceTree = "<group>";
 		};
 		2D25472025A5C849008151FF /* HeaderCollectionView */ = {
@@ -346,6 +321,7 @@
 		2D36A6F525C00C38002B0E8A /* VenueDetails */ = {
 			isa = PBXGroup;
 			children = (
+				2DC5D57E25C16F0B005ABFFF /* Models */,
 				2D36A6FA25C00CF8002B0E8A /* Router */,
 				2D36A6F925C00C89002B0E8A /* Assembly */,
 				2D36A6F825C00C83002B0E8A /* Cells */,
@@ -366,6 +342,9 @@
 		2D36A6F725C00C76002B0E8A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */,
+				2DC5D57C25C16EC0005ABFFF /* ScrollView */,
+				2DC5D57B25C16EB9005ABFFF /* TableView */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -373,6 +352,11 @@
 		2D36A6F825C00C83002B0E8A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2DFE6C0A25B5E4F300D945E6 /* GeneralLogicProtocol */,
+				2D5CB38725B1B22E007C6ED2 /* ImageTableCell */,
+				2D5CB38D25B1B404007C6ED2 /* ShortInfoTableCell */,
+				2D38F7E225B34E74007CAE19 /* HoursTableCell */,
+				2D38F7E725B35C8C007CAE19 /* ContactTableCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -389,7 +373,7 @@
 		2D36A6FA25C00CF8002B0E8A /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2DC5D57525C05075005ABFFF /* Models */,
+				2DC5D57525C05075005ABFFF /* RouterModels */,
 				2DC5D56F25C04F11005ABFFF /* RouterProtocol */,
 				2DC5D57225C04F42005ABFFF /* VenueDetailsRouting */,
 			);
@@ -511,9 +495,6 @@
 			children = (
 				2D3BD9C1258782FE00389405 /* HomeScreen */,
 				2DEC31D2258AA716009FA472 /* SearchScreen */,
-				2D0D357E25B9C5250053FDB0 /* DetailScreenWithScrollView */,
-				2D3BD9C82587848C00389405 /* DetailScreen */,
-				2D10DC3525BDB8BD00C7B9BC /* FullScreenPhotoViewController */,
 				2D3BD9C5258783D700389405 /* ListsScreen */,
 				2DC43C8B2599E2E700655B2F /* AccountScreen */,
 			);
@@ -568,16 +549,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		2D3BD9C82587848C00389405 /* DetailScreen */ = {
-			isa = PBXGroup;
-			children = (
-				2DFE6C0525B4864200D945E6 /* Models */,
-				2D5CB38C25B1B3F7007C6ED2 /* TableViewCell */,
-				2D5CB38425B1AFE0007C6ED2 /* Controller */,
-			);
-			path = DetailScreen;
-			sourceTree = "<group>";
-		};
 		2D49B9C9259B2752009AC096 /* KeychainManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,14 +586,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2D5CB38425B1AFE0007C6ED2 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2D5CB38525B1B000007C6ED2 /* DetailViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		2D5CB38725B1B22E007C6ED2 /* ImageTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,18 +594,6 @@
 				2DFE6C0E25B62C7600D945E6 /* Model */,
 			);
 			path = ImageTableCell;
-			sourceTree = "<group>";
-		};
-		2D5CB38C25B1B3F7007C6ED2 /* TableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				2DFE6C0A25B5E4F300D945E6 /* GeneralLogicProtocol */,
-				2D5CB38725B1B22E007C6ED2 /* ImageTableCell */,
-				2D5CB38D25B1B404007C6ED2 /* ShortInfoTableCell */,
-				2D38F7E225B34E74007CAE19 /* HoursTableCell */,
-				2D38F7E725B35C8C007CAE19 /* ContactTableCell */,
-			);
-			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		2D5CB38D25B1B404007C6ED2 /* ShortInfoTableCell */ = {
@@ -704,21 +655,46 @@
 			path = VenueDetailsRouting;
 			sourceTree = "<group>";
 		};
-		2DC5D57525C05075005ABFFF /* Models */ = {
+		2DC5D57525C05075005ABFFF /* RouterModels */ = {
 			isa = PBXGroup;
 			children = (
 				2DC5D57625C05081005ABFFF /* VenueDetailsStoryType.swift */,
 				2DC5D57825C05099005ABFFF /* VenueDetailsStoryResult.swift */,
 			);
-			path = Models;
+			path = RouterModels;
 			sourceTree = "<group>";
 		};
-		2DC5D57A25C05902005ABFFF /* Controller */ = {
+		2DC5D57B25C16EB9005ABFFF /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */,
+				2D5CB38525B1B000007C6ED2 /* DetailViewController.swift */,
 			);
-			path = Controller;
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		2DC5D57C25C16EC0005ABFFF /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				2D0D357C25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		2DC5D57D25C16ED8005ABFFF /* TableViewCellModel */ = {
+			isa = PBXGroup;
+			children = (
+				2DFE6C0625B4865500D945E6 /* KeysForCells.swift */,
+			);
+			path = TableViewCellModel;
+			sourceTree = "<group>";
+		};
+		2DC5D57E25C16F0B005ABFFF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2D0D358425B9D78A0053FDB0 /* ViewModel */,
+				2DC5D57D25C16ED8005ABFFF /* TableViewCellModel */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2DC7BCC225B62F1F0062AA90 /* Model */ = {
@@ -824,14 +800,6 @@
 				2DEC31D4258AA75C009FA472 /* SearchViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		2DFE6C0525B4864200D945E6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2DFE6C0625B4865500D945E6 /* KeysForCells.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		2DFE6C0A25B5E4F300D945E6 /* GeneralLogicProtocol */ = {
