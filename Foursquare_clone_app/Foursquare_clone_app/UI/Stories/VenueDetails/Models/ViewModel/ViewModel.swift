@@ -6,8 +6,8 @@
 //  Copyright © 2021 maks. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Kingfisher
 
 enum TierKeys {
     case firstLevelPrice
@@ -33,15 +33,13 @@ struct ViewModel {
     private let defaultRating = "-"
     private let defaultColor = "858585"
     private let dataModel: DetailVenueModel
-    private var imageData: Data?
 
-    init(dataModel: DetailVenueModel, imageData: Data?) {
+    init(dataModel: DetailVenueModel) {
         self.dataModel = dataModel
-        self.imageData = imageData
     }
 
-    var image: UIImage? {
-        return getImage()
+    var imageURL: URL? {
+        return getPhotoURL()
     }
 
     var venueName: String {
@@ -112,12 +110,18 @@ struct ViewModel {
 // MARK: - converting data from DetailVenueModel to ViewModel
 private extension ViewModel {
 
-    func getImage() -> UIImage? {
-        guard let imageData = imageData else {
-            return UIImage(named: "img_placeholder")
-        }
+    func getPhotoURL() -> URL? {
+        let pref = dataModel.prefix
+        let suff = dataModel.suffix
 
-        return UIImage(data: imageData)
+        guard
+            let prefix = pref,
+            let suffix = suff
+        else { return nil }
+
+        let urlString = "\(prefix)400x400\(suffix)"
+
+        return URL(string: urlString)
     }
 
     func getRating() -> String {

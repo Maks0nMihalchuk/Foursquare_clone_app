@@ -83,13 +83,11 @@ extension SearchViewController: UITableViewDelegate {
                     return
                 }
 
-                NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix,
-                                               suffix: detailVenueInfo.suffix) { (imageData) in
-                    DispatchQueue.main.async {
-                        let viewModel = ViewModel(dataModel: detailVenueInfo, imageData: imageData)
-                        self.showAlertForSelection(viewModel: viewModel)
-                    }
+                DispatchQueue.main.async {
+                    let viewModel = ViewModel(dataModel: detailVenueInfo)
+                    self.showAlertForSelection(viewModel: viewModel)
                 }
+
             } else {
                 self.showAlertError()
                 return

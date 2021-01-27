@@ -223,7 +223,8 @@ class NetworkManager {
             completion(nil)
             return
         }
-        let urlString = "\(pref)400x400\(suff)"
+
+        let urlString = "\(pref)500x500\(suff)"
 
         guard let url = URL(string: urlString) else {
             completion(nil)

@@ -11,7 +11,7 @@ import UIKit
 protocol DetailViewControllerWithScrollViewDelegate: class {
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapFullScreenImage button: UIButton,
-                                            with model: ViewModel)
+                                            with image: UIImage, model: ViewModel)
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapBack button: UIButton)
 }
@@ -89,9 +89,12 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
 
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
-        guard let model = viewModel else { return }
+        guard
+            let image = imageView.image,
+            let model = viewModel
+        else { return }
 
-        delegate?.detailViewControllerWithScrollView(self, didTapFullScreenImage: sender, with: model)
+        delegate?.detailViewControllerWithScrollView(self, didTapFullScreenImage: sender, with: image, model: model)
     }
 }
 
@@ -169,8 +172,10 @@ private extension DetailViewControllerWithScrollView {
     }
 
     func configureBestPhotoContainerView(with viewModel: ViewModel) {
-        // через кингвишер!
-        imageView.image = viewModel.image
+        imageView.kf.setImage(with: viewModel.imageURL,
+                              placeholder: UIImage(named: "img_placeholder"),
+                              options: [.transition(.fade(1.0))],
+                              progressBlock: nil)
         gradientSetup()
         venueNameLabel.text = viewModel.nameVenueAndPrice
     }
