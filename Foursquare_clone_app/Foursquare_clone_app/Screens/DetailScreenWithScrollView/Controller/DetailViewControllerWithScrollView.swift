@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol DetailViewControllerWithScrollViewDelegate: class {
+    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+                                            didTapFullScreenImage button: UIButton,
+                                            with model: ViewModel)
+    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+                                            didTapBack button: UIButton)
+}
+
 class DetailViewControllerWithScrollView: UIViewController {
 
     @IBOutlet private weak var imageContainerViewHeight: NSLayoutConstraint!
@@ -50,10 +58,11 @@ class DetailViewControllerWithScrollView: UIViewController {
         }
     }
 
+    weak var delegate: DetailViewControllerWithScrollViewDelegate?
+
     private let tapGestureRecognizer = UITapGestureRecognizer()
     private let gradient = CAGradientLayer()
     private let duration = 0.25
-    private let assembly = VenueDetailsAssembly()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +75,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        delegate?.detailViewControllerWithScrollView(self, didTapBack: sender)
     }
 
     @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
@@ -78,21 +87,11 @@ class DetailViewControllerWithScrollView: UIViewController {
             self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
         }
     }
-    // метод делегата в роутер. Роутер реализовывает 
+
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
-        let controller = assembly.assemblyFullScreenImageVC()
+        guard let model = viewModel else { return }
 
-        guard
-            let imageController = controller,
-            let venueName = venueNameLabel.text
-        else { return }
-
-        imageController.venueImage = imageView.image
-        imageController.venueName = venueName
-
-        let navigationController = UINavigationController(rootViewController: imageController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        delegate?.detailViewControllerWithScrollView(self, didTapFullScreenImage: sender, with: model)
     }
 }
 
@@ -170,6 +169,7 @@ private extension DetailViewControllerWithScrollView {
     }
 
     func configureBestPhotoContainerView(with viewModel: ViewModel) {
+        // через кингвишер!
         imageView.image = viewModel.image
         gradientSetup()
         venueNameLabel.text = viewModel.nameVenueAndPrice

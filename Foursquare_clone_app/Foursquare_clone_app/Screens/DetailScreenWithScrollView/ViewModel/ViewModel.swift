@@ -44,6 +44,10 @@ struct ViewModel {
         return getImage()
     }
 
+    var venueName: String {
+        return dataModel.name
+    }
+
     var nameVenueAndPrice: String {
         return "\(dataModel.name) \n \(price)"
     }

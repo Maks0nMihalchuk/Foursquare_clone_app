@@ -67,6 +67,10 @@
 		2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2D9EC7B725925AB1003FBBC3 /* Localizable.strings */; };
 		2D9EC7BB259260D5003FBBC3 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9EC7BA259260D5003FBBC3 /* StringExtension.swift */; };
 		2DC43C8E2599E3D400655B2F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC43C8D2599E3D400655B2F /* AccountViewController.swift */; };
+		2DC5D57125C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5D57025C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift */; };
+		2DC5D57425C04F65005ABFFF /* VenueDetailsRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5D57325C04F65005ABFFF /* VenueDetailsRouting.swift */; };
+		2DC5D57725C05081005ABFFF /* VenueDetailsStoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5D57625C05081005ABFFF /* VenueDetailsStoryType.swift */; };
+		2DC5D57925C05099005ABFFF /* VenueDetailsStoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5D57825C05099005ABFFF /* VenueDetailsStoryResult.swift */; };
 		2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCC325B62F4C0062AA90 /* ShortInfoCellModel.swift */; };
 		2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCC725B631770062AA90 /* HoursCellModel.swift */; };
 		2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */; };
@@ -155,6 +159,10 @@
 		2D9EC7B825925AB8003FBBC3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2D9EC7BA259260D5003FBBC3 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		2DC43C8D2599E3D400655B2F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		2DC5D57025C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsRoutingProtocol.swift; sourceTree = "<group>"; };
+		2DC5D57325C04F65005ABFFF /* VenueDetailsRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsRouting.swift; sourceTree = "<group>"; };
+		2DC5D57625C05081005ABFFF /* VenueDetailsStoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsStoryType.swift; sourceTree = "<group>"; };
+		2DC5D57825C05099005ABFFF /* VenueDetailsStoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsStoryResult.swift; sourceTree = "<group>"; };
 		2DC7BCC325B62F4C0062AA90 /* ShortInfoCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortInfoCellModel.swift; sourceTree = "<group>"; };
 		2DC7BCC725B631770062AA90 /* HoursCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCellModel.swift; sourceTree = "<group>"; };
 		2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellModel.swift; sourceTree = "<group>"; };
@@ -234,7 +242,7 @@
 		2D10DC3525BDB8BD00C7B9BC /* FullScreenPhotoViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */,
+				2DC5D57A25C05902005ABFFF /* Controller */,
 			);
 			path = FullScreenPhotoViewController;
 			sourceTree = "<group>";
@@ -381,6 +389,9 @@
 		2D36A6FA25C00CF8002B0E8A /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				2DC5D57525C05075005ABFFF /* Models */,
+				2DC5D56F25C04F11005ABFFF /* RouterProtocol */,
+				2DC5D57225C04F42005ABFFF /* VenueDetailsRouting */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -673,6 +684,39 @@
 			isa = PBXGroup;
 			children = (
 				2DC43C8D2599E3D400655B2F /* AccountViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2DC5D56F25C04F11005ABFFF /* RouterProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2DC5D57025C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift */,
+			);
+			path = RouterProtocol;
+			sourceTree = "<group>";
+		};
+		2DC5D57225C04F42005ABFFF /* VenueDetailsRouting */ = {
+			isa = PBXGroup;
+			children = (
+				2DC5D57325C04F65005ABFFF /* VenueDetailsRouting.swift */,
+			);
+			path = VenueDetailsRouting;
+			sourceTree = "<group>";
+		};
+		2DC5D57525C05075005ABFFF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2DC5D57625C05081005ABFFF /* VenueDetailsStoryType.swift */,
+				2DC5D57825C05099005ABFFF /* VenueDetailsStoryResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2DC5D57A25C05902005ABFFF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2D10DC3625BDB93C00C7B9BC /* FullScreenImageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1001,6 +1045,8 @@
 				2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */,
 				2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */,
 				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
+				2DC5D57925C05099005ABFFF /* VenueDetailsStoryResult.swift in Sources */,
+				2DC5D57725C05081005ABFFF /* VenueDetailsStoryType.swift in Sources */,
 				2D36A70025C0198F002B0E8A /* VenueDetailsAssembly.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
@@ -1031,6 +1077,8 @@
 				2D5CB39025B1B45D007C6ED2 /* ShortInfoTableCell.swift in Sources */,
 				2DFE6C0725B4865500D945E6 /* KeysForCells.swift in Sources */,
 				2DFE6C0C25B5E50300D945E6 /* GeneralLogicProtocol.swift in Sources */,
+				2DC5D57125C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift in Sources */,
+				2DC5D57425C04F65005ABFFF /* VenueDetailsRouting.swift in Sources */,
 				2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */,
 				2D3BD9AC25875B6800389405 /* SceneDelegate.swift in Sources */,
 			);

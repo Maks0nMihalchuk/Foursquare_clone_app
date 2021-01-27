@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol DetailViewControllerDelegate: class {
+    func detailViewController(_ viewController: DetailViewController,
+                              didTapFullScreenImage button: UIButton,
+                              with model: ViewModel)
+    func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton)
+}
+
 class DetailViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
@@ -20,6 +27,7 @@ class DetailViewController: UIViewController {
     private var defaultHoursCellStatus = true
 
     var viewModel: ViewModel?
+    weak var delegate: DetailViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +37,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        delegate?.detailViewController(self, didTapBack: sender)
     }
 }
 

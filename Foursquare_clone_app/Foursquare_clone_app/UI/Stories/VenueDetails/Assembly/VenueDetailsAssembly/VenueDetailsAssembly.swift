@@ -40,6 +40,7 @@ class VenueDetailsAssembly: VenueDetailsAssemblyProtocol {
 
 // MARK: - getStoryboard
 private extension VenueDetailsAssembly {
+
     func getStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "DetailsVenueStoryboard", bundle: nil)
     }

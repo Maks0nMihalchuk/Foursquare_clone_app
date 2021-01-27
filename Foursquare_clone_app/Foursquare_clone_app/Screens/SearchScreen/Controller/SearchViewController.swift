@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
-    private let assembly = VenueDetailsAssembly()
+    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,13 +151,13 @@ private extension SearchViewController {
     }
 
     func setupDetailControllerWithScrollView(viewModel: ViewModel) {
-        let controller = assembly.assemblyDetailWithScrollViewVC()
 
-        guard let detailController = controller else { return }
-
-        detailController.viewModel = viewModel
-        detailController.modalPresentationStyle = .fullScreen
-        present(detailController, animated: true, completion: nil)
+        router.showVenueDetailsStory(from: self,
+                                     type: .scrollView,
+                                     model: viewModel,
+                                     animated: true) { (_) in
+                                        self.router.hideVenueDetailsStory(animated: true)
+        }
     }
 
     func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
@@ -174,13 +174,12 @@ private extension SearchViewController {
     }
 
     func setupAndPresentDetailController(viewModel: ViewModel) {
-        let controller = assembly.assemblyDetailWithTableViewVC()
-
-        guard let detailController = controller else { return }
-
-        detailController.viewModel = viewModel
-        detailController.modalPresentationStyle = .fullScreen
-        present(detailController, animated: true, completion: nil)
+        router.showVenueDetailsStory(from: self,
+                                     type: .tableView,
+                                     model: viewModel,
+                                     animated: true) { (_) in
+                                        self.router.hideVenueDetailsStory(animated: true)
+        }
     }
 
     func showAlertError() {
