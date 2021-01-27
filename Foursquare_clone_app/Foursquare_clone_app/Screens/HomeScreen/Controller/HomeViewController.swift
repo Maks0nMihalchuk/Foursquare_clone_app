@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
     private let numberOfCellsInRow = 3
     private let numberOfRowInCollectionView = 2
     private let numberOfHorizontalIndents: CGFloat = 4
-    private let numberOfVerticalIndents: CGFloat = 2
     private let offset: CGFloat = 2
     private let main = UIStoryboard(name: "Main", bundle: nil)
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
@@ -94,14 +93,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let topBottomPadding = offset * numberOfVerticalIndents
-
         let collectionViewBounds = collectionView.bounds
         let widthCell = collectionViewBounds.width / CGFloat(numberOfCellsInRow)
         let heightCell = collectionViewBounds.height / CGFloat(numberOfRowInCollectionView)
-        let spacing = (numberOfHorizontalIndents) * offset / CGFloat(numberOfCellsInRow)
+        let spacing = (numberOfHorizontalIndents) * offset / CGFloat(numberOfCellsInRow) - 0.9
 
-        return CGSize(width: widthCell - spacing, height: heightCell - topBottomPadding)
+        return CGSize(width: widthCell - spacing, height: heightCell)
     }
 }
 
