@@ -45,9 +45,10 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
             controller.delegate = self
             controller.viewModel = model
+            let navigationController = UINavigationController(rootViewController: controller)
             detailConroller = controller
-            controller.modalPresentationStyle = .fullScreen
-            from.present(controller, animated: animated, completion: nil)
+            navigationController.modalPresentationStyle = .fullScreen
+            from.present(navigationController, animated: animated, completion: nil)
         }
     }
 
@@ -82,10 +83,7 @@ extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
         imageScreen.venueName = model.venueName
         imageScreen.delegate = self
 
-        let navigationController = UINavigationController(rootViewController: viewController)
-
-        //navigationController.modalPresentationStyle = .fullScreen
-        //viewController.present(navigationController, animated: true, completion: nil)
+        viewController.navigationController?.pushViewController(imageScreen, animated: true)
     }
 }
 
@@ -106,6 +104,8 @@ extension VenueDetailsRouting: DetailViewControllerDelegate {
 extension VenueDetailsRouting: FullScreenImageDelegate {
     func fullScreenImageViewController(_ viewController: FullScreenImageViewController,
                                        didTapBack button: UIBarButtonItem) {
-        viewController.dismiss(animated: true, completion: nil)
+
+        viewController.navigationController?.popViewController(animated: true)
+        viewController.navigationController?.isNavigationBarHidden = true
     }
 }

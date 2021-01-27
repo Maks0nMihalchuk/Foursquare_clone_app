@@ -66,6 +66,7 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
         setupUI()
 
         guard let requiredViewModel = viewModel else { return }

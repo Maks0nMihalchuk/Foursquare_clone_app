@@ -26,7 +26,18 @@ class DetailViewController: UIViewController {
     private let contentOffsetY: CGFloat = 250
     private var defaultHoursCellStatus = true
 
-    var viewModel: ViewModel?
+    var viewModel: ViewModel? {
+        didSet {
+            guard viewModel != nil else { return }
+
+            DispatchQueue.main.async {
+                guard self.isViewLoaded else { return }
+
+                self.tableView.reloadData()
+            }
+        }
+    }
+
     weak var delegate: DetailViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -34,6 +45,7 @@ class DetailViewController: UIViewController {
 
         setupTableView()
         setupBlurEffectView()
+        tableView.reloadData()
     }
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
@@ -142,8 +154,8 @@ private extension DetailViewController {
         guard let cell = optionImageCell else {
             return ImageTableCell()
         }
-
-        let content = ImageCellModel(imageURL: viewModel.imageURL, nameVenue: viewModel.nameVenueAndPrice)
+        let image = getImage(url: viewModel.imageURL)
+        let content = ImageCellModel(image: image, nameVenue: viewModel.nameVenueAndPrice)
         cell.configure(with: content)
         return cell
     }
@@ -219,5 +231,18 @@ private extension DetailViewController {
                            forCellReuseIdentifier: HoursTableCell.getIdentifier())
         tableView.register(ContactTableCell.getNib(),
                            forCellReuseIdentifier: ContactTableCell.getIdentifier())
+    }
+}
+
+// MARK: - Get Image for imageCell
+private extension DetailViewController {
+
+    func getImage(url: URL?) -> UIImage? {
+        let imageView = UIImageView()
+        imageView.kf.setImage(with: url,
+                              placeholder: UIImage(named: "img_placeholder"),
+                              options: [.transition(.fade(1.0))],
+                              progressBlock: nil)
+        return imageView.image
     }
 }

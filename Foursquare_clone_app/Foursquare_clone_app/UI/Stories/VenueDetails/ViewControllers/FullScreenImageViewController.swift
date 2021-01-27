@@ -42,6 +42,7 @@ class FullScreenImageViewController: UIViewController {
 private extension FullScreenImageViewController {
 
     func setupNavigationController() {
+        navigationController?.isNavigationBarHidden = false
         let navBar = navigationController?.navigationBar
         navigationItem.leftBarButtonItem = backButton
         title = venueName

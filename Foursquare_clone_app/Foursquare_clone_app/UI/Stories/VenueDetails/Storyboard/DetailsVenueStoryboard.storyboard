@@ -384,6 +384,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xoo-Aj-vIW"/>
                     </view>
+                    <navigationItem key="navigationItem" id="h0S-uP-zvE"/>
                     <connections>
                         <outlet property="addressVenueLabel" destination="jfV-xr-fxB" id="iBT-vo-xO5"/>
                         <outlet property="categoriesVenueLabel" destination="u9Y-8S-d1k" id="SUA-cs-VjJ"/>
@@ -412,7 +413,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAY-cb-xmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1436" y="1224"/>
+            <point key="canvasLocation" x="1435" y="1238"/>
         </scene>
         <!--Full Screen Image View Controller-->
         <scene sceneID="IjT-mf-QD9">
@@ -441,7 +442,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaT-pF-VfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2546" y="881"/>
+            <point key="canvasLocation" x="2335" y="883"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="ZQf-Ch-Y5x">
@@ -558,7 +559,7 @@
         <image name="arrow" width="17" height="17"/>
         <image name="backWhiteArrow" width="32" height="32"/>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
-        <image name="img_placeholder" width="500" height="500"/>
+        <image name="img_placeholder" width="400" height="400"/>
         <image name="share" width="27" height="27"/>
     </resources>
 </document>
