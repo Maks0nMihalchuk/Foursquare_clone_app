@@ -11,27 +11,24 @@ import UIKit
 class VenueDetailsAssembly: VenueDetailsAssemblyProtocol {
 
     func assemblyDetailWithTableViewVC() -> DetailViewController? {
-        let storyboard = getStoryboard()
         let controllerID = String(describing: DetailViewController.self)
-        let detailController = storyboard
+        let detailController = getStoryboard()
             .instantiateViewController(withIdentifier: controllerID) as? DetailViewController
 
         return detailController
     }
 
     func assemblyDetailWithScrollViewVC() -> DetailViewControllerWithScrollView? {
-        let storyboard = getStoryboard()
         let controllerID = String(describing: DetailViewControllerWithScrollView.self)
-        let detailController = storyboard
+        let detailController = getStoryboard()
             .instantiateViewController(withIdentifier: controllerID) as? DetailViewControllerWithScrollView
 
         return detailController
     }
 
     func assemblyFullScreenImageVC() -> FullScreenImageViewController? {
-        let storyboard = getStoryboard()
         let controllerID = String(describing: FullScreenImageViewController.self)
-        let fullScreenImage = storyboard
+        let fullScreenImage = getStoryboard()
             .instantiateViewController(withIdentifier: controllerID) as? FullScreenImageViewController
 
         return fullScreenImage

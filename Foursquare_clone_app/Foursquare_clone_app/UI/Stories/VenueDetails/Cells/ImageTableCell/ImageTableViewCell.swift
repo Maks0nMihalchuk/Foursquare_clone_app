@@ -8,27 +8,27 @@
 
 import UIKit
 
-protocol ImageTableCellDelegate: class {
-    func imageTableCell(_ tableViewCell: ImageTableCell,
+protocol ImageTableViewCellDelegate: class {
+    func imageTableCell(_ tableViewCell: ImageTableViewCell,
                         didTapFullScreenImage button: UIButton,
                         with image: UIImage, _ name: String)
 
 }
 
-class ImageTableCell: UITableViewCell {
+class ImageTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var venueImageView: UIImageView!
     @IBOutlet private weak var nameVenueLabel: UILabel!
 
-    weak var delegate: ImageTableCellDelegate?
+    weak var delegate: ImageTableViewCellDelegate?
 
     private let gradient = CAGradientLayer()
     private var name = String()
 
-    func configure(with content: ImageCellModel, venueName: String) {
-        venueImageView.image = content.image
+    func configure(with viewModel: ImageCellViewModel, venueName: String) {
+        venueImageView.image = viewModel.image
         gradientSetup()
-        nameVenueLabel.text = content.nameVenue
+        nameVenueLabel.text = viewModel.nameVenue
         name = venueName
     }
     @IBAction func fullScreenImageButtonPressed(_ sender: UIButton) {
@@ -39,7 +39,7 @@ class ImageTableCell: UITableViewCell {
 }
 
 // MARK: - gradientSetup
-private extension ImageTableCell {
+private extension ImageTableViewCell {
 
     func gradientSetup() {
         gradient.frame = venueImageView.bounds

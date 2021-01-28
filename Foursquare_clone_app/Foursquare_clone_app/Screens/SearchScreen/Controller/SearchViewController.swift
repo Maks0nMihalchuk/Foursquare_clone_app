@@ -135,11 +135,13 @@ private extension SearchViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
                                                  style: .default) { (_) in
-                                                    self.setupDetailControllerWithScrollView(viewModel: viewModel)
+                                                    self.showDetailViewController(by: .scrollView,
+                                                                                  viewModel: viewModel)
         }
         let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
                                                  style: .default) { (_) in
-                                                    self.setupAndPresentDetailController(viewModel: viewModel)
+                                                    self.showDetailViewController(by: .tableView,
+                                                                                  viewModel: viewModel)
         }
         let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alertController.addAction(detailWithScrollView)
@@ -148,10 +150,9 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func setupDetailControllerWithScrollView(viewModel: ViewModel) {
-
+    func showDetailViewController(by key: VenueDetailsStoryType, viewModel: ViewModel) {
         router.showVenueDetailsStory(from: self,
-                                     type: .scrollView,
+                                     type: key,
                                      model: viewModel,
                                      animated: true) { (_) in
                                         self.router.hideVenueDetailsStory(animated: true)
@@ -168,15 +169,6 @@ private extension SearchViewController {
             searchBar.becomeFirstResponder()
         } else {
             searchBar.resignFirstResponder()
-        }
-    }
-
-    func setupAndPresentDetailController(viewModel: ViewModel) {
-        router.showVenueDetailsStory(from: self,
-                                     type: .tableView,
-                                     model: viewModel,
-                                     animated: true) { (_) in
-                                        self.router.hideVenueDetailsStory(animated: true)
         }
     }
 

@@ -60,3 +60,5 @@
 "AlertSelectController.Title" = "Make your choice";
 "AlertSelectController.Message" = "choose which controller you want to run";
 "AlertSelectController.CancelButton" = "Cancel";
+
+"NotDataTableViewCell.LabelText" = "Sorry. Something went wrong. No data available";

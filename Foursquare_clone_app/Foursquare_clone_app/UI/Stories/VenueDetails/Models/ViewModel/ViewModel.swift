@@ -29,6 +29,23 @@ enum TierKeys {
     }
 }
 
+enum ImageSizeKey {
+    case small
+    case middle
+    case big
+
+    var key: String {
+        switch self {
+        case .small:
+            return "200x200"
+        case .middle:
+            return "400x400"
+        case .big:
+            return "500x500"
+        }
+    }
+}
+
 struct ViewModel {
     private let defaultRating = "-"
     private let defaultColor = "858585"
@@ -39,7 +56,7 @@ struct ViewModel {
     }
 
     var imageURL: URL? {
-        return getPhotoURL()
+        return getPhotoURL(with: .middle)
     }
 
     var venueName: String {
@@ -110,18 +127,27 @@ struct ViewModel {
 // MARK: - converting data from DetailVenueModel to ViewModel
 private extension ViewModel {
 
-    func getPhotoURL() -> URL? {
+    func getPhotoURL(with size: ImageSizeKey) -> URL? {
         let pref = dataModel.prefix
         let suff = dataModel.suffix
+        var urlString = String()
 
         guard
             let prefix = pref,
             let suffix = suff
         else { return nil }
 
-        let urlString = "\(prefix)400x400\(suffix)"
-
-        return URL(string: urlString)
+        switch size {
+        case .small:
+            urlString = prefix + size.key + suffix
+            return URL(string: urlString)
+        case .middle:
+            urlString = prefix + size.key + suffix
+            return URL(string: urlString)
+        case .big:
+            urlString = prefix + size.key + suffix
+            return URL(string: urlString)
+        }
     }
 
     func getRating() -> String {

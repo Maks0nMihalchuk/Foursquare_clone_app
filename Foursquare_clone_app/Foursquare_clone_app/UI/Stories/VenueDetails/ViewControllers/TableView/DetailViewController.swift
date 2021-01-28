@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
 
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
+    private let numberOfCellsWhenNoData = 1
     private var defaultHoursCellStatus = true
 
     var viewModel: ViewModel? {
@@ -51,11 +52,18 @@ class DetailViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: UIButton) {
         delegate?.detailViewController(self, didTapBack: sender)
     }
+
+    @IBAction func resetDataButtonPressed(_ sender: UIButton) {
+        viewModel = nil
+        tableView.reloadData()
+
+    }
+
 }
 
 // MARK: - ImageTableCellDelegate
-extension DetailViewController: ImageTableCellDelegate {
-    func imageTableCell(_ tableViewCell: ImageTableCell,
+extension DetailViewController: ImageTableViewCellDelegate {
+    func imageTableCell(_ tableViewCell: ImageTableViewCell,
                         didTapFullScreenImage button: UIButton,
                         with image: UIImage, _ name: String) {
         delegate?.detailViewController(self, didTapFullScreenImage: button, with: image, name)
@@ -97,13 +105,13 @@ extension DetailViewController: UITableViewDelegate {
 extension DetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfCells
+        return viewModel != nil ? numberOfCells : numberOfCellsWhenNoData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let requiredViewModel = viewModel else {
-            return UITableViewCell()
+            return getNoDataTableVIewCell(tableView, indexPath)
         }
 
         switch KeysForCells.arrayOfKeysForCells[indexPath.row] {
@@ -154,19 +162,28 @@ private extension DetailViewController {
 // MARK: - setup tableViewCell
 private extension DetailViewController {
 
+    func getNoDataTableVIewCell(_ tableView: UITableView,
+                                _ indexPath: IndexPath) -> UITableViewCell {
+        let noDataCell = tableView
+            .dequeueReusableCell(withIdentifier: NoDataTableViewCell.getIdentifier(), for: indexPath)
+
+        return noDataCell
+    }
+
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: ViewModel) -> ImageTableCell {
-        let optionImageCell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.getIdentifier(),
-                                                            for: indexPath) as? ImageTableCell
+                           with viewModel: ViewModel) -> ImageTableViewCell {
+        let optionImageCell = tableView
+            .dequeueReusableCell(withIdentifier: ImageTableViewCell.getIdentifier(),
+                                                            for: indexPath) as? ImageTableViewCell
 
         guard let cell = optionImageCell else {
-            return ImageTableCell()
+            return ImageTableViewCell()
         }
 
         cell.delegate = self
         let image = getImage(url: viewModel.imageURL)
-        let content = ImageCellModel(image: image, nameVenue: viewModel.nameVenueAndPrice)
+        let content = ImageCellViewModel(image: image, nameVenue: viewModel.nameVenueAndPrice)
         cell.configure(with: content, venueName: viewModel.venueName)
         return cell
     }
@@ -234,8 +251,10 @@ private extension DetailViewController {
     func setupTableView() {
         tableView.contentInset.bottom = 16
         tableView.contentInsetAdjustmentBehavior = .never
-        tableView.register(ImageTableCell.getNib(),
-                           forCellReuseIdentifier: ImageTableCell.getIdentifier())
+        tableView.register(NoDataTableViewCell.getNib(),
+                           forCellReuseIdentifier: NoDataTableViewCell.getIdentifier())
+        tableView.register(ImageTableViewCell.getNib(),
+                           forCellReuseIdentifier: ImageTableViewCell.getIdentifier())
         tableView.register(ShortInfoTableCell.getNib(),
                            forCellReuseIdentifier: ShortInfoTableCell.getIdentifier())
         tableView.register(HoursTableCell.getNib(),

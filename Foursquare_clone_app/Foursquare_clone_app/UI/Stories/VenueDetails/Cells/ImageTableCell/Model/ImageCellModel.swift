@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct ImageCellModel {
+struct ImageCellViewModel {
     var image: UIImage?
     let nameVenue: String
 }

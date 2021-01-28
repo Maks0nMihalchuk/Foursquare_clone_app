@@ -471,7 +471,7 @@
                                         <blurEffect style="systemUltraThinMaterialDark"/>
                                     </visualEffectView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0g-3z-rh9">
-                                        <rect key="frame" x="56" y="52" width="262" height="40"/>
+                                        <rect key="frame" x="56" y="52" width="247" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="rPy-e4-R4Z"/>
                                         </constraints>
@@ -492,18 +492,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6f1-pg-hbc">
-                                        <rect key="frame" x="358" y="52" width="40" height="40"/>
+                                        <rect key="frame" x="343" y="52" width="55" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="YJo-zH-IOh"/>
-                                            <constraint firstAttribute="width" constant="40" id="ijv-lf-iNy"/>
+                                            <constraint firstAttribute="width" constant="55" id="ijv-lf-iNy"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="ellipsis" catalog="system">
+                                        <state key="normal" title="Reset">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
                                         </state>
+                                        <connections>
+                                            <action selector="resetDataButtonPressed:" destination="erF-sg-ICt" eventType="touchUpInside" id="ej4-Rv-e5J"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6X8-sz-8oE">
-                                        <rect key="frame" x="318" y="52" width="40" height="40"/>
+                                        <rect key="frame" x="303" y="52" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="EN5-kK-9Mj"/>
                                             <constraint firstAttribute="width" constant="40" id="Id0-V3-PMj"/>
@@ -558,7 +561,6 @@
     <resources>
         <image name="arrow" width="17" height="17"/>
         <image name="backWhiteArrow" width="32" height="32"/>
-        <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="img_placeholder" width="400" height="400"/>
         <image name="share" width="27" height="27"/>
     </resources>
