@@ -91,20 +91,18 @@ extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
 // MARK: - DetailViewControllerDelegate
 extension VenueDetailsRouting: DetailViewControllerDelegate {
     func detailViewController(_ viewController: DetailViewController,
-                              didTapFullScreenImage button: UIButton,
-                              with image: UIImage, _ name: String) {
+                              didTapToShowFullScreenImage imageView: UIImageView,
+                              name: String) {
         let fullScreenImage = assembly.assemblyFullScreenImageVC()
 
         guard let imageScreen = fullScreenImage else { return }
 
-        imageScreen.venueImage = image
+        imageScreen.venueImage = imageView.image
         imageScreen.venueName = name
         imageScreen.delegate = self
 
         viewController.navigationController?.pushViewController(imageScreen, animated: true)
     }
-
-
 
     func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton) {
         finalizeStory()

@@ -7,11 +7,10 @@
 //
 
 import UIKit
-
+    //нажал кнопку показа полноэкранного изображения
 protocol ImageTableViewCellDelegate: class {
     func imageTableCell(_ tableViewCell: ImageTableViewCell,
-                        didTapFullScreenImage button: UIButton,
-                        with image: UIImage, _ name: String)
+                        didTapToShowFullScreenImage imageView: UIImageView, name: String)
 
 }
 
@@ -32,9 +31,7 @@ class ImageTableViewCell: UITableViewCell {
         name = venueName
     }
     @IBAction func fullScreenImageButtonPressed(_ sender: UIButton) {
-        guard let image = venueImageView.image else { return }
-
-        delegate?.imageTableCell(self, didTapFullScreenImage: sender, with: image, name)
+        delegate?.imageTableCell(self, didTapToShowFullScreenImage: venueImageView, name: name)
     }
 }
 

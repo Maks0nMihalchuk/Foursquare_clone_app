@@ -15,6 +15,7 @@ protocol VenueDetailsRoutingProtocol {
     func showVenueDetailsStory(from: UIViewController,
                                type: VenueDetailsStoryType,
                                model: ViewModel,
-                               animated: Bool, completion: @escaping VenueDetailsStoryCompletion)
+                               animated: Bool,
+                               completion: @escaping VenueDetailsStoryCompletion)
     func hideVenueDetailsStory(animated: Bool)
 }

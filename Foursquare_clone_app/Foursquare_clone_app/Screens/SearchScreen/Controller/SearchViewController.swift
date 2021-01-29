@@ -150,9 +150,9 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func showDetailViewController(by key: VenueDetailsStoryType, viewModel: ViewModel) {
+    func showDetailViewController(by storyType: VenueDetailsStoryType, viewModel: ViewModel) {
         router.showVenueDetailsStory(from: self,
-                                     type: key,
+                                     type: storyType,
                                      model: viewModel,
                                      animated: true) { (_) in
                                         self.router.hideVenueDetailsStory(animated: true)

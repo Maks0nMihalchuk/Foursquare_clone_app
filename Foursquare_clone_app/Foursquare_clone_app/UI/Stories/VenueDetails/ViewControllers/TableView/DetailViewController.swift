@@ -10,8 +10,7 @@ import UIKit
 
 protocol DetailViewControllerDelegate: class {
     func detailViewController(_ viewController: DetailViewController,
-                              didTapFullScreenImage button: UIButton,
-                              with image: UIImage, _ name: String)
+                              didTapToShowFullScreenImage imageView: UIImageView, name: String)
     func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton)
 }
 
@@ -56,7 +55,6 @@ class DetailViewController: UIViewController {
     @IBAction func resetDataButtonPressed(_ sender: UIButton) {
         viewModel = nil
         tableView.reloadData()
-
     }
 
 }
@@ -64,9 +62,9 @@ class DetailViewController: UIViewController {
 // MARK: - ImageTableCellDelegate
 extension DetailViewController: ImageTableViewCellDelegate {
     func imageTableCell(_ tableViewCell: ImageTableViewCell,
-                        didTapFullScreenImage button: UIButton,
-                        with image: UIImage, _ name: String) {
-        delegate?.detailViewController(self, didTapFullScreenImage: button, with: image, name)
+                        didTapToShowFullScreenImage imageView: UIImageView,
+                        name: String) {
+        delegate?.detailViewController(self, didTapToShowFullScreenImage: imageView, name: name)
     }
 }
 
