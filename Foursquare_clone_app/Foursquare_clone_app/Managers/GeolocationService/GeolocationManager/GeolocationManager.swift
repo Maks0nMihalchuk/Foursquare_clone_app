@@ -14,17 +14,15 @@ protocol GeolocationManagerProtocol {
     func startUpdateLocationData()
     func stopUpdateLocationData()
     func getCurrentLocationData(point location: GeoPoint)
+    func getStatus() -> TrackLocationStatus
+    func askPermissionToUseGeolocation()
 }
 
 class GeolocationManager: NSObject {
+    static var shared = GeolocationManager()
+
     private var locationManager = CLLocationManager()
     private lazy var subscribers = [GeolocationObserverProtocol]()
-
-    override init() {
-        super.init()
-        locationManagerSetting()
-        startUpdateLocationData()
-    }
 
     deinit {
         stopUpdateLocationData()
@@ -54,7 +52,6 @@ extension GeolocationManager: GeolocationManagerProtocol {
     }
 
     func startUpdateLocationData() {
-        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
 
@@ -67,13 +64,30 @@ extension GeolocationManager: GeolocationManagerProtocol {
             $0.geolocationManager(self, didUpdateData: location)
         }
     }
+
+    func getStatus() -> TrackLocationStatus {
+        let status = CLLocationManager.authorizationStatus()
+
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return .available
+        case .denied, .notDetermined, .restricted:
+            return .notAvailable
+        @unknown default:
+            return .notAvailable
+        }
+    }
+
+    func askPermissionToUseGeolocation() {
+        locationManager.requestWhenInUseAuthorization()
+    }
 }
 
 // MARK: - CLLocationManagerDelegate
 extension GeolocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error: \(error)")
+        print("Error: \(error.localizedDescription)")
         stopUpdateLocationData()
     }
 

@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var coordinatesLabel: UILabel!
 
     private let standardCategories = defaultCategoriesList
     private let numberOfCellsInRow = 3
@@ -23,7 +24,6 @@ class HomeViewController: UIViewController {
     private let offset: CGFloat = 2
     private let main = UIStoryboard(name: "Main", bundle: nil)
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
-    private var locationManager: GeolocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +32,16 @@ class HomeViewController: UIViewController {
         setupImageView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        locationManager = GeolocationManager()
-        locationManager?.subscribe(subscribeTo: self)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GeolocationManager.shared.subscribe(subscribeTo: self)
+        GeolocationManager.shared.locationManagerSetting()
+        GeolocationManager.shared.startUpdateLocationData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        locationManager?.stopUpdateLocationData()
-        locationManager = nil
+        GeolocationManager.shared.stopUpdateLocationData()
+        GeolocationManager.shared.unsubscribe(unsubscribeFrom: self)
     }
 
     @IBAction func searchButtonPress(_ sender: UIButton) {
@@ -52,8 +53,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: GeolocationObserverProtocol {
 
     func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
-        print("latitude: \(location.latitude)")
-        print("longitude: \(location.longitude)")
+        coordinatesLabel.text = "lat: \(location.latitude) | long: \(location.longitude)"
     }
 
     func geolocationManager(_ locationManager: GeolocationManager, showLocationAccess status: TrackLocationStatus) {

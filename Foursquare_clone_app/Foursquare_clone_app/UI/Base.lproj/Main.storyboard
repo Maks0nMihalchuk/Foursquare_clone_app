@@ -105,20 +105,29 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-l7-K4t">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="436"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngQ-Uf-tuD">
+                                <rect key="frame" x="20" y="398" width="374" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.89761700913241993" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="4uM-5Z-Whq"/>
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="top" secondItem="zfP-uj-jSY" secondAttribute="top" id="ARk-t5-dJe"/>
+                            <constraint firstItem="ngQ-Uf-tuD" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" constant="20" id="HTk-Hn-Q35"/>
                             <constraint firstItem="csS-jc-7hU" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="LXg-AF-sda"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="OUp-pT-a6H"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="S1T-rl-aw1"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="bottom" secondItem="sk8-3b-zb2" secondAttribute="bottom" id="STz-Pz-FHh"/>
                             <constraint firstItem="csS-jc-7hU" firstAttribute="top" secondItem="SpC-l7-K4t" secondAttribute="bottom" constant="8" id="VFE-mC-qcX"/>
+                            <constraint firstItem="csS-jc-7hU" firstAttribute="top" secondItem="ngQ-Uf-tuD" secondAttribute="bottom" constant="22" id="W34-GT-pII"/>
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="fWB-Uh-mZq"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="SpC-l7-K4t" secondAttribute="trailing" id="p9O-Fw-28Y"/>
                             <constraint firstItem="csS-jc-7hU" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" constant="20" id="p9U-7X-xUw"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="top" secondItem="csS-jc-7hU" secondAttribute="bottom" constant="16" id="tJt-DO-5xL"/>
+                            <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="ngQ-Uf-tuD" secondAttribute="trailing" constant="20" id="x58-yR-SJV"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="sk8-3b-zb2" secondAttribute="trailing" id="xog-M6-Ov4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ESO-gy-7jy"/>
@@ -126,6 +135,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="jit-na-TJ7"/>
                     <connections>
                         <outlet property="collectionView" destination="sk8-3b-zb2" id="Ahs-lI-UOq"/>
+                        <outlet property="coordinatesLabel" destination="ngQ-Uf-tuD" id="efP-7s-BY0"/>
                         <outlet property="imageView" destination="SpC-l7-K4t" id="rpD-PX-4y9"/>
                         <outlet property="searchButton" destination="csS-jc-7hU" id="v0d-4L-7EA"/>
                     </connections>
