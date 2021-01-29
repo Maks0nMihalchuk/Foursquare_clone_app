@@ -60,3 +60,7 @@
 "AlertSelectController.Title" = "Сделайте свой выбор";
 "AlertSelectController.Message" = "Выберите, какой контроллер вы хотите запустить";
 "AlertSelectController.CancelButton" = "Отменить";
+
+"LocationErrorAlert.Title" = "Службы геолокации отключены";
+"LocationErrorAlert.Message" = "Пожалуйста, включите службы геолокации в настройках";
+"LocationErrorAlert.Action" = "Окей";

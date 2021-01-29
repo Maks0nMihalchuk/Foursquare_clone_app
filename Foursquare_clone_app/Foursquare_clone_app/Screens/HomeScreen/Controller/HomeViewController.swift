@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     private let offset: CGFloat = 2
     private let main = UIStoryboard(name: "Main", bundle: nil)
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
+    private var locationManager: GeolocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +32,38 @@ class HomeViewController: UIViewController {
         setupImageView()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationManager = GeolocationManager()
+        locationManager?.subscribe(subscribeTo: self)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        locationManager?.stopUpdateLocationData()
+        locationManager = nil
+    }
+
     @IBAction func searchButtonPress(_ sender: UIButton) {
         createdSearchController(main: main, isActiveSearchBar: true, searchBarText: "", venues: [Venue]())
+    }
+}
+
+// MARK: - GeolocationObserverProtocol
+extension HomeViewController: GeolocationObserverProtocol {
+
+    func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
+        print("latitude: \(location.latitude)")
+        print("longitude: \(location.longitude)")
+    }
+
+    func geolocationManager(_ locationManager: GeolocationManager, showLocationAccess status: TrackLocationStatus) {
+
+        switch status {
+        case .available:
+            return
+        case .notAvailable:
+            setupErrorAlert()
+        }
     }
 }
 
@@ -137,5 +168,22 @@ private extension HomeViewController {
                               placeholder: UIImage(named: "img_placeholder"),
                               options: [.transition(.fade(1.0))],
                               progressBlock: nil)
+    }
+}
+
+// MARK: - setup and display the location Error alert
+private extension HomeViewController {
+
+    func setupErrorAlert() {
+        let title = "LocationErrorAlert.Title".localized()
+        let message = "LocationErrorAlert.Message".localized()
+        let buttonTitle = "LocationErrorAlert.Action".localized()
+
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okeyButton = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
+        alertController.addAction(okeyButton)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

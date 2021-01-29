@@ -60,3 +60,7 @@
 "AlertSelectController.Title" = "Make your choice";
 "AlertSelectController.Message" = "choose which controller you want to run";
 "AlertSelectController.CancelButton" = "Cancel";
+
+"LocationErrorAlert.Title" = "Location Services disabled";
+"LocationErrorAlert.Message" = "Please enable Location Services in Settings";
+"LocationErrorAlert.Action" = "Okey";

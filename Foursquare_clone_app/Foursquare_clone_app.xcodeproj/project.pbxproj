@@ -16,6 +16,11 @@
 		2D25472925A5CDEB008151FF /* HeaderCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D25472725A5CDEB008151FF /* HeaderCollectionView.xib */; };
 		2D25472B25A5CF70008151FF /* HeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25472A25A5CF70008151FF /* HeaderModel.swift */; };
 		2D259A5325B844890054DDC9 /* SearchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D259A5225B844890054DDC9 /* SearchCellModel.swift */; };
+		2D25C11025C2CDC8009DC3E6 /* GeolocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25C10F25C2CDC8009DC3E6 /* GeolocationManager.swift */; };
+		2D25C13925C31205009DC3E6 /* GeolocationSubscriberProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25C13825C31205009DC3E6 /* GeolocationSubscriberProtocol.swift */; };
+		2D25C13C25C312F0009DC3E6 /* GeolocationObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25C13B25C312F0009DC3E6 /* GeolocationObserverProtocol.swift */; };
+		2D25C13F25C417C3009DC3E6 /* TrackLocationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25C13E25C417C3009DC3E6 /* TrackLocationStatus.swift */; };
+		2D25C14225C418D8009DC3E6 /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25C14125C418D8009DC3E6 /* GeoPoint.swift */; };
 		2D2607622590B33400D9E1DC /* DefaultCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE67F142587F1B50092B998 /* DefaultCategoryModel.swift */; };
 		2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D292EA225A3690C00A67F36 /* KeychainKey.swift */; };
 		2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D292EA525A3770A00A67F36 /* UserInfo.swift */; };
@@ -96,6 +101,12 @@
 		2D25472725A5CDEB008151FF /* HeaderCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionView.xib; sourceTree = "<group>"; };
 		2D25472A25A5CF70008151FF /* HeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderModel.swift; sourceTree = "<group>"; };
 		2D259A5225B844890054DDC9 /* SearchCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellModel.swift; sourceTree = "<group>"; };
+		2D25C10F25C2CDC8009DC3E6 /* GeolocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeolocationManager.swift; sourceTree = "<group>"; };
+		2D25C11125C2DE69009DC3E6 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
+		2D25C13825C31205009DC3E6 /* GeolocationSubscriberProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeolocationSubscriberProtocol.swift; sourceTree = "<group>"; };
+		2D25C13B25C312F0009DC3E6 /* GeolocationObserverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeolocationObserverProtocol.swift; sourceTree = "<group>"; };
+		2D25C13E25C417C3009DC3E6 /* TrackLocationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackLocationStatus.swift; sourceTree = "<group>"; };
+		2D25C14125C418D8009DC3E6 /* GeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
 		2D292EA225A3690C00A67F36 /* KeychainKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKey.swift; sourceTree = "<group>"; };
 		2D292EA525A3770A00A67F36 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -251,9 +262,62 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2D25C10E25C2CD73009DC3E6 /* GeolocationService */ = {
+			isa = PBXGroup;
+			children = (
+				2D25C14025C418C0009DC3E6 /* GeoPointStruct */,
+				2D25C13D25C417A4009DC3E6 /* TrackLocationStatus */,
+				2D25C13A25C312CE009DC3E6 /* GeolocationObserverProtocol */,
+				2D25C13625C311E3009DC3E6 /* GeolocationManagerProtocol */,
+				2D25C13725C311EE009DC3E6 /* GeolocationManager */,
+			);
+			path = GeolocationService;
+			sourceTree = "<group>";
+		};
+		2D25C13625C311E3009DC3E6 /* GeolocationManagerProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2D25C13825C31205009DC3E6 /* GeolocationSubscriberProtocol.swift */,
+			);
+			path = GeolocationManagerProtocol;
+			sourceTree = "<group>";
+		};
+		2D25C13725C311EE009DC3E6 /* GeolocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				2D25C10F25C2CDC8009DC3E6 /* GeolocationManager.swift */,
+			);
+			path = GeolocationManager;
+			sourceTree = "<group>";
+		};
+		2D25C13A25C312CE009DC3E6 /* GeolocationObserverProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2D25C13B25C312F0009DC3E6 /* GeolocationObserverProtocol.swift */,
+			);
+			path = GeolocationObserverProtocol;
+			sourceTree = "<group>";
+		};
+		2D25C13D25C417A4009DC3E6 /* TrackLocationStatus */ = {
+			isa = PBXGroup;
+			children = (
+				2D25C13E25C417C3009DC3E6 /* TrackLocationStatus.swift */,
+			);
+			path = TrackLocationStatus;
+			sourceTree = "<group>";
+		};
+		2D25C14025C418C0009DC3E6 /* GeoPointStruct */ = {
+			isa = PBXGroup;
+			children = (
+				2D25C14125C418D8009DC3E6 /* GeoPoint.swift */,
+			);
+			path = GeoPointStruct;
+			sourceTree = "<group>";
+		};
 		2D292EA125A3624900A67F36 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2D25C10E25C2CD73009DC3E6 /* GeolocationService */,
 				2DD6DCC025AC9F3500B0E948 /* StorageManager */,
 				2DD269F825891EA500EAEC68 /* NetworkManager */,
 				2D49B9C9259B2752009AC096 /* KeychainManager */,
@@ -365,6 +429,7 @@
 		2D3BD99D25875B6800389405 = {
 			isa = PBXGroup;
 			children = (
+				2D25C11125C2DE69009DC3E6 /* Location.gpx */,
 				2D3BD9A825875B6800389405 /* Foursquare_clone_app */,
 				2D9EC7B225925A6C003FBBC3 /* Localization */,
 				2D2B00D4258BB87F00D49F32 /* Helper */,
@@ -899,11 +964,14 @@
 				2D4F073825A77C8000C9230E /* DefaultImage.swift in Sources */,
 				2D326BAF25909CEB006E4A59 /* Price.swift in Sources */,
 				2D0D358625B9D79B0053FDB0 /* ViewModel.swift in Sources */,
+				2D25C13C25C312F0009DC3E6 /* GeolocationObserverProtocol.swift in Sources */,
 				2DD6DCC625ACA6C200B0E948 /* GetUserListsGroupItems.swift in Sources */,
 				2D0D357D25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift in Sources */,
 				2D4CF36B25A2445100C7006B /* UserCreatedCell.swift in Sources */,
 				2D2B00DB258BE7AB00D49F32 /* DetailInfoModel.swift in Sources */,
 				2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */,
+				2D25C13925C31205009DC3E6 /* GeolocationSubscriberProtocol.swift in Sources */,
+				2D25C14225C418D8009DC3E6 /* GeoPoint.swift in Sources */,
 				2D5CB38625B1B000007C6ED2 /* DetailViewController.swift in Sources */,
 				2D38F7EA25B35CCF007CAE19 /* ContactTableCell.swift in Sources */,
 				2DCC68B125A8AC6A00639B93 /* GetUserLists.swift in Sources */,
@@ -928,6 +996,7 @@
 				2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */,
 				2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */,
 				2D613F7625AF0FAF00F86004 /* KeysForSections.swift in Sources */,
+				2D25C11025C2CDC8009DC3E6 /* GeolocationManager.swift in Sources */,
 				2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */,
 				2D39010E258D13F9003C2187 /* MappingReceivedDataToDetailsVenue.swift in Sources */,
 				2D3BD9AA25875B6800389405 /* AppDelegate.swift in Sources */,
@@ -949,6 +1018,7 @@
 				2DFE6C0C25B5E50300D945E6 /* GeneralLogicProtocol.swift in Sources */,
 				2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */,
 				2D3BD9AC25875B6800389405 /* SceneDelegate.swift in Sources */,
+				2D25C13F25C417C3009DC3E6 /* TrackLocationStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
