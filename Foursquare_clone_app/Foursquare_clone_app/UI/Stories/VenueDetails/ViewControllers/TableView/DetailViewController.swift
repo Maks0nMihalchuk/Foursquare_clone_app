@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     private let numberOfCellsWhenNoData = 1
     private var defaultHoursCellStatus = true
 
-    var viewModel: ViewModel? {
+    var viewModel: DetailViewModel? {
         didSet {
             guard viewModel != nil else { return }
 
@@ -170,7 +170,7 @@ private extension DetailViewController {
 
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: ViewModel) -> ImageTableViewCell {
+                           with viewModel: DetailViewModel) -> ImageTableViewCell {
         let optionImageCell = tableView
             .dequeueReusableCell(withIdentifier: ImageTableViewCell.getIdentifier(),
                                                             for: indexPath) as? ImageTableViewCell
@@ -188,7 +188,7 @@ private extension DetailViewController {
 
     func getShortInfoTableCell(_ tableView: UITableView,
                                _ indexPath: IndexPath,
-                               with viewModel: ViewModel) -> ShortInfoTableCell {
+                               with viewModel: DetailViewModel) -> ShortInfoTableCell {
         let optionShortInfoCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.getIdentifier(),
                                                                 for: indexPath) as? ShortInfoTableCell
 
@@ -207,7 +207,7 @@ private extension DetailViewController {
 
     func getHoursTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: ViewModel) -> HoursTableCell {
+                           with viewModel: DetailViewModel) -> HoursTableCell {
         let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.getIdentifier(),
                                                             for: indexPath) as? HoursTableCell
 
@@ -227,7 +227,7 @@ private extension DetailViewController {
 
     func getContactTableCell(_ tableView: UITableView,
                              _ indexPath: IndexPath,
-                             with viewModel: ViewModel) -> ContactTableCell {
+                             with viewModel: DetailViewModel) -> ContactTableCell {
         let optionContactCell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.getIdentifier(),
                                                               for: indexPath) as? ContactTableCell
 

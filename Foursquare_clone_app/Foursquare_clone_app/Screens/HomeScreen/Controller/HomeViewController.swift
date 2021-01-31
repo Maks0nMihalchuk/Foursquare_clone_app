@@ -20,8 +20,8 @@ class HomeViewController: UIViewController {
     private let numberOfRowInCollectionView = 2
     private let numberOfHorizontalIndents: CGFloat = 2
     private let indentWidth: CGFloat = 2
-    private let main = UIStoryboard(name: "Main", bundle: nil)
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
+    private let router = VenueSearchRouting(assembly: VenueSearchAssembly())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,8 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func searchButtonPress(_ sender: UIButton) {
-        createdSearchController(main: main, isActiveSearchBar: true, searchBarText: "", venues: [Venue]())
+        showSearchViewController(model: [Venue](),
+                                 isActiveSearchBar: true, text: "")
     }
 }
 
@@ -48,11 +49,9 @@ extension HomeViewController: UICollectionViewDelegate {
                 }
 
                 DispatchQueue.main.async {
-
-                    self.createdSearchController(main: self.main,
-                                                 isActiveSearchBar: false,
-                                                 searchBarText: self.standardCategories[indexPath.item].title,
-                                                 venues: venuesData)
+                    self.showSearchViewController(model: venuesData,
+                                                  isActiveSearchBar: false,
+                                                  text: self.standardCategories[indexPath.item].title)
                 }
             } else {
                 return
@@ -94,7 +93,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewBounds = collectionView.bounds
 
-        let widthCell = (collectionViewBounds.width - indentWidth * numberOfHorizontalIndents) / CGFloat(numberOfCellsInRow)
+        let widthCell = (collectionViewBounds.width
+            - indentWidth
+            * numberOfHorizontalIndents)
+            / CGFloat(numberOfCellsInRow)
         let heightCell = collectionViewBounds.height / CGFloat(numberOfRowInCollectionView)
 
         return CGSize(width: widthCell, height: heightCell)
@@ -104,22 +106,13 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - creating and showing a SearchController
 private extension HomeViewController {
 
-    func createdSearchController(main: UIStoryboard,
-                                 isActiveSearchBar: Bool,
-                                 searchBarText: String,
-                                 venues: [Venue]) {
-        let searchController = main.instantiateViewController(identifier: "SearchViewController")
-            as? SearchViewController
-
-        guard let search = searchController else {
-            return
+    func showSearchViewController(model: [Venue], isActiveSearchBar: Bool, text: String) {
+        router.showVenueSearchStory(from: self,
+                                    model: model,
+                                    isActiveSearchBar: isActiveSearchBar,
+                                    searchBarText: text) { (_) in
+                                        self.router.hideVenueSearchStory(animated: true)
         }
-
-        search.searchBarText = searchBarText
-        search.launchSearchBar = isActiveSearchBar
-        search.venues = venues
-        search.modalPresentationStyle = .fullScreen
-        present(search, animated: true, completion: nil)
     }
 }
 

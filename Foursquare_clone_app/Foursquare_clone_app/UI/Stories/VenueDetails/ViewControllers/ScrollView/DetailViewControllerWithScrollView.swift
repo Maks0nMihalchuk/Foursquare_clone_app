@@ -11,7 +11,7 @@ import UIKit
 protocol DetailViewControllerWithScrollViewDelegate: class {
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapFullScreenImage button: UIButton,
-                                            with image: UIImage, model: ViewModel)
+                                            with image: UIImage, model: DetailViewModel)
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapBack button: UIButton)
 }
@@ -46,7 +46,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
 
-    var viewModel: ViewModel? {
+    var viewModel: DetailViewModel? {
         didSet {
             guard let requireViewModel = viewModel else { return }
 
@@ -112,7 +112,7 @@ private extension DetailViewControllerWithScrollView {
         fullScreenButtonHeight.constant = imageContainerViewHeight.constant - window.safeAreaInsets.top
     }
 
-    func checkForDataAvailability(with viewModel: ViewModel) {
+    func checkForDataAvailability(with viewModel: DetailViewModel) {
         let defaultTest = "Add Hours".localized()
 
         if viewModel.hoursStatus != defaultTest {
@@ -149,7 +149,7 @@ private extension DetailViewControllerWithScrollView {
         websiteVenueLabel.text = "LabelTextPlaceholder".localized()
     }
 
-    func reloadUI(with viewModel: ViewModel) {
+    func reloadUI(with viewModel: DetailViewModel) {
         configureBestPhotoContainerView(with: viewModel)
         configureShortInfo(with: viewModel)
         configureHoursContainer(with: viewModel)
@@ -172,7 +172,7 @@ private extension DetailViewControllerWithScrollView {
         imageView.layer.addSublayer(gradient)
     }
 
-    func configureBestPhotoContainerView(with viewModel: ViewModel) {
+    func configureBestPhotoContainerView(with viewModel: DetailViewModel) {
         imageView.kf.setImage(with: viewModel.imageURL,
                               placeholder: UIImage(named: "img_placeholder"),
                               options: [.transition(.fade(1.0))],
@@ -181,7 +181,7 @@ private extension DetailViewControllerWithScrollView {
         venueNameLabel.text = viewModel.nameVenueAndPrice
     }
 
-    func configureShortInfo(with viewModel: ViewModel) {
+    func configureShortInfo(with viewModel: DetailViewModel) {
         addressVenueLabel.text = viewModel.location
         ratingLabel.text = viewModel.rating
         ratingLabel.backgroundColor = viewModel.ratingColor
@@ -189,13 +189,13 @@ private extension DetailViewControllerWithScrollView {
         categoriesVenueLabel.text = viewModel.categories
     }
 
-    func configureHoursContainer(with viewModel: ViewModel) {
+    func configureHoursContainer(with viewModel: DetailViewModel) {
         hoursVenueLabel.text = viewModel.hoursStatus
         detailDaysVenueLabel.text = viewModel.detailDays
         detailHoursVenueLabel.text = viewModel.detailHours
     }
 
-    func configureContactsContainer(with viewModel: ViewModel) {
+    func configureContactsContainer(with viewModel: DetailViewModel) {
         phoneVenueLabel.text = viewModel.phone
         websiteVenueLabel.text = viewModel.website
     }

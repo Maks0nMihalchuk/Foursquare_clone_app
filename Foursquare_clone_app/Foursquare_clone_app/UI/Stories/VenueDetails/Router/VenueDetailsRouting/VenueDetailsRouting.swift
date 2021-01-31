@@ -22,7 +22,7 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
     func showVenueDetailsStory(from: UIViewController,
                                type: VenueDetailsStoryType,
-                               model: ViewModel,
+                               model: DetailViewModel,
                                animated: Bool, completion: @escaping VenueDetailsStoryCompletion) {
 
         self.completion = completion
@@ -75,7 +75,7 @@ extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
 
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapFullScreenImage button: UIButton,
-                                            with image: UIImage, model: ViewModel) {
+                                            with image: UIImage, model: DetailViewModel) {
         let fullScreenImage = assembly.assemblyFullScreenImageVC()
 
         guard let imageScreen = fullScreenImage else { return }

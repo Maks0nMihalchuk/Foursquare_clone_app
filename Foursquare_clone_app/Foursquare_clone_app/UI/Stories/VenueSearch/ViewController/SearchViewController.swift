@@ -84,7 +84,7 @@ extension SearchViewController: UITableViewDelegate {
                 }
 
                 DispatchQueue.main.async {
-                    let viewModel = ViewModel(dataModel: detailVenueInfo)
+                    let viewModel = DetailViewModel(dataModel: detailVenueInfo)
                     self.showAlertForSelection(viewModel: viewModel)
                 }
 
@@ -126,7 +126,7 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
 
-    func showAlertForSelection(viewModel: ViewModel) {
+    func showAlertForSelection(viewModel: DetailViewModel) {
         let title = "AlertSelectController.Title".localized()
         let message = "AlertSelectController.Message".localized()
         let detailWithScrollViewTitle = "detailWithScrollView"
@@ -150,7 +150,7 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func showDetailViewController(by storyType: VenueDetailsStoryType, viewModel: ViewModel) {
+    func showDetailViewController(by storyType: VenueDetailsStoryType, viewModel: DetailViewModel) {
         router.showVenueDetailsStory(from: self,
                                      type: storyType,
                                      model: viewModel,
