@@ -132,9 +132,10 @@ private extension DetailViewControllerWithScrollView {
                                                 self.setupActivityIndicator(isHidden: false)
                                             }
                                         } else {
-                                            self.setupActivityIndicator(isHidden: false)
-                                            self.showAlertError()
-                                            return
+                                            DispatchQueue.main.async {
+                                                self.setupActivityIndicator(isHidden: false)
+                                                self.showAlertError()
+                                            }
                                         }
         })
     }

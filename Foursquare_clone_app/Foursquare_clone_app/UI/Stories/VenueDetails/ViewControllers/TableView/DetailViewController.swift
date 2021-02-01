@@ -166,9 +166,10 @@ private extension DetailViewController {
                                                 self.tableView.reloadData()
                                             }
                                         } else {
-                                            self.setupActivityIndicator(isHidden: false)
-                                            self.showAlertError()
-                                            return
+                                            DispatchQueue.main.async {
+                                                self.setupActivityIndicator(isHidden: false)
+                                                self.showAlertError()
+                                            }
                                         }
         })
     }

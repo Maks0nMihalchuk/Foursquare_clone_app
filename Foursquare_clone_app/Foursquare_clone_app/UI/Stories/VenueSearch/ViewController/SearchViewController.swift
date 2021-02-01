@@ -25,8 +25,7 @@ class SearchViewController: UIViewController {
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
-    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly(),
-                                             networking: NetworkManager.shared)
+    var router: VenueDetailsRouting?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,44 +117,21 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - Alert
+// MARK: - showDetailViewController
 extension SearchViewController {
 
-    func showAlertForSelection(venueID: String) {
-        let title = "AlertSelectController.Title".localized()
-        let message = "AlertSelectController.Message".localized()
-        let detailWithScrollViewTitle = "detailWithScrollView"
-        let detailWithTableViewTitle = "detailWithTableView"
-        let cancelButtonTitle = "AlertSelectController.CancelButton".localized()
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
-                                                 style: .default) { (_) in
-                                                    self.showDetailViewController(by: .scrollView,
-                                                                                  venueID: venueID)
-        }
-        let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
-                                                 style: .default) { (_) in
-                                                    self.showDetailViewController(by: .tableView,
-                                                                                  venueID: venueID)
-        }
-        let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
-        alertController.addAction(detailWithScrollView)
-        alertController.addAction(detailWithTableView)
-        alertController.addAction(cancelButton)
-        present(alertController, animated: true, completion: nil)
-    }
-}
-
-// MARK: - setup searchBar, DetailController
-private extension SearchViewController {
     func showDetailViewController(by storyType: VenueDetailsStoryType, venueID: String) {
-        router.showVenueDetailsStory(from: self,
+        router?.showVenueDetailsStory(from: self,
                                      type: storyType,
                                      venueID: venueID,
                                      animated: true) { (_) in
-                                        self.router.hideVenueDetailsStory(animated: true)
+                                        self.router?.hideVenueDetailsStory(animated: true)
         }
     }
+}
+
+// MARK: - setup searchBar
+private extension SearchViewController {
 
     func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
         searchBar.delegate = self

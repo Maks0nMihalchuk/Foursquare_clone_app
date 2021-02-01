@@ -12,7 +12,7 @@ import UIKit
 class VenueSearchRouting: VenueSearchRoutingProtocol {
 
     var completion: VenueSearchStoryCompletion?
-    private var searchController: UIViewController?
+    private var searchController: SearchViewController?
     private let assembly: VenueSearchAssembly
 
     init(assembly: VenueSearchAssembly) {
@@ -30,6 +30,8 @@ class VenueSearchRouting: VenueSearchRoutingProtocol {
 
         guard let controller = searchController else { return }
 
+        controller.router = VenueDetailsRouting(assembly: VenueDetailsAssembly(),
+                                                networking: NetworkManager.shared)
         controller.delegate = self
         controller.venues = model
         controller.searchBarText = setupSearchBar.searchBarText
@@ -43,12 +45,40 @@ class VenueSearchRouting: VenueSearchRoutingProtocol {
         guard let conroller = searchController else { return }
 
         conroller.dismiss(animated: animated, completion: nil)
+        searchController?.router = nil
         searchController = nil
     }
 
     private func finalizeStory() {
         self.completion?(.userCancelation)
         completion = nil
+    }
+
+    private func showAlertForSelection(_ viewController: SearchViewController,
+                                       venueID: String) {
+        let title = "AlertSelectController.Title".localized()
+        let message = "AlertSelectController.Message".localized()
+        let detailWithScrollViewTitle = "detailWithScrollView"
+        let detailWithTableViewTitle = "detailWithTableView"
+        let cancelButtonTitle = "AlertSelectController.CancelButton".localized()
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .actionSheet)
+        let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
+                                                 style: .default) { (_) in
+                                                    viewController.showDetailViewController(by: .scrollView,
+                                                                                            venueID: venueID)
+        }
+        let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
+                                                 style: .default) { (_) in
+                                                    viewController.showDetailViewController(by: .tableView,
+                                                                                            venueID: venueID)
+        }
+        let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
+        alertController.addAction(detailWithScrollView)
+        alertController.addAction(detailWithTableView)
+        alertController.addAction(cancelButton)
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -63,7 +93,6 @@ extension VenueSearchRouting: SearchViewControllerDelegate {
     func searchViewController(_ viewController: SearchViewController,
                               didTapOnRowAt indexPath: IndexPath,
                               venueID: String) {
-        viewController.showAlertForSelection(venueID: venueID)
-
+        showAlertForSelection(viewController, venueID: venueID)
     }
 }
