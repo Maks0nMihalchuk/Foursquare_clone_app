@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol DetailViewControllerDelegate: class {
+    func detailViewController(_ viewController: DetailViewController,
+                              didTapToShowFullScreenImage imageView: UIImageView, name: String)
+    func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton)
+}
+
 class DetailViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
@@ -17,19 +23,48 @@ class DetailViewController: UIViewController {
 
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
+    private let numberOfCellsWhenNoData = 1
     private var defaultHoursCellStatus = true
 
-    var viewModel: ViewModel?
+    var viewModel: ViewModel? {
+        didSet {
+            guard viewModel != nil else { return }
+
+            DispatchQueue.main.async {
+                guard self.isViewLoaded else { return }
+
+                self.tableView.reloadData()
+            }
+        }
+    }
+
+    weak var delegate: DetailViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.isNavigationBarHidden = true
         setupTableView()
         setupBlurEffectView()
+        tableView.reloadData()
     }
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        delegate?.detailViewController(self, didTapBack: sender)
+    }
+
+    @IBAction func resetDataButtonPressed(_ sender: UIButton) {
+        viewModel = nil
+        tableView.reloadData()
+    }
+
+}
+
+// MARK: - ImageTableCellDelegate
+extension DetailViewController: ImageTableViewCellDelegate {
+    func imageTableCell(_ tableViewCell: ImageTableViewCell,
+                        didTapToShowFullScreenImage imageView: UIImageView,
+                        name: String) {
+        delegate?.detailViewController(self, didTapToShowFullScreenImage: imageView, name: name)
     }
 }
 
@@ -38,8 +73,11 @@ extension DetailViewController: HoursTableCellDelegate {
 
     func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: HoursTableCallState.Type) {
         let indexPath = self.tableView.indexPath(for: cell)
-        self.tableView.reloadRows(at: [IndexPath(row: indexPath!.row,
-                                                 section: indexPath!.section)],
+
+        guard let index = indexPath else { return }
+
+        self.tableView.reloadRows(at: [IndexPath(row: index.row,
+                                                 section: index.section)],
                                   with: .fade)
     }
 }
@@ -65,13 +103,13 @@ extension DetailViewController: UITableViewDelegate {
 extension DetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfCells
+        return viewModel != nil ? numberOfCells : numberOfCellsWhenNoData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let requiredViewModel = viewModel else {
-            return UITableViewCell()
+            return getNoDataTableVIewCell(tableView, indexPath)
         }
 
         switch KeysForCells.arrayOfKeysForCells[indexPath.row] {
@@ -122,21 +160,29 @@ private extension DetailViewController {
 // MARK: - setup tableViewCell
 private extension DetailViewController {
 
+    func getNoDataTableVIewCell(_ tableView: UITableView,
+                                _ indexPath: IndexPath) -> UITableViewCell {
+        let noDataCell = tableView
+            .dequeueReusableCell(withIdentifier: NoDataTableViewCell.getIdentifier(), for: indexPath)
+
+        return noDataCell
+    }
+
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: ViewModel) -> ImageTableCell {
-        let optionImageCell = tableView.dequeueReusableCell(withIdentifier: ImageTableCell.getIdentifier(),
-                                                            for: indexPath) as? ImageTableCell
+                           with viewModel: ViewModel) -> ImageTableViewCell {
+        let optionImageCell = tableView
+            .dequeueReusableCell(withIdentifier: ImageTableViewCell.getIdentifier(),
+                                                            for: indexPath) as? ImageTableViewCell
 
         guard let cell = optionImageCell else {
-            return ImageTableCell()
+            return ImageTableViewCell()
         }
 
-
-
-        let content = ImageCellModel(image: viewModel.image,
-                                     nameVenue: viewModel.nameVenueAndPrice)
-        cell.configure(with: content)
+        cell.delegate = self
+        let image = getImage(url: viewModel.imageURL)
+        let content = ImageCellViewModel(image: image, nameVenue: viewModel.nameVenueAndPrice)
+        cell.configure(with: content, venueName: viewModel.venueName)
         return cell
     }
 
@@ -203,13 +249,28 @@ private extension DetailViewController {
     func setupTableView() {
         tableView.contentInset.bottom = 16
         tableView.contentInsetAdjustmentBehavior = .never
-        tableView.register(ImageTableCell.getNib(),
-                           forCellReuseIdentifier: ImageTableCell.getIdentifier())
+        tableView.register(NoDataTableViewCell.getNib(),
+                           forCellReuseIdentifier: NoDataTableViewCell.getIdentifier())
+        tableView.register(ImageTableViewCell.getNib(),
+                           forCellReuseIdentifier: ImageTableViewCell.getIdentifier())
         tableView.register(ShortInfoTableCell.getNib(),
                            forCellReuseIdentifier: ShortInfoTableCell.getIdentifier())
         tableView.register(HoursTableCell.getNib(),
                            forCellReuseIdentifier: HoursTableCell.getIdentifier())
         tableView.register(ContactTableCell.getNib(),
                            forCellReuseIdentifier: ContactTableCell.getIdentifier())
+    }
+}
+
+// MARK: - Get Image for imageCell
+private extension DetailViewController {
+
+    func getImage(url: URL?) -> UIImage? {
+        let imageView = UIImageView()
+        imageView.kf.setImage(with: url,
+                              placeholder: UIImage(named: "img_placeholder"),
+                              options: [.transition(.fade(1.0))],
+                              progressBlock: nil)
+        return imageView.image
     }
 }

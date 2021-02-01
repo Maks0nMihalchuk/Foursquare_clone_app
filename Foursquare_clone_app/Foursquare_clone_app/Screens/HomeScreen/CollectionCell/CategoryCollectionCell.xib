@@ -32,6 +32,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="0.89761700909999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="0Ir-7q-9rT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0HD-Fl-H2A"/>
                 <constraint firstItem="VVa-vX-sZJ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="6Xb-U8-2C2"/>

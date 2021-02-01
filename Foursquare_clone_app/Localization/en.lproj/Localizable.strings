@@ -64,3 +64,5 @@
 "LocationErrorAlert.Title" = "Location Services disabled";
 "LocationErrorAlert.Message" = "Please enable Location Services in Settings";
 "LocationErrorAlert.Action" = "Okey";
+
+"NotDataTableViewCell.LabelText" = "Sorry. Something went wrong. No data available";

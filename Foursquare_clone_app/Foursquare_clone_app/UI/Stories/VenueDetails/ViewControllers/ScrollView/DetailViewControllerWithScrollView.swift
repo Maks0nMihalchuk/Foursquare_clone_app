@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol DetailViewControllerWithScrollViewDelegate: class {
+    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+                                            didTapFullScreenImage button: UIButton,
+                                            with image: UIImage, model: ViewModel)
+    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+                                            didTapBack button: UIButton)
+}
+
 class DetailViewControllerWithScrollView: UIViewController {
 
     @IBOutlet private weak var imageContainerViewHeight: NSLayoutConstraint!
@@ -50,13 +58,15 @@ class DetailViewControllerWithScrollView: UIViewController {
         }
     }
 
-    private let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    weak var delegate: DetailViewControllerWithScrollViewDelegate?
+
     private let tapGestureRecognizer = UITapGestureRecognizer()
     private let gradient = CAGradientLayer()
     private let duration = 0.25
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
         setupUI()
 
         guard let requiredViewModel = viewModel else { return }
@@ -66,7 +76,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        delegate?.detailViewControllerWithScrollView(self, didTapBack: sender)
     }
 
     @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
@@ -78,21 +88,14 @@ class DetailViewControllerWithScrollView: UIViewController {
             self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
         }
     }
-    // метод делегата в роутер. Роутер реализовывает 
+
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
-        let fullPhotoScreenControllre = mainStoryboard
-            .instantiateViewController(identifier: "FullScreenImageViewController") as? FullScreenImageViewController
+        guard
+            let image = imageView.image,
+            let model = viewModel
+        else { return }
 
-        guard let fullPhotoScreen = fullPhotoScreenControllre else { return }
-
-        guard let venueName = venueNameLabel.text else { return }
-
-        fullPhotoScreen.venueName = venueName
-        fullPhotoScreen.venueImage = imageView.image
-
-        let navigationController = UINavigationController(rootViewController: fullPhotoScreen)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        delegate?.detailViewControllerWithScrollView(self, didTapFullScreenImage: sender, with: image, model: model)
     }
 }
 
@@ -170,7 +173,10 @@ private extension DetailViewControllerWithScrollView {
     }
 
     func configureBestPhotoContainerView(with viewModel: ViewModel) {
-        imageView.image = viewModel.image
+        imageView.kf.setImage(with: viewModel.imageURL,
+                              placeholder: UIImage(named: "img_placeholder"),
+                              options: [.transition(.fade(1.0))],
+                              progressBlock: nil)
         gradientSetup()
         venueNameLabel.text = viewModel.nameVenueAndPrice
     }

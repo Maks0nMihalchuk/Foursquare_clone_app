@@ -64,3 +64,5 @@
 "LocationErrorAlert.Title" = "Службы геолокации отключены";
 "LocationErrorAlert.Message" = "Пожалуйста, включите службы геолокации в настройках";
 "LocationErrorAlert.Action" = "Окей";
+
+"NotDataTableViewCell.LabelText" = "Извините. Что то пошло не так. Данные отсутствуют";

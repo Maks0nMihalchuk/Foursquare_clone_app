@@ -21,20 +21,14 @@ class UserCreatedCell: UICollectionViewCell {
         return UINib(nibName: "UserCreatedCell", bundle: nil)
     }
 
-    func configure(backgroundImage: Data?,
+    func configure(image: UIImage,
                    userImageName: String,
                    listName: String,
                    numberPlaces: String) {
 
-        if let imageData = backgroundImage {
-            backgroundImageView.image = UIImage(data: imageData)?
-                .cropCornerOfImage(by: .bottomLeftCorner)
-                .cropCornerOfImage(by: .upperRightCorner)
-        } else {
-            backgroundImageView.image = UIImage(named: "listsCellBackground")?
-                .cropCornerOfImage(by: .bottomLeftCorner)
-                .cropCornerOfImage(by: .upperRightCorner)
-        }
+        backgroundImageView.image = image
+            .cropCornerOfImage(by: .bottomLeftCorner)
+            .cropCornerOfImage(by: .upperRightCorner)
 
         userImageView.image = UIImage(named: userImageName)
         listNameLabel.text = listName

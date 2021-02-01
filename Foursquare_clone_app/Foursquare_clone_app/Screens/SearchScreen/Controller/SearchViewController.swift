@@ -13,10 +13,10 @@ class SearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
 
-    private let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
+    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,13 +83,11 @@ extension SearchViewController: UITableViewDelegate {
                     return
                 }
 
-                NetworkManager.shared.getPhoto(prefix: detailVenueInfo.prefix,
-                                               suffix: detailVenueInfo.suffix) { (imageData) in
-                    DispatchQueue.main.async {
-                        let viewModel = ViewModel(dataModel: detailVenueInfo, imageData: imageData)
-                        self.showAlertForSelection(viewModel: viewModel)
-                    }
+                DispatchQueue.main.async {
+                    let viewModel = ViewModel(dataModel: detailVenueInfo)
+                    self.showAlertForSelection(viewModel: viewModel)
                 }
+
             } else {
                 self.showAlertError()
                 return
@@ -137,11 +135,13 @@ private extension SearchViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
                                                  style: .default) { (_) in
-                                                    self.setupDetailControllerWithScrollView(viewModel: viewModel)
+                                                    self.showDetailViewController(by: .scrollView,
+                                                                                  viewModel: viewModel)
         }
         let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
                                                  style: .default) { (_) in
-                                                    self.setupAndPresentDetailController(viewModel: viewModel)
+                                                    self.showDetailViewController(by: .tableView,
+                                                                                  viewModel: viewModel)
         }
         let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alertController.addAction(detailWithScrollView)
@@ -150,21 +150,13 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func setupDetailControllerWithScrollView(viewModel: ViewModel?) {
-        let detailController = mainStoryboard
-            .instantiateViewController(identifier: "DetailViewControllerWithScrollView")
-            as? DetailViewControllerWithScrollView
-
-        guard
-            let detail = detailController,
-            let viewModel = viewModel
-        else {
-            return
+    func showDetailViewController(by storyType: VenueDetailsStoryType, viewModel: ViewModel) {
+        router.showVenueDetailsStory(from: self,
+                                     type: storyType,
+                                     model: viewModel,
+                                     animated: true) { (_) in
+                                        self.router.hideVenueDetailsStory(animated: true)
         }
-
-        detail.viewModel = viewModel
-        detail.modalPresentationStyle = .fullScreen
-        present(detail, animated: true, completion: nil)
     }
 
     func setupSearchBar(searchBar: UISearchBar, text: String, isActive: Bool) {
@@ -178,19 +170,6 @@ private extension SearchViewController {
         } else {
             searchBar.resignFirstResponder()
         }
-    }
-
-    func setupAndPresentDetailController(viewModel: ViewModel) {
-        let detailController = mainStoryboard
-            .instantiateViewController(identifier: "DetailViewController") as? DetailViewController
-
-        guard let detail = detailController else {
-            return
-        }
-
-        detail.viewModel = viewModel
-        detail.modalPresentationStyle = .fullScreen
-        present(detail, animated: true, completion: nil)
     }
 
     func showAlertError() {

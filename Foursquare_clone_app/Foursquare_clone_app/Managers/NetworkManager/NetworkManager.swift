@@ -211,35 +211,7 @@ class NetworkManager {
                 completion(StorageManager.shared.getUserLists(), true)
             } catch {
                 completion(nil, false)
-
             }
-        }
-    }
-
-    func getPhoto(prefix: String?, suffix: String?, completion: @escaping (Data?) -> Void) {
-        guard let pref = prefix,
-              let suff = suffix
-        else {
-            completion(nil)
-            return
-        }
-        let urlString = "\(pref)400x400\(suff)"
-
-        guard let url = URL(string: urlString) else {
-            completion(nil)
-            return
-        }
-
-        makeDataTaskRequest(with: url) { (data, error) in
-            if error != nil {
-                completion(nil)
-                return
-            }
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            completion(data)
         }
     }
 

@@ -163,7 +163,12 @@ extension ListsViewController: UICollectionViewDataSource {
 
             switch KeysForSections.arrayOfKeysForSection[indexPath.section] {
             case .sectionOfStandardCells:
-                cell.configure(backgroundImage: nil, userImageName: defaultImageForLists[indexPath.item],
+
+                let image = setupImageForCell(prefix: nil,
+                                              suffix: nil)
+
+                cell.configure(image: image,
+                               userImageName: defaultImageForLists[indexPath.item],
                                listName: defaultNameLists[indexPath.item].listName,
                                numberPlaces: setupNumberPlaces(numberPlaces: userLists.count))
                 return cell
@@ -186,15 +191,12 @@ extension ListsViewController: UICollectionViewDataSource {
             let userImage = setImageName(indexPath: indexPath,
                                          defaultImageForLists: defaultImageForLists,
                                          userImageDefault: userImageDefault)
-
-            networkManager.getPhoto(prefix: prefix, suffix: suffix) { (imageData) in
-                DispatchQueue.main.async {
-                    cell.configure(backgroundImage: imageData,
-                                   userImageName: userImage,
-                                   listName: listName,
-                                   numberPlaces: number)
-                }
-            }
+            let image = setupImageForCell(prefix: prefix,
+                                          suffix: suffix)
+            cell.configure(image: image,
+                           userImageName: userImage,
+                           listName: listName,
+                           numberPlaces: number)
             return cell
         }
     }
@@ -291,6 +293,22 @@ private extension ListsViewController {
 
 // MARK: - Setup screen
 private extension ListsViewController {
+
+    func setupImageForCell(prefix: String?, suffix: String?) -> UIImage {
+        let url = getPhotoURL(prefix: prefix,
+                              suffix: suffix,
+                              with: .middle)
+        let imageView = UIImageView()
+
+        imageView.kf.setImage(with: url,
+                              placeholder: UIImage(named: "listsCellBackground"),
+                              options: [.transition(.fade(1.0))],
+                              progressBlock: nil)
+
+        guard let image = imageView.image else { return UIImage()}
+
+        return image
+    }
 
     func setupHeaderTitle(title: String, type: String, numberOfLists: Int?) -> String {
         if type == TypeHeader.yours.rawValue {
