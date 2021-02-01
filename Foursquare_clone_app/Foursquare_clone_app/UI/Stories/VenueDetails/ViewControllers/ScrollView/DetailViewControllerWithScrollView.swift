@@ -45,7 +45,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var websiteVenueLabel: UILabel!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
-
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     var networking: NetworkManager?
     var venueID = String()
     var viewModel: DetailViewModel? {
@@ -105,9 +105,23 @@ class DetailViewControllerWithScrollView: UIViewController {
 // MARK: - load data
 private extension DetailViewControllerWithScrollView {
 
+    func setupActivityIndicator(isHidden: Bool) {
+        activityIndicator.isHidden = !isHidden
+
+        if isHidden {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
     func loadData() {
         networking?.getDetailInfoVenue(venueId: venueID,
                                        completion: { (detailVenue, isSuccessful) in
+                                        DispatchQueue.main.async {
+                                            self.setupActivityIndicator(isHidden: true)
+                                        }
+
                                         if isSuccessful {
                                             guard let detailVenue = detailVenue else {
                                                 return
@@ -115,9 +129,11 @@ private extension DetailViewControllerWithScrollView {
 
                                             DispatchQueue.main.async {
                                                 self.viewModel = DetailViewModel(dataModel: detailVenue)
-
+                                                self.setupActivityIndicator(isHidden: false)
                                             }
                                         } else {
+                                            self.setupActivityIndicator(isHidden: false)
+                                            self.showAlertError()
                                             return
                                         }
         })
@@ -223,5 +239,19 @@ private extension DetailViewControllerWithScrollView {
     func configureContactsContainer(with viewModel: DetailViewModel) {
         phoneVenueLabel.text = viewModel.phone
         websiteVenueLabel.text = viewModel.website
+    }
+}
+
+// MARK: - setup error alert
+private extension DetailViewControllerWithScrollView {
+
+    func showAlertError() {
+        let alertController = UIAlertController(title: "Error",
+                                                message: "when downloading data error occurred", preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
     }
 }

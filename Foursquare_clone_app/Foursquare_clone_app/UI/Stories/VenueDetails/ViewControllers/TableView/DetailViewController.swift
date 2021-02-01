@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var customViewNavBar: UIView!
     @IBOutlet private weak var blurEffectView: UIVisualEffectView!
     @IBOutlet private weak var venueNameLabel: UILabel!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
@@ -136,19 +137,37 @@ extension DetailViewController: UITableViewDataSource {
 // MARK: - load data
 private extension DetailViewController {
 
+    func setupActivityIndicator(isHidden: Bool) {
+        activityIndicator.isHidden = !isHidden
+
+        if isHidden {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
     func loadData() {
         networking?.getDetailInfoVenue(venueId: venueID,
                                        completion: { (detailVenue, isSuccessful) in
+                                        DispatchQueue.main.async {
+                                            self.setupActivityIndicator(isHidden: true)
+                                        }
+
                                         if isSuccessful {
+
                                             guard let detailVenue = detailVenue else {
                                                 return
                                             }
 
                                             DispatchQueue.main.async {
                                                 self.viewModel = DetailViewModel(dataModel: detailVenue)
+                                                self.setupActivityIndicator(isHidden: false)
                                                 self.tableView.reloadData()
                                             }
                                         } else {
+                                            self.setupActivityIndicator(isHidden: false)
+                                            self.showAlertError()
                                             return
                                         }
         })
@@ -297,5 +316,19 @@ private extension DetailViewController {
                               options: [.transition(.fade(1.0))],
                               progressBlock: nil)
         return imageView.image
+    }
+}
+
+// MARK: - setup error alert
+private extension DetailViewController {
+
+    func showAlertError() {
+        let alertController = UIAlertController(title: "Error",
+                                                message: "when downloading data error occurred", preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
     }
 }

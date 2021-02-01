@@ -25,6 +25,13 @@
                                             <constraint firstAttribute="height" constant="300" id="PbR-bZ-Bbb"/>
                                         </constraints>
                                     </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="xe3-5P-x32">
+                                        <rect key="frame" x="0.0" y="130" width="414" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="ERh-xk-VlD"/>
+                                        </constraints>
+                                        <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dcsdcs" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFB-U6-SIX" userLabel="VenueNameLabel">
                                         <rect key="frame" x="16" y="268" width="382" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -33,6 +40,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="xe3-5P-x32" firstAttribute="centerX" secondItem="Yjn-Yo-Gnr" secondAttribute="centerX" id="3sC-xs-xil"/>
                                     <constraint firstAttribute="bottom" secondItem="sFB-U6-SIX" secondAttribute="bottom" constant="8" id="4W7-b0-Mws"/>
                                     <constraint firstItem="24A-CG-hoe" firstAttribute="top" secondItem="Yjn-Yo-Gnr" secondAttribute="top" id="7Bx-aY-7P2"/>
                                     <constraint firstAttribute="trailing" secondItem="24A-CG-hoe" secondAttribute="trailing" id="A7L-sX-qHb"/>
@@ -40,7 +48,9 @@
                                     <constraint firstItem="sFB-U6-SIX" firstAttribute="leading" secondItem="Yjn-Yo-Gnr" secondAttribute="leading" constant="16" id="Y1K-mf-Yx1"/>
                                     <constraint firstAttribute="trailing" secondItem="sFB-U6-SIX" secondAttribute="trailing" constant="16" id="c1e-nh-PNR"/>
                                     <constraint firstAttribute="height" constant="300" id="e5v-QR-DXt"/>
+                                    <constraint firstItem="xe3-5P-x32" firstAttribute="width" secondItem="Yjn-Yo-Gnr" secondAttribute="width" id="j8Q-CQ-cpb"/>
                                     <constraint firstAttribute="bottom" secondItem="24A-CG-hoe" secondAttribute="bottom" id="jpt-2f-whr"/>
+                                    <constraint firstItem="xe3-5P-x32" firstAttribute="centerY" secondItem="Yjn-Yo-Gnr" secondAttribute="centerY" id="sxL-fW-fEz"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXF-KK-yTa">
@@ -386,6 +396,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="h0S-uP-zvE"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="xe3-5P-x32" id="t5U-Rs-UVv"/>
                         <outlet property="addressVenueLabel" destination="jfV-xr-fxB" id="iBT-vo-xO5"/>
                         <outlet property="categoriesVenueLabel" destination="u9Y-8S-d1k" id="SUA-cs-VjJ"/>
                         <outlet property="detailDaysVenueLabel" destination="dQQ-PU-pMB" id="VCt-Jv-KIN"/>
@@ -413,7 +424,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAY-cb-xmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1435" y="1238"/>
+            <point key="canvasLocation" x="1434.7826086956522" y="1237.5"/>
         </scene>
         <!--Full Screen Image View Controller-->
         <scene sceneID="IjT-mf-QD9">
@@ -459,6 +470,10 @@
                                     <outlet property="delegate" destination="erF-sg-ICt" id="6oj-wQ-G4N"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="g7X-nV-ysI">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1x-mZ-nwp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <subviews>
@@ -535,18 +550,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QPp-a4-y7N" firstAttribute="trailing" secondItem="Z1x-mZ-nwp" secondAttribute="trailing" id="20S-gT-lWg"/>
+                            <constraint firstItem="g7X-nV-ysI" firstAttribute="leading" secondItem="QPp-a4-y7N" secondAttribute="leading" id="Cq5-cd-5yW"/>
                             <constraint firstAttribute="top" secondItem="J3f-7x-e9W" secondAttribute="top" id="DGY-8t-SeJ"/>
+                            <constraint firstItem="QPp-a4-y7N" firstAttribute="bottom" secondItem="g7X-nV-ysI" secondAttribute="bottom" id="Dbc-mW-kXW"/>
                             <constraint firstItem="QPp-a4-y7N" firstAttribute="trailing" secondItem="J3f-7x-e9W" secondAttribute="trailing" id="Dvw-Bo-uJx"/>
                             <constraint firstItem="J3f-7x-e9W" firstAttribute="bottom" secondItem="YTM-ho-3YB" secondAttribute="bottom" id="Nqo-la-h3J"/>
+                            <constraint firstItem="g7X-nV-ysI" firstAttribute="top" secondItem="Z1x-mZ-nwp" secondAttribute="bottom" id="czw-i0-mme"/>
                             <constraint firstItem="J3f-7x-e9W" firstAttribute="leading" secondItem="QPp-a4-y7N" secondAttribute="leading" id="f2i-VW-29M"/>
                             <constraint firstAttribute="top" secondItem="Z1x-mZ-nwp" secondAttribute="top" id="o8R-kJ-ZRe"/>
                             <constraint firstItem="Z1x-mZ-nwp" firstAttribute="leading" secondItem="QPp-a4-y7N" secondAttribute="leading" id="oVx-Vu-Yix"/>
                             <constraint firstItem="Z1x-mZ-nwp" firstAttribute="height" secondItem="QPp-a4-y7N" secondAttribute="height" multiplier="0.122249" id="ouK-iu-CLc"/>
+                            <constraint firstItem="QPp-a4-y7N" firstAttribute="trailing" secondItem="g7X-nV-ysI" secondAttribute="trailing" id="xPX-hO-Adh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QPp-a4-y7N"/>
                     </view>
                     <navigationItem key="navigationItem" id="BkV-GF-zgY"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="g7X-nV-ysI" id="zsa-go-baD"/>
                         <outlet property="blurEffectView" destination="LGh-g5-ARH" id="nsC-7J-q0n"/>
                         <outlet property="customViewNavBar" destination="Z1x-mZ-nwp" id="OcT-gJ-hCw"/>
                         <outlet property="tableView" destination="J3f-7x-e9W" id="RMQ-7b-kM2"/>

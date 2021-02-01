@@ -144,16 +144,6 @@ extension SearchViewController {
         alertController.addAction(cancelButton)
         present(alertController, animated: true, completion: nil)
     }
-
-    func showAlertError() {
-        let alertController = UIAlertController(title: "Error",
-                                                message: "when downloading data error occurred", preferredStyle: .alert)
-        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
-                                   style: .default,
-                                   handler: nil)
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
-    }
 }
 
 // MARK: - setup searchBar, DetailController
