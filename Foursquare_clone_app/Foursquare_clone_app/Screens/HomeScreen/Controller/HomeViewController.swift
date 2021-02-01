@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     private let indentWidth: CGFloat = 2
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
     private let router = VenueSearchRouting(assembly: VenueSearchAssembly())
+    private var pointCoordinates: GeoPoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +35,9 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GeolocationManager.shared.subscribe(subscribeTo: self)
-        GeolocationManager.shared.locationManagerSetting()
-        GeolocationManager.shared.startUpdateLocationData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        GeolocationManager.shared.stopUpdateLocationData()
         GeolocationManager.shared.unsubscribe(unsubscribeFrom: self)
     }
 
@@ -53,6 +51,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: GeolocationObserverProtocol {
 
     func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
+        pointCoordinates = locationManager.getCurrentLocation()
         coordinatesLabel.text = "lat: \(location.latitude) | long: \(location.longitude)"
     }
 
@@ -71,8 +70,14 @@ extension HomeViewController: GeolocationObserverProtocol {
 extension HomeViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let lat = pointCoordinates?.latitude,
+            let long = pointCoordinates?.longitude
+            else { return }
+
         let standardCategory = standardCategories[indexPath.item].imageName
-        NetworkManager.shared.getVenues(categoryName: standardCategory) { (venuesData, isSuccessful) in
+        NetworkManager.shared.getVenues(categoryName: standardCategory,
+                                        coordinates: (lat: lat, long: long)) { (venuesData, isSuccessful) in
             if isSuccessful {
 
                 guard let venuesData = venuesData else {

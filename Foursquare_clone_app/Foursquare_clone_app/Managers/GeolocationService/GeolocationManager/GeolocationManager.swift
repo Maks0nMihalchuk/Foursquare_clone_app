@@ -10,10 +10,9 @@ import UIKit
 import CoreLocation
 
 protocol GeolocationManagerProtocol {
-    func locationManagerSetting()
-    func startUpdateLocationData()
-    func stopUpdateLocationData()
-    func getCurrentLocationData(point location: GeoPoint)
+    func startUpdateLocation()
+    func stopUpdateLocation()
+    func didUpdateLocation(point location: GeoPoint)
     func getStatus() -> TrackLocationStatus
     func askPermissionToUseGeolocation()
 }
@@ -23,9 +22,21 @@ class GeolocationManager: NSObject {
 
     private var locationManager = CLLocationManager()
     private lazy var subscribers = [GeolocationObserverProtocol]()
+    private var currentLocation: GeoPoint?
+
+    override init() {
+        super.init()
+        locationManagerSetting()
+    }
 
     deinit {
-        stopUpdateLocationData()
+        stopUpdateLocation()
+    }
+
+    private func locationManagerSetting() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.allowsBackgroundLocationUpdates = false
     }
 }
 
@@ -45,21 +56,15 @@ extension GeolocationManager: GeolocationSubscriberProtocol {
 // MARK: - GeolocationManagerProtocol
 extension GeolocationManager: GeolocationManagerProtocol {
 
-    func locationManagerSetting() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.allowsBackgroundLocationUpdates = false
-    }
-
-    func startUpdateLocationData() {
+    func startUpdateLocation() {
         locationManager.startUpdatingLocation()
     }
 
-    func stopUpdateLocationData() {
+    func stopUpdateLocation() {
         locationManager.stopUpdatingLocation()
     }
 
-    func getCurrentLocationData(point location: GeoPoint) {
+    func didUpdateLocation(point location: GeoPoint) {
         subscribers.forEach {
             $0.geolocationManager(self, didUpdateData: location)
         }
@@ -81,6 +86,10 @@ extension GeolocationManager: GeolocationManagerProtocol {
     func askPermissionToUseGeolocation() {
         locationManager.requestWhenInUseAuthorization()
     }
+
+    func getCurrentLocation() -> GeoPoint? {
+        return currentLocation
+    }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -88,7 +97,7 @@ extension GeolocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error: \(error.localizedDescription)")
-        stopUpdateLocationData()
+        stopUpdateLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -97,8 +106,8 @@ extension GeolocationManager: CLLocationManagerDelegate {
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
         let geoPoint = GeoPoint(latitude: latitude, longitude: longitude)
-
-        getCurrentLocationData(point: geoPoint)
+        currentLocation = geoPoint
+        didUpdateLocation(point: geoPoint)
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -108,7 +117,7 @@ extension GeolocationManager: CLLocationManagerDelegate {
         switch status {
 
         case .notDetermined:
-            startUpdateLocationData()
+            startUpdateLocation()
         case .restricted, .denied:
             firstSubscribe.geolocationManager(self, showLocationAccess: .notAvailable)
         case .authorizedAlways, .authorizedWhenInUse:

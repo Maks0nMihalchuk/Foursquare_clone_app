@@ -26,12 +26,22 @@ class SearchViewController: UIViewController {
     var launchSearchBar = Bool()
     var searchBarText = String()
     var router: VenueDetailsRouting?
+    private var pointCoordinates: GeoPoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        pointCoordinates = GeolocationManager.shared.getCurrentLocation()
         tableView.register(SearchTableCell.nib(), forCellReuseIdentifier: SearchTableCell.identifier)
         setupSearchBar(searchBar: searchBar, text: searchBarText, isActive: launchSearchBar)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GeolocationManager.shared.subscribe(subscribeTo: self)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        GeolocationManager.shared.unsubscribe(unsubscribeFrom: self)
     }
 
     @IBAction func goToBack(_ sender: UIButton) {
@@ -39,39 +49,59 @@ class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - GeolocationObserverProtocol
+extension SearchViewController: GeolocationObserverProtocol {
+
+    func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
+        pointCoordinates = locationManager.getCurrentLocation()
+    }
+
+    func geolocationManager(_ locationManager: GeolocationManager, showLocationAccess status: TrackLocationStatus) {
+        switch status {
+        case .available:
+            return
+        case .notAvailable:
+            print("notAvailable")
+        }
+    }
+}
+
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text else {
+        guard
+            let text = searchBar.text,
+            let lat = pointCoordinates?.latitude,
+            let long = pointCoordinates?.longitude
+        else {
+            searchBar.resignFirstResponder()
             return
         }
 
-        if text.isEmpty {
-            searchBar.resignFirstResponder()
-            venues.removeAll()
-            tableView.reloadData()
-        } else {
-            NetworkManager.shared.getVenues(categoryName: text) { (venuesData, isSuccessful)  in
+        venues.removeAll()
+        tableView.reloadData()
 
-                if isSuccessful {
+        NetworkManager.shared.getVenues(categoryName: text,
+                                        coordinates: (lat: lat,
+                                                      long: long)) { (venuesData, isSuccessful)  in
 
-                    guard let venuesData = venuesData else {
-                        return
-                    }
+            if isSuccessful {
 
-                    DispatchQueue.main.async {
-
-                        self.venues = venuesData
-                        self.tableView.reloadData()
-                    }
-                } else {
+                guard let venuesData = venuesData else {
                     return
                 }
 
+                DispatchQueue.main.async {
+
+                    self.venues = venuesData
+                    self.tableView.reloadData()
+                }
+            } else {
+                return
             }
-            searchBar.resignFirstResponder()
         }
+        searchBar.resignFirstResponder()
     }
 }
 

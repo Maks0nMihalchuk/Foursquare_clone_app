@@ -29,13 +29,15 @@ class NetworkManager {
     }
 
     func getVenues(categoryName: String,
+                   coordinates: (lat: Double, long: Double),
                    completion: @escaping ([Venue]?, Bool) -> Void) {
-
+        let lat = coordinates.lat
+        let long = coordinates.long
         let urlHostAllowed = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
         + "&v=\(versionAPI)"
-        + "&ll=40.7099,-73.9622&intent=checkin&radius=2000&query=\(categoryName)"
+        + "&ll=\(lat),\(long)&intent=checkin&radius=2000&query=\(categoryName)"
         guard
             let urlString = urlHostAllowed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         else {
