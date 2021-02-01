@@ -113,6 +113,12 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-l7-K4t">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="425.66666666666669"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMX-tE-Moo">
+                                <rect key="frame" x="20" y="371.66666666666669" width="374" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.89761700913241993" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -120,6 +126,7 @@
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="4uM-5Z-Whq"/>
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="top" secondItem="zfP-uj-jSY" secondAttribute="top" id="ARk-t5-dJe"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="height" secondItem="ESO-gy-7jy" secondAttribute="height" multiplier="0.41" constant="16.043333333333351" id="BXK-FT-Wbi"/>
+                            <constraint firstItem="csS-jc-7hU" firstAttribute="top" secondItem="XMX-tE-Moo" secondAttribute="bottom" constant="32" id="FAA-i3-fsi"/>
                             <constraint firstItem="csS-jc-7hU" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="LXg-AF-sda"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="centerX" secondItem="ESO-gy-7jy" secondAttribute="centerX" id="OUp-pT-a6H"/>
                             <constraint firstItem="sk8-3b-zb2" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="S1T-rl-aw1"/>
@@ -127,12 +134,14 @@
                             <constraint firstItem="csS-jc-7hU" firstAttribute="top" secondItem="SpC-l7-K4t" secondAttribute="bottom" constant="8" id="VFE-mC-qcX"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="bottom" secondItem="SUt-AO-PA7" secondAttribute="bottom" id="YGo-kt-1Ic"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="SUt-AO-PA7" secondAttribute="trailing" id="YxT-B3-afT"/>
+                            <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="XMX-tE-Moo" secondAttribute="trailing" constant="20" id="Yyy-Ms-8yk"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="bottom" secondItem="SUt-AO-PA7" secondAttribute="bottom" id="cCk-QM-PRG"/>
                             <constraint firstItem="SUt-AO-PA7" firstAttribute="height" secondItem="sk8-3b-zb2" secondAttribute="height" id="eF0-PQ-8Nq"/>
                             <constraint firstItem="SpC-l7-K4t" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="fWB-Uh-mZq"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="SpC-l7-K4t" secondAttribute="trailing" id="p9O-Fw-28Y"/>
                             <constraint firstItem="csS-jc-7hU" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" constant="20" id="p9U-7X-xUw"/>
                             <constraint firstItem="SUt-AO-PA7" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" id="pfK-8U-W1o"/>
+                            <constraint firstItem="XMX-tE-Moo" firstAttribute="leading" secondItem="ESO-gy-7jy" secondAttribute="leading" constant="20" id="rH8-Ql-Ubx"/>
                             <constraint firstItem="ESO-gy-7jy" firstAttribute="trailing" secondItem="sk8-3b-zb2" secondAttribute="trailing" id="xog-M6-Ov4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ESO-gy-7jy"/>
@@ -140,6 +149,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="jit-na-TJ7"/>
                     <connections>
                         <outlet property="collectionView" destination="sk8-3b-zb2" id="Ahs-lI-UOq"/>
+                        <outlet property="coordinatesLabel" destination="XMX-tE-Moo" id="v6U-df-r8z"/>
                         <outlet property="imageView" destination="SpC-l7-K4t" id="rpD-PX-4y9"/>
                         <outlet property="searchButton" destination="csS-jc-7hU" id="v0d-4L-7EA"/>
                     </connections>

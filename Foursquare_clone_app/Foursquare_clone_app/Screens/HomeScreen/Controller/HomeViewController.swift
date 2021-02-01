@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var coordinatesLabel: UILabel!
 
     private let standardCategories = defaultCategoriesList
     private let numberOfCellsInRow = 3
@@ -30,9 +31,39 @@ class HomeViewController: UIViewController {
         setupImageView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GeolocationManager.shared.subscribe(subscribeTo: self)
+        GeolocationManager.shared.locationManagerSetting()
+        GeolocationManager.shared.startUpdateLocationData()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        GeolocationManager.shared.stopUpdateLocationData()
+        GeolocationManager.shared.unsubscribe(unsubscribeFrom: self)
+    }
+
     @IBAction func searchButtonPress(_ sender: UIButton) {
         showSearchViewController(model: [Venue](),
                                  isActiveSearchBar: true, text: "")
+    }
+}
+
+// MARK: - GeolocationObserverProtocol
+extension HomeViewController: GeolocationObserverProtocol {
+
+    func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
+        coordinatesLabel.text = "lat: \(location.latitude) | long: \(location.longitude)"
+    }
+
+    func geolocationManager(_ locationManager: GeolocationManager, showLocationAccess status: TrackLocationStatus) {
+
+        switch status {
+        case .available:
+            return
+        case .notAvailable:
+            setupErrorAlert()
+        }
     }
 }
 
@@ -126,5 +157,22 @@ private extension HomeViewController {
                               placeholder: UIImage(named: "img_placeholder"),
                               options: [.transition(.fade(1.0))],
                               progressBlock: nil)
+    }
+}
+
+// MARK: - setup and display the location Error alert
+private extension HomeViewController {
+
+    func setupErrorAlert() {
+        let title = "LocationErrorAlert.Title".localized()
+        let message = "LocationErrorAlert.Message".localized()
+        let buttonTitle = "LocationErrorAlert.Action".localized()
+
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okeyButton = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
+        alertController.addAction(okeyButton)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
