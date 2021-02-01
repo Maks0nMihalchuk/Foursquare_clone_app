@@ -26,6 +26,8 @@ class DetailViewController: UIViewController {
     private let numberOfCellsWhenNoData = 1
     private var defaultHoursCellStatus = true
 
+    var networking: NetworkManager?
+    var venueID = String()
     var viewModel: DetailViewModel? {
         didSet {
             guard viewModel != nil else { return }
@@ -42,6 +44,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         navigationController?.isNavigationBarHidden = true
         setupTableView()
         setupBlurEffectView()
@@ -127,6 +130,28 @@ extension DetailViewController: UITableViewDataSource {
             let contactCell = getContactTableCell(tableView, indexPath, with: requiredViewModel)
             return contactCell
         }
+    }
+}
+
+// MARK: - load data
+private extension DetailViewController {
+
+    func loadData() {
+        networking?.getDetailInfoVenue(venueId: venueID,
+                                       completion: { (detailVenue, isSuccessful) in
+                                        if isSuccessful {
+                                            guard let detailVenue = detailVenue else {
+                                                return
+                                            }
+
+                                            DispatchQueue.main.async {
+                                                self.viewModel = DetailViewModel(dataModel: detailVenue)
+                                                self.tableView.reloadData()
+                                            }
+                                        } else {
+                                            return
+                                        }
+        })
     }
 }
 

@@ -21,7 +21,8 @@ class FullScreenImageViewController: UIViewController {
 
     var venueName = String()
     var venueImage: UIImage?
-    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly())
+    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly(),
+                                             networking: NetworkManager.shared)
 
     private lazy var backButton: UIBarButtonItem = {
         let image = UIImage(named: "backWhiteArrow")

@@ -543,7 +543,6 @@
 			isa = PBXGroup;
 			children = (
 				2D3BD9C1258782FE00389405 /* HomeScreen */,
-				2DEC31D2258AA716009FA472 /* SearchScreen */,
 				2D3BD9C5258783D700389405 /* ListsScreen */,
 				2DC43C8B2599E2E700655B2F /* AccountScreen */,
 			);
@@ -904,13 +903,6 @@
 			path = StorageManager;
 			sourceTree = "<group>";
 		};
-		2DDDCD46258B9B42008D2525 /* TableCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TableCell;
-			sourceTree = "<group>";
-		};
 		2DE67F132587F1920092B998 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,22 +918,6 @@
 				2DE67F18258800460092B998 /* CategoryCollectionCell.xib */,
 			);
 			path = CollectionCell;
-			sourceTree = "<group>";
-		};
-		2DEC31D2258AA716009FA472 /* SearchScreen */ = {
-			isa = PBXGroup;
-			children = (
-				2DDDCD46258B9B42008D2525 /* TableCell */,
-				2DEC31D3258AA73E009FA472 /* Controller */,
-			);
-			path = SearchScreen;
-			sourceTree = "<group>";
-		};
-		2DEC31D3258AA73E009FA472 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		2DFE6C0A25B5E4F300D945E6 /* GeneralLogicProtocol */ = {

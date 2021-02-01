@@ -8,15 +8,25 @@
 
 import UIKit
 
+protocol SearchViewControllerDelegate: class {
+    func searchViewController(_ viewController: SearchViewController,
+                              didTapOnRowAt indexPath: IndexPath, venueID: String)
+    func searchViewController(_ viewController: SearchViewController,
+                              didTapBack button: UIButton)
+}
+
 class SearchViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
 
+    weak var delegate: SearchViewControllerDelegate?
+
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
-    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly())
+    private let router = VenueDetailsRouting(assembly: VenueDetailsAssembly(),
+                                             networking: NetworkManager.shared)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +36,8 @@ class SearchViewController: UIViewController {
     }
 
     @IBAction func goToBack(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        delegate?.searchViewController(self, didTapBack: sender)
     }
-
 }
 
 // MARK: - UISearchBarDelegate
@@ -76,24 +85,10 @@ extension SearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        NetworkManager.shared.getDetailInfoVenue(venueId: venues[indexPath.row].id) { (detailVenueInfo, isSuccessful) in
-
-            if isSuccessful {
-                guard let detailVenueInfo = detailVenueInfo else {
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    let viewModel = DetailViewModel(dataModel: detailVenueInfo)
-                    self.showAlertForSelection(viewModel: viewModel)
-                }
-
-            } else {
-                self.showAlertError()
-                return
-            }
-
-        }
+        let venueID = venues[indexPath.row].id
+        delegate?.searchViewController(self,
+                                       didTapOnRowAt: indexPath,
+                                       venueID: venueID)
     }
 }
 
@@ -123,10 +118,10 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - setup searchBar, DetailController and AlertError
-private extension SearchViewController {
+// MARK: - Alert
+extension SearchViewController {
 
-    func showAlertForSelection(viewModel: DetailViewModel) {
+    func showAlertForSelection(venueID: String) {
         let title = "AlertSelectController.Title".localized()
         let message = "AlertSelectController.Message".localized()
         let detailWithScrollViewTitle = "detailWithScrollView"
@@ -136,12 +131,12 @@ private extension SearchViewController {
         let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
                                                  style: .default) { (_) in
                                                     self.showDetailViewController(by: .scrollView,
-                                                                                  viewModel: viewModel)
+                                                                                  venueID: venueID)
         }
         let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
                                                  style: .default) { (_) in
                                                     self.showDetailViewController(by: .tableView,
-                                                                                  viewModel: viewModel)
+                                                                                  venueID: venueID)
         }
         let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alertController.addAction(detailWithScrollView)
@@ -150,10 +145,23 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func showDetailViewController(by storyType: VenueDetailsStoryType, viewModel: DetailViewModel) {
+    func showAlertError() {
+        let alertController = UIAlertController(title: "Error",
+                                                message: "when downloading data error occurred", preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - setup searchBar, DetailController
+private extension SearchViewController {
+    func showDetailViewController(by storyType: VenueDetailsStoryType, venueID: String) {
         router.showVenueDetailsStory(from: self,
                                      type: storyType,
-                                     model: viewModel,
+                                     venueID: venueID,
                                      animated: true) { (_) in
                                         self.router.hideVenueDetailsStory(animated: true)
         }
@@ -170,15 +178,5 @@ private extension SearchViewController {
         } else {
             searchBar.resignFirstResponder()
         }
-    }
-
-    func showAlertError() {
-        let alertController = UIAlertController(title: "Error",
-                                                message: "when downloading data error occurred", preferredStyle: .alert)
-        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
-                                   style: .default,
-                                   handler: nil)
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
     }
 }

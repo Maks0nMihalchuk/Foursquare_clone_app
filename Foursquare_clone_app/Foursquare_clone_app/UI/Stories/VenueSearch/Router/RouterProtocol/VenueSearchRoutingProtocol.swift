@@ -14,8 +14,8 @@ typealias VenueSearchStoryCompletion = ((_ result: VenueSearchStoryResult) -> Vo
 protocol VenueSearchRoutingProtocol {
     func showVenueSearchStory(from: UIViewController,
                               model: [Venue],
-                              isActiveSearchBar: Bool,
-                              searchBarText: String,
+                              setupSearchBar: (isActiveSearchBar: Bool, searchBarText: String),
+                              animated: Bool,
                               completion: @escaping VenueSearchStoryCompletion)
     func hideVenueSearchStory(animated: Bool)
 }

@@ -12,7 +12,7 @@ import UIKit
 class VenueSearchRouting: VenueSearchRoutingProtocol {
 
     var completion: VenueSearchStoryCompletion?
-    var searchController: UIViewController?
+    private var searchController: UIViewController?
     private let assembly: VenueSearchAssembly
 
     init(assembly: VenueSearchAssembly) {
@@ -21,8 +21,8 @@ class VenueSearchRouting: VenueSearchRoutingProtocol {
 
     func showVenueSearchStory(from: UIViewController,
                               model: [Venue],
-                              isActiveSearchBar: Bool,
-                              searchBarText: String,
+                              setupSearchBar: (isActiveSearchBar: Bool, searchBarText: String),
+                              animated: Bool,
                               completion: @escaping VenueSearchStoryCompletion) {
         self.completion = completion
 
@@ -30,11 +30,13 @@ class VenueSearchRouting: VenueSearchRoutingProtocol {
 
         guard let controller = searchController else { return }
 
+        controller.delegate = self
         controller.venues = model
-        controller.searchBarText = searchBarText
-        controller.launchSearchBar = isActiveSearchBar
+        controller.searchBarText = setupSearchBar.searchBarText
+        controller.launchSearchBar = setupSearchBar.isActiveSearchBar
+        self.searchController = controller
         controller.modalPresentationStyle = .fullScreen
-        from.present(controller, animated: true, completion: nil)
+        from.present(controller, animated: animated, completion: nil)
     }
 
     func hideVenueSearchStory(animated: Bool) {
@@ -51,3 +53,17 @@ class VenueSearchRouting: VenueSearchRoutingProtocol {
 }
 
 // MARK: - SearchViewControllerDelegate
+extension VenueSearchRouting: SearchViewControllerDelegate {
+
+    func searchViewController(_ viewController: SearchViewController,
+                              didTapBack button: UIButton) {
+        finalizeStory()
+    }
+
+    func searchViewController(_ viewController: SearchViewController,
+                              didTapOnRowAt indexPath: IndexPath,
+                              venueID: String) {
+        viewController.showAlertForSelection(venueID: venueID)
+
+    }
+}

@@ -109,8 +109,8 @@ private extension HomeViewController {
     func showSearchViewController(model: [Venue], isActiveSearchBar: Bool, text: String) {
         router.showVenueSearchStory(from: self,
                                     model: model,
-                                    isActiveSearchBar: isActiveSearchBar,
-                                    searchBarText: text) { (_) in
+                                    setupSearchBar: (isActiveSearchBar: isActiveSearchBar, searchBarText: text),
+                                    animated: true) { (_) in
                                         self.router.hideVenueSearchStory(animated: true)
         }
     }

@@ -46,6 +46,8 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
 
+    var networking: NetworkManager?
+    var venueID = String()
     var viewModel: DetailViewModel? {
         didSet {
             guard let requireViewModel = viewModel else { return }
@@ -66,6 +68,7 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         navigationController?.isNavigationBarHidden = true
         setupUI()
 
@@ -96,6 +99,28 @@ class DetailViewControllerWithScrollView: UIViewController {
         else { return }
 
         delegate?.detailViewControllerWithScrollView(self, didTapFullScreenImage: sender, with: image, model: model)
+    }
+}
+
+// MARK: - load data
+private extension DetailViewControllerWithScrollView {
+
+    func loadData() {
+        networking?.getDetailInfoVenue(venueId: venueID,
+                                       completion: { (detailVenue, isSuccessful) in
+                                        if isSuccessful {
+                                            guard let detailVenue = detailVenue else {
+                                                return
+                                            }
+
+                                            DispatchQueue.main.async {
+                                                self.viewModel = DetailViewModel(dataModel: detailVenue)
+
+                                            }
+                                        } else {
+                                            return
+                                        }
+        })
     }
 }
 
