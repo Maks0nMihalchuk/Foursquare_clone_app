@@ -153,7 +153,7 @@ class NetworkManager {
         }
     }
 
-    func getUserInfo(accessToken: String, completion: @escaping (String?, Bool) -> Void) {
+    func getUserInfo(accessToken: String, completion: @escaping (UserInfoDataModel?, Bool) -> Void) {
 
         let urlString = "\(urlFoursquare)/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
 
@@ -175,9 +175,10 @@ class NetworkManager {
 
             do {
                 let userInfo = try JSONDecoder().decode(User.self, from: data)
-                let userFullName = "\(userInfo.response.user.firstName) "
-                + "\(userInfo.response.user.lastName)"
-                completion(userFullName, true)
+                let mapper = NetworkManager.shared.mapper
+                let convertedUserData = mapper.mapReceivedDataAboutUser(userData: userInfo.response.user)
+                StorageManager.shared.putUserInfo(of: convertedUserData)
+                completion(StorageManager.shared.getUserInfo(), true)
 
             } catch {
                 completion(nil, false)

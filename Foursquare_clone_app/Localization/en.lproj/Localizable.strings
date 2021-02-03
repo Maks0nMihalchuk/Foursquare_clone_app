@@ -14,13 +14,6 @@
 "HomeViewController.NightlifeTitle" = "Nightlife";
 "HomeViewController.ThingsToDoTitle" = "Things to do";
 
-"AccountViewController.UpdateDataButton" = "Press to update";
-"AccountViewController.SignInButton" = "Sign in";
-"AccountViewController.SignOutButton" = "Sign out";
-"AccountViewController.YourProfile" = "Your profile";
-"AccountViewController.AlertMessage" = "Login failed";
-"AccountViewController.AlertActionTitle" = "Proceed";
-
 "ListsViewController.Title" = "Lists";
 "ListsViewController.AlertToErrorMessage" = "To add lists you need to log in";
 
@@ -62,3 +55,17 @@
 "AlertSelectController.CancelButton" = "Cancel";
 
 "NotDataTableViewCell.LabelText" = "Sorry. Something went wrong. No data available";
+
+"AccountViewController.YourProfile" = "Your profile";
+
+"Unauthorized.PlaceholderLabel" = "By creating an account, you are able to follow friends and experts you trust and see the places they've recommended.";
+"Unauthorized.createYourAcc" = "Create Your Personal Account";
+"Unauthorized.Already" = "Already have an account?";
+"Unauthorized.SignInButton" = "Sign in";
+
+"Authorized.SignOutButton" = "Sign out";
+"Authorized.Tips" = "Tips";
+"Authorized.Photos" = "Photos";
+"Authorized.Followers" = "Followers";
+"Authorized.Lists" = "Lists";
+"Authorized.Placeholder" = "Had a great meal? Discovered a new bar? Know a place that always has great sales? Share your experience with others by leaving a tip.";

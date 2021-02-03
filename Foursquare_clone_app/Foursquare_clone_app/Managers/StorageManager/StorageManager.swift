@@ -18,6 +18,7 @@ class StorageManager {
     private var userLists = [GetUserListsGroup]()
     private var detailsVanue: DetailVenueModel?
     private var venues = [Venue]()
+    private var userInformation: UserInfoDataModel?
 
     func putUserIntoArray(of list: [GetUserListsGroup]) {
         userLists = list
@@ -41,5 +42,13 @@ class StorageManager {
 
     func getVenues() -> [Venue] {
         return venues
+    }
+
+    func putUserInfo(of userInfo: UserInfoDataModel) {
+        userInformation = userInfo
+    }
+
+    func getUserInfo() -> UserInfoDataModel? {
+        return userInformation
     }
 }
