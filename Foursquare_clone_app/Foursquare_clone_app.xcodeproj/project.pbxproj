@@ -79,6 +79,13 @@
 		2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */; };
 		2D9D63C425CAC9C500C5261D /* DefaultUserPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D63C325CAC9C500C5261D /* DefaultUserPhotoView.xib */; };
 		2D9D63C725CACA8400C5261D /* DefaultUserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63C625CACA8400C5261D /* DefaultUserPhotoView.swift */; };
+		2D9D63CE25CAF2BB00C5261D /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */; };
+		2D9D63D225CAF32400C5261D /* SettingsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63D125CAF32400C5261D /* SettingsAssemblyProtocol.swift */; };
+		2D9D63D425CAF39D00C5261D /* SettingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63D325CAF39D00C5261D /* SettingsAssembly.swift */; };
+		2D9D63D625CAFA4000C5261D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63D525CAFA4000C5261D /* SettingsViewController.swift */; };
+		2D9D63DA25CAFFF800C5261D /* SettingsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63D925CAFFF800C5261D /* SettingsRouterProtocol.swift */; };
+		2D9D63DD25CB00E200C5261D /* SettingsStoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63DC25CB00E200C5261D /* SettingsStoryResult.swift */; };
+		2D9D63DF25CB01CA00C5261D /* SettingsRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63DE25CB01CA00C5261D /* SettingsRouting.swift */; };
 		2D9EC7B125923E71003FBBC3 /* SearchTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9EC7B025923E71003FBBC3 /* SearchTableCell.xib */; };
 		2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2D9EC7B725925AB1003FBBC3 /* Localizable.strings */; };
 		2D9EC7BB259260D5003FBBC3 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9EC7BA259260D5003FBBC3 /* StringExtension.swift */; };
@@ -183,6 +190,13 @@
 		2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAnimationKeys.swift; sourceTree = "<group>"; };
 		2D9D63C325CAC9C500C5261D /* DefaultUserPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultUserPhotoView.xib; sourceTree = "<group>"; };
 		2D9D63C625CACA8400C5261D /* DefaultUserPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserPhotoView.swift; sourceTree = "<group>"; };
+		2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		2D9D63D125CAF32400C5261D /* SettingsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2D9D63D325CAF39D00C5261D /* SettingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAssembly.swift; sourceTree = "<group>"; };
+		2D9D63D525CAFA4000C5261D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2D9D63D925CAFFF800C5261D /* SettingsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouterProtocol.swift; sourceTree = "<group>"; };
+		2D9D63DC25CB00E200C5261D /* SettingsStoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStoryResult.swift; sourceTree = "<group>"; };
+		2D9D63DE25CB01CA00C5261D /* SettingsRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouting.swift; sourceTree = "<group>"; };
 		2D9EC7AB25923683003FBBC3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2D9EC7AC25923684003FBBC3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		2D9EC7B025923E71003FBBC3 /* SearchTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableCell.xib; sourceTree = "<group>"; };
@@ -470,6 +484,7 @@
 			children = (
 				2D36A6F525C00C38002B0E8A /* VenueDetails */,
 				2D365A7725C9621E00E4C777 /* AccountStory */,
+				2D9D63C825CAEE9A00C5261D /* SettingsStory */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
@@ -772,6 +787,92 @@
 			path = DefaultUserPhotoVIew;
 			sourceTree = "<group>";
 		};
+		2D9D63C825CAEE9A00C5261D /* SettingsStory */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63CA25CAEECE00C5261D /* Router */,
+				2D9D63C925CAEEC700C5261D /* Assembly */,
+				2D9D63CB25CAEED900C5261D /* ViewControllers */,
+				2D9D63CC25CAEEE600C5261D /* Storyboard */,
+			);
+			path = SettingsStory;
+			sourceTree = "<group>";
+		};
+		2D9D63C925CAEEC700C5261D /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63CF25CAF2E000C5261D /* AssemblyProtocol */,
+				2D9D63D025CAF2E900C5261D /* SettingsAssembly */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		2D9D63CA25CAEECE00C5261D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63DB25CB009500C5261D /* RouterModels */,
+				2D9D63D725CAFFC200C5261D /* RouterProtocol */,
+				2D9D63D825CAFFD300C5261D /* SettingsRouter */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2D9D63CB25CAEED900C5261D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63D525CAFA4000C5261D /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2D9D63CC25CAEEE600C5261D /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		2D9D63CF25CAF2E000C5261D /* AssemblyProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63D125CAF32400C5261D /* SettingsAssemblyProtocol.swift */,
+			);
+			path = AssemblyProtocol;
+			sourceTree = "<group>";
+		};
+		2D9D63D025CAF2E900C5261D /* SettingsAssembly */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63D325CAF39D00C5261D /* SettingsAssembly.swift */,
+			);
+			path = SettingsAssembly;
+			sourceTree = "<group>";
+		};
+		2D9D63D725CAFFC200C5261D /* RouterProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63D925CAFFF800C5261D /* SettingsRouterProtocol.swift */,
+			);
+			path = RouterProtocol;
+			sourceTree = "<group>";
+		};
+		2D9D63D825CAFFD300C5261D /* SettingsRouter */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63DE25CB01CA00C5261D /* SettingsRouting.swift */,
+			);
+			path = SettingsRouter;
+			sourceTree = "<group>";
+		};
+		2D9D63DB25CB009500C5261D /* RouterModels */ = {
+			isa = PBXGroup;
+			children = (
+				2D9D63DC25CB00E200C5261D /* SettingsStoryResult.swift */,
+			);
+			path = RouterModels;
+			sourceTree = "<group>";
+		};
 		2D9EC7B225925A6C003FBBC3 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1163,7 @@
 				2D365A7D25C962B000E4C777 /* AccountStoryboard.storyboard in Resources */,
 				2D5CB39125B1B45D007C6ED2 /* ShortInfoTableCell.xib in Resources */,
 				2D365ACB25C9C09500E4C777 /* AuthorizedUserView.xib in Resources */,
+				2D9D63CE25CAF2BB00C5261D /* SettingsStoryboard.storyboard in Resources */,
 				2D3BD9B125875B6800389405 /* Main.storyboard in Resources */,
 				2D38F7EB25B35CCF007CAE19 /* ContactTableCell.xib in Resources */,
 				2D5CB38B25B1B259007C6ED2 /* ImageTableViewCell.xib in Resources */,
@@ -1156,8 +1258,10 @@
 				2D365AD725CAA70800E4C777 /* UserInfoViewModel.swift in Sources */,
 				2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */,
 				2D5CB38625B1B000007C6ED2 /* DetailViewController.swift in Sources */,
+				2D9D63D225CAF32400C5261D /* SettingsAssemblyProtocol.swift in Sources */,
 				2D38F7EA25B35CCF007CAE19 /* ContactTableCell.swift in Sources */,
 				2DCC68B125A8AC6A00639B93 /* GetUserLists.swift in Sources */,
+				2D9D63D625CAFA4000C5261D /* SettingsViewController.swift in Sources */,
 				2D326BAD25909B5D006E4A59 /* DetailCategory.swift in Sources */,
 				2D25472B25A5CF70008151FF /* HeaderModel.swift in Sources */,
 				2D49B9CD259B921A009AC096 /* SecureStoreError.swift in Sources */,
@@ -1169,6 +1273,7 @@
 				2DD6DCC825ACA70E00B0E948 /* GetPhoto.swift in Sources */,
 				2DE67F19258800460092B998 /* CategoryCollectionCell.swift in Sources */,
 				2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */,
+				2D9D63DF25CB01CA00C5261D /* SettingsRouting.swift in Sources */,
 				2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */,
 				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
 				2D9D63C725CACA8400C5261D /* DefaultUserPhotoView.swift in Sources */,
@@ -1185,6 +1290,7 @@
 				2D06D148259A22120090CF23 /* URLExtension.swift in Sources */,
 				2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */,
 				2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */,
+				2D9D63DD25CB00E200C5261D /* SettingsStoryResult.swift in Sources */,
 				2D613F7625AF0FAF00F86004 /* KeysForSections.swift in Sources */,
 				2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */,
 				2D39010E258D13F9003C2187 /* Mapper.swift in Sources */,
@@ -1192,6 +1298,7 @@
 				2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */,
 				2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */,
 				2D06D14B259A29290090CF23 /* Model.swift in Sources */,
+				2D9D63DA25CAFFF800C5261D /* SettingsRouterProtocol.swift in Sources */,
 				2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */,
 				2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */,
 				2D365A8D25C9895D00E4C777 /* AccountAssembly.swift in Sources */,
@@ -1207,6 +1314,7 @@
 				2D5CB39025B1B45D007C6ED2 /* ShortInfoTableCell.swift in Sources */,
 				2DFE6C0725B4865500D945E6 /* KeysForCells.swift in Sources */,
 				2DFE6C0C25B5E50300D945E6 /* GeneralLogicProtocol.swift in Sources */,
+				2D9D63D425CAF39D00C5261D /* SettingsAssembly.swift in Sources */,
 				2DC5D57125C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift in Sources */,
 				2DC5D57425C04F65005ABFFF /* VenueDetailsRouting.swift in Sources */,
 				2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */,

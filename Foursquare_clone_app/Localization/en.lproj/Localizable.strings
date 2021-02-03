@@ -69,3 +69,10 @@
 "Authorized.Followers" = "Followers";
 "Authorized.Lists" = "Lists";
 "Authorized.Placeholder" = "Had a great meal? Discovered a new bar? Know a place that always has great sales? Share your experience with others by leaving a tip.";
+
+"Settings.Title" = "Settings";
+"Settings.PushNotification" = "Push-notifications";
+"Settings.AboutUs" = "About us";
+"Settings.TermsOfUse" = "Terms of use";
+"Settings.Privacy" = "Privacy";
+

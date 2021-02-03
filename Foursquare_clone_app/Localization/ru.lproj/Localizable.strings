@@ -69,3 +69,9 @@
 "Authorized.Followers" = "Последователи";
 "Authorized.Lists" = "Списки";
 "Authorized.Placeholder" = "Понравилась еда? Открыли для себя новый бар? Нашли место, где всегда отличные распродажи? Поделитесь своим опытом с другими, оставив подсказку.";
+
+"Settings.Title" = "Настройки";
+"Settings.PushNotification" = "Всплывающие уведомления";
+"Settings.AboutUs" = "О нас";
+"Settings.TermsOfUse" = "Условия эксплуатации";
+"Settings.Privacy" = "Конфиденциальность";

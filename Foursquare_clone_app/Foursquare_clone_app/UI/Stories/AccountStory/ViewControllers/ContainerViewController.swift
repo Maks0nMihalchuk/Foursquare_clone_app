@@ -31,6 +31,7 @@ class ContainerViewController: UIViewController {
     private let assembly = AccountAssembly()
     private var unauthorizedUserView: UnauthorizedUserView?
     private var authorizedUserView: AuthorizedUserView?
+    private let router = SettingsRouting(assembly: SettingsAssembly())
 
     private var userInfoViewModel: UserInfoViewModel? {
         didSet {
@@ -59,9 +60,10 @@ class ContainerViewController: UIViewController {
     }
 
     @IBAction func didTapSettingsButton(_ sender: UIButton) {
-
+        router.showSettingsStory(from: self, animated: true) { (_) in
+            self.router.hideSettingsStory(animated: true)
+        }
     }
-
 }
 
 // MARK: - AuthorizedUserViewDelegate
