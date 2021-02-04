@@ -77,6 +77,13 @@
 		2D5CB39125B1B45D007C6ED2 /* ShortInfoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D5CB38F25B1B45D007C6ED2 /* ShortInfoTableCell.xib */; };
 		2D613F7625AF0FAF00F86004 /* KeysForSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D613F7525AF0FAF00F86004 /* KeysForSections.swift */; };
 		2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */; };
+		2D701F7D25CB259700A16B96 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F7C25CB259700A16B96 /* AboutUsViewController.swift */; };
+		2D701F7F25CB280000A16B96 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F7E25CB280000A16B96 /* PrivacyViewController.swift */; };
+		2D701F8125CB28A000A16B96 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F8025CB28A000A16B96 /* TermsOfUseViewController.swift */; };
+		2D701F8425CB399700A16B96 /* АК2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2D701F8325CB399700A16B96 /* АК2.pdf */; };
+		2D701F8725CC0BC200A16B96 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F8625CC0BC200A16B96 /* NotificationManager.swift */; };
+		2D701F8925CC0C0800A16B96 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F8825CC0C0800A16B96 /* Notification.swift */; };
+		2D701F8B25CC0C6300A16B96 /* NotificationDurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F8A25CC0C6300A16B96 /* NotificationDurationType.swift */; };
 		2D9D63C425CAC9C500C5261D /* DefaultUserPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D63C325CAC9C500C5261D /* DefaultUserPhotoView.xib */; };
 		2D9D63C725CACA8400C5261D /* DefaultUserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63C625CACA8400C5261D /* DefaultUserPhotoView.swift */; };
 		2D9D63CE25CAF2BB00C5261D /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */; };
@@ -188,6 +195,13 @@
 		2D5CB38F25B1B45D007C6ED2 /* ShortInfoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShortInfoTableCell.xib; sourceTree = "<group>"; };
 		2D613F7525AF0FAF00F86004 /* KeysForSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysForSections.swift; sourceTree = "<group>"; };
 		2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAnimationKeys.swift; sourceTree = "<group>"; };
+		2D701F7C25CB259700A16B96 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		2D701F7E25CB280000A16B96 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		2D701F8025CB28A000A16B96 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
+		2D701F8325CB399700A16B96 /* АК2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "АК2.pdf"; sourceTree = "<group>"; };
+		2D701F8625CC0BC200A16B96 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		2D701F8825CC0C0800A16B96 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		2D701F8A25CC0C6300A16B96 /* NotificationDurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDurationType.swift; sourceTree = "<group>"; };
 		2D9D63C325CAC9C500C5261D /* DefaultUserPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultUserPhotoView.xib; sourceTree = "<group>"; };
 		2D9D63C625CACA8400C5261D /* DefaultUserPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserPhotoView.swift; sourceTree = "<group>"; };
 		2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -304,6 +318,7 @@
 		2D292EA125A3624900A67F36 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2D701F8525CC0BA400A16B96 /* NotificationManager */,
 				2DD6DCC025AC9F3500B0E948 /* StorageManager */,
 				2DD269F825891EA500EAEC68 /* NetworkManager */,
 				2D49B9C9259B2752009AC096 /* KeychainManager */,
@@ -616,6 +631,7 @@
 				2D3BD9A825875B6800389405 /* Foursquare_clone_app */,
 				2D9EC7B225925A6C003FBBC3 /* Localization */,
 				2D2B00D4258BB87F00D49F32 /* Helper */,
+				2D701F8225CB35AF00A16B96 /* PDFFile */,
 				2D3BD9A725875B6800389405 /* Products */,
 				3CDDD1E5D4225A368687AC8E /* Pods */,
 				B32EA95B97018AD12E99880A /* Frameworks */,
@@ -778,6 +794,24 @@
 			path = ShortInfoTableCell;
 			sourceTree = "<group>";
 		};
+		2D701F8225CB35AF00A16B96 /* PDFFile */ = {
+			isa = PBXGroup;
+			children = (
+				2D701F8325CB399700A16B96 /* АК2.pdf */,
+			);
+			path = PDFFile;
+			sourceTree = "<group>";
+		};
+		2D701F8525CC0BA400A16B96 /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				2D701F8825CC0C0800A16B96 /* Notification.swift */,
+				2D701F8A25CC0C6300A16B96 /* NotificationDurationType.swift */,
+				2D701F8625CC0BC200A16B96 /* NotificationManager.swift */,
+			);
+			path = NotificationManager;
+			sourceTree = "<group>";
+		};
 		2D9D63C225CAC98D00C5261D /* DefaultUserPhotoVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,6 +855,9 @@
 			isa = PBXGroup;
 			children = (
 				2D9D63D525CAFA4000C5261D /* SettingsViewController.swift */,
+				2D701F7C25CB259700A16B96 /* AboutUsViewController.swift */,
+				2D701F8025CB28A000A16B96 /* TermsOfUseViewController.swift */,
+				2D701F7E25CB280000A16B96 /* PrivacyViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1159,6 +1196,7 @@
 				2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */,
 				2D3BD9B625875B6E00389405 /* LaunchScreen.storyboard in Resources */,
 				2D3BD9B325875B6E00389405 /* Assets.xcassets in Resources */,
+				2D701F8425CB399700A16B96 /* АК2.pdf in Resources */,
 				2D9EC7B125923E71003FBBC3 /* SearchTableCell.xib in Resources */,
 				2D365A7D25C962B000E4C777 /* AccountStoryboard.storyboard in Resources */,
 				2D5CB39125B1B45D007C6ED2 /* ShortInfoTableCell.xib in Resources */,
@@ -1242,6 +1280,7 @@
 				2D326BB525909F4F006E4A59 /* Hours.swift in Sources */,
 				2D25C10C25C2A760009DC3E6 /* NoDataTableViewCell.swift in Sources */,
 				2D2F495225A917F100A61FBB /* CreateNewListAlert.swift in Sources */,
+				2D701F7D25CB259700A16B96 /* AboutUsViewController.swift in Sources */,
 				2DD6DCC225AC9F5900B0E948 /* StorageManager.swift in Sources */,
 				2D365AD525CA8E5000E4C777 /* UserInfoDataModel.swift in Sources */,
 				2D4CF36725A2289E00C7006B /* ListsViewController.swift in Sources */,
@@ -1264,10 +1303,12 @@
 				2D9D63D625CAFA4000C5261D /* SettingsViewController.swift in Sources */,
 				2D326BAD25909B5D006E4A59 /* DetailCategory.swift in Sources */,
 				2D25472B25A5CF70008151FF /* HeaderModel.swift in Sources */,
+				2D701F8725CC0BC200A16B96 /* NotificationManager.swift in Sources */,
 				2D49B9CD259B921A009AC096 /* SecureStoreError.swift in Sources */,
 				2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */,
 				2D25472825A5CDEB008151FF /* HeaderCollectionView.swift in Sources */,
 				2D38F7E525B34ECA007CAE19 /* HoursTableCell.swift in Sources */,
+				2D701F8125CB28A000A16B96 /* TermsOfUseViewController.swift in Sources */,
 				2D25C10725C1E170009DC3E6 /* RadialGradientView.swift in Sources */,
 				2D326BB125909D59006E4A59 /* Contact.swift in Sources */,
 				2DD6DCC825ACA70E00B0E948 /* GetPhoto.swift in Sources */,
@@ -1275,6 +1316,7 @@
 				2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */,
 				2D9D63DF25CB01CA00C5261D /* SettingsRouting.swift in Sources */,
 				2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */,
+				2D701F8B25CC0C6300A16B96 /* NotificationDurationType.swift in Sources */,
 				2D326BAB25909AB3006E4A59 /* DetailLocation.swift in Sources */,
 				2D9D63C725CACA8400C5261D /* DefaultUserPhotoView.swift in Sources */,
 				2DC5D57925C05099005ABFFF /* VenueDetailsStoryResult.swift in Sources */,
@@ -1287,6 +1329,7 @@
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,
 				2D5CB38A25B1B259007C6ED2 /* ImageTableViewCell.swift in Sources */,
 				2D39010B258CFB2C003C2187 /* DetailVenueModel.swift in Sources */,
+				2D701F8925CC0C0800A16B96 /* Notification.swift in Sources */,
 				2D06D148259A22120090CF23 /* URLExtension.swift in Sources */,
 				2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */,
 				2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */,
@@ -1319,6 +1362,7 @@
 				2DC5D57425C04F65005ABFFF /* VenueDetailsRouting.swift in Sources */,
 				2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */,
 				2D365A8B25C988BD00E4C777 /* AccountAssemblyProtocol.swift in Sources */,
+				2D701F7F25CB280000A16B96 /* PrivacyViewController.swift in Sources */,
 				2D365ACF25C9C3EA00E4C777 /* UnauthorizedUserView.swift in Sources */,
 				2D3BD9AC25875B6800389405 /* SceneDelegate.swift in Sources */,
 			);

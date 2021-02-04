@@ -17,6 +17,30 @@ class SettingsAssembly: SettingsAssemblyProtocol {
             as? SettingsViewController
         return settingsController
     }
+
+    func assemblyAboutUsVC() -> AboutUsViewController? {
+        let controllerID = String(describing: AboutUsViewController.self)
+        let aboutUsController = getStoruboard()
+            .instantiateViewController(withIdentifier: controllerID)
+            as? AboutUsViewController
+        return aboutUsController
+    }
+
+    func assemblyTermsOfUseViewController() -> TermsOfUseViewController? {
+        let controllerID = String(describing: TermsOfUseViewController.self)
+        let termsOfUseController = getStoruboard()
+        .instantiateViewController(withIdentifier: controllerID)
+        as? TermsOfUseViewController
+        return termsOfUseController
+    }
+
+    func assemblyPrivacyVC() -> PrivacyViewController? {
+        let controllerID = String(describing: PrivacyViewController.self)
+        let privacyController = getStoruboard()
+            .instantiateViewController(withIdentifier: controllerID)
+            as? PrivacyViewController
+        return privacyController
+    }
 }
 
 // MARK: - getStoryboard

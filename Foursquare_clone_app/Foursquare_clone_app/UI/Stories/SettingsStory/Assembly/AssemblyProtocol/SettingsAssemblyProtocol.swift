@@ -11,4 +11,7 @@ import UIKit
 
 protocol SettingsAssemblyProtocol {
     func assemblySettingsVC() -> SettingsViewController?
+    func assemblyAboutUsVC() -> AboutUsViewController?
+    func assemblyTermsOfUseViewController() -> TermsOfUseViewController?
+    func assemblyPrivacyVC() -> PrivacyViewController?
 }

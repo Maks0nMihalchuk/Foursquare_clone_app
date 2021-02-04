@@ -7,18 +7,33 @@
 //
 
 import UIKit
+import UserNotifications
 
 protocol SettingsViewControllerDelegate: class {
     func settingsViewController(_ viewController: SettingsViewController,
+                                didChangeValue sender: UISwitch)
+    func settingsViewController(_ viewController: SettingsViewController,
                                 didTapBack button: UIBarButtonItem)
+    func settingsViewController(_ viewController: SettingsViewController,
+                                didTapAboutUs button: UIButton,
+                                with urlString: String)
+    func settingsViewController(_ viewController: SettingsViewController,
+                                didTapTermsOfUse button: UIButton,
+                                with fileName: String)
+    func settingsViewController(_ viewController: SettingsViewController,
+                                didTapPrivacy button: UIButton)
 }
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet weak var pushNotificationsLabel: UILabel!
-    @IBOutlet weak var aboutUsButton: UIButton!
-    @IBOutlet weak var termsOfUseButton: UIButton!
-    @IBOutlet weak var privacyButton: UIButton!
+    @IBOutlet private weak var pushNotificationsLabel: UILabel!
+    @IBOutlet private weak var aboutUsButton: UIButton!
+    @IBOutlet private weak var termsOfUseButton: UIButton!
+    @IBOutlet private weak var privacyButton: UIButton!
+
+    private let notificationCenter = UNUserNotificationCenter.current()
+    private let urlString = "https://www.apple.com"
+    private var fileName = String()
 
     private lazy var backButton: UIBarButtonItem = {
         let image = UIImage(named: "backWhiteArrow")
@@ -36,16 +51,22 @@ class SettingsViewController: UIViewController {
         setupView()
     }
 
-    @IBAction func didTapAboutUsButton(_ sender: UIButton) {
+    @IBAction func didChangeSwitchValue(_ sender: UISwitch) {
+        delegate?.settingsViewController(self, didChangeValue: sender)
+    }
 
+    @IBAction func didTapAboutUsButton(_ sender: UIButton) {
+        delegate?.settingsViewController(self, didTapAboutUs: sender, with: urlString)
     }
 
     @IBAction func didTapTermsOfUseButton(_ sender: UIButton) {
-
+        fileName = "АК2"
+        delegate?.settingsViewController(self,
+                                         didTapTermsOfUse: sender, with: fileName)
     }
 
     @IBAction func didTapPrivacyButton(_ sender: UIButton) {
-
+        delegate?.settingsViewController(self, didTapPrivacy: sender)
     }
 }
 
