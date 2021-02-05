@@ -49,10 +49,6 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
-    }
-
-    override func loadView() {
-        super.loadView()
         setupAuthorizedUserView()
         setupUnauthorizedUserView()
         checkToken()
@@ -206,12 +202,12 @@ private extension ContainerViewController {
     }
 
     func setupAuthorizedUserView() {
-        authorizedUserView = assembly.assemblyAuthorizedUserView(containreBounds: containerView.bounds)
+        authorizedUserView = assembly.assemblyAuthorizedUserView(containerBounds: containerView.bounds)
         authorizedUserView?.delegate = self
     }
 
     func setupUnauthorizedUserView() {
-        unauthorizedUserView = assembly.assemblyUnauthorizedUserView(containreBounds: containerView.bounds)
+        unauthorizedUserView = assembly.assemblyUnauthorizedUserView(containerBounds: containerView.bounds)
         unauthorizedUserView?.delegate = self
     }
 

@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 protocol AccountAssemblyProtocol {
-    func assemblyAuthorizedUserView(containreBounds: CGRect) -> AuthorizedUserView
-    func assemblyUnauthorizedUserView(containreBounds: CGRect) -> UnauthorizedUserView
+    func assemblyAuthorizedUserView(containerBounds: CGRect) -> AuthorizedUserView
+    func assemblyUnauthorizedUserView(containerBounds: CGRect) -> UnauthorizedUserView
 }

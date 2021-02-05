@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 class AccountAssembly: AccountAssemblyProtocol {
-    func assemblyAuthorizedUserView(containreBounds: CGRect) -> AuthorizedUserView {
-        let view = AuthorizedUserView(frame: containreBounds)
+    func assemblyAuthorizedUserView(containerBounds: CGRect) -> AuthorizedUserView {
+        let view = AuthorizedUserView(frame: containerBounds)
         view.alpha = 0
 
         return view
     }
 
-    func assemblyUnauthorizedUserView(containreBounds: CGRect) -> UnauthorizedUserView {
-        let view = UnauthorizedUserView(frame: containreBounds)
+    func assemblyUnauthorizedUserView(containerBounds: CGRect) -> UnauthorizedUserView {
+        let view = UnauthorizedUserView(frame: containerBounds)
         view.alpha = 0
 
         return view
