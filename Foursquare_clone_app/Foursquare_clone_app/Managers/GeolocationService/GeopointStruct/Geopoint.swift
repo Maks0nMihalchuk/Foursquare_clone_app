@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GeoPoint {
-    var latitude: Double
-    var longitude: Double
+struct Geopoint {
+    let latitude: Double
+    let longitude: Double
 }

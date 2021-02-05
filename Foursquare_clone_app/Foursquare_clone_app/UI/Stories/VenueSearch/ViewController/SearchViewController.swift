@@ -26,22 +26,22 @@ class SearchViewController: UIViewController {
     var launchSearchBar = Bool()
     var searchBarText = String()
     var router: VenueDetailsRouting?
-    private var pointCoordinates: GeoPoint?
+    private var pointCoordinates: Geopoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pointCoordinates = GeolocationManager.shared.getCurrentLocation()
         tableView.register(SearchTableCell.nib(), forCellReuseIdentifier: SearchTableCell.identifier)
         setupSearchBar(searchBar: searchBar, text: searchBarText, isActive: launchSearchBar)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        GeolocationManager.shared.subscribe(subscribeTo: self)
+        GeopositionManager.shared.subscribeForGeopositionChanges(observer: self)
+        pointCoordinates = GeopositionManager.shared.getCurrentPosition()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        GeolocationManager.shared.unsubscribe(unsubscribeFrom: self)
+        GeopositionManager.shared.unsubscribeFromGeopositionChanges(observer: self)
     }
 
     @IBAction func goToBack(_ sender: UIButton) {
@@ -49,21 +49,14 @@ class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - GeolocationObserverProtocol
-extension SearchViewController: GeolocationObserverProtocol {
-
-    func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
-        pointCoordinates = locationManager.getCurrentLocation()
+// MARK: - GeopositionObserverProtocol
+extension SearchViewController: GeopositionObserverProtocol {
+    func geopositionManager(_ manager: GeopositionManagerPriotocol, didUpdateLocation location: Geopoint) {
+        pointCoordinates = location
     }
 
-    func geolocationManager(_ locationManager: GeolocationManager, showLocationAccess status: TrackLocationStatus) {
-        switch status {
-        case .available:
-            return
-        case .notAvailable:
-            print("notAvailable")
-        }
-    }
+    func geopositionManager(_ manager: GeopositionManagerPriotocol,
+                            didChangeStatus status: GeopositionManagerStatus) { }
 }
 
 // MARK: - UISearchBarDelegate

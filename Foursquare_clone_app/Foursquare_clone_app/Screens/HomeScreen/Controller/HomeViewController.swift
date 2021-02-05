@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     private let indentWidth: CGFloat = 2
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
     private let router = VenueSearchRouting(assembly: VenueSearchAssembly())
-    private var pointCoordinates: GeoPoint?
+    private var pointCoordinates: Geopoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +34,12 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        GeolocationManager.shared.subscribe(subscribeTo: self)
+        GeopositionManager.shared.subscribeForGeopositionChanges(observer: self)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        GeolocationManager.shared.unsubscribe(unsubscribeFrom: self)
+        super.viewDidDisappear(animated)
+        GeopositionManager.shared.unsubscribeFromGeopositionChanges(observer: self)
     }
 
     @IBAction func searchButtonPress(_ sender: UIButton) {
@@ -47,20 +48,18 @@ class HomeViewController: UIViewController {
     }
 }
 
-// MARK: - GeolocationObserverProtocol
-extension HomeViewController: GeolocationObserverProtocol {
-
-    func geolocationManager(_ locationManager: GeolocationManager, didUpdateData location: GeoPoint) {
-        pointCoordinates = locationManager.getCurrentLocation()
+// MARK: - GeopositionObserverProtocol
+extension HomeViewController: GeopositionObserverProtocol {
+    func geopositionManager(_ manager: GeopositionManagerPriotocol, didUpdateLocation location: Geopoint) {
+        pointCoordinates = location
         coordinatesLabel.text = "lat: \(location.latitude) | long: \(location.longitude)"
     }
 
-    func geolocationManager(_ locationManager: GeolocationManager, showLocationAccess status: TrackLocationStatus) {
-
+    func geopositionManager(_ manager: GeopositionManagerPriotocol, didChangeStatus status: GeopositionManagerStatus) {
         switch status {
-        case .available:
+        case .started:
             return
-        case .notAvailable:
+        case .stopped:
             setupErrorAlert()
         }
     }

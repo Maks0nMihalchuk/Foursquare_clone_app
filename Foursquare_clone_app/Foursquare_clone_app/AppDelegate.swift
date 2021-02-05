@@ -13,7 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // swiftlint:disable line_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GeolocationManager.shared.startUpdateLocation()
+        GeopositionManager.shared.startTrackLocation { (result) in
+
+        }
+
         return true
     }
 
