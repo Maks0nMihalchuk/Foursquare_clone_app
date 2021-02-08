@@ -356,7 +356,14 @@ private extension ListsViewController {
     func setupScreen() {
         title = "ListsViewController.Title".localized()
         collectionView.refreshControl = refreshControl
+        let navBar = navigationController?.navigationBar
+        navBar?.barTintColor = .systemBlue
+        navBar?.backgroundColor = .systemBlue
+        navBar?.barTintColor = .systemBlue
+        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white,
+                                       .font: UIFont.boldSystemFont(ofSize: 22)]
     }
+
     func updateDataOnScreen() {
         if userLists.isEmpty {
             getUserLists()

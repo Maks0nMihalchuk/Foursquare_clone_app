@@ -458,13 +458,6 @@
 			path = DetailInfoVenueModel;
 			sourceTree = "<group>";
 		};
-		2D2F495025A9171A00A61FBB /* AlertOfAddingNewList */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AlertOfAddingNewList;
-			sourceTree = "<group>";
-		};
 		2D33376625D1A49500B13C83 /* HomeStory */ = {
 			isa = PBXGroup;
 			children = (
@@ -863,7 +856,6 @@
 				2D3BD9A925875B6800389405 /* AppDelegate.swift */,
 				2D3BD9BF2587797700389405 /* Resorces */,
 				2D3BD9BE2587796A00389405 /* UI */,
-				2D3BD9C025877C4900389405 /* Screens */,
 			);
 			path = Foursquare_clone_app;
 			sourceTree = "<group>";
@@ -885,38 +877,6 @@
 				2D3BD9B725875B6E00389405 /* Info.plist */,
 			);
 			path = Resorces;
-			sourceTree = "<group>";
-		};
-		2D3BD9C025877C4900389405 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				2D3BD9C5258783D700389405 /* ListsScreen */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		2D3BD9C5258783D700389405 /* ListsScreen */ = {
-			isa = PBXGroup;
-			children = (
-				2D2F495025A9171A00A61FBB /* AlertOfAddingNewList */,
-				2D3BD9C7258783F500389405 /* Models */,
-				2D3BD9C6258783EF00389405 /* Controller */,
-			);
-			path = ListsScreen;
-			sourceTree = "<group>";
-		};
-		2D3BD9C6258783EF00389405 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2D3BD9C7258783F500389405 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		2D48B10D25D1D7F2004A211C /* View */ = {

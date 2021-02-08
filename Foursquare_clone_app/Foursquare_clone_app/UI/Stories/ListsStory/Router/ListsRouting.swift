@@ -27,7 +27,6 @@ class ListsRouting: ListsRoutingProtocol {
             guard let navigationController = from as? UINavigationController else { return }
 
             navigationController.viewControllers = [controller]
-            controller.navigationController?.navigationBar.isHidden = true
         } else {
             from = controller
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rve-C3-xL1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Lists View Controller-->
+        <!--Lists-->
         <scene sceneID="zBx-vv-Zgh">
             <objects>
                 <viewController storyboardIdentifier="ListsViewController" id="v0N-Cz-7Te" customClass="ListsViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fdm-EK-Djh">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" white="0.89761700909999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="NTM-J7-Slk">
                                     <size key="itemSize" width="50" height="50"/>
@@ -31,7 +31,7 @@
                                 </connections>
                             </collectionView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="gim-2n-IeU">
-                                <rect key="frame" x="188.5" y="432" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="410" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.37986247470000001" blue="0.78753569160000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -46,7 +46,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QMR-eu-8tJ"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Lists" image="list.bullet" catalog="system" id="qgu-1z-ttD"/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="HXo-78-jFN"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="gim-2n-IeU" id="dcg-e1-aXl"/>
                         <outlet property="collectionView" destination="Fdm-EK-Djh" id="PbV-Kq-VkM"/>
@@ -54,33 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGs-Q1-KNm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1992.753623188406" y="270.53571428571428"/>
-        </scene>
-        <!--Lists-->
-        <scene sceneID="hhS-SR-Rbv">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rve-C3-xL1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Lists" image="list.bullet" catalog="system" id="qgu-1z-ttD"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2CE-SR-6yC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="v0N-Cz-7Te" kind="relationship" relationship="rootViewController" id="r5H-ed-Dk0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oor-sP-ilA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1112" y="271"/>
+            <point key="canvasLocation" x="1635" y="266"/>
         </scene>
     </scenes>
     <resources>
