@@ -94,7 +94,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewBounds = collectionView.bounds
 
-        let widthCell = (collectionViewBounds.width - indentWidth * numberOfHorizontalIndents) / CGFloat(numberOfCellsInRow)
+        let widthCell = (collectionViewBounds.width - indentWidth * numberOfHorizontalIndents)
+            / CGFloat(numberOfCellsInRow)
         let heightCell = collectionViewBounds.height / CGFloat(numberOfRowInCollectionView)
 
         return CGSize(width: widthCell, height: heightCell)

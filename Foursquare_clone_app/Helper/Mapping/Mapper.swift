@@ -35,9 +35,33 @@ class Mapper {
                                 timeframesRenderedTime: timeframesRenderedTime, webSite: website,
                                 tierPrice: tierPrice, messagePrice: messagePrice)
     }
+
+    func mapReceivedDataAboutUser(userData: UserInfo) -> UserInfoDataModel {
+        let firstName = userData.firstName
+        let lastName = userData.lastName
+        let photoPrefix = userData.photo.prefix
+        let photoSuffix = userData.photo.suffix
+        let `default` = userData.photo.`default`
+        let friendsCount = userData.friends.count
+        let tipsCount = userData.tips.count
+        let photosCount = userData.photos.count
+        let userListsItem = getUserListsItems(data: userData.lists)
+        let userListsName = getUserListsName(listItems: userListsItem)
+        let userFollowersCount = getUserFollowers(listItems: userListsItem)
+
+        return UserInfoDataModel(firstName: firstName,
+                                 lastName: lastName,
+                                 photoPrefix: photoPrefix,
+                                 photoSuffix: photoSuffix, default: `default`,
+                                 countFriends: friendsCount,
+                                 countTips: tipsCount,
+                                 countPhotos: photosCount,
+                                 countFollowers: userFollowersCount,
+                                 listsName: userListsName)
+    }
 }
 
-// MARK: - converting the received data into a convenient form
+// MARK: - converting data about a place into a convenient form
 private extension Mapper {
 
     func getCategories(of apiModel: [DetailCategory]) -> [String] {
@@ -81,5 +105,34 @@ private extension Mapper {
             return renderedTime
         }()
         return renderedTime
+    }
+}
+
+// MARK: - converting user data into a convenient form
+private extension Mapper {
+
+    func getUserListsItems(data: UserLists) -> [UserListItems] {
+        let userGroupsLists = data.groups
+        let listItems = userGroupsLists.flatMap {
+            $0.items
+        }
+
+        return listItems
+    }
+
+    func getUserListsName(listItems: [UserListItems]) -> [String] {
+        let items = listItems.map {
+            $0.name
+        }
+
+        return items
+    }
+
+    func getUserFollowers(listItems: [UserListItems]) -> [Int] {
+        let followers = listItems.compactMap {
+            $0.followers?.count
+        }
+
+        return followers
     }
 }

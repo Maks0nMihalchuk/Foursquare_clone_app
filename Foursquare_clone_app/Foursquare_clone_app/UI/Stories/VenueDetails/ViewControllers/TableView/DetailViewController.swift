@@ -24,7 +24,7 @@ class DetailViewController: UIViewController {
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
     private let numberOfCellsWhenNoData = 1
-    private var defaultHoursCellStatus = true
+    private var defaultHoursCellStatus = false
 
     var viewModel: ViewModel? {
         didSet {
@@ -71,14 +71,19 @@ extension DetailViewController: ImageTableViewCellDelegate {
 // MARK: - HoursTableCellDelegate
 extension DetailViewController: HoursTableCellDelegate {
 
-    func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: HoursTableCallState.Type) {
+    func hoursTableViewCell(_ cell: HoursTableCell,
+                            didTapChangeState button: UIButton,
+                            to state: HoursTableCallState.Type) {
         let indexPath = self.tableView.indexPath(for: cell)
+        let transform = CGAffineTransform(rotationAngle: .zero)
 
         guard let index = indexPath else { return }
 
-        self.tableView.reloadRows(at: [IndexPath(row: index.row,
-                                                 section: index.section)],
-                                  with: .fade)
+        button.imageView?.transform = defaultHoursCellStatus
+            ? transform.rotated(by: .zero)
+            : transform.rotated(by: .pi)
+        tableView.reloadRows(at: [IndexPath(row: index.row, section: index.section)],
+                             with: .fade)
     }
 }
 

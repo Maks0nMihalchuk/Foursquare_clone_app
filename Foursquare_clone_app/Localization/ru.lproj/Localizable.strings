@@ -14,13 +14,6 @@
 "HomeViewController.NightlifeTitle" = "Ночь";
 "HomeViewController.ThingsToDoTitle" = "Дела";
 
-"AccountViewController.UpdateDataButton" = "Нажмите, чтобы обновить";
-"AccountViewController.SignInButton" = "Войти";
-"AccountViewController.SignOutButton" = "Выход";
-"AccountViewController.YourProfile" = "Ваш профиль";
-"AccountViewController.AlertMessage" = "Не удалось войти в аккаунт";
-"AccountViewController.AlertActionTitle" = "Продолжить";
-
 "ListsViewController.Title" = "Списки";
 "ListsViewController.AlertToErrorMessage" = "Для добавления списков вам необходимо авторизоваться";
 
@@ -62,3 +55,23 @@
 "AlertSelectController.CancelButton" = "Отменить";
 
 "NotDataTableViewCell.LabelText" = "Извините. Что то пошло не так. Данные отсутствуют";
+
+"AccountViewController.YourProfile" = "Ваш профиль";
+
+"Unauthorized.PlaceholderLabel" = "Создав учетную запись, вы можете подписаться на друзей и экспертов, которым доверяете, и увидеть места, которые они порекомендовали.";
+"Unauthorized.createYourAcc" = "Cоздать Свой личный кабинет";
+"Unauthorized.Already" = "Уже есть аккаунт?";
+"Unauthorized.SignInButton" = "Войти";
+
+"Authorized.SignOutButton" = "Выход";
+"Authorized.Tips" = "Подсказки";
+"Authorized.Photos" = "Фотографии";
+"Authorized.Followers" = "Последователи";
+"Authorized.Lists" = "Списки";
+"Authorized.Placeholder" = "Понравилась еда? Открыли для себя новый бар? Нашли место, где всегда отличные распродажи? Поделитесь своим опытом с другими, оставив подсказку.";
+
+"Settings.Title" = "Настройки";
+"Settings.PushNotification" = "Всплывающие уведомления";
+"Settings.AboutUs" = "О нас";
+"Settings.TermsOfUse" = "Условия эксплуатации";
+"Settings.Privacy" = "Конфиденциальность";
