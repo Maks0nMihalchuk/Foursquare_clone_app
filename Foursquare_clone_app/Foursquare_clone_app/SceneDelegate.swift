@@ -13,7 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private let mainRouter: MainRoutingProtocol = MainRouting(assembly: MainAssembly(),
                                                               homeRouter: HomeRouting(assembly: HomeAssembly()),
-                                                              accountRouter: AccountRouting(assembly: AccountAssembly()))
+                                                              accountRouter: AccountRouting(assembly: AccountAssembly()),
+                                                              listsRouter: ListsRouting(assembly: ListsAssembly()))
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }

@@ -14,21 +14,26 @@ class MainRouting: MainRoutingProtocol {
     private let assembly: MainAssemblyProtocol
     private let homeRouter: HomeRoutingProtocol
     private let accountRouter: AccountRoutingProtocol
+    private let listsRouter: ListsRoutingProtocol
 
     init(assembly: MainAssemblyProtocol,
          homeRouter: HomeRoutingProtocol,
-         accountRouter: AccountRoutingProtocol) {
+         accountRouter: AccountRoutingProtocol,
+         listsRouter: ListsRoutingProtocol) {
         self.assembly = assembly
         self.homeRouter = homeRouter
         self.accountRouter = accountRouter
+        self.listsRouter = listsRouter
     }
 
     func showMainStory(_ window: UIWindow?, animated: Bool) {
 
         let tabBarController = assembly.assemblyTabBarController()
         let homeNavigationController = getHomeViewController()
+        let listsNavigationController = getListsViewController()
         let accountNavigationController = getAccountViewController()
         let viewControllers: [UIViewController] = [homeNavigationController,
+                                                   listsNavigationController,
                                                    accountNavigationController]
 
         tabBarController.setViewControllers(viewControllers, animated: animated)
@@ -50,5 +55,11 @@ private extension MainRouting {
         var accountNavigationController: UIViewController = UINavigationController()
         accountRouter.showAccountStory(from: &accountNavigationController, animated: true)
         return accountNavigationController
+    }
+
+    func getListsViewController() -> UIViewController {
+        var listsNavigationController: UIViewController = UINavigationController()
+        listsRouter.showListsStory(from: &listsNavigationController, animated: true)
+        return listsNavigationController
     }
 }
