@@ -14,7 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // swiftlint:disable line_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNotifications(on: application)
-        // Override point for customization after application launch.
+        GeopositionManager.shared.startTrackLocation { (result) in
+
+        }
+
         return true
     }
 

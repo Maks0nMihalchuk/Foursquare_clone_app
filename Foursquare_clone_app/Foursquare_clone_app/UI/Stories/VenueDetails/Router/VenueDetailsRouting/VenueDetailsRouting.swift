@@ -12,17 +12,19 @@ import UIKit
 class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
     var completion: VenueDetailsStoryCompletion?
-    var detailConroller: UIViewController?
+    var detailController: UIViewController?
 
-    init(assembly: VenueDetailsAssembly) {
+    init(assembly: VenueDetailsAssembly, networking: NetworkManager) {
         self.assembly = assembly
+        self.networking = networking
     }
 
     private let assembly: VenueDetailsAssembly
+    private let networking: NetworkManager
 
     func showVenueDetailsStory(from: UIViewController,
                                type: VenueDetailsStoryType,
-                               model: ViewModel,
+                               venueID: String,
                                animated: Bool, completion: @escaping VenueDetailsStoryCompletion) {
 
         self.completion = completion
@@ -33,10 +35,11 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
             guard let controller = detailController else { return }
 
-            controller.viewModel = model
+            controller.venueID = venueID
+            controller.networking = networking
             controller.delegate = self
             let navigationController = UINavigationController(rootViewController: controller)
-            detailConroller = controller
+            self.detailController = controller
             navigationController.modalPresentationStyle = .fullScreen
             from.present(navigationController, animated: animated, completion: nil)
         case .scrollView:
@@ -44,20 +47,21 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
             guard let controller = detailController else { return }
 
+            controller.venueID = venueID
+            controller.networking = networking
             controller.delegate = self
-            controller.viewModel = model
             let navigationController = UINavigationController(rootViewController: controller)
-            detailConroller = controller
+            self.detailController = controller
             navigationController.modalPresentationStyle = .fullScreen
             from.present(navigationController, animated: animated, completion: nil)
         }
     }
 
     func hideVenueDetailsStory(animated: Bool) {
-        guard let controller = detailConroller else { return }
+        guard let controller = detailController else { return }
 
         controller.dismiss(animated: animated, completion: nil)
-        detailConroller = nil
+        detailController = nil
     }
 
     private func finalizeStory() {
@@ -75,7 +79,8 @@ extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
 
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapFullScreenImage button: UIButton,
-                                            with image: UIImage, model: ViewModel) {
+                                            with image: UIImage,
+                                            model: DetailViewModel) {
         let fullScreenImage = assembly.assemblyFullScreenImageVC()
 
         guard let imageScreen = fullScreenImage else { return }

@@ -54,6 +54,10 @@
 "AlertSelectController.Message" = "choose which controller you want to run";
 "AlertSelectController.CancelButton" = "Cancel";
 
+"LocationErrorAlert.Title" = "Location Services disabled";
+"LocationErrorAlert.Message" = "Please enable Location Services in Settings";
+"LocationErrorAlert.Action" = "Okey";
+
 "NotDataTableViewCell.LabelText" = "Sorry. Something went wrong. No data available";
 
 "AccountViewController.YourProfile" = "Your profile";

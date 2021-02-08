@@ -29,7 +29,7 @@ enum TierKeys {
     }
 }
 
-struct ViewModel {
+struct DetailViewModel {
     private let defaultRating = "-"
     private let defaultColor = "858585"
     private let dataModel: DetailVenueModel
@@ -107,7 +107,7 @@ struct ViewModel {
 }
 
 // MARK: - converting data from DetailVenueModel to ViewModel
-private extension ViewModel {
+private extension DetailViewModel {
 
     func getRating() -> String {
         guard let rating = dataModel.rating else {

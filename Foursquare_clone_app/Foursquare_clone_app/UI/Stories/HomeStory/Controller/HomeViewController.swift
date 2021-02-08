@@ -14,14 +14,16 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var coordinatesLabel: UILabel!
 
     private let standardCategories = defaultCategoriesList
     private let numberOfCellsInRow = 3
     private let numberOfRowInCollectionView = 2
     private let numberOfHorizontalIndents: CGFloat = 2
     private let indentWidth: CGFloat = 2
-    private let main = UIStoryboard(name: "Main", bundle: nil)
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
+    private let router = VenueSearchRouting(assembly: VenueSearchAssembly())
+    private var pointCoordinates: Geopoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +32,36 @@ class HomeViewController: UIViewController {
         setupImageView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GeopositionManager.shared.subscribeForGeopositionChanges(observer: self)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        GeopositionManager.shared.unsubscribeFromGeopositionChanges(observer: self)
+    }
+
     @IBAction func searchButtonPress(_ sender: UIButton) {
-        createdSearchController(main: main, isActiveSearchBar: true, searchBarText: "", venues: [Venue]())
+        showSearchViewController(model: [Venue](),
+                                 isActiveSearchBar: true, text: "")
+    }
+}
+
+// MARK: - GeopositionObserverProtocol
+extension HomeViewController: GeopositionObserverProtocol {
+    func geopositionManager(_ manager: GeopositionManagerPriotocol, didUpdateLocation location: Geopoint) {
+        pointCoordinates = location
+        coordinatesLabel.text = "lat: \(location.latitude) | long: \(location.longitude)"
+    }
+
+    func geopositionManager(_ manager: GeopositionManagerPriotocol, didChangeStatus status: GeopositionManagerStatus) {
+        switch status {
+        case .started:
+            return
+        case .stopped:
+            setupErrorAlert()
+        }
     }
 }
 
@@ -39,8 +69,14 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let lat = pointCoordinates?.latitude,
+            let long = pointCoordinates?.longitude
+            else { return }
+
         let standardCategory = standardCategories[indexPath.item].imageName
-        NetworkManager.shared.getVenues(categoryName: standardCategory) { (venuesData, isSuccessful) in
+        NetworkManager.shared.getVenues(categoryName: standardCategory,
+                                        coordinates: (lat: lat, long: long)) { (venuesData, isSuccessful) in
             if isSuccessful {
 
                 guard let venuesData = venuesData else {
@@ -48,11 +84,9 @@ extension HomeViewController: UICollectionViewDelegate {
                 }
 
                 DispatchQueue.main.async {
-
-                    self.createdSearchController(main: self.main,
-                                                 isActiveSearchBar: false,
-                                                 searchBarText: self.standardCategories[indexPath.item].title,
-                                                 venues: venuesData)
+                    self.showSearchViewController(model: venuesData,
+                                                  isActiveSearchBar: false,
+                                                  text: self.standardCategories[indexPath.item].title)
                 }
             } else {
                 return
@@ -94,7 +128,9 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewBounds = collectionView.bounds
 
-        let widthCell = (collectionViewBounds.width - indentWidth * numberOfHorizontalIndents)
+        let widthCell = (collectionViewBounds.width
+            - indentWidth
+            * numberOfHorizontalIndents)
             / CGFloat(numberOfCellsInRow)
         let heightCell = collectionViewBounds.height / CGFloat(numberOfRowInCollectionView)
 
@@ -105,22 +141,13 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - creating and showing a SearchController
 private extension HomeViewController {
 
-    func createdSearchController(main: UIStoryboard,
-                                 isActiveSearchBar: Bool,
-                                 searchBarText: String,
-                                 venues: [Venue]) {
-        let searchController = main.instantiateViewController(identifier: "SearchViewController")
-            as? SearchViewController
-
-        guard let search = searchController else {
-            return
+    func showSearchViewController(model: [Venue], isActiveSearchBar: Bool, text: String) {
+        router.showVenueSearchStory(from: self,
+                                    model: model,
+                                    setupSearchBar: (isActiveSearchBar: isActiveSearchBar, searchBarText: text),
+                                    animated: true) { (_) in
+                                        self.router.hideVenueSearchStory(animated: true)
         }
-
-        search.searchBarText = searchBarText
-        search.launchSearchBar = isActiveSearchBar
-        search.venues = venues
-        search.modalPresentationStyle = .fullScreen
-        present(search, animated: true, completion: nil)
     }
 }
 
@@ -134,5 +161,22 @@ private extension HomeViewController {
                               placeholder: UIImage(named: "img_placeholder"),
                               options: [.transition(.fade(1.0))],
                               progressBlock: nil)
+    }
+}
+
+// MARK: - setup and display the location Error alert
+private extension HomeViewController {
+
+    func setupErrorAlert() {
+        let title = "LocationErrorAlert.Title".localized()
+        let message = "LocationErrorAlert.Message".localized()
+        let buttonTitle = "LocationErrorAlert.Action".localized()
+
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okeyButton = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
+        alertController.addAction(okeyButton)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
