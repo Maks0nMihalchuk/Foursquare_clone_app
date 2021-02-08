@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AccountAssembly: AccountAssemblyProtocol {
+class AccountViewAssembly: AccountViewAssemblyProtocol {
     func assemblyAuthorizedUserView(containerBounds: CGRect) -> AuthorizedUserView {
         let view = AuthorizedUserView(frame: containerBounds)
         view.alpha = 0

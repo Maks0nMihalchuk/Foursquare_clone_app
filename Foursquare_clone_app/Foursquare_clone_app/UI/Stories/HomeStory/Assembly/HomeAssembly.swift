@@ -20,6 +20,7 @@ class HomeAssembly: HomeAssemblyProtocol {
     }
 }
 
+// MARK: - getStoryboard
 private extension HomeAssembly {
 
     func getStoryboard() -> UIStoryboard {

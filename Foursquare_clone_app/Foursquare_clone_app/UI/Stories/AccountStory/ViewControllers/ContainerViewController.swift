@@ -28,7 +28,7 @@ class ContainerViewController: UIViewController {
     private let redirectUrl = NetworkManager.shared.redirectUrl.lowercased()
     private let appearance = UITabBarAppearance()
     private var authorizationState: AuthorizationState?
-    private let assembly = AccountAssembly()
+    private let assembly = AccountViewAssembly()
     private var unauthorizedUserView: UnauthorizedUserView?
     private var authorizedUserView: AuthorizedUserView?
     private let router = SettingsRouting(assembly: SettingsAssembly())

@@ -12,7 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private let mainRouter: MainRoutingProtocol = MainRouting(assembly: MainAssembly(),
-                                                              homeRouter: HomeRouting(assembly: HomeAssembly()))
+                                                              homeRouter: HomeRouting(assembly: HomeAssembly()),
+                                                              accountRouter: AccountRouting(assembly: AccountAssembly()))
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -42,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        GeopositionManager.shared.startTrackLocation { (result) in
+        GeopositionManager.shared.startTrackLocation { (_) in
 
         }
     }

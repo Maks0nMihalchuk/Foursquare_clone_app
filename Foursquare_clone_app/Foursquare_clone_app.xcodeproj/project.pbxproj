@@ -46,8 +46,8 @@
 		2D33378525D1A72700B13C83 /* MainRoutingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33378325D1A72700B13C83 /* MainRoutingProtocol.swift */; };
 		2D3561F325A746D10015987D /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3561F225A746D10015987D /* UIImageExtension.swift */; };
 		2D365A7D25C962B000E4C777 /* AccountStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D365A7C25C962B000E4C777 /* AccountStoryboard.storyboard */; };
-		2D365A8B25C988BD00E4C777 /* AccountAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A8A25C988BD00E4C777 /* AccountAssemblyProtocol.swift */; };
-		2D365A8D25C9895D00E4C777 /* AccountAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A8C25C9895D00E4C777 /* AccountAssembly.swift */; };
+		2D365A8B25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A8A25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift */; };
+		2D365A8D25C9895D00E4C777 /* AccountViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A8C25C9895D00E4C777 /* AccountViewAssembly.swift */; };
 		2D365A9825C98DD100E4C777 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A9725C98DD100E4C777 /* ContainerViewController.swift */; };
 		2D365ACB25C9C09500E4C777 /* AuthorizedUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D365ACA25C9C09500E4C777 /* AuthorizedUserView.xib */; };
 		2D365ACD25C9C0B500E4C777 /* UnauthorizedUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D365ACC25C9C0B500E4C777 /* UnauthorizedUserView.xib */; };
@@ -88,6 +88,10 @@
 		2D5CB39125B1B45D007C6ED2 /* ShortInfoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D5CB38F25B1B45D007C6ED2 /* ShortInfoTableCell.xib */; };
 		2D613F7625AF0FAF00F86004 /* KeysForSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D613F7525AF0FAF00F86004 /* KeysForSections.swift */; };
 		2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */; };
+		2D62C63725D1CFE000091D0D /* AccountRoutingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62C63625D1CFE000091D0D /* AccountRoutingProtocol.swift */; };
+		2D62C63925D1CFFC00091D0D /* AccountRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62C63825D1CFFC00091D0D /* AccountRouting.swift */; };
+		2D62C63D25D1D1E800091D0D /* AccountAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62C63C25D1D1E800091D0D /* AccountAssemblyProtocol.swift */; };
+		2D62C63F25D1D24200091D0D /* AccountAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62C63E25D1D24200091D0D /* AccountAssembly.swift */; };
 		2D701F7D25CB259700A16B96 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F7C25CB259700A16B96 /* AboutUsViewController.swift */; };
 		2D701F7F25CB280000A16B96 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F7E25CB280000A16B96 /* PrivacyViewController.swift */; };
 		2D701F8125CB28A000A16B96 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D701F8025CB28A000A16B96 /* TermsOfUseViewController.swift */; };
@@ -184,8 +188,8 @@
 		2D33378325D1A72700B13C83 /* MainRoutingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRoutingProtocol.swift; sourceTree = "<group>"; };
 		2D3561F225A746D10015987D /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		2D365A7C25C962B000E4C777 /* AccountStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountStoryboard.storyboard; sourceTree = "<group>"; };
-		2D365A8A25C988BD00E4C777 /* AccountAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssemblyProtocol.swift; sourceTree = "<group>"; };
-		2D365A8C25C9895D00E4C777 /* AccountAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssembly.swift; sourceTree = "<group>"; };
+		2D365A8A25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2D365A8C25C9895D00E4C777 /* AccountViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewAssembly.swift; sourceTree = "<group>"; };
 		2D365A9725C98DD100E4C777 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		2D365ACA25C9C09500E4C777 /* AuthorizedUserView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizedUserView.xib; sourceTree = "<group>"; };
 		2D365ACC25C9C0B500E4C777 /* UnauthorizedUserView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnauthorizedUserView.xib; sourceTree = "<group>"; };
@@ -228,6 +232,10 @@
 		2D5CB38F25B1B45D007C6ED2 /* ShortInfoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShortInfoTableCell.xib; sourceTree = "<group>"; };
 		2D613F7525AF0FAF00F86004 /* KeysForSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysForSections.swift; sourceTree = "<group>"; };
 		2D613F7725AF153400F86004 /* AlertAnimationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAnimationKeys.swift; sourceTree = "<group>"; };
+		2D62C63625D1CFE000091D0D /* AccountRoutingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRoutingProtocol.swift; sourceTree = "<group>"; };
+		2D62C63825D1CFFC00091D0D /* AccountRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRouting.swift; sourceTree = "<group>"; };
+		2D62C63C25D1D1E800091D0D /* AccountAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2D62C63E25D1D24200091D0D /* AccountAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssembly.swift; sourceTree = "<group>"; };
 		2D701F7C25CB259700A16B96 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		2D701F7E25CB280000A16B96 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		2D701F8025CB28A000A16B96 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
@@ -475,8 +483,8 @@
 		2D33376825D1A53F00B13C83 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2D33377325D1A6C300B13C83 /* HomeRouting.swift */,
 				2D33377425D1A6C300B13C83 /* HomeRoutingProtocol.swift */,
+				2D33377325D1A6C300B13C83 /* HomeRouting.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -535,8 +543,8 @@
 		2D33377925D1A6F500B13C83 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2D33378025D1A72700B13C83 /* MainRouting */,
 				2D33378225D1A72700B13C83 /* RoterProtocol */,
+				2D33378025D1A72700B13C83 /* MainRouting */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -577,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				2D365A8025C975A600E4C777 /* Models */,
+				2D62C63525D1CFC700091D0D /* Router */,
 				2D365A7925C9623C00E4C777 /* Assembly */,
 				2D365A7A25C9624400E4C777 /* ViewControllers */,
 				2D365AC825C9BF8700E4C777 /* Views */,
@@ -588,8 +597,9 @@
 		2D365A7925C9623C00E4C777 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2D365A8825C9884A00E4C777 /* AssemblyProtocol */,
-				2D365A8925C9885600E4C777 /* AccountAssembly */,
+				2D62C63C25D1D1E800091D0D /* AccountAssemblyProtocol.swift */,
+				2D62C63A25D1D1B700091D0D /* AccountViewAssembly */,
+				2D62C63E25D1D24200091D0D /* AccountAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -623,7 +633,7 @@
 		2D365A8825C9884A00E4C777 /* AssemblyProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				2D365A8A25C988BD00E4C777 /* AccountAssemblyProtocol.swift */,
+				2D365A8A25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift */,
 			);
 			path = AssemblyProtocol;
 			sourceTree = "<group>";
@@ -631,7 +641,7 @@
 		2D365A8925C9885600E4C777 /* AccountAssembly */ = {
 			isa = PBXGroup;
 			children = (
-				2D365A8C25C9895D00E4C777 /* AccountAssembly.swift */,
+				2D365A8C25C9895D00E4C777 /* AccountViewAssembly.swift */,
 			);
 			path = AccountAssembly;
 			sourceTree = "<group>";
@@ -962,6 +972,24 @@
 				2DC7BCC225B62F1F0062AA90 /* Model */,
 			);
 			path = ShortInfoTableCell;
+			sourceTree = "<group>";
+		};
+		2D62C63525D1CFC700091D0D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2D62C63625D1CFE000091D0D /* AccountRoutingProtocol.swift */,
+				2D62C63825D1CFFC00091D0D /* AccountRouting.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2D62C63A25D1D1B700091D0D /* AccountViewAssembly */ = {
+			isa = PBXGroup;
+			children = (
+				2D365A8825C9884A00E4C777 /* AssemblyProtocol */,
+				2D365A8925C9885600E4C777 /* AccountAssembly */,
+			);
+			path = AccountViewAssembly;
 			sourceTree = "<group>";
 		};
 		2D701F8525CC0BA400A16B96 /* NotificationManager */ = {
@@ -1540,6 +1568,7 @@
 				2D259A5325B844890054DDC9 /* SearchCellModel.swift in Sources */,
 				2D326BB325909F1E006E4A59 /* ItemBestPhoto.swift in Sources */,
 				2D85CEE225C7245B0058158E /* VenueSearchRoutingProtocol.swift in Sources */,
+				2D62C63F25D1D24200091D0D /* AccountAssembly.swift in Sources */,
 				2D4F073825A77C8000C9230E /* DefaultImage.swift in Sources */,
 				2D85CEE625C7256A0058158E /* VenueSearchStoryResult.swift in Sources */,
 				2D326BAF25909CEB006E4A59 /* Price.swift in Sources */,
@@ -1567,12 +1596,14 @@
 				2D38F7E525B34ECA007CAE19 /* HoursTableCell.swift in Sources */,
 				2D701F8125CB28A000A16B96 /* TermsOfUseViewController.swift in Sources */,
 				2D25C10725C1E170009DC3E6 /* RadialGradientView.swift in Sources */,
+				2D62C63D25D1D1E800091D0D /* AccountAssemblyProtocol.swift in Sources */,
 				2D326BB125909D59006E4A59 /* Contact.swift in Sources */,
 				2DD6DCC825ACA70E00B0E948 /* GetPhoto.swift in Sources */,
 				2DE67F19258800460092B998 /* CategoryCollectionCell.swift in Sources */,
 				2D33377525D1A6C300B13C83 /* HomeRouting.swift in Sources */,
 				2D613F7825AF153400F86004 /* AlertAnimationKeys.swift in Sources */,
 				2D33377125D1A6A200B13C83 /* HomeAssembly.swift in Sources */,
+				2D62C63925D1CFFC00091D0D /* AccountRouting.swift in Sources */,
 				2D33377225D1A6A200B13C83 /* HomeAssemblyProtocol.swift in Sources */,
 				2D9D63DF25CB01CA00C5261D /* SettingsRouting.swift in Sources */,
 				2D10DC3725BDB93C00C7B9BC /* FullScreenImageViewController.swift in Sources */,
@@ -1612,13 +1643,14 @@
 				2D9D63DA25CAFFF800C5261D /* SettingsRouterProtocol.swift in Sources */,
 				2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */,
 				2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */,
-				2D365A8D25C9895D00E4C777 /* AccountAssembly.swift in Sources */,
+				2D365A8D25C9895D00E4C777 /* AccountViewAssembly.swift in Sources */,
 				2D390108258CE2E6003C2187 /* LocationModel.swift in Sources */,
 				2D3561F325A746D10015987D /* UIImageExtension.swift in Sources */,
 				2D4F073B25A857DC00C9230E /* CellWithButton.swift in Sources */,
 				2D4E54DF25AA5541002E0E41 /* RequestModelPOST.swift in Sources */,
 				2D33378425D1A72700B13C83 /* MainRouring.swift in Sources */,
 				2DFE6C1025B62C9B00D945E6 /* ImageCellModel.swift in Sources */,
+				2D62C63725D1CFE000091D0D /* AccountRoutingProtocol.swift in Sources */,
 				2DD6DCC425ACA68600B0E948 /* GetUserListsGroup.swift in Sources */,
 				2D85CEDE25C7221C0058158E /* VenueSearchAssembly.swift in Sources */,
 				2DEC31D5258AA75C009FA472 /* SearchViewController.swift in Sources */,
@@ -1631,7 +1663,7 @@
 				2DC5D57125C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift in Sources */,
 				2DC5D57425C04F65005ABFFF /* VenueDetailsRouting.swift in Sources */,
 				2D292EA625A3770A00A67F36 /* UserInfo.swift in Sources */,
-				2D365A8B25C988BD00E4C777 /* AccountAssemblyProtocol.swift in Sources */,
+				2D365A8B25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift in Sources */,
 				2D701F7F25CB280000A16B96 /* PrivacyViewController.swift in Sources */,
 				2D365ACF25C9C3EA00E4C777 /* UnauthorizedUserView.swift in Sources */,
 				2D3BD9AC25875B6800389405 /* SceneDelegate.swift in Sources */,
