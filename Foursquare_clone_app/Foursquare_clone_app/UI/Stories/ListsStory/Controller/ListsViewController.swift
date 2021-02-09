@@ -8,6 +8,26 @@
 
 import UIKit
 
+protocol ListsViewControllerDelegate: class {
+    func listsViewController(_ viewController: ListsViewController,
+                             didTapSetupAlert alert: inout CreateNewListAlert!)
+    func listsViewController(_ viewController: ListsViewController,
+                             didShowAlert alert: CreateNewListAlert!,
+                             visualEffectView: UIVisualEffectView,
+                             scale: CGFloat,
+                             duration: Double)
+    func listsViewController(_ viewController: ListsViewController,
+                             didHideAlert alert: CreateNewListAlert!,
+                             visualEffectView: UIVisualEffectView,
+                             scale: CGFloat,
+                             duration: Double)
+    func listsViewController(_ viewController: ListsViewController,
+                             didTapCreateNewListWith parameters: (name: String?,
+                                                                  description: String?,
+                                                                  flag: Bool),
+                             token: String)
+}
+
 class ListsViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -32,6 +52,8 @@ class ListsViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         return refreshControl
     }()
+
+    weak var delegate: ListsViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,21 +81,30 @@ extension ListsViewController: AlertDelegate {
                             description: String?,
                             collaborativeFlag: Bool) {
 
-        guard
-            let listName = name,
-            let description = description
-        else {
-            return
-        }
+        delegate?.listsViewController(self,
+                                      didTapCreateNewListWith: (name: name,
+                                                                description: description,
+                                                                flag: collaborativeFlag),
+                                      token: getToken())
+    }
 
-        if !listName.isEmpty {
-            startAnimationForAlert(key: .hide)
-            networkManager.postRequestForCreateNewList(token: getToken(),
-                                                       listName: listName,
-                                                       descriptionList: description,
-                                                       collaborativeFlag: collaborativeFlag)
-        } else {
-            return
+    func startAnimationForAlert(key animation: AlertAnimationKeys) {
+        let scale: CGFloat = 1.3
+        let duration = 0.4
+
+        switch animation {
+        case .show:
+            delegate?.listsViewController(self,
+                                          didShowAlert: createNewListAlert,
+                                          visualEffectView: visualEffectView,
+                                          scale: scale,
+                                          duration: duration)
+        case .hide:
+            delegate?.listsViewController(self,
+                                          didHideAlert: createNewListAlert,
+                                          visualEffectView: visualEffectView,
+                                          scale: scale,
+                                          duration: duration)
         }
     }
 }
@@ -94,7 +125,8 @@ extension ListsViewController: UICollectionViewDelegate {
             let numberOfUserLists = userLists[indexPath.section].items.count
 
             if indexPath.item == numberOfUserLists {
-                setupAlertForAddingNewList()
+                delegate?.listsViewController(self,
+                                              didTapSetupAlert: &createNewListAlert)
                 startAnimationForAlert(key: .show)
             }
         }
@@ -230,47 +262,6 @@ extension ListsViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Setup showing and hiding alerts
 private extension ListsViewController {
-
-    func setupAlertForAddingNewList() {
-        createNewListAlert = Bundle.main.loadNibNamed("CreateNewListAlert",
-                                                        owner: self,
-                                                        options: nil)?.first as? CreateNewListAlert
-        view.addSubview(createNewListAlert)
-        createNewListAlert.center = view.center
-        createNewListAlert.delegate = self
-    }
-
-    func startAnimationForAlert(key animation: AlertAnimationKeys) {
-        let scale: CGFloat = 1.3
-        let duration = 0.4
-
-        switch animation {
-        case .show:
-            showAlertAddingNewList(scale: scale, duration: duration)
-        case .hide:
-            hideAlertAddingNewList(scale: scale, duration: duration)
-        }
-    }
-
-    func showAlertAddingNewList(scale: CGFloat, duration: Double) {
-        createNewListAlert.transform = CGAffineTransform(scaleX: scale, y: scale)
-        createNewListAlert.alpha = 0
-
-        UIView.animate(withDuration: duration) {
-            self.visualEffectView.alpha = 1
-            self.createNewListAlert.alpha = 1
-            self.createNewListAlert.transform = CGAffineTransform.identity
-        }
-    }
-
-    func hideAlertAddingNewList(scale: CGFloat, duration: Double) {
-        UIView.animate(withDuration: duration) {
-            self.visualEffectView.alpha = 0
-            self.createNewListAlert.alpha = 0
-            self.createNewListAlert.transform = CGAffineTransform(scaleX: scale, y: scale)
-            self.createNewListAlert.removeFromSuperview()
-        }
-    }
 
     func setupVisualEffectView() {
         view.addSubview(visualEffectView)
