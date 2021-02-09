@@ -70,7 +70,7 @@ class ListsViewController: UIViewController {
 }
 
 // MARK: - AlertDelegate
-extension ListsViewController: AlertDelegate {
+extension ListsViewController: CreateNewListAlertDelegate {
 
     func createNewListAlertDidEndInteraction(_ createNewListAlert: CreateNewListAlert) {
         startAnimationForAlert(key: .hide)

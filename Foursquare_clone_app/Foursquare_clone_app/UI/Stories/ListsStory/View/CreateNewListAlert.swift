@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AlertDelegate: class {
+protocol CreateNewListAlertDelegate: class {
     func createNewListAlertDidEndInteraction(_ alertToCreateNewList: CreateNewListAlert)
     func createNewListAlert(_ alertToCreateNewList: CreateNewListAlert,
                             createListWith name: String?,
@@ -33,7 +33,7 @@ class CreateNewListAlert: UIView {
     @IBOutlet private weak var collaborationSwitch: UISwitch!
     @IBOutlet private weak var createListButton: UIButton!
 
-    weak var delegate: AlertDelegate?
+    weak var delegate: CreateNewListAlertDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
