@@ -9,12 +9,21 @@
 import UIKit
 import Kingfisher
 
+protocol HomeViewControllerDelegate: class {
+    func homeViewController(_ viewController: HomeViewController,
+                            didStartedSearchingWith model: [Venue],
+                            setupSearchBar: (activateSearchBar: Bool,
+                                             searchBarText: String),
+                            router: VenueSearchRouting,
+                            animated: Bool)
+}
+
 class HomeViewController: UIViewController {
 
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet weak var coordinatesLabel: UILabel!
+    @IBOutlet private weak var coordinatesLabel: UILabel!
 
     private let standardCategories = defaultCategoriesList
     private let numberOfCellsInRow = 3
@@ -24,6 +33,8 @@ class HomeViewController: UIViewController {
     private let stringURL = "https://www.afisha.uz/ui/materials/2020/06/0932127_b.jpeg"
     private let router = VenueSearchRouting(assembly: VenueSearchAssembly())
     private var pointCoordinates: Geopoint?
+
+    weak var delegate: HomeViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +54,12 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func searchButtonPress(_ sender: UIButton) {
-        showSearchViewController(model: [Venue](),
-                                 isActiveSearchBar: true, text: "")
+        delegate?.homeViewController(self,
+                                     didStartedSearchingWith: [Venue](),
+                                     setupSearchBar: (activateSearchBar: true,
+                                                      searchBarText: ""),
+                                     router: router,
+                                     animated: true)
     }
 }
 
@@ -75,18 +90,21 @@ extension HomeViewController: UICollectionViewDelegate {
             else { return }
 
         let standardCategory = standardCategories[indexPath.item].imageName
+        let searchBarText = standardCategories[indexPath.item].title
+
         NetworkManager.shared.getVenues(categoryName: standardCategory,
                                         coordinates: (lat: lat, long: long)) { (venuesData, isSuccessful) in
             if isSuccessful {
 
-                guard let venuesData = venuesData else {
-                    return
-                }
+                guard let venuesData = venuesData else { return }
 
                 DispatchQueue.main.async {
-                    self.showSearchViewController(model: venuesData,
-                                                  isActiveSearchBar: false,
-                                                  text: self.standardCategories[indexPath.item].title)
+                    self.delegate?.homeViewController(self,
+                                                      didStartedSearchingWith: venuesData,
+                                                      setupSearchBar: (activateSearchBar: false,
+                                                                       searchBarText: searchBarText),
+                                                      router: self.router,
+                                                      animated: true)
                 }
             } else {
                 return
@@ -135,19 +153,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         let heightCell = collectionViewBounds.height / CGFloat(numberOfRowInCollectionView)
 
         return CGSize(width: widthCell, height: heightCell)
-    }
-}
-
-// MARK: - creating and showing a SearchController
-private extension HomeViewController {
-
-    func showSearchViewController(model: [Venue], isActiveSearchBar: Bool, text: String) {
-        router.showVenueSearchStory(from: self,
-                                    model: model,
-                                    setupSearchBar: (isActiveSearchBar: isActiveSearchBar, searchBarText: text),
-                                    animated: true) { (_) in
-                                        self.router.hideVenueSearchStory(animated: true)
-        }
     }
 }
 

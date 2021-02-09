@@ -22,6 +22,8 @@ class HomeRouting: HomeRoutingProtocol {
 
         guard let controller = homeController else { return }
 
+        controller.delegate = self
+
         if from is UINavigationController {
 
             guard let navigationController = from as? UINavigationController else { return }
@@ -30,6 +32,24 @@ class HomeRouting: HomeRoutingProtocol {
             controller.navigationController?.navigationBar.isHidden = true
         } else {
             from = controller
+        }
+    }
+}
+
+// MARK: -
+extension HomeRouting: HomeViewControllerDelegate {
+    func homeViewController(_ viewController: HomeViewController,
+                            didStartedSearchingWith model: [Venue],
+                            setupSearchBar: (activateSearchBar: Bool,
+                                             searchBarText: String),
+                            router: VenueSearchRouting,
+                            animated: Bool) {
+        router.showVenueSearchStory(from: viewController,
+                                    model: model,
+                                    setupSearchBar: (isActiveSearchBar: setupSearchBar.activateSearchBar,
+                                                     searchBarText: setupSearchBar.searchBarText),
+                                    animated: animated) { (_) in
+                                        router.hideVenueSearchStory(animated: true)
         }
     }
 }
