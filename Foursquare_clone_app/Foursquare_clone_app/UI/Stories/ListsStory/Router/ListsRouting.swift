@@ -23,7 +23,7 @@ class ListsRouting: ListsRoutingProtocol {
         guard let controller = listsController else { return }
 
         controller.delegate = self
-
+        controller.title = "ListsViewController.Title".localized()
         if from is UINavigationController {
 
             guard let navigationController = from as? UINavigationController else { return }

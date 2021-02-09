@@ -23,6 +23,7 @@ class HomeRouting: HomeRoutingProtocol {
         guard let controller = homeController else { return }
 
         controller.delegate = self
+        controller.title = "HomeViewController.Title".localized()
 
         if from is UINavigationController {
 

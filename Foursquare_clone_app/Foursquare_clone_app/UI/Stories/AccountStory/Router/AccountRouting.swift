@@ -24,7 +24,7 @@ class AccountRouting: AccountRoutingProtocol {
         guard let controller = accountController else { return }
 
         controller.delegate = self
-
+        controller.title = "AccountViewController.Title".localized()
         if from is UINavigationController {
 
             guard let navigationController = from as? UINavigationController else { return }

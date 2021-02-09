@@ -345,7 +345,6 @@ private extension ListsViewController {
     }
 
     func setupScreen() {
-        title = "ListsViewController.Title".localized()
         collectionView.refreshControl = refreshControl
         let navBar = navigationController?.navigationBar
         navBar?.barTintColor = .systemBlue

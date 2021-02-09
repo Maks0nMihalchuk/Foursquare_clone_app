@@ -7,6 +7,7 @@
 */
 "AlertErrorTitle" = "Error";
 
+"HomeViewController.Title" = "Search";
 "HomeViewController.BreakfastTitle" = "Breakfast";
 "HomeViewController.LunchTitle" = "Lunch";
 "HomeViewController.DinnerTitle" = "Dinner";
@@ -61,6 +62,7 @@
 "NotDataTableViewCell.LabelText" = "Sorry. Something went wrong. No data available";
 
 "AccountViewController.YourProfile" = "Your profile";
+"AccountViewController.Title" = "Me";
 
 "Unauthorized.PlaceholderLabel" = "By creating an account, you are able to follow friends and experts you trust and see the places they've recommended.";
 "Unauthorized.createYourAcc" = "Create Your Personal Account";

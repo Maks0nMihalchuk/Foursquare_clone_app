@@ -7,6 +7,7 @@
 */
 "AlertErrorTitle" = "Ошибка";
 
+"HomeViewController.Title" = "Поиск";
 "HomeViewController.BreakfastTitle" = "Завтрак";
 "HomeViewController.LunchTitle" = "Обед";
 "HomeViewController.DinnerTitle" = "Ужин";
@@ -61,6 +62,7 @@
 "NotDataTableViewCell.LabelText" = "Извините. Что то пошло не так. Данные отсутствуют";
 
 "AccountViewController.YourProfile" = "Ваш профиль";
+"AccountViewController.Title" = "Я";
 
 "Unauthorized.PlaceholderLabel" = "Создав учетную запись, вы можете подписаться на друзей и экспертов, которым доверяете, и увидеть места, которые они порекомендовали.";
 "Unauthorized.createYourAcc" = "Cоздать Свой личный кабинет";
