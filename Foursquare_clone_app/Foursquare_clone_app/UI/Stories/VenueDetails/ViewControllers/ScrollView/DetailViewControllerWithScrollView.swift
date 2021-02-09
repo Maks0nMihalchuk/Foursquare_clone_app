@@ -23,15 +23,6 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var venueNameLabel: UILabel!
 
-    @IBOutlet private weak var staticAddressLabel: UILabel!
-    @IBOutlet private weak var staticHoursStatusLabel: UILabel!
-    @IBOutlet private weak var staticCategoryLabel: UILabel!
-
-    @IBOutlet private weak var ratingLabel: UILabel!
-    @IBOutlet private weak var addressVenueLabel: UILabel!
-    @IBOutlet private weak var hoursStatusVenueLabel: UILabel!
-    @IBOutlet private weak var categoriesVenueLabel: UILabel!
-
     @IBOutlet private weak var staticHoursLabel: UILabel!
     @IBOutlet private weak var hoursVenueLabel: UILabel!
     @IBOutlet private weak var detailDaysVenueLabel: UILabel!
@@ -45,6 +36,7 @@ class DetailViewControllerWithScrollView: UIViewController {
     @IBOutlet private weak var websiteVenueLabel: UILabel!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
+    @IBOutlet private weak var shortInfoContainerView: UIView!
 
     var viewModel: ViewModel? {
         didSet {
@@ -60,12 +52,12 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     weak var delegate: DetailViewControllerWithScrollViewDelegate?
 
-    private let tapGestureRecognizer = UITapGestureRecognizer()
     private let gradient = CAGradientLayer()
     private let duration = 0.25
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         navigationController?.isNavigationBarHidden = true
         setupUI()
 
@@ -132,16 +124,9 @@ private extension DetailViewControllerWithScrollView {
         setupScrollView()
         setupHeightfullScreenButton()
         venueNameLabel.text = "LabelTextPlaceholder".localized()
-        staticAddressLabel.text = "AdressLabelText".localized()
-        staticHoursStatusLabel.text = "HoursLabelText".localized()
-        staticCategoryLabel.text = "CategoriesLabelText".localized()
         staticHoursLabel.text = "HoursLabelText".localized()
         staticPhoneLabel.text = "PhoneLabelText".localized()
         staticWebsiteLabel.text = "WebSiteLabelText".localized()
-        addressVenueLabel.text = "LabelTextPlaceholder".localized()
-        ratingLabel.text = "-"
-        hoursStatusVenueLabel.text = "LabelTextPlaceholder".localized()
-        categoriesVenueLabel.text = "LabelTextPlaceholder".localized()
         hoursVenueLabel.text = "LabelTextPlaceholder".localized()
         detailHoursVenueLabel.text = "LabelTextPlaceholder".localized()
         detailDaysVenueLabel.text = "LabelTextPlaceholder".localized()
@@ -182,11 +167,7 @@ private extension DetailViewControllerWithScrollView {
     }
 
     func configureShortInfo(with viewModel: ViewModel) {
-        addressVenueLabel.text = viewModel.location
-        ratingLabel.text = viewModel.rating
-        ratingLabel.backgroundColor = viewModel.ratingColor
-        hoursStatusVenueLabel.text = viewModel.hoursStatus
-        categoriesVenueLabel.text = viewModel.categories
+    
     }
 
     func configureHoursContainer(with viewModel: ViewModel) {
