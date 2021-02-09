@@ -59,6 +59,10 @@
 		2D48B12A25D2DFB6004A211C /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B12925D2DFB6004A211C /* ContactView.swift */; };
 		2D48B12C25D2DFC7004A211C /* ContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D48B12B25D2DFC7004A211C /* ContactView.xib */; };
 		2D48B13025D2E3E0004A211C /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B12F25D2E3E0004A211C /* ContactViewModel.swift */; };
+		2D48B13325D2E84F004A211C /* BestPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13225D2E84F004A211C /* BestPhotoView.swift */; };
+		2D48B13525D2E85E004A211C /* BestPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D48B13425D2E85E004A211C /* BestPhotoView.xib */; };
+		2D48B13825D2EA1F004A211C /* BestPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13725D2EA1F004A211C /* BestPhotoViewModel.swift */; };
+		2D48B13A25D2EAF0004A211C /* TierKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13925D2EAEF004A211C /* TierKeys.swift */; };
 		2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49B9CA259B276A009AC096 /* KeychainManager.swift */; };
 		2D49B9CD259B921A009AC096 /* SecureStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49B9CC259B921A009AC096 /* SecureStoreError.swift */; };
 		2D4CF36725A2289E00C7006B /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4CF36625A2289E00C7006B /* ListsViewController.swift */; };
@@ -161,6 +165,10 @@
 		2D48B12925D2DFB6004A211C /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		2D48B12B25D2DFC7004A211C /* ContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactView.xib; sourceTree = "<group>"; };
 		2D48B12F25D2E3E0004A211C /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
+		2D48B13225D2E84F004A211C /* BestPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestPhotoView.swift; sourceTree = "<group>"; };
+		2D48B13425D2E85E004A211C /* BestPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestPhotoView.xib; sourceTree = "<group>"; };
+		2D48B13725D2EA1F004A211C /* BestPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestPhotoViewModel.swift; sourceTree = "<group>"; };
+		2D48B13925D2EAEF004A211C /* TierKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierKeys.swift; sourceTree = "<group>"; };
 		2D49B9CA259B276A009AC096 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		2D49B9CC259B921A009AC096 /* SecureStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreError.swift; sourceTree = "<group>"; };
 		2D4CF36625A2289E00C7006B /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
@@ -607,6 +615,7 @@
 		2D48B11625D2BBCF004A211C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D48B13125D2E82C004A211C /* BestPhotoView */,
 				2D48B11725D2BBE7004A211C /* ShortInfoView */,
 				2D48B11825D2BBF0004A211C /* HoursView */,
 				2D48B11925D2BBF9004A211C /* ContactView */,
@@ -663,6 +672,23 @@
 				2D48B12F25D2E3E0004A211C /* ContactViewModel.swift */,
 			);
 			path = ContactViewModel;
+			sourceTree = "<group>";
+		};
+		2D48B13125D2E82C004A211C /* BestPhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				2D48B13225D2E84F004A211C /* BestPhotoView.swift */,
+				2D48B13425D2E85E004A211C /* BestPhotoView.xib */,
+			);
+			path = BestPhotoView;
+			sourceTree = "<group>";
+		};
+		2D48B13625D2EA06004A211C /* BestPhotoViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2D48B13725D2EA1F004A211C /* BestPhotoViewModel.swift */,
+			);
+			path = BestPhotoViewModel;
 			sourceTree = "<group>";
 		};
 		2D49B9C9259B2752009AC096 /* KeychainManager */ = {
@@ -807,8 +833,10 @@
 		2DC5D57E25C16F0B005ABFFF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2D48B12625D2DE75004A211C /* HoursViewModel */,
+				2D48B13925D2EAEF004A211C /* TierKeys.swift */,
+				2D48B13625D2EA06004A211C /* BestPhotoViewModel */,
 				2D48B11E25D2CBC7004A211C /* ShortInfoViewModel */,
+				2D48B12625D2DE75004A211C /* HoursViewModel */,
 				2D48B12D25D2E3C1004A211C /* ContactViewModel */,
 				2D0D358425B9D78A0053FDB0 /* ViewModel */,
 				2DC5D57D25C16ED8005ABFFF /* TableViewCellModel */,
@@ -1022,6 +1050,7 @@
 				2D25C10D25C2A760009DC3E6 /* NoDataTableViewCell.xib in Resources */,
 				2D4CF36C25A2445100C7006B /* UserCreatedCell.xib in Resources */,
 				2D4F073C25A857DC00C9230E /* CellWithButton.xib in Resources */,
+				2D48B13525D2E85E004A211C /* BestPhotoView.xib in Resources */,
 				2D48B12C25D2DFC7004A211C /* ContactView.xib in Resources */,
 				2D2F495425A9181800A61FBB /* CreateNewListAlert.xib in Resources */,
 				2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */,
@@ -1116,6 +1145,7 @@
 				2D326BB325909F1E006E4A59 /* ItemBestPhoto.swift in Sources */,
 				2D4F073825A77C8000C9230E /* DefaultImage.swift in Sources */,
 				2D326BAF25909CEB006E4A59 /* Price.swift in Sources */,
+				2D48B13A25D2EAF0004A211C /* TierKeys.swift in Sources */,
 				2D0D358625B9D79B0053FDB0 /* ViewModel.swift in Sources */,
 				2D48B12325D2DA95004A211C /* HoursView.swift in Sources */,
 				2DD6DCC625ACA6C200B0E948 /* GetUserListsGroupItems.swift in Sources */,
@@ -1147,12 +1177,14 @@
 				2D25C14725C45BF5009DC3E6 /* GetImage.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
+				2D48B13325D2E84F004A211C /* BestPhotoView.swift in Sources */,
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,
 				2D5CB38A25B1B259007C6ED2 /* ImageTableViewCell.swift in Sources */,
 				2D39010B258CFB2C003C2187 /* DetailVenueModel.swift in Sources */,
 				2D06D148259A22120090CF23 /* URLExtension.swift in Sources */,
 				2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */,
 				2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */,
+				2D48B13825D2EA1F004A211C /* BestPhotoViewModel.swift in Sources */,
 				2D613F7625AF0FAF00F86004 /* KeysForSections.swift in Sources */,
 				2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */,
 				2D39010E258D13F9003C2187 /* MappingReceivedDataToDetailsVenue.swift in Sources */,

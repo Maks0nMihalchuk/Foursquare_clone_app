@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -108,27 +107,26 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="T8M-FV-Fwu" secondAttribute="bottom" constant="8" id="6aa-zz-8EQ"/>
+                <constraint firstAttribute="bottom" secondItem="T8M-FV-Fwu" secondAttribute="bottom" constant="8" id="6aa-zz-8EQ"/>
                 <constraint firstItem="PNs-Nb-BpK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="GNV-Tq-iZn"/>
                 <constraint firstItem="GG8-H4-sZA" firstAttribute="top" secondItem="wTI-Yn-Jp8" secondAttribute="bottom" constant="8" id="LNU-39-83c"/>
-                <constraint firstItem="T8M-FV-Fwu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="NRp-0A-FsK"/>
+                <constraint firstItem="T8M-FV-Fwu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="NRp-0A-FsK"/>
                 <constraint firstItem="T8M-FV-Fwu" firstAttribute="top" secondItem="PNs-Nb-BpK" secondAttribute="bottom" constant="8" id="SAS-fl-yeT"/>
                 <constraint firstItem="kwM-yo-SkR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="WtZ-81-ZaM"/>
                 <constraint firstAttribute="trailing" secondItem="PNs-Nb-BpK" secondAttribute="trailing" constant="16" id="Znd-xR-k4M"/>
-                <constraint firstItem="fBt-zC-phw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="cgW-3K-43E"/>
+                <constraint firstItem="fBt-zC-phw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="cgW-3K-43E"/>
                 <constraint firstItem="kwM-yo-SkR" firstAttribute="leading" secondItem="fBt-zC-phw" secondAttribute="trailing" constant="16" id="de1-lH-Vlg"/>
                 <constraint firstItem="wTI-Yn-Jp8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="hqW-Sd-l9d"/>
                 <constraint firstItem="fBt-zC-phw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="igV-Zj-6uM"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GG8-H4-sZA" secondAttribute="trailing" constant="16" id="ivo-V0-6Ed"/>
+                <constraint firstAttribute="trailing" secondItem="GG8-H4-sZA" secondAttribute="trailing" constant="16" id="ivo-V0-6Ed"/>
                 <constraint firstItem="PNs-Nb-BpK" firstAttribute="top" secondItem="GG8-H4-sZA" secondAttribute="bottom" constant="8" id="l65-XA-GdN"/>
                 <constraint firstAttribute="trailing" secondItem="wTI-Yn-Jp8" secondAttribute="trailing" constant="16" id="rgm-Df-zob"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kwM-yo-SkR" secondAttribute="trailing" constant="16" id="slb-zV-QQS"/>
+                <constraint firstAttribute="trailing" secondItem="kwM-yo-SkR" secondAttribute="trailing" constant="16" id="slb-zV-QQS"/>
                 <constraint firstItem="wTI-Yn-Jp8" firstAttribute="top" secondItem="fBt-zC-phw" secondAttribute="bottom" constant="8" id="uqE-Fv-0A6"/>
-                <constraint firstItem="GG8-H4-sZA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="wxV-d7-wtv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="T8M-FV-Fwu" secondAttribute="trailing" constant="16" id="zBL-vy-Cpt"/>
+                <constraint firstItem="GG8-H4-sZA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wxV-d7-wtv"/>
+                <constraint firstAttribute="trailing" secondItem="T8M-FV-Fwu" secondAttribute="trailing" constant="16" id="zBL-vy-Cpt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="-122" y="95"/>
         </view>
     </objects>

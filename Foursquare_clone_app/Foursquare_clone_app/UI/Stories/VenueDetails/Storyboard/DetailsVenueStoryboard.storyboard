@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7E-vU-G1I">
-                                        <rect key="frame" x="0.0" y="66" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="44" width="414" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="lUy-r3-aDQ"/>
                                         </constraints>
@@ -56,7 +56,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12O-XE-wZ9">
-                                        <rect key="frame" x="16" y="66" width="44" height="44"/>
+                                        <rect key="frame" x="16" y="44" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ldE-zG-Wbe"/>
                                             <constraint firstAttribute="width" constant="44" id="mjn-4h-3Rf"/>

@@ -167,7 +167,7 @@ private extension DetailViewControllerWithScrollView {
     }
 
     func configureShortInfo(with viewModel: ViewModel) {
-    
+
     }
 
     func configureHoursContainer(with viewModel: ViewModel) {

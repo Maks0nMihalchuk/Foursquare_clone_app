@@ -9,26 +9,6 @@
 import UIKit
 import Kingfisher
 
-enum TierKeys {
-    case firstLevelPrice
-    case secondLevelPrice
-    case thirdLevelPrice
-    case fourthLevelPrice
-
-    var currentLevelPrice: String {
-        switch self {
-        case .firstLevelPrice:
-            return "$"
-        case .secondLevelPrice:
-            return "$$"
-        case .thirdLevelPrice:
-            return "$$$"
-        case .fourthLevelPrice:
-            return "$$$$"
-        }
-    }
-}
-
 struct ViewModel {
     private let defaultRating = "-"
     private let defaultColor = "858585"
