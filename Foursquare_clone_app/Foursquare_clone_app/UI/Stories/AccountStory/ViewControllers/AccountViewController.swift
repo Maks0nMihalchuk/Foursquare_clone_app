@@ -15,7 +15,15 @@ enum AuthorizationState {
     case yesAuthorization
 }
 
-class ContainerViewController: UIViewController {
+protocol AccountViewControllerDelegate: class {
+    func accountViewController(_ viewController: AccountViewController, didTapSignInButton button: UIButton)
+    func accountViewController(_ viewController: AccountViewController, didTapSignOutButton button: UIButton)
+    func accountViewController(_ viewController: AccountViewController,
+                               didTapSettingsButton button: UIButton,
+                               router: SettingsRouting)
+}
+
+class AccountViewController: UIViewController {
 
     @IBOutlet private weak var navigationBarView: UIView!
     @IBOutlet private weak var userNameLabel: UILabel!
@@ -46,6 +54,8 @@ class ContainerViewController: UIViewController {
         }
     }
 
+    weak var delegate: AccountViewControllerDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
@@ -56,43 +66,29 @@ class ContainerViewController: UIViewController {
     }
 
     @IBAction func didTapSettingsButton(_ sender: UIButton) {
-        router.showSettingsStory(from: self, animated: true) { (_) in
-            self.router.hideSettingsStory(animated: true)
-        }
+        delegate?.accountViewController(self, didTapSettingsButton: sender, router: router)
     }
 }
 
 // MARK: - AuthorizedUserViewDelegate
-extension ContainerViewController: AuthorizedUserViewDelegate {
+extension AccountViewController: AuthorizedUserViewDelegate {
     func authorizedUserView(_ authorizedUserView: AuthorizedUserView, didTapSignOutButton: UIButton) {
-        keychainManager.removeValue(for: getKeyToToken())
+        delegate?.accountViewController(self, didTapSignOutButton: didTapSignOutButton)
         checkToken()
         showViewDependingOnState()
     }
 }
 
 // MARK: - UnauthorizedUserViewDelegate
-extension ContainerViewController: UnauthorizedUserViewDelegate {
+extension AccountViewController: UnauthorizedUserViewDelegate {
     func unauthorizedUserView(_ unauthorizedUserView: UnauthorizedUserView,
                               didTapSignInButton: UIButton) {
-        networkManager.autorizationFoursquare { (url, isSuccessful) in
-            if isSuccessful {
-                guard let url = url else { return }
-
-                DispatchQueue.main.async {
-                    let safariViewController = SFSafariViewController(url: url)
-                    safariViewController.delegate = self
-                    self.present(safariViewController, animated: true, completion: nil)
-                }
-            } else {
-                self.showErrorAlert()
-            }
-        }
+        delegate?.accountViewController(self, didTapSignInButton: didTapSignInButton)
     }
 }
 
 // MARK: - SFSafariViewControllerDelegate
-extension ContainerViewController: SFSafariViewControllerDelegate {
+extension AccountViewController: SFSafariViewControllerDelegate {
     func safariViewController(_ controller: SFSafariViewController,
                               initialLoadDidRedirectTo URL: URL) {
         if URL.absoluteString.contains(redirectUrl) {
@@ -125,7 +121,7 @@ extension ContainerViewController: SFSafariViewControllerDelegate {
 }
 
 // MARK: - getUserInfo
-private extension ContainerViewController {
+private extension AccountViewController {
 
     func getUserInfo() {
         let token = keychainManager.getValue(for: getKeyToToken())
@@ -145,7 +141,7 @@ private extension ContainerViewController {
 }
 
 // MARK: - work with token
-private extension ContainerViewController {
+private extension AccountViewController {
 
     func checkToken() {
         let tokenAvailability = keychainManager
@@ -161,12 +157,12 @@ private extension ContainerViewController {
 }
 
 // MARK: - setup view
-private extension ContainerViewController {
+private extension AccountViewController {
 
     func showViewDependingOnState() {
         guard let state = authorizationState else { return }
 
-        setupsettingButton(state: state)
+        setupSettingButton(state: state)
         switch state {
         case .noAuthorization:
             setupActivityIndicator(isLaunch: false)
@@ -216,7 +212,7 @@ private extension ContainerViewController {
         tabBarController?.tabBar.standardAppearance = appearance
     }
 
-    func setupsettingButton(state: AuthorizationState) {
+    func setupSettingButton(state: AuthorizationState) {
         let duration = 0.25
         UIView.animate(withDuration: duration) {
             switch state {
@@ -229,6 +225,10 @@ private extension ContainerViewController {
             }
         }
     }
+}
+
+// MARK: - setup error alert
+extension AccountViewController {
 
     func showErrorAlert() {
         let alertController = UIAlertController(title: "AlertErrorTitle".localized(),

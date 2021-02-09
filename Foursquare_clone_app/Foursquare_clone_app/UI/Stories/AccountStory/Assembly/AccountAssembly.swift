@@ -11,11 +11,11 @@ import UIKit
 
 class AccountAssembly: AccountAssemblyProtocol {
 
-    func assemblyAccountViewController() -> ContainerViewController? {
-        let controllerID = String(describing: ContainerViewController.self)
+    func assemblyAccountViewController() -> AccountViewController? {
+        let controllerID = String(describing: AccountViewController.self)
         let accountController = getStoryboard()
             .instantiateViewController(withIdentifier: controllerID)
-            as? ContainerViewController
+            as? AccountViewController
         return accountController
     }
 }

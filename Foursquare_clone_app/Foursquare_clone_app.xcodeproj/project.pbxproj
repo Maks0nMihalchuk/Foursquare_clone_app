@@ -48,7 +48,7 @@
 		2D365A7D25C962B000E4C777 /* AccountStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D365A7C25C962B000E4C777 /* AccountStoryboard.storyboard */; };
 		2D365A8B25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A8A25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift */; };
 		2D365A8D25C9895D00E4C777 /* AccountViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A8C25C9895D00E4C777 /* AccountViewAssembly.swift */; };
-		2D365A9825C98DD100E4C777 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A9725C98DD100E4C777 /* ContainerViewController.swift */; };
+		2D365A9825C98DD100E4C777 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365A9725C98DD100E4C777 /* AccountViewController.swift */; };
 		2D365ACB25C9C09500E4C777 /* AuthorizedUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D365ACA25C9C09500E4C777 /* AuthorizedUserView.xib */; };
 		2D365ACD25C9C0B500E4C777 /* UnauthorizedUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D365ACC25C9C0B500E4C777 /* UnauthorizedUserView.xib */; };
 		2D365ACF25C9C3EA00E4C777 /* UnauthorizedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365ACE25C9C3EA00E4C777 /* UnauthorizedUserView.swift */; };
@@ -195,7 +195,7 @@
 		2D365A7C25C962B000E4C777 /* AccountStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountStoryboard.storyboard; sourceTree = "<group>"; };
 		2D365A8A25C988BD00E4C777 /* AccountViewAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2D365A8C25C9895D00E4C777 /* AccountViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewAssembly.swift; sourceTree = "<group>"; };
-		2D365A9725C98DD100E4C777 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		2D365A9725C98DD100E4C777 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		2D365ACA25C9C09500E4C777 /* AuthorizedUserView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizedUserView.xib; sourceTree = "<group>"; };
 		2D365ACC25C9C0B500E4C777 /* UnauthorizedUserView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnauthorizedUserView.xib; sourceTree = "<group>"; };
 		2D365ACE25C9C3EA00E4C777 /* UnauthorizedUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedUserView.swift; sourceTree = "<group>"; };
@@ -607,7 +607,7 @@
 		2D365A7A25C9624400E4C777 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2D365A9725C98DD100E4C777 /* ContainerViewController.swift */,
+				2D365A9725C98DD100E4C777 /* AccountViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1659,7 +1659,7 @@
 				2D36A70025C0198F002B0E8A /* VenueDetailsAssembly.swift in Sources */,
 				2D701FB225CDA18700A16B96 /* GeopositionObserverProtocol.swift in Sources */,
 				2D25C14725C45BF5009DC3E6 /* GetImage.swift in Sources */,
-				2D365A9825C98DD100E4C777 /* ContainerViewController.swift in Sources */,
+				2D365A9825C98DD100E4C777 /* AccountViewController.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,

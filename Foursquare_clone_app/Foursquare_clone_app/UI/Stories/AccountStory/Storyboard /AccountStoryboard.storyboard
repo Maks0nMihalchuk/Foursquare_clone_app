@@ -10,7 +10,7 @@
         <!--Me-->
         <scene sceneID="CiC-n1-fA1">
             <objects>
-                <viewController restorationIdentifier="ContainerViewController" storyboardIdentifier="ContainerViewController" id="Mku-uS-83f" customClass="ContainerViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AccountViewController" storyboardIdentifier="AccountViewController" id="Mku-uS-83f" customClass="AccountViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gAk-Dl-HJt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
