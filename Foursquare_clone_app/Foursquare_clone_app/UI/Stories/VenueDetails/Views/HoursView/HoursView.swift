@@ -11,7 +11,6 @@ import UIKit
 
 class HoursView: UIView {
 
-    @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var hoursLabel: UILabel!
     @IBOutlet private weak var hoursVanueLabel: UILabel!
     @IBOutlet private weak var detailDaysLabel: UILabel!
@@ -26,34 +25,17 @@ class HoursView: UIView {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: - setupUI
-private extension HoursView {
-
-    func commonInit() {
-        let nibName = String(describing: HoursView.self)
-        Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-
     func setupUI() {
         hoursLabel.text = "HoursLabelText".localized()
         hoursVanueLabel.text = "LabelTextPlaceholder".localized()
         detailDaysLabel.text = "LabelTextPlaceholder".localized()
         detailHoursLabel.text = "LabelTextPlaceholder".localized()
     }
+
+}
+
+// MARK: - setupUI
+private extension HoursView {
 
     func reloadUI(with viewModel: HoursViewModel) {
         hoursVanueLabel.text = viewModel.hoursStatus

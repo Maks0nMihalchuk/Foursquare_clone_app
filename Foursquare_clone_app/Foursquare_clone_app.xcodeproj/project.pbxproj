@@ -63,6 +63,8 @@
 		2D48B13525D2E85E004A211C /* BestPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D48B13425D2E85E004A211C /* BestPhotoView.xib */; };
 		2D48B13825D2EA1F004A211C /* BestPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13725D2EA1F004A211C /* BestPhotoViewModel.swift */; };
 		2D48B13A25D2EAF0004A211C /* TierKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13925D2EAEF004A211C /* TierKeys.swift */; };
+		2D48B13C25D30531004A211C /* VenueDetailViewAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13B25D30531004A211C /* VenueDetailViewAssemblyProtocol.swift */; };
+		2D48B13E25D306FA004A211C /* VenueDetailViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D48B13D25D306FA004A211C /* VenueDetailViewAssembly.swift */; };
 		2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49B9CA259B276A009AC096 /* KeychainManager.swift */; };
 		2D49B9CD259B921A009AC096 /* SecureStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49B9CC259B921A009AC096 /* SecureStoreError.swift */; };
 		2D4CF36725A2289E00C7006B /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4CF36625A2289E00C7006B /* ListsViewController.swift */; };
@@ -92,6 +94,7 @@
 		2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCC725B631770062AA90 /* HoursCellModel.swift */; };
 		2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */; };
 		2DCC68B125A8AC6A00639B93 /* GetUserLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */; };
+		2DCDA17525D31626003B9643 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCDA17425D31626003B9643 /* UIViewExtension.swift */; };
 		2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269F925891EBC00EAEC68 /* NetworkManager.swift */; };
 		2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FC258A2D2700EAEC68 /* RequestModel.swift */; };
 		2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FE258A595800EAEC68 /* CategoryModel.swift */; };
@@ -169,6 +172,8 @@
 		2D48B13425D2E85E004A211C /* BestPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestPhotoView.xib; sourceTree = "<group>"; };
 		2D48B13725D2EA1F004A211C /* BestPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestPhotoViewModel.swift; sourceTree = "<group>"; };
 		2D48B13925D2EAEF004A211C /* TierKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierKeys.swift; sourceTree = "<group>"; };
+		2D48B13B25D30531004A211C /* VenueDetailViewAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailViewAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2D48B13D25D306FA004A211C /* VenueDetailViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailViewAssembly.swift; sourceTree = "<group>"; };
 		2D49B9CA259B276A009AC096 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		2D49B9CC259B921A009AC096 /* SecureStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreError.swift; sourceTree = "<group>"; };
 		2D4CF36625A2289E00C7006B /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 		2DC7BCC725B631770062AA90 /* HoursCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCellModel.swift; sourceTree = "<group>"; };
 		2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellModel.swift; sourceTree = "<group>"; };
 		2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLists.swift; sourceTree = "<group>"; };
+		2DCDA17425D31626003B9643 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2DD269F925891EBC00EAEC68 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2DD269FC258A2D2700EAEC68 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		2DD269FE258A595800EAEC68 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 			children = (
 				2D2B00D7258BB8D900D49F32 /* UIColorExtension.swift */,
 				2D3561F225A746D10015987D /* UIImageExtension.swift */,
+				2DCDA17425D31626003B9643 /* UIViewExtension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -446,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				2D36A6FB25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift */,
+				2D48B13B25D30531004A211C /* VenueDetailViewAssemblyProtocol.swift */,
 			);
 			path = AssemblyProtocol;
 			sourceTree = "<group>";
@@ -454,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				2D36A6FF25C0198F002B0E8A /* VenueDetailsAssembly.swift */,
+				2D48B13D25D306FA004A211C /* VenueDetailViewAssembly.swift */,
 			);
 			path = VenueDetailsAssembly;
 			sourceTree = "<group>";
@@ -1138,7 +1147,9 @@
 				2D326BB525909F4F006E4A59 /* Hours.swift in Sources */,
 				2D25C10C25C2A760009DC3E6 /* NoDataTableViewCell.swift in Sources */,
 				2D2F495225A917F100A61FBB /* CreateNewListAlert.swift in Sources */,
+				2DCDA17525D31626003B9643 /* UIViewExtension.swift in Sources */,
 				2DD6DCC225AC9F5900B0E948 /* StorageManager.swift in Sources */,
+				2D48B13C25D30531004A211C /* VenueDetailViewAssemblyProtocol.swift in Sources */,
 				2D4CF36725A2289E00C7006B /* ListsViewController.swift in Sources */,
 				2D259A5325B844890054DDC9 /* SearchCellModel.swift in Sources */,
 				2DC43C8E2599E3D400655B2F /* AccountViewController.swift in Sources */,
@@ -1176,6 +1187,7 @@
 				2D36A70025C0198F002B0E8A /* VenueDetailsAssembly.swift in Sources */,
 				2D25C14725C45BF5009DC3E6 /* GetImage.swift in Sources */,
 				2D292EA325A3690C00A67F36 /* KeychainKey.swift in Sources */,
+				2D48B13E25D306FA004A211C /* VenueDetailViewAssembly.swift in Sources */,
 				2D3BD9AE25875B6800389405 /* HomeViewController.swift in Sources */,
 				2D48B13325D2E84F004A211C /* BestPhotoView.swift in Sources */,
 				2DDDCD4B258B9C79008D2525 /* SearchTableCell.swift in Sources */,

@@ -14,7 +14,7 @@ typealias VenueDetailsStoryCompletion = ((_ result: VenueDetailsStoryResult) -> 
 protocol VenueDetailsRoutingProtocol {
     func showVenueDetailsStory(from: UIViewController,
                                type: VenueDetailsStoryType,
-                               model: ViewModel,
+                               model: (viewModel: ViewModel, dataModel: DetailVenueModel),
                                animated: Bool,
                                completion: @escaping VenueDetailsStoryCompletion)
     func hideVenueDetailsStory(animated: Bool)

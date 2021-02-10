@@ -85,7 +85,7 @@ extension SearchViewController: UITableViewDelegate {
 
                 DispatchQueue.main.async {
                     let viewModel = ViewModel(dataModel: detailVenueInfo)
-                    self.showAlertForSelection(viewModel: viewModel)
+                    self.showAlertForSelection(viewModel: viewModel, dataModel: detailVenueInfo)
                 }
 
             } else {
@@ -126,7 +126,8 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
 
-    func showAlertForSelection(viewModel: ViewModel) {
+    func showAlertForSelection(viewModel: ViewModel, dataModel: DetailVenueModel) {
+
         let title = "AlertSelectController.Title".localized()
         let message = "AlertSelectController.Message".localized()
         let detailWithScrollViewTitle = "detailWithScrollView"
@@ -136,12 +137,14 @@ private extension SearchViewController {
         let detailWithScrollView = UIAlertAction(title: detailWithScrollViewTitle,
                                                  style: .default) { (_) in
                                                     self.showDetailViewController(by: .scrollView,
-                                                                                  viewModel: viewModel)
+                                                                                  viewModel: viewModel,
+                                                                                  dataModel: dataModel)
         }
         let detailWithTableView = UIAlertAction(title: detailWithTableViewTitle,
                                                  style: .default) { (_) in
                                                     self.showDetailViewController(by: .tableView,
-                                                                                  viewModel: viewModel)
+                                                                                  viewModel: viewModel,
+                                                                                  dataModel: dataModel)
         }
         let cancelButton = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alertController.addAction(detailWithScrollView)
@@ -150,10 +153,11 @@ private extension SearchViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func showDetailViewController(by storyType: VenueDetailsStoryType, viewModel: ViewModel) {
+    func showDetailViewController(by storyType: VenueDetailsStoryType,
+                                  viewModel: ViewModel,
+                                  dataModel: DetailVenueModel) {
         router.showVenueDetailsStory(from: self,
-                                     type: storyType,
-                                     model: viewModel,
+                                     type: storyType, model: (viewModel: viewModel, dataModel: dataModel),
                                      animated: true) { (_) in
                                         self.router.hideVenueDetailsStory(animated: true)
         }

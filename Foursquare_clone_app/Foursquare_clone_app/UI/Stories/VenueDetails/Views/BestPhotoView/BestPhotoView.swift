@@ -9,9 +9,16 @@
 import UIKit
 import Kingfisher
 
+protocol BestPhotoViewDelegate: class {
+
+    func bestPhotoView(_ view: BestPhotoView,
+                       didTapFullScreenImage button: UIButton,
+                       with image: UIImage,
+                       model: BestPhotoViewModel)
+}
+
 class BestPhotoView: UIView {
 
-    @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var bestPhotoImageView: UIImageView!
     @IBOutlet private weak var venueName: UILabel!
 
@@ -25,30 +32,14 @@ class BestPhotoView: UIView {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-private extension BestPhotoView {
-
-    func commonInit() {
-        let nibName = String(describing: BestPhotoView.self)
-        Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-
     func setupUI() {
         bestPhotoImageView.image = UIImage(named: "img_placeholder")
+        gradientSetup()
         venueName.text = "LabelTextPlaceholder".localized()
     }
+
+}
+private extension BestPhotoView {
 
     func reloadUI(with viewModel: BestPhotoViewModel) {
         bestPhotoImageView.kf.setImage(with: viewModel.imageURL,

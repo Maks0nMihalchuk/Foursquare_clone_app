@@ -22,7 +22,7 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
     func showVenueDetailsStory(from: UIViewController,
                                type: VenueDetailsStoryType,
-                               model: ViewModel,
+                               model: (viewModel: ViewModel, dataModel: DetailVenueModel),
                                animated: Bool, completion: @escaping VenueDetailsStoryCompletion) {
 
         self.completion = completion
@@ -33,7 +33,7 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
             guard let controller = detailController else { return }
 
-            controller.viewModel = model
+            controller.viewModel = model.viewModel
             controller.delegate = self
             let navigationController = UINavigationController(rootViewController: controller)
             detailConroller = controller
@@ -45,7 +45,7 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
             guard let controller = detailController else { return }
 
             controller.delegate = self
-            controller.viewModel = model
+            controller.dataModel = model.dataModel
             let navigationController = UINavigationController(rootViewController: controller)
             detailConroller = controller
             navigationController.modalPresentationStyle = .fullScreen

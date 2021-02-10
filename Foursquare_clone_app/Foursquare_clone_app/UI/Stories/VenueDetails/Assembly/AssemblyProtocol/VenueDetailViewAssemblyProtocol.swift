@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol VenueDetailViewAssemblyProtocol {
-    func assemblyBestPhotoView(containerBounds: CGRect) -> BestPhotoView
-    func assemblyShortInfoView(containerBounds: CGRect) -> ShortInfoView
-    func assemblyHoursView(containerBounds: CGRect) -> HoursView
-    func assemblyContactView(containerBounds: CGRect) -> ContactView
+    func assemblyBestPhotoView() -> BestPhotoView
+    func assemblyShortInfoView() -> ShortInfoView
+    func assemblyHoursView() -> HoursView
+    func assemblyContactView() -> ContactView
 }

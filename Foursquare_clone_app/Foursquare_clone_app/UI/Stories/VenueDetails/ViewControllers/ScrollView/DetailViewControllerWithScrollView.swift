@@ -18,166 +18,136 @@ protocol DetailViewControllerWithScrollViewDelegate: class {
 
 class DetailViewControllerWithScrollView: UIViewController {
 
-    @IBOutlet private weak var imageContainerViewHeight: NSLayoutConstraint!
-    @IBOutlet private weak var imageContainerView: UIView!
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var venueNameLabel: UILabel!
-
-    @IBOutlet private weak var staticHoursLabel: UILabel!
-    @IBOutlet private weak var hoursVenueLabel: UILabel!
-    @IBOutlet private weak var detailDaysVenueLabel: UILabel!
-    @IBOutlet private weak var detailHoursVenueLabel: UILabel!
-    @IBOutlet private weak var detailHoursInfoButton: UIButton!
-    @IBOutlet private weak var detailInfoStackView: UIStackView!
-
-    @IBOutlet private weak var staticPhoneLabel: UILabel!
-    @IBOutlet private weak var staticWebsiteLabel: UILabel!
-    @IBOutlet private weak var phoneVenueLabel: UILabel!
-    @IBOutlet private weak var websiteVenueLabel: UILabel!
+    @IBOutlet private weak var bestPhotoContainerView: UIView!
+    @IBOutlet weak var bestPhotoHeight: NSLayoutConstraint!
+    @IBOutlet private weak var contentViewHeight: NSLayoutConstraint!
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
-    @IBOutlet private weak var shortInfoContainerView: UIView!
+    @IBOutlet private weak var contentView: UIView!
 
-    var viewModel: ViewModel? {
+    var dataModel: DetailVenueModel? {
         didSet {
-            guard let requireViewModel = viewModel else { return }
+            guard let requireDataModel = dataModel else { return }
 
             DispatchQueue.main.async {
                 guard self.isViewLoaded else { return }
 
-                self.reloadUI(with: requireViewModel)
+                self.bestPhotoView?.viewModel = BestPhotoViewModel(dataModel: requireDataModel)
+                self.shortInfoView?.viewModel = ShortInfoViewModel(dataModel: requireDataModel)
+                self.hoursView?.viewModel = HoursViewModel(dataModel: requireDataModel)
+                self.contactView?.viewModel = ContactViewModel(dataModel: requireDataModel)
             }
         }
     }
 
     weak var delegate: DetailViewControllerWithScrollViewDelegate?
 
-    private let gradient = CAGradientLayer()
-    private let duration = 0.25
+    private let spacing: CGFloat = 26
+    private var contentViewSizeConstant: CGFloat = 0
+    private let assemblyView = VenueDetailViewAssembly()
+    private var bestPhotoView: BestPhotoView?
+    private var shortInfoView: ShortInfoView?
+    private var hoursView: HoursView?
+    private var contactView: ContactView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupBestPhotoView()
+        setupShortInfoView()
+        setupHoursView()
+        setupContactView()
+        layoutSetup()
         navigationController?.isNavigationBarHidden = true
-        setupUI()
-
-        guard let requiredViewModel = viewModel else { return }
-
-        reloadUI(with: requiredViewModel)
-        checkForDataAvailability(with: requiredViewModel)
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
         delegate?.detailViewControllerWithScrollView(self, didTapBack: sender)
     }
 
-    @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
-        let transform = CGAffineTransform(rotationAngle: .zero)
-        UIView.animate(withDuration: duration) {
-            sender.imageView?.transform = self.checkState() == HoursTableCallState.decomposed
-                ? transform.rotated(by: .pi)
-                : transform.rotated(by: .zero)
-            self.detailInfoStackView.isHidden = !self.detailInfoStackView.isHidden
-        }
-    }
-
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
-        guard
-            let image = imageView.image,
-            let model = viewModel
-        else { return }
 
-        delegate?.detailViewControllerWithScrollView(self, didTapFullScreenImage: sender, with: image, model: model)
     }
 }
 
 // MARK: - SetupUI
 private extension DetailViewControllerWithScrollView {
 
+    func setupBestPhotoView() {
+        bestPhotoView = assemblyView.assemblyBestPhotoView()
+        bestPhotoView?.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func setupShortInfoView() {
+        shortInfoView = assemblyView.assemblyShortInfoView()
+        shortInfoView?.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func setupHoursView() {
+        hoursView = assemblyView.assemblyHoursView()
+        hoursView?.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func setupContactView() {
+        contactView = assemblyView.assemblyContactView()
+        contactView?.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func layoutSetup() {
+        guard
+            let photoView = bestPhotoView,
+            let shortInfo = shortInfoView,
+            let hoursView = hoursView,
+            let contactView = contactView
+        else { return }
+
+        bestPhotoContainerView.addSubview(photoView)
+        contentView.addSubview(shortInfo)
+        contentView.addSubview(hoursView)
+        contentView.addSubview(contactView)
+
+        bestPhotoHeight.constant = photoView.bounds.height
+
+        contentViewSizeConstant = shortInfo.bounds.size.height
+            + spacing
+            + hoursView.bounds.size.height
+            + spacing
+            + contactView.bounds.size.height
+            + spacing
+
+        contentViewHeight.constant = contentViewSizeConstant
+
+        NSLayoutConstraint.activate([
+
+            photoView.topAnchor.constraint(equalTo: bestPhotoContainerView.topAnchor),
+            photoView.leadingAnchor.constraint(equalTo: bestPhotoContainerView.leadingAnchor),
+            photoView.trailingAnchor.constraint(equalTo: bestPhotoContainerView.trailingAnchor),
+            photoView.bottomAnchor.constraint(equalTo: bestPhotoContainerView.bottomAnchor),
+
+            shortInfo.topAnchor.constraint(equalTo: contentView.topAnchor),
+            shortInfo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            shortInfo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+
+            hoursView.topAnchor.constraint(equalTo: shortInfo.bottomAnchor,
+                                           constant: spacing),
+            hoursView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hoursView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+
+            contactView.topAnchor.constraint(equalTo: hoursView.bottomAnchor,
+                                             constant: spacing),
+            contactView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            contactView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+        setupScrollView()
+    }
+
     func setupScrollView() {
-        let window = UIApplication.shared.windows[0]
-        scrollView.contentInset.top = imageContainerViewHeight.constant - window.safeAreaInsets.top
+        scrollView.contentInset.top = bestPhotoContainerView.bounds.height
     }
 
     func setupHeightfullScreenButton() {
-        let window = UIApplication.shared.windows[0]
-        fullScreenButtonHeight.constant = imageContainerViewHeight.constant - window.safeAreaInsets.top
+
     }
 
     func checkForDataAvailability(with viewModel: ViewModel) {
-        let defaultTest = "Add Hours".localized()
 
-        if viewModel.hoursStatus != defaultTest {
-            detailHoursInfoButton.isHidden = false
-        } else {
-            detailHoursInfoButton.isHidden = true
-        }
-    }
-
-    func checkState() -> HoursTableCallState {
-        return detailInfoStackView.isHidden ? .decomposed : .folded
-    }
-
-    func setupUI() {
-        imageView.image = UIImage(named: "img_placeholder")
-        gradientSetup()
-        setupScrollView()
-        setupHeightfullScreenButton()
-        venueNameLabel.text = "LabelTextPlaceholder".localized()
-        staticHoursLabel.text = "HoursLabelText".localized()
-        staticPhoneLabel.text = "PhoneLabelText".localized()
-        staticWebsiteLabel.text = "WebSiteLabelText".localized()
-        hoursVenueLabel.text = "LabelTextPlaceholder".localized()
-        detailHoursVenueLabel.text = "LabelTextPlaceholder".localized()
-        detailDaysVenueLabel.text = "LabelTextPlaceholder".localized()
-        phoneVenueLabel.text = "LabelTextPlaceholder".localized()
-        websiteVenueLabel.text = "LabelTextPlaceholder".localized()
-    }
-
-    func reloadUI(with viewModel: ViewModel) {
-        configureBestPhotoContainerView(with: viewModel)
-        configureShortInfo(with: viewModel)
-        configureHoursContainer(with: viewModel)
-        configureContactsContainer(with: viewModel)
-        setupScrollView()
-        setupHeightfullScreenButton()
-    }
-}
-
-// MARK: - UI configuration
-private extension DetailViewControllerWithScrollView {
-
-    func gradientSetup() {
-        gradient.frame = imageView.bounds
-        gradient.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
-                           UIColor.black.withAlphaComponent(0.0).cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
-        gradient.locations = [0, 0.75, 1]
-        imageView.layer.addSublayer(gradient)
-    }
-
-    func configureBestPhotoContainerView(with viewModel: ViewModel) {
-        imageView.kf.setImage(with: viewModel.imageURL,
-                              placeholder: UIImage(named: "img_placeholder"),
-                              options: [.transition(.fade(1.0))],
-                              progressBlock: nil)
-        gradientSetup()
-        venueNameLabel.text = viewModel.nameVenueAndPrice
-    }
-
-    func configureShortInfo(with viewModel: ViewModel) {
-
-    }
-
-    func configureHoursContainer(with viewModel: ViewModel) {
-        hoursVenueLabel.text = viewModel.hoursStatus
-        detailDaysVenueLabel.text = viewModel.detailDays
-        detailHoursVenueLabel.text = viewModel.detailHours
-    }
-
-    func configureContactsContainer(with viewModel: ViewModel) {
-        phoneVenueLabel.text = viewModel.phone
-        websiteVenueLabel.text = viewModel.website
     }
 }

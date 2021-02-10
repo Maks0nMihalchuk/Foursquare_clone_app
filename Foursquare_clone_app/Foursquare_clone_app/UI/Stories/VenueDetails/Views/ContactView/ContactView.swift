@@ -10,7 +10,6 @@ import UIKit
 
 class ContactView: UIView {
 
-    @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var phoneLabel: UILabel!
     @IBOutlet private weak var websiteLabel: UILabel!
     @IBOutlet private weak var phoneVenueLabel: UILabel!
@@ -20,30 +19,8 @@ class ContactView: UIView {
         didSet {
             guard let requireViewModel = viewModel else { return }
 
-            reloadUI(with: requireViewModel)
+           reloadUI(with: requireViewModel)
         }
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
-// MARK: - setupUI
-private extension ContactView {
-    func commonInit() {
-        let nibName = String(describing: ContactView.self)
-        Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
     func setupUI() {
@@ -53,7 +30,13 @@ private extension ContactView {
         websiteVenueLabel.text = "LabelTextPlaceholder".localized()
     }
 
-    func reloadUI(with viewModel: ContactViewModel) {
+}
 
+// MARK: - setupUI
+private extension ContactView {
+
+    func reloadUI(with viewModel: ContactViewModel) {
+        phoneVenueLabel.text = viewModel.phone
+        websiteVenueLabel.text = viewModel.website
     }
 }

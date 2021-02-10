@@ -9,7 +9,7 @@
 import UIKit
 
 class ShortInfoView: UIView {
-    @IBOutlet private var contentView: UIView!
+
     @IBOutlet private weak var ratingLabel: UILabel!
     @IBOutlet private weak var addressLabel: UILabel!
     @IBOutlet private weak var addressVenueLabel: UILabel!
@@ -26,28 +26,6 @@ class ShortInfoView: UIView {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: - setupUI
-private extension ShortInfoView {
-
-    func commonInit() {
-        let nibName = String(describing: ShortInfoView.self)
-        Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-
     func setupUI() {
         ratingLabel.text = "-"
         addressLabel.text = "AdressLabelText".localized()
@@ -57,6 +35,11 @@ private extension ShortInfoView {
         categoriesLabel.text = "CategoriesLabelText".localized()
         categoriesVenueLabel.text = "LabelTextPlaceholder".localized()
     }
+
+}
+
+// MARK: - setupUI
+private extension ShortInfoView {
 
     func reloadUI(with viewModel: ShortInfoViewModel) {
         ratingLabel.text = viewModel.rating

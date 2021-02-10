@@ -6,24 +6,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShortInfoView" customModule="Foursquare_clone_app" customModuleProvider="target">
-            <connections>
-                <outlet property="addressLabel" destination="lu5-K8-Eay" id="jxX-gJ-Mal"/>
-                <outlet property="addressVenueLabel" destination="qqe-f0-gLM" id="4JM-ua-KCF"/>
-                <outlet property="categoriesLabel" destination="ICX-cp-S5j" id="YSO-zK-WoR"/>
-                <outlet property="categoriesVenueLabel" destination="2vx-Ae-Tpu" id="gPe-Q7-u36"/>
-                <outlet property="contentView" destination="iN0-l3-epB" id="7wU-Jq-4sn"/>
-                <outlet property="hoursLabel" destination="f4Z-hj-yVA" id="T6H-qf-IX7"/>
-                <outlet property="hoursVenueLabel" destination="BNX-7S-iFW" id="fAQ-CZ-vBP"/>
-                <outlet property="ratingLabel" destination="kwM-yo-SkR" id="vrY-EQ-ecS"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="ShortInfoView" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" restorationIdentifier="ShortInfoView" id="iN0-l3-epB" customClass="ShortInfoView" customModule="Foursquare_clone_app" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwM-yo-SkR" userLabel="RatingLabel">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwM-yo-SkR" userLabel="RatingLabel">
                     <rect key="frame" x="358" y="8" width="40" height="40"/>
                     <color key="backgroundColor" red="0.33300000000000002" green="0.33300000000000002" blue="0.33300000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -127,6 +116,15 @@
                 <constraint firstAttribute="trailing" secondItem="T8M-FV-Fwu" secondAttribute="trailing" constant="16" id="zBL-vy-Cpt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addressLabel" destination="lu5-K8-Eay" id="04U-eZ-lkp"/>
+                <outlet property="addressVenueLabel" destination="qqe-f0-gLM" id="u8A-zW-M4c"/>
+                <outlet property="categoriesLabel" destination="ICX-cp-S5j" id="Ahf-u2-Zkj"/>
+                <outlet property="categoriesVenueLabel" destination="2vx-Ae-Tpu" id="EoQ-Lc-uyR"/>
+                <outlet property="hoursLabel" destination="f4Z-hj-yVA" id="U4E-Hu-33F"/>
+                <outlet property="hoursVenueLabel" destination="BNX-7S-iFW" id="7IQ-WS-tqE"/>
+                <outlet property="ratingLabel" destination="kwM-yo-SkR" id="t4w-T5-4yR"/>
+            </connections>
             <point key="canvasLocation" x="-122" y="95"/>
         </view>
     </objects>
