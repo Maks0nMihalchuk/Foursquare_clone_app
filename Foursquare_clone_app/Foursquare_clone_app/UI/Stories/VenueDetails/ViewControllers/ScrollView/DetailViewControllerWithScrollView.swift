@@ -11,13 +11,15 @@ import UIKit
 protocol DetailViewControllerWithScrollViewDelegate: class {
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapFullScreenImage button: UIButton,
-                                            with image: UIImage, model: ViewModel)
+                                            with image: UIImage,
+                                            model: BestPhotoViewModel)
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapBack button: UIButton)
 }
 
 class DetailViewControllerWithScrollView: UIViewController {
 
+    @IBOutlet weak var fullScreenButtonHeight: NSLayoutConstraint!
     @IBOutlet private weak var bestPhotoContainerView: UIView!
     @IBOutlet weak var bestPhotoHeight: NSLayoutConstraint!
     @IBOutlet private weak var contentViewHeight: NSLayoutConstraint!
@@ -41,13 +43,17 @@ class DetailViewControllerWithScrollView: UIViewController {
 
     weak var delegate: DetailViewControllerWithScrollViewDelegate?
 
+    private let duration = 0.25
     private let spacing: CGFloat = 26
+    private let redViewSize: CGFloat = 250
     private var contentViewSizeConstant: CGFloat = 0
     private let assemblyView = VenueDetailViewAssembly()
+    private let transform = CGAffineTransform(rotationAngle: .zero)
     private var bestPhotoView: BestPhotoView?
     private var shortInfoView: ShortInfoView?
     private var hoursView: HoursView?
     private var contactView: ContactView?
+    private var redView: RedView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +61,7 @@ class DetailViewControllerWithScrollView: UIViewController {
         setupShortInfoView()
         setupHoursView()
         setupContactView()
+        setupRedView()
         layoutSetup()
         navigationController?.isNavigationBarHidden = true
     }
@@ -64,7 +71,30 @@ class DetailViewControllerWithScrollView: UIViewController {
     }
 
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
+        guard
+            let image = bestPhotoView?.didTransferImage(),
+            let model = bestPhotoView?.viewModel
+        else { return }
 
+        delegate?.detailViewControllerWithScrollView(self,
+                                                     didTapFullScreenImage: sender,
+                                                     with: image,
+                                                     model: model)
+    }
+}
+
+// MARK: - HoursViewDelegate
+extension DetailViewControllerWithScrollView: HoursViewDelegate {
+    func hoursView(_ view: HoursView,
+                   didTapChangeStateButton button: UIButton,
+                   detailHours stackView: UIStackView) {
+        let state = checkState(isHidden: stackView.isHidden)
+        UIView.animate(withDuration: duration) {
+            button.imageView?.transform = state == HoursTableCallState.decomposed
+                ? self.transform.rotated(by: .pi)
+                : self.transform.rotated(by: .zero)
+            stackView.isHidden = !stackView.isHidden
+        }
     }
 }
 
@@ -83,6 +113,7 @@ private extension DetailViewControllerWithScrollView {
 
     func setupHoursView() {
         hoursView = assemblyView.assemblyHoursView()
+        hoursView?.delegate = self
         hoursView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -91,27 +122,35 @@ private extension DetailViewControllerWithScrollView {
         contactView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    func setupRedView() {
+        redView = assemblyView.assemblyRedView()
+        redView?.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     func layoutSetup() {
         guard
             let photoView = bestPhotoView,
             let shortInfo = shortInfoView,
             let hoursView = hoursView,
-            let contactView = contactView
+            let contactView = contactView,
+            let redView = redView
         else { return }
 
         bestPhotoContainerView.addSubview(photoView)
         contentView.addSubview(shortInfo)
         contentView.addSubview(hoursView)
         contentView.addSubview(contactView)
+        contentView.addSubview(redView)
 
         bestPhotoHeight.constant = photoView.bounds.height
 
-        contentViewSizeConstant = shortInfo.bounds.size.height
+        contentViewSizeConstant = shortInfo.bounds.height
             + spacing
-            + hoursView.bounds.size.height
+            + hoursView.bounds.height
             + spacing
-            + contactView.bounds.size.height
+            + contactView.bounds.height
             + spacing
+            + redView.bounds.height
 
         contentViewHeight.constant = contentViewSizeConstant
 
@@ -134,20 +173,28 @@ private extension DetailViewControllerWithScrollView {
             contactView.topAnchor.constraint(equalTo: hoursView.bottomAnchor,
                                              constant: spacing),
             contactView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contactView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            contactView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+
+            redView.topAnchor.constraint(equalTo: contactView.bottomAnchor, constant: spacing),
+            redView.heightAnchor.constraint(equalToConstant: redViewSize),
+            redView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            redView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         setupScrollView()
+        setupHeightfullScreenButton()
     }
 
     func setupScrollView() {
-        scrollView.contentInset.top = bestPhotoContainerView.bounds.height
+        let window = UIApplication.shared.windows[0]
+        scrollView.contentInset.top = bestPhotoContainerView.bounds.height - window.safeAreaInsets.top
     }
 
     func setupHeightfullScreenButton() {
-
+        let window = UIApplication.shared.windows[0]
+        fullScreenButtonHeight.constant = bestPhotoContainerView.bounds.height - window.safeAreaInsets.top
     }
 
-    func checkForDataAvailability(with viewModel: ViewModel) {
-
+    func checkState(isHidden: Bool) -> HoursTableCallState {
+        return isHidden ? .decomposed : .folded
     }
 }

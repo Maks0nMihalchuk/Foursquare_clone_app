@@ -95,6 +95,8 @@
 		2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */; };
 		2DCC68B125A8AC6A00639B93 /* GetUserLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */; };
 		2DCDA17525D31626003B9643 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCDA17425D31626003B9643 /* UIViewExtension.swift */; };
+		2DCDA17825D4024A003B9643 /* RedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DCDA17725D4024A003B9643 /* RedView.xib */; };
+		2DCDA17A25D40267003B9643 /* RedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCDA17925D40267003B9643 /* RedView.swift */; };
 		2DD269FA25891EBC00EAEC68 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269F925891EBC00EAEC68 /* NetworkManager.swift */; };
 		2DD269FD258A2D2700EAEC68 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FC258A2D2700EAEC68 /* RequestModel.swift */; };
 		2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD269FE258A595800EAEC68 /* CategoryModel.swift */; };
@@ -207,6 +209,8 @@
 		2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellModel.swift; sourceTree = "<group>"; };
 		2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLists.swift; sourceTree = "<group>"; };
 		2DCDA17425D31626003B9643 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		2DCDA17725D4024A003B9643 /* RedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedView.xib; sourceTree = "<group>"; };
+		2DCDA17925D40267003B9643 /* RedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedView.swift; sourceTree = "<group>"; };
 		2DD269F925891EBC00EAEC68 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2DD269FC258A2D2700EAEC68 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		2DD269FE258A595800EAEC68 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
@@ -628,6 +632,7 @@
 				2D48B11725D2BBE7004A211C /* ShortInfoView */,
 				2D48B11825D2BBF0004A211C /* HoursView */,
 				2D48B11925D2BBF9004A211C /* ContactView */,
+				2DCDA17625D40235003B9643 /* RedView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -888,6 +893,15 @@
 			path = UserListModel;
 			sourceTree = "<group>";
 		};
+		2DCDA17625D40235003B9643 /* RedView */ = {
+			isa = PBXGroup;
+			children = (
+				2DCDA17925D40267003B9643 /* RedView.swift */,
+				2DCDA17725D4024A003B9643 /* RedView.xib */,
+			);
+			path = RedView;
+			sourceTree = "<group>";
+		};
 		2DD269F825891EA500EAEC68 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,6 +1074,7 @@
 				2D4CF36C25A2445100C7006B /* UserCreatedCell.xib in Resources */,
 				2D4F073C25A857DC00C9230E /* CellWithButton.xib in Resources */,
 				2D48B13525D2E85E004A211C /* BestPhotoView.xib in Resources */,
+				2DCDA17825D4024A003B9643 /* RedView.xib in Resources */,
 				2D48B12C25D2DFC7004A211C /* ContactView.xib in Resources */,
 				2D2F495425A9181800A61FBB /* CreateNewListAlert.xib in Resources */,
 				2D9EC7B525925AB1003FBBC3 /* Localizable.strings in Resources */,
@@ -1159,6 +1174,7 @@
 				2D48B13A25D2EAF0004A211C /* TierKeys.swift in Sources */,
 				2D0D358625B9D79B0053FDB0 /* ViewModel.swift in Sources */,
 				2D48B12325D2DA95004A211C /* HoursView.swift in Sources */,
+				2DCDA17A25D40267003B9643 /* RedView.swift in Sources */,
 				2DD6DCC625ACA6C200B0E948 /* GetUserListsGroupItems.swift in Sources */,
 				2D0D357D25B99E1C0053FDB0 /* DetailViewControllerWithScrollView.swift in Sources */,
 				2D4CF36B25A2445100C7006B /* UserCreatedCell.swift in Sources */,

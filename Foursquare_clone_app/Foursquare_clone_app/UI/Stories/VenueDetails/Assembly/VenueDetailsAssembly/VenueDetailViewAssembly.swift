@@ -37,4 +37,11 @@ class VenueDetailViewAssembly: VenueDetailViewAssemblyProtocol {
 
         return view
     }
+
+    func assemblyRedView() -> RedView {
+        let view = UIView.fromNib() as RedView
+        view.setupUI()
+
+        return view
+    }
 }

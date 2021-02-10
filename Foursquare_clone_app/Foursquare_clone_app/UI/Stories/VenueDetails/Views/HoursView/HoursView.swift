@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+protocol HoursViewDelegate: class {
+    func hoursView(_ view: HoursView,
+                   didTapChangeStateButton button: UIButton,
+                   detailHours stackView: UIStackView)
+}
+
 class HoursView: UIView {
 
     @IBOutlet private weak var hoursLabel: UILabel!
@@ -16,6 +22,7 @@ class HoursView: UIView {
     @IBOutlet private weak var detailDaysLabel: UILabel!
     @IBOutlet private weak var detailHoursLabel: UILabel!
     @IBOutlet private weak var detailHoursButton: UIButton!
+    @IBOutlet private weak var detailHoursStackView: UIStackView!
 
     var viewModel: HoursViewModel? {
         didSet {
@@ -23,6 +30,12 @@ class HoursView: UIView {
 
             reloadUI(with: requireViewModel)
         }
+    }
+
+    weak var delegate: HoursViewDelegate?
+
+    @IBAction func stateChangeButtonPressed(_ sender: UIButton) {
+        delegate?.hoursView(self, didTapChangeStateButton: sender, detailHours: detailHoursStackView)
     }
 
     func setupUI() {

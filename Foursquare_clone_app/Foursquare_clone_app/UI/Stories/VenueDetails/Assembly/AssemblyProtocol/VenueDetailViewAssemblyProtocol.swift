@@ -14,4 +14,5 @@ protocol VenueDetailViewAssemblyProtocol {
     func assemblyShortInfoView() -> ShortInfoView
     func assemblyHoursView() -> HoursView
     func assemblyContactView() -> ContactView
+    func assemblyRedView() -> RedView
 }

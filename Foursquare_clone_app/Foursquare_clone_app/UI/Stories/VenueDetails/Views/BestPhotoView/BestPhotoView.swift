@@ -9,14 +9,6 @@
 import UIKit
 import Kingfisher
 
-protocol BestPhotoViewDelegate: class {
-
-    func bestPhotoView(_ view: BestPhotoView,
-                       didTapFullScreenImage button: UIButton,
-                       with image: UIImage,
-                       model: BestPhotoViewModel)
-}
-
 class BestPhotoView: UIView {
 
     @IBOutlet private weak var bestPhotoImageView: UIImageView!
@@ -38,6 +30,9 @@ class BestPhotoView: UIView {
         venueName.text = "LabelTextPlaceholder".localized()
     }
 
+    func didTransferImage() -> UIImage? {
+        return bestPhotoImageView.image
+    }
 }
 private extension BestPhotoView {
 

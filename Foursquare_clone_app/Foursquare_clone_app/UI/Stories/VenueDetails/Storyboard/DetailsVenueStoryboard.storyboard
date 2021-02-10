@@ -25,9 +25,30 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jL-J0-Oiq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvz-5d-ZU7">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="krF-lD-e6g"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="fullScreenDisplayButtonPressed:" destination="sn0-dA-olf" eventType="touchUpInside" id="WMy-Fw-EzQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-Bi-4OS">
+                                        <rect key="frame" x="16" y="44" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="aa2-ER-Tj0"/>
+                                            <constraint firstAttribute="width" constant="44" id="hx6-jg-NOc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" image="backWhiteArrow"/>
+                                        <connections>
+                                            <action selector="screenCloseButtonPressed:" destination="sn0-dA-olf" eventType="touchUpInside" id="SFt-pQ-ovy"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-jx-815" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.77700000000000002" green="0.7769868338" blue="0.7769868338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="eSd-Jr-26d"/>
                                         </constraints>
@@ -36,7 +57,10 @@
                                 <constraints>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="bottom" secondItem="0Nf-Vm-OhB" secondAttribute="bottom" id="7J2-mc-A8C"/>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="centerX" secondItem="5jL-J0-Oiq" secondAttribute="centerX" id="C4G-lV-5Za"/>
+                                    <constraint firstItem="gvz-5d-ZU7" firstAttribute="leading" secondItem="5jL-J0-Oiq" secondAttribute="leading" id="EyI-Ua-HM4"/>
+                                    <constraint firstAttribute="trailing" secondItem="gvz-5d-ZU7" secondAttribute="trailing" id="Lt5-2q-MtO"/>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="trailing" secondItem="5jL-J0-Oiq" secondAttribute="trailing" id="UK5-d9-rvX"/>
+                                    <constraint firstItem="ZNj-Bi-4OS" firstAttribute="leading" secondItem="5jL-J0-Oiq" secondAttribute="leading" constant="16" id="iMJ-aB-0ae"/>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="leading" secondItem="5jL-J0-Oiq" secondAttribute="leading" id="nHw-F0-UcU"/>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="top" secondItem="5jL-J0-Oiq" secondAttribute="top" id="tV8-73-mc0"/>
                                 </constraints>
@@ -44,13 +68,15 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="f7J-So-0Xr"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mBQ-Rf-LuS" firstAttribute="leading" secondItem="Xoo-Aj-vIW" secondAttribute="leading" id="6RD-q4-j6B"/>
                             <constraint firstItem="5jL-J0-Oiq" firstAttribute="leading" secondItem="Xoo-Aj-vIW" secondAttribute="leading" id="6mB-UX-TjD"/>
                             <constraint firstAttribute="bottom" secondItem="5jL-J0-Oiq" secondAttribute="bottom" id="LPt-YO-lfa"/>
                             <constraint firstItem="5jL-J0-Oiq" firstAttribute="top" secondItem="a7p-ST-mpG" secondAttribute="top" id="OIp-fo-uH0"/>
                             <constraint firstItem="Xoo-Aj-vIW" firstAttribute="trailing" secondItem="mBQ-Rf-LuS" secondAttribute="trailing" id="Pyp-A4-doY"/>
+                            <constraint firstItem="Xoo-Aj-vIW" firstAttribute="top" secondItem="gvz-5d-ZU7" secondAttribute="top" id="mJA-0N-LDR"/>
+                            <constraint firstItem="ZNj-Bi-4OS" firstAttribute="top" secondItem="Xoo-Aj-vIW" secondAttribute="top" id="pFL-Fn-AxZ"/>
                             <constraint firstItem="mBQ-Rf-LuS" firstAttribute="top" secondItem="a7p-ST-mpG" secondAttribute="top" id="q9R-fc-4U9"/>
                             <constraint firstItem="Xoo-Aj-vIW" firstAttribute="trailing" secondItem="5jL-J0-Oiq" secondAttribute="trailing" id="rdy-Lz-oin"/>
                         </constraints>
@@ -62,6 +88,7 @@
                         <outlet property="bestPhotoHeight" destination="zHT-lU-Fdk" id="Mbr-7B-o4P"/>
                         <outlet property="contentView" destination="gbf-jx-815" id="db5-w5-Z0C"/>
                         <outlet property="contentViewHeight" destination="eSd-Jr-26d" id="CQM-no-qR2"/>
+                        <outlet property="fullScreenButtonHeight" destination="krF-lD-e6g" id="vur-6O-gSn"/>
                         <outlet property="scrollView" destination="5jL-J0-Oiq" id="6Nl-pi-cxt"/>
                     </connections>
                 </viewController>

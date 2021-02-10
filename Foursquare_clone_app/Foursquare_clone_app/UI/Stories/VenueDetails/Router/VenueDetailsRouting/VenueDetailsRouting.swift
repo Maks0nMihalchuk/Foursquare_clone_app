@@ -75,7 +75,7 @@ extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
 
     func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
                                             didTapFullScreenImage button: UIButton,
-                                            with image: UIImage, model: ViewModel) {
+                                            with image: UIImage, model: BestPhotoViewModel) {
         let fullScreenImage = assembly.assemblyFullScreenImageVC()
 
         guard let imageScreen = fullScreenImage else { return }
