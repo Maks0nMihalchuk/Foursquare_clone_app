@@ -51,8 +51,19 @@ class HoursView: UIView {
 private extension HoursView {
 
     func reloadUI(with viewModel: HoursViewModel) {
+        checkForDataAvailability(with: viewModel)
         hoursVanueLabel.text = viewModel.hoursStatus
         detailDaysLabel.text = viewModel.detailDays
         detailHoursLabel.text = viewModel.detailHours
+    }
+
+    func checkForDataAvailability(with viewModel: HoursViewModel) {
+        let defaultTest = "Add Hours".localized()
+
+        if viewModel.hoursStatus != defaultTest {
+            detailHoursButton.isHidden = false
+        } else {
+            detailHoursButton.isHidden = true
+        }
     }
 }

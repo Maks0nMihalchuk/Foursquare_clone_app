@@ -145,48 +145,40 @@ private extension DetailViewControllerWithScrollView {
         bestPhotoHeight.constant = photoView.bounds.height
 
         contentViewSizeConstant = shortInfo.bounds.height
-            + spacing
-            + hoursView.bounds.height
-            + spacing
-            + contactView.bounds.height
-            + spacing
-            + redView.bounds.height
+            + spacing + hoursView.bounds.height
+            + spacing + contactView.bounds.height
+            + spacing + redView.bounds.height
 
         contentViewHeight.constant = contentViewSizeConstant
 
         NSLayoutConstraint.activate([
-
             photoView.topAnchor.constraint(equalTo: bestPhotoContainerView.topAnchor),
             photoView.leadingAnchor.constraint(equalTo: bestPhotoContainerView.leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: bestPhotoContainerView.trailingAnchor),
             photoView.bottomAnchor.constraint(equalTo: bestPhotoContainerView.bottomAnchor),
-
             shortInfo.topAnchor.constraint(equalTo: contentView.topAnchor),
             shortInfo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             shortInfo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
-            hoursView.topAnchor.constraint(equalTo: shortInfo.bottomAnchor,
-                                           constant: spacing),
+            hoursView.topAnchor.constraint(equalTo: shortInfo.bottomAnchor, constant: spacing),
             hoursView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             hoursView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
-            contactView.topAnchor.constraint(equalTo: hoursView.bottomAnchor,
-                                             constant: spacing),
+            contactView.topAnchor.constraint(equalTo: hoursView.bottomAnchor, constant: spacing),
             contactView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contactView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
             redView.topAnchor.constraint(equalTo: contactView.bottomAnchor, constant: spacing),
-            redView.heightAnchor.constraint(equalToConstant: redViewSize),
             redView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            redView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            redView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            redView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         setupScrollView()
         setupHeightfullScreenButton()
     }
 
     func setupScrollView() {
+        guard let photoView = bestPhotoView else { return }
+
         let window = UIApplication.shared.windows[0]
-        scrollView.contentInset.top = bestPhotoContainerView.bounds.height - window.safeAreaInsets.top
+        scrollView.contentInset.top = photoView.bounds.height - window.safeAreaInsets.top
     }
 
     func setupHeightfullScreenButton() {

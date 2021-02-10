@@ -26,7 +26,7 @@ struct BestPhotoViewModel {
     }
 
     var nameVenueAndPrice: String {
-        return "\(dataModel.name) \n \(price)"
+        return getNameAndPrice()
     }
 
     var price: String {
@@ -43,6 +43,10 @@ struct BestPhotoViewModel {
 
 // MARK: - converting data from DetailVenueModel to BestPhotoViewModel
 private extension BestPhotoViewModel {
+
+    func getNameAndPrice() -> String {
+        return getMessagePrice().isEmpty ? dataModel.name : "\(dataModel.name) \n \(price)"
+    }
 
     func getMessagePrice() -> String {
         guard let message = dataModel.messagePrice else {

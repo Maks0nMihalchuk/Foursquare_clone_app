@@ -39,7 +39,7 @@ struct ShortInfoViewModel {
     }
 }
 
-// MARK: - converting data from DetailVenueModel to ViewModel
+// MARK: - converting data from DetailVenueModel to ShortInfoViewModel
 private extension ShortInfoViewModel {
 
     func getRating() -> String {
