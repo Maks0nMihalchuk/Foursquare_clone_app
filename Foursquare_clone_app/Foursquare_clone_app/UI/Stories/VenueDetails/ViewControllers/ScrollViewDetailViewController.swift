@@ -9,15 +9,15 @@
 import UIKit
 
 protocol DetailViewControllerWithScrollViewDelegate: class {
-    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
                                             didTapFullScreenImage button: UIButton,
                                             with image: UIImage,
                                             model: BestPhotoViewModel)
-    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
                                             didTapBack button: UIButton)
 }
 
-class DetailViewControllerWithScrollView: UIViewController {
+class ScrollViewDetailViewController: UIViewController {
 
     @IBOutlet weak var fullScreenButtonHeight: NSLayoutConstraint!
     @IBOutlet private weak var bestPhotoContainerView: UIView!
@@ -84,7 +84,7 @@ class DetailViewControllerWithScrollView: UIViewController {
 }
 
 // MARK: - HoursViewDelegate
-extension DetailViewControllerWithScrollView: HoursViewDelegate {
+extension ScrollViewDetailViewController: HoursViewDelegate {
     func hoursView(_ view: HoursView,
                    didTapChangeStateButton button: UIButton,
                    detailHours stackView: UIStackView) {
@@ -99,7 +99,7 @@ extension DetailViewControllerWithScrollView: HoursViewDelegate {
 }
 
 // MARK: - SetupUI
-private extension DetailViewControllerWithScrollView {
+private extension ScrollViewDetailViewController {
 
     func setupBestPhotoView() {
         bestPhotoView = assemblyView.assemblyBestPhotoView()

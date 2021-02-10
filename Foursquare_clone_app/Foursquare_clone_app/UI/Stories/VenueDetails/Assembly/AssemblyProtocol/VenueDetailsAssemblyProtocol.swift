@@ -11,6 +11,6 @@ import UIKit
 
 protocol VenueDetailsAssemblyProtocol {
     func assemblyDetailWithTableViewVC() -> DetailViewController?
-    func assemblyDetailWithScrollViewVC() -> DetailViewControllerWithScrollView?
+    func assemblyDetailWithScrollViewVC() -> ScrollViewDetailViewController?
     func assemblyFullScreenImageVC() -> FullScreenImageViewController?
 }

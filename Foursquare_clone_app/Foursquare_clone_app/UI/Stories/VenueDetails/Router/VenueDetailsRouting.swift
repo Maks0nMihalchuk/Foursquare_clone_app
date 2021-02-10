@@ -9,6 +9,17 @@
 import Foundation
 import UIKit
 
+enum VenueDetailsStoryType {
+    case tableView
+    case scrollView
+}
+
+enum VenueDetailsStoryResult {
+    case success
+    case userCancelation
+    case failure(error: Error?)
+}
+
 class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
     var completion: VenueDetailsStoryCompletion?
@@ -68,12 +79,12 @@ class VenueDetailsRouting: VenueDetailsRoutingProtocol {
 
 // MARK: - DetailViewControllerWithScrollViewDelegate
 extension VenueDetailsRouting: DetailViewControllerWithScrollViewDelegate {
-    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
                                             didTapBack button: UIButton) {
         finalizeStory()
     }
 
-    func detailViewControllerWithScrollView(_ viewController: DetailViewControllerWithScrollView,
+    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
                                             didTapFullScreenImage button: UIButton,
                                             with image: UIImage, model: BestPhotoViewModel) {
         let fullScreenImage = assembly.assemblyFullScreenImageVC()

@@ -18,10 +18,10 @@ class VenueDetailsAssembly: VenueDetailsAssemblyProtocol {
         return detailController
     }
 
-    func assemblyDetailWithScrollViewVC() -> DetailViewControllerWithScrollView? {
-        let controllerID = String(describing: DetailViewControllerWithScrollView.self)
+    func assemblyDetailWithScrollViewVC() -> ScrollViewDetailViewController? {
+        let controllerID = String(describing: ScrollViewDetailViewController.self)
         let detailController = getStoryboard()
-            .instantiateViewController(withIdentifier: controllerID) as? DetailViewControllerWithScrollView
+            .instantiateViewController(withIdentifier: controllerID) as? ScrollViewDetailViewController
 
         return detailController
     }
