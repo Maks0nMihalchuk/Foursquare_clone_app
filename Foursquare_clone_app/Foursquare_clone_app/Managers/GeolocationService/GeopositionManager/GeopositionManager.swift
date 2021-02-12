@@ -125,15 +125,16 @@ extension GeopositionManager: CLLocationManagerDelegate {
         guard let requiredCompletionBlock = completion else { return }
 
         switch status {
-        case .denied, .notDetermined, .restricted:
+        case .denied, .restricted:
             requiredCompletionBlock(.failure(error: .locationAccessDenied))
+            completion = nil
+        case .notDetermined:
+            break
         case .authorizedAlways, .authorizedWhenInUse:
             break
         @unknown default:
             break
         }
-
-        completion = nil
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

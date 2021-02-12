@@ -39,14 +39,29 @@ class HomeViewController: UIViewController {
         collectionView.register(CategoryCollectionCell.nib(),
                                 forCellWithReuseIdentifier: CategoryCollectionCell.identifier)
         setupImageView()
+        GeopositionManager.shared.startTrackLocation { (result) in
+            switch result {
+
+            case .success:
+                break
+            case .failure(let error):
+                switch error {
+
+                case .locationUnknown:
+                    break
+                case .locationAccessDenied:
+                    self.setupErrorAlert()
+                case .internetIsNotAvailable:
+                    break
+                }
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GeopositionManager.shared.subscribeForGeopositionChanges(observer: self)
-        GeopositionManager.shared.startTrackLocation { (_) in
 
-        }
         setLocationLabel(with: GeopositionManager.shared.getCurrentPosition())
     }
 
