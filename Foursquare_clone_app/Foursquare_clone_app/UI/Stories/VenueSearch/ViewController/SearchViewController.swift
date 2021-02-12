@@ -25,7 +25,6 @@ class SearchViewController: UIViewController {
     var venues = [Venue]()
     var launchSearchBar = Bool()
     var searchBarText = String()
-    var router: VenueDetailsRouting?
     private var pointCoordinates: Geopoint?
 
     override func viewDidLoad() {
@@ -137,19 +136,6 @@ extension SearchViewController: UITableViewDataSource {
                                       category: category)
         cell.configure(with: content)
         return cell
-    }
-}
-
-// MARK: - showDetailViewController
-extension SearchViewController {
-
-    func showDetailViewController(by storyType: VenueDetailsStoryType, venueID: String) {
-        router?.showVenueDetailsStory(from: self,
-                                     type: storyType,
-                                     venueID: venueID,
-                                     animated: true) { (_) in
-                                        self.router?.hideVenueDetailsStory(animated: true)
-        }
     }
 }
 

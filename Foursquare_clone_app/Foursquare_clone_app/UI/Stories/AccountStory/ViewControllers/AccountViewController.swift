@@ -11,16 +11,14 @@ import SafariServices
 import Security
 
 enum AuthorizationState {
-    case noAuthorization
-    case yesAuthorization
+    case unauthorized
+    case authorized
 }
 
 protocol AccountViewControllerDelegate: class {
     func accountViewController(_ viewController: AccountViewController, didTapSignInButton button: UIButton)
     func accountViewController(_ viewController: AccountViewController, didTapSignOutButton button: UIButton)
-    func accountViewController(_ viewController: AccountViewController,
-                               didTapSettingsButton button: UIButton,
-                               router: SettingsRouting)
+    func accountViewController(_ viewController: AccountViewController, didTapSettingsButton button: UIButton)
 }
 
 class AccountViewController: UIViewController {
@@ -36,10 +34,8 @@ class AccountViewController: UIViewController {
     private let redirectUrl = NetworkManager.shared.redirectUrl.lowercased()
     private let appearance = UITabBarAppearance()
     private var authorizationState: AuthorizationState?
-    private let assembly = AccountViewAssembly()
     private var unauthorizedUserView: UnauthorizedUserView?
     private var authorizedUserView: AuthorizedUserView?
-    private let router = SettingsRouting(assembly: SettingsAssembly())
 
     private var userInfoViewModel: UserInfoViewModel? {
         didSet {
@@ -61,12 +57,12 @@ class AccountViewController: UIViewController {
         setupTabBar()
         setupAuthorizedUserView()
         setupUnauthorizedUserView()
-        checkToken()
+        checkForTokenAvailability()
         showViewDependingOnState()
     }
 
     @IBAction func didTapSettingsButton(_ sender: UIButton) {
-        delegate?.accountViewController(self, didTapSettingsButton: sender, router: router)
+        delegate?.accountViewController(self, didTapSettingsButton: sender)
     }
 }
 
@@ -74,7 +70,7 @@ class AccountViewController: UIViewController {
 extension AccountViewController: AuthorizedUserViewDelegate {
     func authorizedUserView(_ authorizedUserView: AuthorizedUserView, didTapSignOutButton: UIButton) {
         delegate?.accountViewController(self, didTapSignOutButton: didTapSignOutButton)
-        checkToken()
+        checkForTokenAvailability()
         showViewDependingOnState()
     }
 }
@@ -103,7 +99,7 @@ extension AccountViewController: SFSafariViewControllerDelegate {
                     DispatchQueue.main.async {
                         if self.keychainManager.saveValue(value: dataAccessToken,
                                                           with: self.getKeyToToken()) {
-                            self.checkToken()
+                            self.checkForTokenAvailability()
                             self.showViewDependingOnState()
                             self.setupActivityIndicator(isLaunch: false)
                         } else {
@@ -112,8 +108,10 @@ extension AccountViewController: SFSafariViewControllerDelegate {
                         }
                     }
                 } else {
-                    self.setupActivityIndicator(isLaunch: false)
-                    self.showErrorAlert()
+                    DispatchQueue.main.async {
+                        self.setupActivityIndicator(isLaunch: false)
+                        self.showErrorAlert()
+                    }
                 }
             }
         }
@@ -143,16 +141,16 @@ private extension AccountViewController {
 // MARK: - work with token
 private extension AccountViewController {
 
-    func checkToken() {
+    func checkForTokenAvailability() {
         let tokenAvailability = keychainManager
             .checkForDataAvailability(for: getKeyToToken())
         authorizationState = tokenAvailability
-            ? .yesAuthorization
-            : .noAuthorization
+            ? .authorized
+            : .unauthorized
     }
 
     func getKeyToToken() -> String {
-        return KeychainKey.accessToken.currentKey
+        return Keys.accessToken.stringValue
     }
 }
 
@@ -164,25 +162,29 @@ private extension AccountViewController {
 
         setupSettingButton(state: state)
         switch state {
-        case .noAuthorization:
+        case .unauthorized:
             setupActivityIndicator(isLaunch: false)
             authorizedUserView?.alpha = 0
             userNameLabel.text = "AccountViewController.YourProfile".localized()
             authorizedUserView?.removeFromSuperview()
-            animatedSetupView(subview: unauthorizedUserView ?? UIView())
-        case .yesAuthorization:
+            setupContainerView(with: unauthorizedUserView ?? UIView())
+        case .authorized:
             unauthorizedUserView?.alpha = 0
             setupActivityIndicator(isLaunch: true)
             getUserInfo()
             unauthorizedUserView?.removeFromSuperview()
-            animatedSetupView(subview: authorizedUserView ?? UIView())
+            setupContainerView(with: authorizedUserView ?? UIView())
         }
     }
 
-    func animatedSetupView(subview: UIView) {
+    func setupContainerView(with subview: UIView) {
         let duration = 0.5
+
+        containerView.addSubview(subview)
+        subview.frame = containerView.bounds
+
+        subview.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         UIView.animate(withDuration: duration) {
-            self.containerView.addSubview(subview)
             subview.alpha = 1
         }
     }
@@ -198,12 +200,14 @@ private extension AccountViewController {
     }
 
     func setupAuthorizedUserView() {
-        authorizedUserView = assembly.assemblyAuthorizedUserView(containerBounds: containerView.bounds)
+        authorizedUserView = UIView.fromNib() as AuthorizedUserView
+        authorizedUserView?.setupUI()
         authorizedUserView?.delegate = self
     }
 
     func setupUnauthorizedUserView() {
-        unauthorizedUserView = assembly.assemblyUnauthorizedUserView(containerBounds: containerView.bounds)
+        unauthorizedUserView = UIView.fromNib() as UnauthorizedUserView
+        unauthorizedUserView?.setupUI()
         unauthorizedUserView?.delegate = self
     }
 
@@ -216,10 +220,10 @@ private extension AccountViewController {
         let duration = 0.25
         UIView.animate(withDuration: duration) {
             switch state {
-            case .noAuthorization:
+            case .unauthorized:
                 self.settingButton.alpha = 0
                 self.settingButton.isEnabled = false
-            case .yesAuthorization:
+            case .authorized:
                 self.settingButton.alpha = 1
                 self.settingButton.isEnabled = true
             }
@@ -234,7 +238,7 @@ extension AccountViewController {
         let alertController = UIAlertController(title: "AlertErrorTitle".localized(),
                                                 message: "AccountViewController.AlertMessage".localized(),
                                                 preferredStyle: .alert)
-        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+        let action = UIAlertAction(title: "AccountViewController.AlertAction".localized(),
                                    style: .default,
                                    handler: nil)
         alertController.addAction(action)

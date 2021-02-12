@@ -1,5 +1,5 @@
 //
-//  AccountAssembly.swift
+//  UserFollowers.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 11.02.2021.
@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import UIKit
 
-protocol AccountAssemblyProtocol {
-    func assemblyAccountViewController() -> AccountViewController
+struct UserFollowers: Codable {
+    let count: Int
 }

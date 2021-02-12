@@ -1,5 +1,5 @@
 //
-//  AssemblyProtocol.swift
+//  File.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 08.02.2021.
@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-protocol HomeAssemblyProtocol {
-    func assemblyHomeViewController() -> HomeViewController
+protocol AccountRouterProtocol {
+    func showAccountStory(from: inout UIViewController, animated: Bool)
 }

@@ -63,6 +63,8 @@
 
 "AccountViewController.YourProfile" = "Ваш профиль";
 "AccountViewController.Title" = "Я";
+"AccountViewController.AlertMessage" = "Ошибка авторизации. Попробуйте позже";
+"AccountViewController.AlertAction" = "Хорошо";
 
 "Unauthorized.PlaceholderLabel" = "Создав учетную запись, вы можете подписаться на друзей и экспертов, которым доверяете, и увидеть места, которые они порекомендовали.";
 "Unauthorized.createYourAcc" = "Cоздать Свой личный кабинет";

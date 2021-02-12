@@ -146,7 +146,7 @@ class NetworkManager {
             }
 
             do {
-                let accessToken = try JSONDecoder().decode(Token.self, from: data)
+                let accessToken = try JSONDecoder().decode(TokenModel.self, from: data)
 
                 completion(accessToken.access_token, true)
             } catch {

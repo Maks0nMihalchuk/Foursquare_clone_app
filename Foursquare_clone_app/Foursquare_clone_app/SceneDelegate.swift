@@ -11,17 +11,22 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private let mainRouter: MainRoutingProtocol = MainRouting(assembly: MainAssembly(),
-                                                              homeRouter: HomeRouting(assembly: HomeAssembly()),
-                                                              accountRouter: AccountRouting(assembly: AccountAssembly()),
-                                                              listsRouter: ListsRouting(assembly: ListsAssembly()))
+
+    private let mainRouter: MainRouterProtocol = MainRouter(assembly: MainAssembly(),
+                                                            homeRouter: HomeRouter(assembly: HomeAssembly()),
+                                                            accountRouter: AccountRouter(assembly: AccountAssembly()),
+                                                            listsRouter: ListsRouter(assembly: ListsAssembly()))
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
+        let rootNavigationController = UINavigationController()
+
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        mainRouter.showMainStory(window, animated: true)
+        mainRouter.showMainStory(rootNavigationController, animated: true)
+        window?.rootViewController = rootNavigationController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,7 +55,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        UIApplication.shared.applicationIconBadgeNumber = 0
         GeopositionManager.shared.stopTrackLocation()
 
     }

@@ -41,7 +41,6 @@ class Mapper {
         let lastName = userData.lastName
         let photoPrefix = userData.photo.prefix
         let photoSuffix = userData.photo.suffix
-        let `default` = userData.photo.`default`
         let friendsCount = userData.friends.count
         let tipsCount = userData.tips.count
         let photosCount = userData.photos.count
@@ -52,12 +51,12 @@ class Mapper {
         return UserInfoDataModel(firstName: firstName,
                                  lastName: lastName,
                                  photoPrefix: photoPrefix,
-                                 photoSuffix: photoSuffix, default: `default`,
-                                 countFriends: friendsCount,
-                                 countTips: tipsCount,
-                                 countPhotos: photosCount,
-                                 countFollowers: userFollowersCount,
-                                 listsName: userListsName)
+                                 photoSuffix: photoSuffix, 
+                                 friendsCount: friendsCount,
+                                 tipsCount: tipsCount,
+                                 photosCount: photosCount,
+                                 followersCount: userFollowersCount,
+                                 arrayOfListNames: userListsName)
     }
 }
 

@@ -8,6 +8,16 @@
 
 import Foundation
 
+enum Keys {
+    case accessToken
+
+    var stringValue: String {
+        switch self {
+        case .accessToken: return "accessToken"
+        }
+    }
+}
+
 class KeychainManager {
 
     static var shared: KeychainManager = {

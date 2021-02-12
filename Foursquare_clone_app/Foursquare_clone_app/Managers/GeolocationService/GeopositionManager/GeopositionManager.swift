@@ -119,7 +119,6 @@ extension GeopositionManager: CLLocationManagerDelegate {
         }
         self.position = position
         notifyObservers(aboutGeopositionChange: position)
-
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
