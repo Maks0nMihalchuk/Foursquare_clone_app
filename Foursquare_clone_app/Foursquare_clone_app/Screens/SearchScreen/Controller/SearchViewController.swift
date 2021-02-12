@@ -85,7 +85,7 @@ extension SearchViewController: UITableViewDelegate {
 
                 DispatchQueue.main.async {
                     let viewModel = ViewModel(dataModel: detailVenueInfo)
-                    self.showAlertForSelection(viewModel: viewModel, dataModel: detailVenueInfo)
+                    self.showAlert(forSelectionViewModel: viewModel, dataModel: detailVenueInfo)
                 }
 
             } else {
@@ -126,7 +126,7 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - setup searchBar, DetailController and AlertError
 private extension SearchViewController {
 
-    func showAlertForSelection(viewModel: ViewModel, dataModel: DetailVenueModel) {
+    func showAlert(forSelectionViewModel viewModel: ViewModel, dataModel: DetailVenueModel) {
 
         let title = "AlertSelectController.Title".localized()
         let message = "AlertSelectController.Message".localized()
