@@ -29,13 +29,16 @@ class NetworkManager {
     }
 
     func getVenues(categoryName: String,
+                   coordinates: (lat: Double, long: Double),
                    completion: @escaping ([Venue]?, Bool) -> Void) {
-
+        let lat = coordinates.lat
+        let long = coordinates.long
         let urlHostAllowed = "\(urlFoursquare)/v2/venues/search"
         + "?client_id=\(clientId)"
         + "&client_secret=\(clientSecret)"
         + "&v=\(versionAPI)"
-        + "&ll=40.7099,-73.9622&intent=checkin&radius=2000&query=\(categoryName)"
+        + "&ll=\(lat),\(long)&intent=checkin&radius=2000&query=\(categoryName)"
+
         guard
             let urlString = urlHostAllowed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         else {
@@ -144,8 +147,7 @@ class NetworkManager {
             }
 
             do {
-                let accessToken = try JSONDecoder().decode(Token.self, from: data)
-
+                let accessToken = try JSONDecoder().decode(TokenModel.self, from: data)
                 completion(accessToken.access_token, true)
             } catch {
                 completion(nil, false)
@@ -153,8 +155,7 @@ class NetworkManager {
         }
     }
 
-    func getUserInfo(accessToken: String, completion: @escaping (String?, Bool) -> Void) {
-
+    func getUserInfo(accessToken: String, completion: @escaping (UserInfoDataModel?, Bool) -> Void) {
         let urlString = "\(urlFoursquare)/v2/users/self?oauth_token=\(accessToken)&v=\(versionAPI)"
 
         guard let url = URL(string: urlString) else {
@@ -175,10 +176,10 @@ class NetworkManager {
 
             do {
                 let userInfo = try JSONDecoder().decode(User.self, from: data)
-                let userFullName = "\(userInfo.response.user.firstName) "
-                + "\(userInfo.response.user.lastName)"
-                completion(userFullName, true)
-
+                let mapper = NetworkManager.shared.mapper
+                let convertedUserData = mapper.mapReceivedDataAboutUser(userData: userInfo.response.user)
+                StorageManager.shared.putUserInfo(of: convertedUserData)
+                completion(StorageManager.shared.getUserInfo(), true)
             } catch {
                 completion(nil, false)
             }

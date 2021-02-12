@@ -20,13 +20,16 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var customViewNavBar: UIView!
     @IBOutlet private weak var blurEffectView: UIVisualEffectView!
     @IBOutlet private weak var venueNameLabel: UILabel!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
     private let numberOfCellsWhenNoData = 1
-    private var defaultHoursCellStatus = true
+    private var defaultHoursCellStatus = false
 
-    var viewModel: ViewModel? {
+    var networking: NetworkManager?
+    var venueID = String()
+    var viewModel: DetailViewModel? {
         didSet {
             guard viewModel != nil else { return }
 
@@ -42,6 +45,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         navigationController?.isNavigationBarHidden = true
         setupTableView()
         setupBlurEffectView()
@@ -71,14 +75,19 @@ extension DetailViewController: ImageTableViewCellDelegate {
 // MARK: - HoursTableCellDelegate
 extension DetailViewController: HoursTableCellDelegate {
 
-    func hoursTableViewCell(_ cell: HoursTableCell, didChangeStateTo state: HoursTableCallState.Type) {
+    func hoursTableViewCell(_ cell: HoursTableCell,
+                            didTapChangeState button: UIButton,
+                            to state: HoursTableCallState.Type) {
         let indexPath = self.tableView.indexPath(for: cell)
+        let transform = CGAffineTransform(rotationAngle: .zero)
 
         guard let index = indexPath else { return }
 
-        self.tableView.reloadRows(at: [IndexPath(row: index.row,
-                                                 section: index.section)],
-                                  with: .fade)
+        button.imageView?.transform = defaultHoursCellStatus
+            ? transform.rotated(by: .zero)
+            : transform.rotated(by: .pi)
+        tableView.reloadRows(at: [IndexPath(row: index.row, section: index.section)],
+                             with: .fade)
     }
 }
 
@@ -130,6 +139,47 @@ extension DetailViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - load data
+private extension DetailViewController {
+
+    func setupActivityIndicator(isHidden: Bool) {
+        activityIndicator.isHidden = !isHidden
+
+        if isHidden {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
+    func loadData() {
+        networking?.getDetailInfoVenue(venueId: venueID,
+                                       completion: { (detailVenue, isSuccessful) in
+                                        DispatchQueue.main.async {
+                                            self.setupActivityIndicator(isHidden: true)
+                                        }
+
+                                        if isSuccessful {
+
+                                            guard let detailVenue = detailVenue else {
+                                                return
+                                            }
+
+                                            DispatchQueue.main.async {
+                                                self.viewModel = DetailViewModel(dataModel: detailVenue)
+                                                self.setupActivityIndicator(isHidden: false)
+                                                self.tableView.reloadData()
+                                            }
+                                        } else {
+                                            DispatchQueue.main.async {
+                                                self.setupActivityIndicator(isHidden: false)
+                                                self.showAlertError()
+                                            }
+                                        }
+        })
+    }
+}
+
 // MARK: - setup, show and hide customNavBar
 private extension DetailViewController {
 
@@ -170,7 +220,7 @@ private extension DetailViewController {
 
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: ViewModel) -> ImageTableViewCell {
+                           with viewModel: DetailViewModel) -> ImageTableViewCell {
         let optionImageCell = tableView
             .dequeueReusableCell(withIdentifier: ImageTableViewCell.getIdentifier(),
                                                             for: indexPath) as? ImageTableViewCell
@@ -188,7 +238,7 @@ private extension DetailViewController {
 
     func getShortInfoTableCell(_ tableView: UITableView,
                                _ indexPath: IndexPath,
-                               with viewModel: ViewModel) -> ShortInfoTableCell {
+                               with viewModel: DetailViewModel) -> ShortInfoTableCell {
         let optionShortInfoCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.getIdentifier(),
                                                                 for: indexPath) as? ShortInfoTableCell
 
@@ -207,7 +257,7 @@ private extension DetailViewController {
 
     func getHoursTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: ViewModel) -> HoursTableCell {
+                           with viewModel: DetailViewModel) -> HoursTableCell {
         let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.getIdentifier(),
                                                             for: indexPath) as? HoursTableCell
 
@@ -227,7 +277,7 @@ private extension DetailViewController {
 
     func getContactTableCell(_ tableView: UITableView,
                              _ indexPath: IndexPath,
-                             with viewModel: ViewModel) -> ContactTableCell {
+                             with viewModel: DetailViewModel) -> ContactTableCell {
         let optionContactCell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.getIdentifier(),
                                                               for: indexPath) as? ContactTableCell
 
@@ -272,5 +322,19 @@ private extension DetailViewController {
                               options: [.transition(.fade(1.0))],
                               progressBlock: nil)
         return imageView.image
+    }
+}
+
+// MARK: - setup error alert
+private extension DetailViewController {
+
+    func showAlertError() {
+        let alertController = UIAlertController(title: "Error",
+                                                message: "when downloading data error occurred", preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
     }
 }

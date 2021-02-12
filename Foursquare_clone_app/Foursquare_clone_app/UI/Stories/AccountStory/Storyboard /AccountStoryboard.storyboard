@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mku-uS-83f">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Me-->
+        <scene sceneID="CiC-n1-fA1">
+            <objects>
+                <viewController restorationIdentifier="AccountViewController" storyboardIdentifier="AccountViewController" id="Mku-uS-83f" customClass="AccountViewController" customModule="Foursquare_clone_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gAk-Dl-HJt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wst-Y2-iLH">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUH-ha-cXz">
+                                        <rect key="frame" x="8" y="8" width="360" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f7-HT-Y57">
+                                        <rect key="frame" x="376" y="8" width="30" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="Dlj-DE-UtH"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="ellipsis" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapSettingsButton:" destination="Mku-uS-83f" eventType="touchUpInside" id="9qW-8Z-woV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="2f7-HT-Y57" firstAttribute="top" secondItem="wst-Y2-iLH" secondAttribute="top" constant="8" id="Hlb-jX-kyn"/>
+                                    <constraint firstAttribute="height" constant="44" id="JUT-zd-V1q"/>
+                                    <constraint firstAttribute="trailing" secondItem="2f7-HT-Y57" secondAttribute="trailing" constant="8" id="ON7-zu-HMn"/>
+                                    <constraint firstItem="rUH-ha-cXz" firstAttribute="leading" secondItem="wst-Y2-iLH" secondAttribute="leading" constant="8" id="Ust-qy-AzO"/>
+                                    <constraint firstItem="rUH-ha-cXz" firstAttribute="top" secondItem="wst-Y2-iLH" secondAttribute="top" constant="8" id="bFe-3a-gew"/>
+                                    <constraint firstAttribute="bottom" secondItem="rUH-ha-cXz" secondAttribute="bottom" constant="8" id="cHv-kj-SU5"/>
+                                    <constraint firstItem="2f7-HT-Y57" firstAttribute="leading" secondItem="rUH-ha-cXz" secondAttribute="trailing" constant="8" id="jDR-UO-Y0W"/>
+                                    <constraint firstAttribute="bottom" secondItem="2f7-HT-Y57" secondAttribute="bottom" constant="8" id="kBF-s8-OOd"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2g-yN-wrZ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="SKZ-Us-rgN">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.33881258959999999" blue="0.51555329559999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rlP-5p-yLK" firstAttribute="trailing" secondItem="wst-Y2-iLH" secondAttribute="trailing" id="1fL-4f-tX8"/>
+                            <constraint firstItem="SKZ-Us-rgN" firstAttribute="centerX" secondItem="gAk-Dl-HJt" secondAttribute="centerX" id="6Og-jw-IG9"/>
+                            <constraint firstItem="rlP-5p-yLK" firstAttribute="bottom" secondItem="Y2g-yN-wrZ" secondAttribute="bottom" id="BBI-cw-q3T"/>
+                            <constraint firstItem="Y2g-yN-wrZ" firstAttribute="leading" secondItem="rlP-5p-yLK" secondAttribute="leading" id="GaV-aS-GyN"/>
+                            <constraint firstItem="SKZ-Us-rgN" firstAttribute="centerY" secondItem="gAk-Dl-HJt" secondAttribute="centerY" id="LnI-6a-ZKz"/>
+                            <constraint firstItem="wst-Y2-iLH" firstAttribute="leading" secondItem="rlP-5p-yLK" secondAttribute="leading" id="PmL-Ej-Dys"/>
+                            <constraint firstItem="Y2g-yN-wrZ" firstAttribute="top" secondItem="wst-Y2-iLH" secondAttribute="bottom" id="gQJ-cm-gZS"/>
+                            <constraint firstItem="rlP-5p-yLK" firstAttribute="trailing" secondItem="Y2g-yN-wrZ" secondAttribute="trailing" id="hGQ-mu-2fL"/>
+                            <constraint firstItem="wst-Y2-iLH" firstAttribute="top" secondItem="rlP-5p-yLK" secondAttribute="top" id="wdQ-Kd-9ck"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rlP-5p-yLK"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Me" image="person.crop.square.fill" catalog="system" id="9k5-XK-ZfK">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="SKZ-Us-rgN" id="ghY-Ny-iFb"/>
+                        <outlet property="containerView" destination="Y2g-yN-wrZ" id="vPa-c9-OtD"/>
+                        <outlet property="navigationBarView" destination="wst-Y2-iLH" id="gzt-tJ-8P2"/>
+                        <outlet property="settingButton" destination="2f7-HT-Y57" id="Rux-k2-AJa"/>
+                        <outlet property="userNameLabel" destination="rUH-ha-cXz" id="DhL-Dt-HU1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXe-GI-hKM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="57.971014492753625" y="1319.8660714285713"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
+        <image name="person.crop.square.fill" catalog="system" width="64" height="56"/>
+    </resources>
+</document>

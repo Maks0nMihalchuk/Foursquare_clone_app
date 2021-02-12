@@ -4,20 +4,28 @@
 //
 //  Created by maks on 14.12.2020.
 //  Copyright © 2020 maks. All rights reserved.
-//
+// swiftlint:disable line_length
 
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-// swiftlint:disable line_length
-// swiftlint:disable unused_optional_binding
+    private let mainRouter: MainRouterProtocol = MainRouter(assembly: MainAssembly(),
+                                                            homeRouter: HomeRouter(assembly: HomeAssembly()),
+                                                            accountRouter: AccountRouter(assembly: AccountAssembly()),
+                                                            listsRouter: ListsRouter(assembly: ListsAssembly()))
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        let rootNavigationController = UINavigationController()
+
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        mainRouter.showMainStory(rootNavigationController, animated: true)
+        window?.rootViewController = rootNavigationController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -30,6 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        GeopositionManager.shared.startTrackLocation { (_) in }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -43,8 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        GeopositionManager.shared.stopTrackLocation()
     }
 }

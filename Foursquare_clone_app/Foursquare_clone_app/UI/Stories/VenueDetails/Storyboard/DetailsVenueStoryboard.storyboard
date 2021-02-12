@@ -212,14 +212,20 @@
                                     <constraint firstAttribute="trailing" secondItem="6f1-pg-hbc" secondAttribute="trailing" constant="16" id="z0o-F2-iZj"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9Qh-y2-X0q">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QPp-a4-y7N" firstAttribute="trailing" secondItem="Z1x-mZ-nwp" secondAttribute="trailing" id="20S-gT-lWg"/>
                             <constraint firstAttribute="top" secondItem="J3f-7x-e9W" secondAttribute="top" id="DGY-8t-SeJ"/>
                             <constraint firstItem="QPp-a4-y7N" firstAttribute="trailing" secondItem="J3f-7x-e9W" secondAttribute="trailing" id="Dvw-Bo-uJx"/>
+                            <constraint firstItem="9Qh-y2-X0q" firstAttribute="centerX" secondItem="YTM-ho-3YB" secondAttribute="centerX" id="NgD-0k-flI"/>
                             <constraint firstItem="J3f-7x-e9W" firstAttribute="bottom" secondItem="YTM-ho-3YB" secondAttribute="bottom" id="Nqo-la-h3J"/>
                             <constraint firstItem="J3f-7x-e9W" firstAttribute="leading" secondItem="QPp-a4-y7N" secondAttribute="leading" id="f2i-VW-29M"/>
+                            <constraint firstItem="9Qh-y2-X0q" firstAttribute="centerY" secondItem="YTM-ho-3YB" secondAttribute="centerY" id="fMc-jZ-nsd"/>
                             <constraint firstAttribute="top" secondItem="Z1x-mZ-nwp" secondAttribute="top" id="o8R-kJ-ZRe"/>
                             <constraint firstItem="Z1x-mZ-nwp" firstAttribute="leading" secondItem="QPp-a4-y7N" secondAttribute="leading" id="oVx-Vu-Yix"/>
                             <constraint firstItem="Z1x-mZ-nwp" firstAttribute="height" secondItem="QPp-a4-y7N" secondAttribute="height" multiplier="0.122249" id="ouK-iu-CLc"/>
@@ -228,6 +234,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BkV-GF-zgY"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="9Qh-y2-X0q" id="HXh-EK-Sce"/>
                         <outlet property="blurEffectView" destination="LGh-g5-ARH" id="nsC-7J-q0n"/>
                         <outlet property="customViewNavBar" destination="Z1x-mZ-nwp" id="OcT-gJ-hCw"/>
                         <outlet property="tableView" destination="J3f-7x-e9W" id="RMQ-7b-kM2"/>

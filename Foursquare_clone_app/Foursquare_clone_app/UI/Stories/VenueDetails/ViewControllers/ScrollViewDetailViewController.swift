@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DetailViewControllerWithScrollViewDelegate: class {
+protocol ScrollViewDetailViewControllerDelegate: class {
     func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
                                             didTapFullScreenImage button: UIButton,
                                             with image: UIImage,
@@ -26,6 +26,8 @@ class ScrollViewDetailViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentView: UIView!
 
+    var networking: NetworkManager?
+    var venueID = String()
     var dataModel: DetailVenueModel? {
         didSet {
             guard let requireDataModel = dataModel else { return }
@@ -41,7 +43,7 @@ class ScrollViewDetailViewController: UIViewController {
         }
     }
 
-    weak var delegate: DetailViewControllerWithScrollViewDelegate?
+    weak var delegate: ScrollViewDetailViewControllerDelegate?
 
     private let duration = 0.25
     private let spacing: CGFloat = 26
@@ -95,6 +97,45 @@ extension ScrollViewDetailViewController: HoursViewDelegate {
                 : self.transform.rotated(by: .zero)
             stackView.isHidden = !stackView.isHidden
         }
+    }
+}
+
+// MARK: - Load data
+private extension ScrollViewDetailViewController {
+
+    func setupActivityIndicator(isHidden: Bool) {
+//        activityIndicator.isHidden = !isHidden
+//
+//        if isHidden {
+//            activityIndicator.startAnimating()
+//        } else {
+//            activityIndicator.stopAnimating()
+//        }
+    }
+
+    func loadData() {
+        networking?.getDetailInfoVenue(venueId: venueID,
+                                       completion: { (detailVenue, isSuccessful) in
+                                        DispatchQueue.main.async {
+                                            //self.setupActivityIndicator(isHidden: true)
+                                        }
+
+                                        if isSuccessful {
+                                            guard let detailVenue = detailVenue else {
+                                                return
+                                            }
+
+                                            DispatchQueue.main.async {
+                                                self.dataModel = detailVenue
+                                                //self.setupActivityIndicator(isHidden: false)
+                                            }
+                                        } else {
+                                            DispatchQueue.main.async {
+                                                //self.setupActivityIndicator(isHidden: false)
+                                                self.showAlertError()
+                                            }
+                                        }
+        })
     }
 }
 
@@ -188,5 +229,19 @@ private extension ScrollViewDetailViewController {
 
     func checkState(isHidden: Bool) -> HoursTableCallState {
         return isHidden ? .decomposed : .folded
+    }
+}
+
+// MARK: - setup error alert
+private extension ScrollViewDetailViewController {
+
+    func showAlertError() {
+        let alertController = UIAlertController(title: "Error",
+                                                message: "when downloading data error occurred", preferredStyle: .alert)
+        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
     }
 }

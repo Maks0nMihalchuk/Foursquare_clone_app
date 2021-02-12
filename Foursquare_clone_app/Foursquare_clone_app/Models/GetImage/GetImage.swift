@@ -34,5 +34,6 @@ func getPhotoURL(prefix: String?, suffix: String?, with size: ImageSizeKey) -> U
     else { return nil }
 
     urlString = prefix + size.stringValue + suffix
-    return URL(string: urlString)
+    let url = URL(string: urlString)
+    return url
 }
