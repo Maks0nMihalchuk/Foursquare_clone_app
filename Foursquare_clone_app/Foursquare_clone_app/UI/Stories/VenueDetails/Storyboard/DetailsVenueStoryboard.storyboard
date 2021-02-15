@@ -25,6 +25,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jL-J0-Oiq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Nwt-UQ-ttt">
+                                        <rect key="frame" x="188.5" y="131.5" width="37" height="37"/>
+                                        <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvz-5d-ZU7">
                                         <rect key="frame" x="0.0" y="44" width="414" height="0.0"/>
                                         <constraints>
@@ -56,6 +60,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="bottom" secondItem="0Nf-Vm-OhB" secondAttribute="bottom" id="7J2-mc-A8C"/>
+                                    <constraint firstItem="Nwt-UQ-ttt" firstAttribute="centerX" secondItem="5jL-J0-Oiq" secondAttribute="centerX" id="9UN-fA-Z8U"/>
                                     <constraint firstItem="gbf-jx-815" firstAttribute="centerX" secondItem="5jL-J0-Oiq" secondAttribute="centerX" id="C4G-lV-5Za"/>
                                     <constraint firstItem="gvz-5d-ZU7" firstAttribute="leading" secondItem="5jL-J0-Oiq" secondAttribute="leading" id="EyI-Ua-HM4"/>
                                     <constraint firstAttribute="trailing" secondItem="gvz-5d-ZU7" secondAttribute="trailing" id="Lt5-2q-MtO"/>
@@ -75,6 +80,7 @@
                             <constraint firstAttribute="bottom" secondItem="5jL-J0-Oiq" secondAttribute="bottom" id="LPt-YO-lfa"/>
                             <constraint firstItem="5jL-J0-Oiq" firstAttribute="top" secondItem="a7p-ST-mpG" secondAttribute="top" id="OIp-fo-uH0"/>
                             <constraint firstItem="Xoo-Aj-vIW" firstAttribute="trailing" secondItem="mBQ-Rf-LuS" secondAttribute="trailing" id="Pyp-A4-doY"/>
+                            <constraint firstItem="Nwt-UQ-ttt" firstAttribute="centerY" secondItem="mBQ-Rf-LuS" secondAttribute="centerY" id="QsJ-dG-g0O"/>
                             <constraint firstItem="Xoo-Aj-vIW" firstAttribute="top" secondItem="gvz-5d-ZU7" secondAttribute="top" id="mJA-0N-LDR"/>
                             <constraint firstItem="ZNj-Bi-4OS" firstAttribute="top" secondItem="Xoo-Aj-vIW" secondAttribute="top" id="pFL-Fn-AxZ"/>
                             <constraint firstItem="mBQ-Rf-LuS" firstAttribute="top" secondItem="a7p-ST-mpG" secondAttribute="top" id="q9R-fc-4U9"/>
@@ -84,6 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="h0S-uP-zvE"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Nwt-UQ-ttt" id="BA8-ze-a0q"/>
                         <outlet property="bestPhotoContainerView" destination="mBQ-Rf-LuS" id="ls8-EM-SDY"/>
                         <outlet property="bestPhotoHeight" destination="zHT-lU-Fdk" id="Mbr-7B-o4P"/>
                         <outlet property="contentView" destination="gbf-jx-815" id="db5-w5-Z0C"/>

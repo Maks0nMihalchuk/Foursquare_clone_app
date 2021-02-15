@@ -27,6 +27,7 @@ class ScrollViewDetailViewController: UIViewController {
     @IBOutlet private weak var contentViewHeight: NSLayoutConstraint!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     var networking: NetworkManager?
     var venueID = String()
@@ -115,20 +116,20 @@ extension ScrollViewDetailViewController: HoursViewDelegate {
 private extension ScrollViewDetailViewController {
 
     func setupActivityIndicator(isHidden: Bool) {
-//        activityIndicator.isHidden = !isHidden
-//
-//        if isHidden {
-//            activityIndicator.startAnimating()
-//        } else {
-//            activityIndicator.stopAnimating()
-//        }
+        activityIndicator.isHidden = !isHidden
+
+        if isHidden {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
 
     func loadData() {
         networking?.getDetailInfoVenue(venueId: venueID,
                                        completion: { (detailVenue, isSuccessful) in
                                         DispatchQueue.main.async {
-                                            //self.setupActivityIndicator(isHidden: true)
+                                            self.setupActivityIndicator(isHidden: true)
                                         }
 
                                         if isSuccessful {
@@ -138,11 +139,11 @@ private extension ScrollViewDetailViewController {
 
                                             DispatchQueue.main.async {
                                                 self.dataModel = detailVenue
-                                                //self.setupActivityIndicator(isHidden: false)
+                                                self.setupActivityIndicator(isHidden: false)
                                             }
                                         } else {
                                             DispatchQueue.main.async {
-                                                //self.setupActivityIndicator(isHidden: false)
+                                                self.setupActivityIndicator(isHidden: false)
                                                 self.showAlertError()
                                             }
                                         }
