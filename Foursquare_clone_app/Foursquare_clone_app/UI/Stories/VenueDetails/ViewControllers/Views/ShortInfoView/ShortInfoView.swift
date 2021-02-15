@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ShortInfoViewDelegate: class {
+    func shortInfoView(_ view: ShortInfoView,
+                       didTapShowMapButton button: UIButton, with model: ShortInfoViewModel)
+}
+
 class ShortInfoView: UIView {
 
     @IBOutlet private weak var ratingLabel: UILabel!
@@ -17,6 +22,7 @@ class ShortInfoView: UIView {
     @IBOutlet private weak var hoursVenueLabel: UILabel!
     @IBOutlet private weak var categoriesLabel: UILabel!
     @IBOutlet private weak var categoriesVenueLabel: UILabel!
+    @IBOutlet private weak var showMapButton: UIButton!
 
     var viewModel: ShortInfoViewModel? {
         didSet {
@@ -26,6 +32,8 @@ class ShortInfoView: UIView {
         }
     }
 
+    weak var delegate: ShortInfoViewDelegate?
+
     func setupUI() {
         ratingLabel.text = "-"
         addressLabel.text = "AdressLabelText".localized()
@@ -34,8 +42,15 @@ class ShortInfoView: UIView {
         hoursVenueLabel.text = "LabelTextPlaceholder".localized()
         categoriesLabel.text = "CategoriesLabelText".localized()
         categoriesVenueLabel.text = "LabelTextPlaceholder".localized()
+        showMapButton.setTitle("ShowMap".localized(), for: .normal)
+        showMapButton.titleLabel?.textAlignment = .center
     }
 
+    @IBAction func didTapShowMapButton(_ sender: UIButton) {
+        guard let model = viewModel else { return }
+
+        delegate?.shortInfoView(self, didTapShowMapButton: sender, with: model)
+    }
 }
 
 // MARK: - setupUI

@@ -15,13 +15,15 @@ protocol ScrollViewDetailViewControllerDelegate: class {
                                             model: BestPhotoViewModel)
     func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
                                             didTapBack button: UIButton)
+    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
+                                            didTapShowMap button: UIButton, with model: ShortInfoViewModel)
 }
 
 class ScrollViewDetailViewController: UIViewController {
 
-    @IBOutlet weak var fullScreenButtonHeight: NSLayoutConstraint!
+    @IBOutlet private weak var fullScreenButtonHeight: NSLayoutConstraint!
     @IBOutlet private weak var bestPhotoContainerView: UIView!
-    @IBOutlet weak var bestPhotoHeight: NSLayoutConstraint!
+    @IBOutlet private weak var bestPhotoHeight: NSLayoutConstraint!
     @IBOutlet private weak var contentViewHeight: NSLayoutConstraint!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentView: UIView!
@@ -39,6 +41,7 @@ class ScrollViewDetailViewController: UIViewController {
                 self.shortInfoView?.viewModel = ShortInfoViewModel(dataModel: requireDataModel)
                 self.hoursView?.viewModel = HoursViewModel(dataModel: requireDataModel)
                 self.contactView?.viewModel = ContactViewModel(dataModel: requireDataModel)
+                self.setupScrollView()
             }
         }
     }
@@ -59,13 +62,14 @@ class ScrollViewDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         setupBestPhotoView()
         setupShortInfoView()
         setupHoursView()
         setupContactView()
         setupRedView()
         layoutSetup()
-        navigationController?.isNavigationBarHidden = true
+        loadData()
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
@@ -82,6 +86,14 @@ class ScrollViewDetailViewController: UIViewController {
                                                      didTapFullScreenImage: sender,
                                                      with: image,
                                                      model: model)
+    }
+}
+
+// MARK: - ShortInfoViewDelegate
+extension ScrollViewDetailViewController: ShortInfoViewDelegate {
+    func shortInfoView(_ view: ShortInfoView,
+                       didTapShowMapButton button: UIButton, with model: ShortInfoViewModel) {
+        delegate?.detailViewControllerWithScrollView(self, didTapShowMap: button, with: model)
     }
 }
 
@@ -142,6 +154,10 @@ private extension ScrollViewDetailViewController {
 // MARK: - SetupUI
 private extension ScrollViewDetailViewController {
 
+    func setupNavBar() {
+        navigationController?.isNavigationBarHidden = true
+    }
+
     func setupBestPhotoView() {
         bestPhotoView = assemblyView.assemblyBestPhotoView()
         bestPhotoView?.translatesAutoresizingMaskIntoConstraints = false
@@ -149,6 +165,7 @@ private extension ScrollViewDetailViewController {
 
     func setupShortInfoView() {
         shortInfoView = assemblyView.assemblyShortInfoView()
+        shortInfoView?.delegate = self
         shortInfoView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -216,10 +233,7 @@ private extension ScrollViewDetailViewController {
     }
 
     func setupScrollView() {
-        guard let photoView = bestPhotoView else { return }
-
-        let window = UIApplication.shared.windows[0]
-        scrollView.contentInset.top = photoView.bounds.height - window.safeAreaInsets.top
+        scrollView.contentInset.top = bestPhotoHeight.constant
     }
 
     func setupHeightfullScreenButton() {

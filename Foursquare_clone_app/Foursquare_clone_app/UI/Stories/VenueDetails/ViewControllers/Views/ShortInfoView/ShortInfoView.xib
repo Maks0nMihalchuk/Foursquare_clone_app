@@ -29,7 +29,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTI-Yn-Jp8" userLabel="FirstSeparatorView">
-                    <rect key="frame" x="16" y="68.5" width="382" height="2"/>
+                    <rect key="frame" x="16" y="68.5" width="294" height="2"/>
                     <color key="backgroundColor" red="0.7769868338" green="0.7769868338" blue="0.7769868338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="FXf-r2-tzo"/>
@@ -53,16 +53,16 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GG8-H4-sZA">
-                    <rect key="frame" x="16" y="78.5" width="382" height="52.5"/>
+                    <rect key="frame" x="16" y="78.5" width="294" height="52.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4Z-hj-yVA" userLabel="HoursLabel">
-                            <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4Z-hj-yVA" userLabel="HoursLabel">
+                            <rect key="frame" x="0.0" y="0.0" width="294" height="26.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNX-7S-iFW" userLabel="HoursStatusLabel">
-                            <rect key="frame" x="0.0" y="34.5" width="382" height="18"/>
+                            <rect key="frame" x="0.0" y="34.5" width="294" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -93,6 +93,18 @@
                         </label>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xr8-gC-J6L">
+                    <rect key="frame" x="318" y="64" width="80" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="cfn-PI-2d1"/>
+                    </constraints>
+                    <state key="normal">
+                        <attributedString key="attributedTitle"/>
+                    </state>
+                    <connections>
+                        <action selector="didTapShowMapButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="iei-bk-TIP"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -100,16 +112,18 @@
                 <constraint firstItem="PNs-Nb-BpK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="GNV-Tq-iZn"/>
                 <constraint firstItem="GG8-H4-sZA" firstAttribute="top" secondItem="wTI-Yn-Jp8" secondAttribute="bottom" constant="8" id="LNU-39-83c"/>
                 <constraint firstItem="T8M-FV-Fwu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="NRp-0A-FsK"/>
+                <constraint firstAttribute="trailing" secondItem="Xr8-gC-J6L" secondAttribute="trailing" constant="16" id="PVh-qd-cyr"/>
                 <constraint firstItem="T8M-FV-Fwu" firstAttribute="top" secondItem="PNs-Nb-BpK" secondAttribute="bottom" constant="8" id="SAS-fl-yeT"/>
                 <constraint firstItem="kwM-yo-SkR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="WtZ-81-ZaM"/>
                 <constraint firstAttribute="trailing" secondItem="PNs-Nb-BpK" secondAttribute="trailing" constant="16" id="Znd-xR-k4M"/>
                 <constraint firstItem="fBt-zC-phw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="cgW-3K-43E"/>
                 <constraint firstItem="kwM-yo-SkR" firstAttribute="leading" secondItem="fBt-zC-phw" secondAttribute="trailing" constant="16" id="de1-lH-Vlg"/>
+                <constraint firstItem="Xr8-gC-J6L" firstAttribute="top" secondItem="kwM-yo-SkR" secondAttribute="bottom" constant="16" id="hPd-CB-Rbe"/>
                 <constraint firstItem="wTI-Yn-Jp8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="hqW-Sd-l9d"/>
                 <constraint firstItem="fBt-zC-phw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="igV-Zj-6uM"/>
-                <constraint firstAttribute="trailing" secondItem="GG8-H4-sZA" secondAttribute="trailing" constant="16" id="ivo-V0-6Ed"/>
+                <constraint firstItem="Xr8-gC-J6L" firstAttribute="leading" secondItem="GG8-H4-sZA" secondAttribute="trailing" constant="8" id="ivo-V0-6Ed"/>
                 <constraint firstItem="PNs-Nb-BpK" firstAttribute="top" secondItem="GG8-H4-sZA" secondAttribute="bottom" constant="8" id="l65-XA-GdN"/>
-                <constraint firstAttribute="trailing" secondItem="wTI-Yn-Jp8" secondAttribute="trailing" constant="16" id="rgm-Df-zob"/>
+                <constraint firstItem="Xr8-gC-J6L" firstAttribute="leading" secondItem="wTI-Yn-Jp8" secondAttribute="trailing" constant="8" id="rgm-Df-zob"/>
                 <constraint firstAttribute="trailing" secondItem="kwM-yo-SkR" secondAttribute="trailing" constant="16" id="slb-zV-QQS"/>
                 <constraint firstItem="wTI-Yn-Jp8" firstAttribute="top" secondItem="fBt-zC-phw" secondAttribute="bottom" constant="8" id="uqE-Fv-0A6"/>
                 <constraint firstItem="GG8-H4-sZA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wxV-d7-wtv"/>
@@ -124,8 +138,9 @@
                 <outlet property="hoursLabel" destination="f4Z-hj-yVA" id="U4E-Hu-33F"/>
                 <outlet property="hoursVenueLabel" destination="BNX-7S-iFW" id="7IQ-WS-tqE"/>
                 <outlet property="ratingLabel" destination="kwM-yo-SkR" id="t4w-T5-4yR"/>
+                <outlet property="showMapButton" destination="Xr8-gC-J6L" id="QYO-N6-h1Y"/>
             </connections>
-            <point key="canvasLocation" x="-122" y="95"/>
+            <point key="canvasLocation" x="-123.18840579710145" y="94.754464285714278"/>
         </view>
     </objects>
 </document>

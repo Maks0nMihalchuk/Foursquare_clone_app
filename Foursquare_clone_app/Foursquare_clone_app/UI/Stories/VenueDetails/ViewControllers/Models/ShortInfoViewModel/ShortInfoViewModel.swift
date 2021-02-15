@@ -18,6 +18,18 @@ struct ShortInfoViewModel {
         self.dataModel = dataModel
     }
 
+    var name: String {
+        return dataModel.name
+    }
+
+    var address: String {
+        return dataModel.address
+    }
+
+    var coordinates: (lat: Double, long: Double) {
+        return (dataModel.lat, dataModel.long)
+    }
+
     var location: String {
         return getLocation()
     }

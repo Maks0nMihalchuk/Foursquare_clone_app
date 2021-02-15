@@ -48,6 +48,7 @@
 "LabelTextPlaceholder" = "No Data!";
 "VenueNameLabelText" = "Venue Name";
 "Add Hours" = "Add Hours";
+"ShowMap" = "Show map";
 "Add Phone" = "Add Phone";
 "Add Website" = "Add Website";
 "Add Categories" = "Add Categories";
@@ -93,3 +94,5 @@
 "Settings.AboutUs" = "About us";
 "Settings.TermsOfUse" = "Terms of use";
 "Settings.Privacy" = "Privacy";
+
+"ShowView" = "Map";

@@ -48,6 +48,7 @@
 "LabelTextPlaceholder" = "Нет Данных!";
 "VenueNameLabelText" = "Название места проведения";
 "Add Hours" = "Добавить часы";
+"ShowMap" = "Показать карту";
 "Add Phone" = "Добавить телефон";
 "Add Website" = "Добавить веб-сайт";
 "Add Categories" = "Добавить категории";
@@ -92,3 +93,5 @@
 "Settings.AboutUs" = "О нас";
 "Settings.TermsOfUse" = "Условия эксплуатации";
 "Settings.Privacy" = "Конфиденциальность";
+
+"ShowView" = "Карта";

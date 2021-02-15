@@ -35,14 +35,14 @@ class FullScreenImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImageView()
-        setupNavigationController()
+        setupNavigationBar()
     }
 }
 
 // MARK: - setupUI
 private extension FullScreenImageViewController {
 
-    func setupNavigationController() {
+    func setupNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         let navBar = navigationController?.navigationBar
         navigationItem.leftBarButtonItem = backButton

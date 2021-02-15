@@ -46,7 +46,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        navigationController?.isNavigationBarHidden = true
+        setupNavBar()
         setupTableView()
         setupBlurEffectView()
         tableView.reloadData()
@@ -182,6 +182,10 @@ private extension DetailViewController {
 
 // MARK: - setup, show and hide customNavBar
 private extension DetailViewController {
+
+    func setupNavBar() {
+        navigationController?.isNavigationBarHidden = true
+    }
 
     func setupBlurEffectView() {
         blurEffectView.effect = UIBlurEffect(style: .systemMaterialDark)

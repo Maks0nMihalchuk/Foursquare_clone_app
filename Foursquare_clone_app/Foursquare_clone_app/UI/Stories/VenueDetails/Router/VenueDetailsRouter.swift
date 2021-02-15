@@ -26,6 +26,7 @@ class VenueDetailsRouter: VenueDetailsRouterProtocol {
     private var detailController: UIViewController?
     private let assembly: VenueDetailsAssemblyProtocol
     private let networking: NetworkManager
+    private let mapRouter: MapRouterProtocol = MapRouter(assembly: MapAssembly())
 
     init(assembly: VenueDetailsAssemblyProtocol, networking: NetworkManager) {
         self.assembly = assembly
@@ -96,6 +97,15 @@ extension VenueDetailsRouter: ScrollViewDetailViewControllerDelegate {
         fullScreenImage.delegate = self
 
         viewController.navigationController?.pushViewController(fullScreenImage, animated: true)
+    }
+
+    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
+                                            didTapShowMap button: UIButton, with model: ShortInfoViewModel) {
+        mapRouter.showMapStory(from: viewController,
+                               model: model,
+                               animated: true) { (_) in
+            self.mapRouter.hideMapStory(animated: true)
+        }
     }
 }
 

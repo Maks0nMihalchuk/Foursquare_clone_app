@@ -24,10 +24,14 @@ class Mapper {
         let hoursStatus = apiModel.hours?.status
         let timeframesDays = getTimeFramesDays(of: timeframes)
         let timeframesRenderedTime = getTimeFramesRenderedTime(of: timeframes)
+        let address = apiModel.location.address
+        let lat = apiModel.location.lat
+        let long = apiModel.location.lng
         let location = apiModel.location.formattedAddress
         let categories = getCategories(of: apiModel.categories)
 
         return DetailVenueModel(name: venueName, categories: categories,
+                                address: address, lat: lat, long: long,
                                 location: location, rating: rating,
                                 ratingColor: ratingColor, prefix: prefix,
                                 suffix: suffix, hoursStatus: hoursStatus,
