@@ -51,6 +51,8 @@ class HomeViewController: UIViewController {
                     break
                 case .locationAccessDenied:
                     self.setupErrorAlert()
+                    self.pointCoordinates = GeopositionManager.shared.getCurrentPosition()
+                    self.setLocationLabel(with: self.pointCoordinates)
                 case .internetIsNotAvailable:
                     break
                 }

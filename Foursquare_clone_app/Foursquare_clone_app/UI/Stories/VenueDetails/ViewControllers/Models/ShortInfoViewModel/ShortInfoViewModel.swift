@@ -23,7 +23,11 @@ struct ShortInfoViewModel {
     }
 
     var address: String {
-        return dataModel.address
+        guard let adress = dataModel.address else {
+            return "LabelTextPlaceholder".localized()
+        }
+
+        return adress
     }
 
     var coordinates: (lat: Double, long: Double) {

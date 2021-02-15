@@ -24,6 +24,8 @@ private struct GeopositionManagerDefaults {
 class GeopositionManager: NSObject {
     static let shared = GeopositionManager()
 
+    fileprivate let defaultLatitude = 49.988599
+    fileprivate let defaultLongitude = 36.232571
     fileprivate let locationManager = CLLocationManager()
     fileprivate var observers = [GeopositionObserverProtocol]()
     fileprivate var completion: GeopositionObserverCompletionBlock?
@@ -123,6 +125,8 @@ extension GeopositionManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard let requiredCompletionBlock = completion else { return }
+
+        position = Geopoint(latitude: defaultLatitude, longitude: defaultLongitude)
 
         switch status {
         case .denied, .restricted:

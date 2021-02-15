@@ -129,8 +129,10 @@ private extension MapViewController {
     func setupAnnotationMapView() {
         guard let model = viewModel else { return }
 
-        annotation.coordinate = CLLocationCoordinate2D(latitude: model.coordinates.lat,
-                                                       longitude: model.coordinates.long)
+        let latitude = model.coordinates.lat
+        let longitude = model.coordinates.long
+        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude,
+                                                       longitude: longitude)
         annotation.title = model.address
         mapView.addAnnotation(annotation)
     }

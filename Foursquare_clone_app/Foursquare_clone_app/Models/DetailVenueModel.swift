@@ -11,7 +11,7 @@ import Foundation
 struct DetailVenueModel {
     let name: String
     let categories: [String]
-    let address: String
+    let address: String?
     let lat: Double
     let long: Double
     let location: [String]
