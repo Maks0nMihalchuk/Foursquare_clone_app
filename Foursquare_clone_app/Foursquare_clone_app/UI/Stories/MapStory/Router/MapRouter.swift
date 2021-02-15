@@ -21,7 +21,6 @@ class MapRouter: MapRouterProtocol {
     private var completion: MapStoryCompletion?
     private var mapController: MapViewController?
     private let assembly: MapAssemblyProtocol
-    private let
     init(assembly: MapAssemblyProtocol) {
         self.assembly = assembly
     }
