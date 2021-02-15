@@ -52,7 +52,6 @@ class ScrollViewDetailViewController: UIViewController {
     private let spacing: CGFloat = 26
     private let redViewSize: CGFloat = 250
     private var contentViewSizeConstant: CGFloat = 0
-    private let assemblyView = VenueDetailViewAssembly()
     private let transform = CGAffineTransform(rotationAngle: .zero)
     private var bestPhotoView: BestPhotoView?
     private var shortInfoView: ShortInfoView?
@@ -159,29 +158,34 @@ private extension ScrollViewDetailViewController {
     }
 
     func setupBestPhotoView() {
-        bestPhotoView = assemblyView.assemblyBestPhotoView()
+        bestPhotoView = UIView.fromNib() as BestPhotoView
+        bestPhotoView?.setupUI()
         bestPhotoView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func setupShortInfoView() {
-        shortInfoView = assemblyView.assemblyShortInfoView()
+        shortInfoView = UIView.fromNib() as ShortInfoView
         shortInfoView?.delegate = self
+        shortInfoView?.setupUI()
         shortInfoView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func setupHoursView() {
-        hoursView = assemblyView.assemblyHoursView()
+        hoursView = UIView.fromNib() as HoursView
         hoursView?.delegate = self
+        hoursView?.setupUI()
         hoursView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func setupContactView() {
-        contactView = assemblyView.assemblyContactView()
+        contactView = UIView.fromNib() as ContactView
+        contactView?.setupUI()
         contactView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func setupRedView() {
-        redView = assemblyView.assemblyRedView()
+        redView = UIView.fromNib() as RedView
+        redView?.setupUI()
         redView?.translatesAutoresizingMaskIntoConstraints = false
     }
 
