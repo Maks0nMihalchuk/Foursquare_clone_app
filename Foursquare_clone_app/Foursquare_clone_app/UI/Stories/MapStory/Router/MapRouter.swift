@@ -75,15 +75,20 @@ extension MapRouter: MapViewControllerDelegate {
     func mapViewController(_ viewController: MapViewController,
                            didTapFindUserLocationButton button: UIButton,
                            on mapView: MKMapView,
-                           with locationServicesEnabled: Bool) {
-        if locationServicesEnabled {
+                           locationServicesStatus status: CLAuthorizationStatus) {
+
+        switch status {
+
+        case .authorizedAlways, .authorizedWhenInUse:
             mapView.setUserTrackingMode(.follow, animated: true)
             mapView.showsUserLocation = true
-        } else {
+        case .notDetermined, .restricted, .denied:
             showErrorAboutMissingUserGeolocation(viewController,
                                                  alert: (title: "MapViewController.AlertError.Title",
                                                          message: "MapViewController.AlertError.Message"),
                                                  alertButton: "LocationErrorAlert.Action")
+        @unknown default:
+            break
         }
     }
 

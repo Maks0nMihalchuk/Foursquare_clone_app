@@ -15,10 +15,11 @@ protocol MapViewControllerDelegate: class {
     func mapViewController(_ viewController: MapViewController,
                            didTapFindUserLocationButton button: UIButton,
                            on mapView: MKMapView,
-                           with locationServicesEnabled: Bool)
+                           locationServicesStatus status: CLAuthorizationStatus)
     func mapViewController(_ viewController: MapViewController,
                            didTapMapViewZoomButton button: UIButton,
-                           on mapView: MKMapView, by key: KeyToScaleMapView)
+                           on mapView: MKMapView,
+                           by key: KeyToScaleMapView)
 
 }
 
@@ -61,10 +62,11 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func didTapFindUserLocationButton(_ sender: UIButton) {
+        let status = CLLocationManager.authorizationStatus()
         delegate?.mapViewController(self,
                                     didTapFindUserLocationButton: sender,
                                     on: mapView,
-                                    with: CLLocationManager.locationServicesEnabled())
+                                    locationServicesStatus: status)
     }
 }
 
