@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 import UIKit
 
 enum MapStoryResult {
@@ -20,7 +21,7 @@ class MapRouter: MapRouterProtocol {
     private var completion: MapStoryCompletion?
     private var mapController: MapViewController?
     private let assembly: MapAssemblyProtocol
-
+    private let
     init(assembly: MapAssemblyProtocol) {
         self.assembly = assembly
     }
@@ -51,6 +52,18 @@ class MapRouter: MapRouterProtocol {
         self.completion?(.userCancelation)
         completion = nil
     }
+
+    private func showErrorAboutMissingUserGeolocation(_ viewController: UIViewController,
+                                                      alert: (title: String, message: String),
+                                                      alertButton title: String) {
+        let alertController = UIAlertController(title: alert.title.localized(),
+                                                message: alert.message.localized(),
+                                                preferredStyle: .alert)
+        let okeyButton = UIAlertAction(title: title.localized(), style: .default, handler: nil)
+
+        alertController.addAction(okeyButton)
+        viewController.present(alertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - MapViewControllerDelegate
@@ -58,4 +71,37 @@ extension MapRouter: MapViewControllerDelegate {
     func mapViewController(_ viewController: MapViewController, didTapBack button: UIBarButtonItem) {
         finalizeStory()
     }
+
+    func mapViewController(_ viewController: MapViewController,
+                           didTapFindUserLocationButton button: UIButton,
+                           on mapView: MKMapView,
+                           with locationServicesEnabled: Bool) {
+        if locationServicesEnabled {
+            mapView.setUserTrackingMode(.follow, animated: true)
+            mapView.showsUserLocation = true
+        } else {
+            showErrorAboutMissingUserGeolocation(viewController,
+                                                 alert: (title: "MapViewController.AlertError.Title",
+                                                         message: "MapViewController.AlertError.Message"),
+                                                 alertButton: "LocationErrorAlert.Action")
+        }
+    }
+
+    func mapViewController(_ viewController: MapViewController,
+                           didTapMapViewZoomButton button: UIButton,
+                           on mapView: MKMapView, by key: KeyToScaleMapView) {
+        var region = mapView.region
+
+        switch key {
+
+        case .zoomIn:
+            region.span.latitudeDelta /= 2
+            region.span.longitudeDelta /= 2
+        case .zoomOut:
+            region.span.latitudeDelta *= 2
+            region.span.longitudeDelta *= 2
+        }
+        mapView.setRegion(region, animated: true)
+    }
+
 }

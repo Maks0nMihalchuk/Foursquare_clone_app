@@ -12,6 +12,14 @@ import MapKit
 protocol MapViewControllerDelegate: class {
     func mapViewController(_ viewController: MapViewController,
                            didTapBack button: UIBarButtonItem)
+    func mapViewController(_ viewController: MapViewController,
+                           didTapFindUserLocationButton button: UIButton,
+                           on mapView: MKMapView,
+                           with locationServicesEnabled: Bool)
+    func mapViewController(_ viewController: MapViewController,
+                           didTapMapViewZoomButton button: UIButton,
+                           on mapView: MKMapView, by key: KeyToScaleMapView)
+
 }
 
 class MapViewController: UIViewController {
@@ -45,26 +53,18 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func didTapButtonZoomIn(_ sender: UIButton) {
-        var region = mapView.region
-        region.span.latitudeDelta /= 2.0
-        region.span.longitudeDelta /= 2.0
-        mapView.setRegion(region, animated: true)
+        delegate?.mapViewController(self, didTapMapViewZoomButton: sender, on: mapView, by: .zoomIn)
     }
 
     @IBAction func didTapButtonZoomOut(_ sender: UIButton) {
-        var region = mapView.region
-        region.span.latitudeDelta = min(region.span.latitudeDelta * 2, 180)
-        region.span.longitudeDelta = min(region.span.longitudeDelta * 2, 180)
-        mapView.setRegion(region, animated: true)
+        delegate?.mapViewController(self, didTapMapViewZoomButton: sender, on: mapView, by: .zoomOut)
     }
 
     @IBAction func didTapFindUserLocationButton(_ sender: UIButton) {
-        if CLLocationManager.locationServicesEnabled() {
-            mapView.setUserTrackingMode(.follow, animated: true)
-            mapView.showsUserLocation = true
-        } else {
-            // Show popup from button
-        }
+        delegate?.mapViewController(self,
+                                    didTapFindUserLocationButton: sender,
+                                    on: mapView,
+                                    with: CLLocationManager.locationServicesEnabled())
     }
 }
 

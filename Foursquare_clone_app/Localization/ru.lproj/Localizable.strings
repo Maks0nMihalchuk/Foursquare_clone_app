@@ -95,3 +95,6 @@
 "Settings.Privacy" = "Конфиденциальность";
 
 "ShowView" = "Карта";
+
+"MapViewController.AlertError.Title" = "Ошибка при попытке найти ваше местоположение";
+"MapViewController.AlertError.Message" = "Для работы этой функции нам нужен доступ к вашему местоположению";

@@ -130,6 +130,7 @@
 		2D8FCDB125D8592300FFD9CC /* MapAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8FCDB025D8592300FFD9CC /* MapAssembly.swift */; };
 		2D8FCDB325D85A1200FFD9CC /* MapRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8FCDB225D85A1200FFD9CC /* MapRouterProtocol.swift */; };
 		2D8FCDB525D85A8300FFD9CC /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8FCDB425D85A8300FFD9CC /* MapRouter.swift */; };
+		2D909DB325DAA91600735AD2 /* KeyToScaleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D909DB225DAA91600735AD2 /* KeyToScaleMapView.swift */; };
 		2D9D63C425CAC9C500C5261D /* DefaultUserPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D63C325CAC9C500C5261D /* DefaultUserPhotoView.xib */; };
 		2D9D63C725CACA8400C5261D /* DefaultUserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D63C625CACA8400C5261D /* DefaultUserPhotoView.swift */; };
 		2D9D63CE25CAF2BB00C5261D /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */; };
@@ -299,6 +300,7 @@
 		2D8FCDB025D8592300FFD9CC /* MapAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAssembly.swift; sourceTree = "<group>"; };
 		2D8FCDB225D85A1200FFD9CC /* MapRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouterProtocol.swift; sourceTree = "<group>"; };
 		2D8FCDB425D85A8300FFD9CC /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
+		2D909DB225DAA91600735AD2 /* KeyToScaleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyToScaleMapView.swift; sourceTree = "<group>"; };
 		2D9D63C325CAC9C500C5261D /* DefaultUserPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultUserPhotoView.xib; sourceTree = "<group>"; };
 		2D9D63C625CACA8400C5261D /* DefaultUserPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserPhotoView.swift; sourceTree = "<group>"; };
 		2D9D63CD25CAF2BB00C5261D /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -1220,9 +1222,18 @@
 			isa = PBXGroup;
 			children = (
 				2D8FCDAA25D8585900FFD9CC /* MapViewController.swift */,
+				2D909DB125DAA90300735AD2 /* Model */,
 				2D1E8DDB25DA71B700815793 /* View */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2D909DB125DAA90300735AD2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D909DB225DAA91600735AD2 /* KeyToScaleMapView.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2D9D63C225CAC98D00C5261D /* DefaultUserPhotoVIew */ = {
@@ -1695,6 +1706,7 @@
 				2D3BD9AA25875B6800389405 /* AppDelegate.swift in Sources */,
 				2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */,
 				2DD7372225D528AE002360B2 /* UserTips.swift in Sources */,
+				2D909DB325DAA91600735AD2 /* KeyToScaleMapView.swift in Sources */,
 				2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */,
 				2DD7372625D529A5002360B2 /* UserFollowers.swift in Sources */,
 				2D48B11525D1D981004A211C /* ListsRouter.swift in Sources */,

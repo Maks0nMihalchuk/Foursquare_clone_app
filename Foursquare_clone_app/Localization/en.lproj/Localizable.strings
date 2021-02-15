@@ -96,3 +96,6 @@
 "Settings.Privacy" = "Privacy";
 
 "ShowView" = "Map";
+
+"MapViewController.AlertError.Title" = "Error while trying to find your location";
+"MapViewController.AlertError.Message" = "For this feature to work, we need access to your location";
