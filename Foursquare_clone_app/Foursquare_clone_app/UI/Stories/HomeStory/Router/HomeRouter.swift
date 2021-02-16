@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class HomeRouter: HomeRouterProtocol {
+class HomeRouter: HomeRoutingProtocol {
 
     private let assembly: HomeAssemblyProtocol
-    private let venueSearchRouter: VenueSearchRouterProtocol = VenueSearchRouter(assembly: VenueSearchAssembly())
+    private let venueSearchRouter: VenueSearchRoutingProtocol = VenueSearchRouter(assembly: VenueSearchAssembly())
 
     init(assembly: HomeAssemblyProtocol) {
         self.assembly = assembly
@@ -22,7 +22,6 @@ class HomeRouter: HomeRouterProtocol {
         let homeController = assembly.assemblyHomeViewController()
 
         homeController.delegate = self
-        homeController.title = "HomeViewController.Title".localized()
 
         if from is UINavigationController {
 
@@ -50,5 +49,27 @@ extension HomeRouter: HomeViewControllerDelegate {
                                     animated: animated) { (_) in
                                         self.venueSearchRouter.hideVenueSearchStory(animated: true)
         }
+    }
+
+    func homeViewController(_ viewController: HomeViewController,
+                            didShowLocationErrorAlert error: GeopositionObservingError) {
+        showLocationErrorAlert(viewController: viewController)
+    }
+}
+
+// MARK: - setup and display the location Error alert
+private extension HomeRouter {
+
+    func showLocationErrorAlert(viewController: HomeViewController) {
+        let title = "LocationErrorAlert.Title".localized(name: "HomeVCLocalization")
+        let message = "LocationErrorAlert.Message".localized(name: "HomeVCLocalization")
+        let buttonTitle = "LocationErrorAlert.Action".localized(name: "HomeVCLocalization")
+
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okeyButton = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
+        alertController.addAction(okeyButton)
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }

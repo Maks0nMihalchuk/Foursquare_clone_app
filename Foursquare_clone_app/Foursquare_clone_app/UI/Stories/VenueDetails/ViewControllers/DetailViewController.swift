@@ -12,6 +12,11 @@ protocol DetailViewControllerDelegate: class {
     func detailViewController(_ viewController: DetailViewController,
                               didTapToShowFullScreenImage imageView: UIImageView, name: String)
     func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton)
+    func detailViewController(_ viewController: DetailViewController,
+                              didShowAlertError error: Bool)
+    func detailViewController(_ viewController: DetailViewController,
+                              didTapShowMap button: UIButton,
+                              with viewModel: ShortInfoViewModel)
 }
 
 class DetailViewController: UIViewController {
@@ -21,11 +26,13 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var blurEffectView: UIVisualEffectView!
     @IBOutlet private weak var venueNameLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var clearButton: UIButton!
 
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
     private let numberOfCellsWhenNoData = 1
     private var defaultHoursCellStatus = false
+    private var shortInfoViewModel: ShortInfoViewModel?
 
     var networking: NetworkManager?
     var venueID = String()
@@ -46,7 +53,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        setupNavBar()
+        setupView()
         setupTableView()
         setupBlurEffectView()
         tableView.reloadData()
@@ -56,11 +63,22 @@ class DetailViewController: UIViewController {
         delegate?.detailViewController(self, didTapBack: sender)
     }
 
-    @IBAction func resetDataButtonPressed(_ sender: UIButton) {
+    @IBAction func clearDataButtonPressed(_ sender: UIButton) {
         viewModel = nil
         tableView.reloadData()
     }
 
+}
+
+// MARK: - ShortInfoTableCell
+extension DetailViewController: ShortInfoTableCellDelegate {
+
+    func shortInfoTableCell(_ cell: ShortInfoTableCell,
+                            didTapShowMapButton button: UIButton) {
+        guard let viewModel = shortInfoViewModel else { return }
+
+        delegate?.detailViewController(self, didTapShowMap: button, with: viewModel)
+    }
 }
 
 // MARK: - ImageTableCellDelegate
@@ -167,13 +185,14 @@ private extension DetailViewController {
 
                                             DispatchQueue.main.async {
                                                 self.viewModel = DetailViewModel(dataModel: detailVenue)
+                                                self.shortInfoViewModel = ShortInfoViewModel(dataModel: detailVenue)
                                                 self.setupActivityIndicator(isHidden: false)
                                                 self.tableView.reloadData()
                                             }
                                         } else {
                                             DispatchQueue.main.async {
                                                 self.setupActivityIndicator(isHidden: false)
-                                                self.showAlertError()
+                                                self.delegate?.detailViewController(self, didShowAlertError: true)
                                             }
                                         }
         })
@@ -183,7 +202,9 @@ private extension DetailViewController {
 // MARK: - setup, show and hide customNavBar
 private extension DetailViewController {
 
-    func setupNavBar() {
+    func setupView() {
+        let clearButtonTitle = "СlearButton".localized(name: "DetailVCLocalization")
+        clearButton.setTitle(clearButtonTitle, for: .normal)
         navigationController?.isNavigationBarHidden = true
     }
 
@@ -250,6 +271,7 @@ private extension DetailViewController {
             return ShortInfoTableCell()
         }
 
+        cell.delegate = self
         let content = ShortInfoCellModel(adressVenue: viewModel.location,
                                          hoursVenue: viewModel.hoursStatus,
                                          categoriesVenue: viewModel.categories,
@@ -326,19 +348,5 @@ private extension DetailViewController {
                               options: [.transition(.fade(1.0))],
                               progressBlock: nil)
         return imageView.image
-    }
-}
-
-// MARK: - setup error alert
-private extension DetailViewController {
-
-    func showAlertError() {
-        let alertController = UIAlertController(title: "Error",
-                                                message: "when downloading data error occurred", preferredStyle: .alert)
-        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
-                                   style: .default,
-                                   handler: nil)
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
     }
 }

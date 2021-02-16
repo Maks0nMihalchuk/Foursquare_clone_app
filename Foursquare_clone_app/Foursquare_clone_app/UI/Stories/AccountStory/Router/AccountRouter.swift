@@ -10,10 +10,10 @@ import Foundation
 import SafariServices
 import UIKit
 
-class AccountRouter: AccountRouterProtocol {
+class AccountRouter: AccountRoutingProtocol {
 
     private let assembly: AccountAssemblyProtocol
-    private let settingsRouter: SettingsRouterProtocol = SettingsRouter(assembly: SettingsAssembly())
+    private let settingsRouter: SettingsRoutingProtocol = SettingsRouter(assembly: SettingsAssembly())
 
     init(assembly: AccountAssemblyProtocol) {
         self.assembly = assembly
@@ -23,7 +23,7 @@ class AccountRouter: AccountRouterProtocol {
         let accountController = assembly.assemblyAccountViewController()
 
         accountController.delegate = self
-        accountController.title = "AccountViewController.Title".localized()
+        accountController.title = "Title".localized(name: "AccountVCLocalization")
         if from is UINavigationController {
 
             guard let navigationController = from as? UINavigationController else { return }
@@ -33,6 +33,20 @@ class AccountRouter: AccountRouterProtocol {
         } else {
             from = accountController
         }
+    }
+
+    private func showErrorAlert(_ viewController: AccountViewController) {
+        let alertTitle = "AlertErrorTitle".localized(name: "AccountVCLocalization")
+        let alertMessage = "AlertMessage".localized(name: "AccountVCLocalization")
+        let alertButtonTitle = "AlertAction".localized(name: "AccountVCLocalization")
+        let alertController = UIAlertController(title: alertTitle,
+                                                message: alertMessage,
+                                                preferredStyle: .alert)
+        let action = UIAlertAction(title: alertButtonTitle,
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -51,7 +65,7 @@ extension AccountRouter: AccountViewControllerDelegate {
                     viewController.present(safariViewController, animated: true, completion: nil)
                 }
             } else {
-                viewController.showErrorAlert()
+                self.showErrorAlert(viewController)
             }
         }
     }
@@ -67,5 +81,10 @@ extension AccountRouter: AccountViewControllerDelegate {
         settingsRouter.showSettingsStory(from: viewController, animated: true) { (_) in
             self.settingsRouter.hideSettingsStory(animated: true)
         }
+    }
+
+    func accountViewController(_ viewController: AccountViewController,
+                               didShowErrorAlert error: Bool) {
+        showErrorAlert(viewController)
     }
 }

@@ -44,12 +44,13 @@ class AuthorizedUserView: UIView {
     }
 
     func setupUI() {
-        tipsLabel.text = "Authorized.Tips".localized()
-        photosLabel.text = "Authorized.Photos".localized()
-        followersLabel.text = "Authorized.Followers".localized()
-        listLabel.text = "Authorized.Lists".localized()
-        placeholderLabel.text = "Authorized.Placeholder".localized()
-        signOutButton.setTitle("Authorized.SignOutButton".localized(), for: .normal)
+        tipsLabel.text = "Authorized.Tips".localized(name: "AccountVCLocalization")
+        photosLabel.text = "Authorized.Photos".localized(name: "AccountVCLocalization")
+        followersLabel.text = "Authorized.Followers".localized(name: "AccountVCLocalization")
+        listLabel.text = "Authorized.Lists".localized(name: "AccountVCLocalization")
+        placeholderLabel.text = "Authorized.Placeholder".localized(name: "AccountVCLocalization")
+        signOutButton.setTitle("Authorized.SignOutButton".localized(name: "AccountVCLocalization"),
+                               for: .normal)
     }
 
     @IBAction private func didTapSignOutButton(_ sender: UIButton) {

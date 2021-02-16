@@ -11,7 +11,7 @@ import UIKit
 
 typealias VenueSearchStoryCompletion = ((_ result: VenueSearchStoryResult) -> Void)
 
-protocol VenueSearchRouterProtocol {
+protocol VenueSearchRoutingProtocol {
     func showVenueSearchStory(from: UIViewController,
                               model: [Venue],
                               setupSearchBar: (isActiveSearchBar: Bool, searchBarText: String),

@@ -17,8 +17,8 @@ class ContactTableCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        phoneLabel.text = "PhoneLabelText".localized()
-        webSiteLabel.text = "WebSiteLabelText".localized()
+        phoneLabel.text = "PhoneLabelText".localized(name: "DetailVCLocalization")
+        webSiteLabel.text = "WebSiteLabelText".localized(name: "DetailVCLocalization")
     }
 
     func configure(with content: ContactCellModel) {

@@ -16,7 +16,7 @@ enum MapStoryResult {
     case failure(error: Error?)
 }
 
-class MapRouter: MapRouterProtocol {
+class MapRouter: MapRoutingProtocol {
 
     private var completion: MapStoryCompletion?
     private var mapController: MapViewController?
@@ -27,14 +27,14 @@ class MapRouter: MapRouterProtocol {
     }
 
     func showMapStory(from: UIViewController,
-                      model: ShortInfoViewModel,
+                      viewModel: ShortInfoViewModel,
                       animated: Bool,
                       completion: @escaping MapStoryCompletion) {
         self.completion = completion
 
         let mapController = assembly.assemblyMapViewController()
         mapController.delegate = self
-        mapController.viewModel = model
+        mapController.viewModel = viewModel
         self.mapController = mapController
 
         from.navigationController?.pushViewController(mapController, animated: animated)
@@ -83,10 +83,13 @@ extension MapRouter: MapViewControllerDelegate {
             mapView.setUserTrackingMode(.follow, animated: true)
             mapView.showsUserLocation = true
         case .notDetermined, .restricted, .denied:
+            let alertTitle = "AlertErrorTitle".localized(name: "MapVCLocalization")
+            let alertMessage = "AlertErrorMessage".localized(name: "MapVCLocalization")
+            let alertActionTitle = "AlertActionTitle".localized(name: "MapVCLocalization")
             showErrorAboutMissingUserGeolocation(viewController,
-                                                 alert: (title: "MapViewController.AlertError.Title",
-                                                         message: "MapViewController.AlertError.Message"),
-                                                 alertButton: "LocationErrorAlert.Action")
+                                                 alert: (title: alertTitle,
+                                                         message: alertMessage),
+                                                 alertButton: alertActionTitle)
         @unknown default:
             break
         }
@@ -94,10 +97,10 @@ extension MapRouter: MapViewControllerDelegate {
 
     func mapViewController(_ viewController: MapViewController,
                            didTapMapViewZoomButton button: UIButton,
-                           on mapView: MKMapView, by key: KeyToScaleMapView) {
+                           on mapView: MKMapView, state: MapViewScaleState) {
         var region = mapView.region
 
-        switch key {
+        switch state {
 
         case .zoomIn:
             region.span.latitudeDelta /= 2

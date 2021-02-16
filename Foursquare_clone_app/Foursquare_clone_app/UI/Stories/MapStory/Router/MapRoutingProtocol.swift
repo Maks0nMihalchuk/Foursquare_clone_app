@@ -11,9 +11,9 @@ import UIKit
 
 typealias MapStoryCompletion = ((_ result: MapStoryResult) -> Void)
 
-protocol MapRouterProtocol {
+protocol MapRoutingProtocol {
     func showMapStory(from: UIViewController,
-                      model: ShortInfoViewModel,
+                      viewModel: ShortInfoViewModel,
                       animated: Bool,
                       completion: @escaping MapStoryCompletion)
     func hideMapStory(animated: Bool)

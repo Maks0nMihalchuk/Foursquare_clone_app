@@ -20,13 +20,13 @@ enum VenueDetailsStoryResult {
     case failure(error: Error?)
 }
 
-class VenueDetailsRouter: VenueDetailsRouterProtocol {
+class VenueDetailsRouter: VenueDetailsRoutingProtocol {
 
     private var completion: VenueDetailsStoryCompletion?
     private var detailController: UIViewController?
     private let assembly: VenueDetailsAssemblyProtocol
     private let networking: NetworkManager
-    private let mapRouter: MapRouterProtocol = MapRouter(assembly: MapAssembly())
+    private let mapRouter: MapRoutingProtocol = MapRouter(assembly: MapAssembly())
 
     init(assembly: VenueDetailsAssemblyProtocol, networking: NetworkManager) {
         self.assembly = assembly
@@ -76,20 +76,35 @@ class VenueDetailsRouter: VenueDetailsRouterProtocol {
         self.completion?(.userCancelation)
         completion = nil
     }
+
+    private func showAlertError(_ viewController: UIViewController) {
+        let alertTitle = "AlertTitle".localized(name: "DetailVCLocalization")
+        let alertMessage = "AlertMessage".localized(name: "DetailVCLocalization")
+        let alertActionTitle = "AlertActionTitle".localized(name: "DetailVCLocalization")
+        let alertController = UIAlertController(title: alertTitle,
+                                                message: alertMessage,
+                                                preferredStyle: .alert)
+        let action = UIAlertAction(title: alertActionTitle,
+                                   style: .default,
+                                   handler: nil)
+        alertController.addAction(action)
+        viewController.present(alertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - DetailViewControllerWithScrollViewDelegate
 
 extension VenueDetailsRouter: ScrollViewDetailViewControllerDelegate {
-    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
-                                            didTapBack button: UIButton) {
+
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didTapBack button: UIButton) {
         finalizeStory()
     }
 
-    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
-                                            didTapFullScreenImage button: UIButton,
-                                            with image: UIImage,
-                                            model: BestPhotoViewModel) {
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didTapFullScreenImage button: UIButton,
+                                        with image: UIImage,
+                                        model: BestPhotoViewModel) {
         let fullScreenImage = assembly.assemblyFullScreenImageVC()
 
         fullScreenImage.venueImage = image
@@ -99,13 +114,18 @@ extension VenueDetailsRouter: ScrollViewDetailViewControllerDelegate {
         viewController.navigationController?.pushViewController(fullScreenImage, animated: true)
     }
 
-    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
-                                            didTapShowMap button: UIButton, with model: ShortInfoViewModel) {
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didTapShowMap button: UIButton, with viewModel: ShortInfoViewModel) {
         mapRouter.showMapStory(from: viewController,
-                               model: model,
+                               viewModel: viewModel,
                                animated: true) { (_) in
             self.mapRouter.hideMapStory(animated: true)
         }
+    }
+
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didShowAlertError error: Bool) {
+        showAlertError(viewController)
     }
 }
 
@@ -125,6 +145,20 @@ extension VenueDetailsRouter: DetailViewControllerDelegate {
 
     func detailViewController(_ viewController: DetailViewController, didTapBack button: UIButton) {
         finalizeStory()
+    }
+
+    func detailViewController(_ viewController: DetailViewController, didShowAlertError error: Bool) {
+        showAlertError(viewController)
+    }
+
+    func detailViewController(_ viewController: DetailViewController,
+                              didTapShowMap button: UIButton,
+                              with viewModel: ShortInfoViewModel) {
+        mapRouter.showMapStory(from: viewController,
+                               viewModel: viewModel,
+                               animated: true) { (_) in
+            self.mapRouter.hideMapStory(animated: true)
+        }
     }
 }
 

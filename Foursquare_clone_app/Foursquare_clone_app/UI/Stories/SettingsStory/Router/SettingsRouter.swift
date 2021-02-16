@@ -15,7 +15,7 @@ enum SettingsStoryResult {
     case failure(error: Error?)
 }
 
-class SettingsRouter: SettingsRouterProtocol {
+class SettingsRouter: SettingsRoutingProtocol {
 
     private var completion: SettingsStoryCompletion?
     private var settingsController: SettingsViewController?
@@ -51,10 +51,20 @@ class SettingsRouter: SettingsRouterProtocol {
     }
 
     private func setupNotificationAlert(_ viewController: UIViewController) {
-        let alertConrtoller = UIAlertController(title: "Notification",
+        let alertTitle = "AlertTitle"
+            .localized(name: "SettingsVCLocalization")
+        let alertSetAction = "AlertSet"
+            .localized(name: "SettingsVCLocalization")
+        let alertRemoveAction = "AlerRemove"
+            .localized(name: "SettingsVCLocalization")
+        let alertCancelAction = "AlertCancel"
+            .localized(name: "SettingsVCLocalization")
+
+        let alertConrtoller = UIAlertController(title: alertTitle,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
-        let setNotificationAction = UIAlertAction(title: "Set", style: .default) { (_) in
+        let setNotificationAction = UIAlertAction(title: alertSetAction,
+                                                  style: .default) { (_) in
             NotificationManager.setNotification(5,
                                                 of: .seconds,
                                                 repeats: false,
@@ -62,10 +72,12 @@ class SettingsRouter: SettingsRouterProtocol {
                                                                       body: "Notification"),
                                                 userInfo: ["aps": ["Hello": "world"]])
         }
-        let removeNotificationAction = UIAlertAction(title: "Remove", style: .default) { (_) in
+        let removeNotificationAction = UIAlertAction(title: alertRemoveAction,
+                                                     style: .default) { (_) in
             NotificationManager.cancel()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: alertCancelAction,
+                                         style: .cancel, handler: nil)
         alertConrtoller.addAction(setNotificationAction)
         alertConrtoller.addAction(removeNotificationAction)
         alertConrtoller.addAction(cancelAction)

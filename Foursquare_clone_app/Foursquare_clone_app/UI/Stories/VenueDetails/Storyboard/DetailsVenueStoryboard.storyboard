@@ -159,7 +159,7 @@
                                         <blurEffect style="systemUltraThinMaterialDark"/>
                                     </visualEffectView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0g-3z-rh9">
-                                        <rect key="frame" x="56" y="52" width="247" height="40"/>
+                                        <rect key="frame" x="56" y="52" width="0.0" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="rPy-e4-R4Z"/>
                                         </constraints>
@@ -180,40 +180,29 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6f1-pg-hbc">
-                                        <rect key="frame" x="343" y="52" width="55" height="40"/>
+                                        <rect key="frame" x="308" y="52" width="90" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="YJo-zH-IOh"/>
-                                            <constraint firstAttribute="width" constant="55" id="ijv-lf-iNy"/>
+                                            <constraint firstAttribute="width" constant="90" id="ijv-lf-iNy"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Reset">
+                                        <state key="normal" title="Clear">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
                                         </state>
                                         <connections>
-                                            <action selector="resetDataButtonPressed:" destination="erF-sg-ICt" eventType="touchUpInside" id="ej4-Rv-e5J"/>
+                                            <action selector="clearDataButtonPressed:" destination="erF-sg-ICt" eventType="touchUpInside" id="noP-yV-eZ1"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6X8-sz-8oE">
-                                        <rect key="frame" x="303" y="52" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="EN5-kK-9Mj"/>
-                                            <constraint firstAttribute="width" constant="40" id="Id0-V3-PMj"/>
-                                        </constraints>
-                                        <state key="normal" image="share"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="n5f-R7-3Oe" secondAttribute="bottom" constant="8" id="4DV-xw-jSh"/>
                                     <constraint firstAttribute="bottom" secondItem="6f1-pg-hbc" secondAttribute="bottom" constant="8" id="4aW-HF-UjX"/>
-                                    <constraint firstItem="6f1-pg-hbc" firstAttribute="leading" secondItem="6X8-sz-8oE" secondAttribute="trailing" id="GZj-RI-ybY"/>
                                     <constraint firstItem="LGh-g5-ARH" firstAttribute="leading" secondItem="Z1x-mZ-nwp" secondAttribute="leading" id="VcL-c6-Fez"/>
                                     <constraint firstItem="F0g-3z-rh9" firstAttribute="leading" secondItem="n5f-R7-3Oe" secondAttribute="trailing" id="YG8-3b-09p"/>
-                                    <constraint firstAttribute="bottom" secondItem="6X8-sz-8oE" secondAttribute="bottom" constant="8" id="btR-3J-Uub"/>
                                     <constraint firstItem="LGh-g5-ARH" firstAttribute="top" secondItem="Z1x-mZ-nwp" secondAttribute="top" id="p3x-3J-O36"/>
                                     <constraint firstAttribute="bottom" secondItem="LGh-g5-ARH" secondAttribute="bottom" id="qAH-fo-yEz"/>
                                     <constraint firstAttribute="trailing" secondItem="LGh-g5-ARH" secondAttribute="trailing" id="qSo-OK-KFs"/>
-                                    <constraint firstItem="6X8-sz-8oE" firstAttribute="leading" secondItem="F0g-3z-rh9" secondAttribute="trailing" id="rMz-gQ-suw"/>
                                     <constraint firstItem="n5f-R7-3Oe" firstAttribute="leading" secondItem="Z1x-mZ-nwp" secondAttribute="leading" constant="16" id="tNQ-d7-XDG"/>
                                     <constraint firstAttribute="bottom" secondItem="F0g-3z-rh9" secondAttribute="bottom" constant="8" id="uUN-06-nEt"/>
                                     <constraint firstAttribute="trailing" secondItem="6f1-pg-hbc" secondAttribute="trailing" constant="16" id="z0o-F2-iZj"/>
@@ -243,6 +232,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="9Qh-y2-X0q" id="HXh-EK-Sce"/>
                         <outlet property="blurEffectView" destination="LGh-g5-ARH" id="nsC-7J-q0n"/>
+                        <outlet property="clearButton" destination="6f1-pg-hbc" id="npY-nJ-JJb"/>
                         <outlet property="customViewNavBar" destination="Z1x-mZ-nwp" id="OcT-gJ-hCw"/>
                         <outlet property="tableView" destination="J3f-7x-e9W" id="RMQ-7b-kM2"/>
                         <outlet property="venueNameLabel" destination="F0g-3z-rh9" id="c0T-O8-XjL"/>
@@ -255,6 +245,5 @@
     </scenes>
     <resources>
         <image name="backWhiteArrow" width="32" height="32"/>
-        <image name="share" width="27" height="27"/>
     </resources>
 </document>

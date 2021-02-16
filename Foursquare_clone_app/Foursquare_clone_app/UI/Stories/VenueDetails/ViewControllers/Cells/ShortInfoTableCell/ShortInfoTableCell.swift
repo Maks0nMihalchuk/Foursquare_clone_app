@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ShortInfoTableCellDelegate: class {
+    func shortInfoTableCell(_ cell: ShortInfoTableCell,
+                            didTapShowMapButton button: UIButton)
+}
+
 class ShortInfoTableCell: UITableViewCell {
 
     @IBOutlet private weak var ratingLabel: UILabel!
@@ -17,12 +22,18 @@ class ShortInfoTableCell: UITableViewCell {
     @IBOutlet private weak var hoursVenueLabel: UILabel!
     @IBOutlet private weak var categoriesLabel: UILabel!
     @IBOutlet private weak var categoriesVenueLabel: UILabel!
+    @IBOutlet private weak var showMapViewButton: UIButton!
+
+    weak var delegate: ShortInfoTableCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        adressLabel.text = "AdressLabelText".localized()
-        hoursLabel.text = "HoursLabelText".localized()
-        categoriesLabel.text = "CategoriesLabelText".localized()
+        adressLabel.text = "AdressLabelText".localized(name: "DetailVCLocalization")
+        hoursLabel.text = "HoursLabelText".localized(name: "DetailVCLocalization")
+        categoriesLabel.text = "CategoriesLabelText".localized(name: "DetailVCLocalization")
+        showMapViewButton.setTitle("ShowMap".localized(name: "DetailVCLocalization"),
+                             for: .normal)
+        showMapViewButton.titleLabel?.textAlignment = .center
     }
 
     func configure(with content: ShortInfoCellModel) {
@@ -32,4 +43,9 @@ class ShortInfoTableCell: UITableViewCell {
         ratingLabel.text = content.rating
         ratingLabel.backgroundColor = content.ratingColor
     }
+
+    @IBAction func didTapShowMapButton(_ sender: UIButton) {
+        delegate?.shortInfoTableCell(self, didTapShowMapButton: sender)
+    }
+
 }

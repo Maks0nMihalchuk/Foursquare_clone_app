@@ -50,6 +50,6 @@ class HoursTableCell: UITableViewCell {
 private extension HoursTableCell {
 
     func setupHoursLabel() {
-        hoursLabel.text = "HoursLabelText".localized()
+        hoursLabel.text = "HoursLabelText".localized(name: "DetailVCLocalization")
     }
 }

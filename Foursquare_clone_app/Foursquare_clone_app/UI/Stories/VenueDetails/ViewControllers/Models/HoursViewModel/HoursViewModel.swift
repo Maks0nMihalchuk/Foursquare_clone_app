@@ -34,7 +34,7 @@ private extension HoursViewModel {
 
     func getHoursStatus() -> String {
         guard let status = dataModel.hoursStatus else {
-            return "Add Hours".localized()
+            return "Add Hours".localized(name: "DetailVCLocalization")
         }
 
         return status

@@ -11,7 +11,7 @@ import UIKit
 
 typealias SettingsStoryCompletion = ((_ result: SettingsStoryResult) -> Void)
 
-protocol SettingsRouterProtocol {
+protocol SettingsRoutingProtocol {
     func showSettingsStory(from: UIViewController,
                            animated: Bool,
                            completion: @escaping SettingsStoryCompletion)

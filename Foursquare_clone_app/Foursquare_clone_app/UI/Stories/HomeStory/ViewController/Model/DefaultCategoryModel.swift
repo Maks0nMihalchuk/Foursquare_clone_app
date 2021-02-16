@@ -14,14 +14,14 @@ struct DefaultCategory {
 }
 
 let defaultCategoriesList = [DefaultCategory(imageName: "breakfast",
-                                             title: "HomeViewController.BreakfastTitle".localized()),
+                                             title: "BreakfastTitle".localized(name: "HomeVCLocalization")),
                              DefaultCategory(imageName: "lunch",
-                                             title: "HomeViewController.LunchTitle".localized()),
+                                             title: "LunchTitle".localized(name: "HomeVCLocalization")),
                              DefaultCategory(imageName: "dinner",
-                                             title: "HomeViewController.DinnerTitle".localized()),
+                                             title: "DinnerTitle".localized(name: "HomeVCLocalization")),
                              DefaultCategory(imageName: "coffee&Tea",
-                                             title: "HomeViewController.CoffeeAndTeaTitle".localized()),
+                                             title: "CoffeeAndTeaTitle".localized(name: "HomeVCLocalization")),
                              DefaultCategory(imageName: "nightlife",
-                                             title: "HomeViewController.NightlifeTitle".localized()),
+                                             title: "NightlifeTitle".localized(name: "HomeVCLocalization")),
                              DefaultCategory(imageName: "thingsToDo",
-                                             title: "HomeViewController.ThingsToDoTitle".localized())]
+                                             title: "ThingsToDoTitle".localized(name: "HomeVCLocalization"))]

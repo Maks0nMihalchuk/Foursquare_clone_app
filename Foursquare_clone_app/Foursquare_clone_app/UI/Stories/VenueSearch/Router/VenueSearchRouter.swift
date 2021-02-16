@@ -15,12 +15,12 @@ enum VenueSearchStoryResult {
     case failure(error: Error?)
 }
 
-class VenueSearchRouter: VenueSearchRouterProtocol {
+class VenueSearchRouter: VenueSearchRoutingProtocol {
 
     private var completion: VenueSearchStoryCompletion?
     private var searchController: SearchViewController?
     private let assembly: VenueSearchAssemblyProtocol
-    private let venueDetailRouter: VenueDetailsRouterProtocol = VenueDetailsRouter(assembly: VenueDetailsAssembly(),
+    private let venueDetailRouter: VenueDetailsRoutingProtocol = VenueDetailsRouter(assembly: VenueDetailsAssembly(),
                                                                                    networking: NetworkManager.shared)
 
     init(assembly: VenueSearchAssemblyProtocol) {
@@ -78,11 +78,14 @@ private extension VenueSearchRouter {
 
     private func showAlertForSelection(_ viewController: SearchViewController,
                                        venueID: String) {
-        let title = "AlertSelectController.Title".localized()
-        let message = "AlertSelectController.Message".localized()
+        let title = "AlertSelectController.Title"
+            .localized(name: "SerachVCLocalization")
+        let message = "AlertSelectController.Message"
+            .localized(name: "SerachVCLocalization")
         let detailWithScrollViewTitle = "detailWithScrollView"
         let detailWithTableViewTitle = "detailWithTableView"
-        let cancelButtonTitle = "AlertSelectController.CancelButton".localized()
+        let cancelButtonTitle = "AlertSelectController.CancelButton"
+            .localized(name: "SerachVCLocalization")
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .actionSheet)

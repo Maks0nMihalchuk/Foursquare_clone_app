@@ -24,10 +24,10 @@ class ContactView: UIView {
     }
 
     func setupUI() {
-        phoneLabel.text = "PhoneLabelText".localized()
-        websiteLabel.text = "WebSiteLabelText".localized()
-        phoneVenueLabel.text = "LabelTextPlaceholder".localized()
-        websiteVenueLabel.text = "LabelTextPlaceholder".localized()
+        phoneLabel.text = "PhoneLabelText".localized(name: "DetailVCLocalization")
+        websiteLabel.text = "WebSiteLabelText".localized(name: "DetailVCLocalization")
+        phoneVenueLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
+        websiteVenueLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
     }
 
 }

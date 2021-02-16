@@ -39,10 +39,10 @@ class HoursView: UIView {
     }
 
     func setupUI() {
-        hoursLabel.text = "HoursLabelText".localized()
-        hoursVanueLabel.text = "LabelTextPlaceholder".localized()
-        detailDaysLabel.text = "LabelTextPlaceholder".localized()
-        detailHoursLabel.text = "LabelTextPlaceholder".localized()
+        hoursLabel.text = "HoursLabelText".localized(name: "DetailVCLocalization")
+        hoursVanueLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
+        detailDaysLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
+        detailHoursLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
     }
 
 }
@@ -58,7 +58,7 @@ private extension HoursView {
     }
 
     func checkForDataAvailability(with viewModel: HoursViewModel) {
-        let defaultTest = "Add Hours".localized()
+        let defaultTest = "Add Hours".localized(name: "DetailVCLocalization")
 
         if viewModel.hoursStatus != defaultTest {
             detailHoursButton.isHidden = false

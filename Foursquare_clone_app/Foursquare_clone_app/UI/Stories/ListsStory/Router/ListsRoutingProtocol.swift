@@ -1,5 +1,5 @@
 //
-//  TabBarRoutingProtocol.swift
+//  ListsRoutingProtocol.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 08.02.2021.
@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-protocol MainRouterProtocol {
-    func showMainStory(_ viewController: UIViewController, animated: Bool)
+protocol ListsRoutingProtocol {
+    func showListsStory(from: inout UIViewController, animated: Bool)
 }

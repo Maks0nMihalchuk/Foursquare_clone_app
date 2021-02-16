@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ListsRouter: ListsRouterProtocol {
+class ListsRouter: ListsRoutingProtocol {
 
     private let assembly: ListsAssemblyProtocol
 
@@ -21,7 +21,7 @@ class ListsRouter: ListsRouterProtocol {
         let listsController = assembly.assemblyListsViewController()
 
         listsController.delegate = self
-        listsController.title = "ListsViewController.Title".localized()
+        listsController.title = "Title".localized(name: "ListVCLocalization")
         if from is UINavigationController {
 
             guard let navigationController = from as? UINavigationController else { return }

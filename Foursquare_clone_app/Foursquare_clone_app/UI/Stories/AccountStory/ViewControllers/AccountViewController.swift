@@ -19,6 +19,7 @@ protocol AccountViewControllerDelegate: class {
     func accountViewController(_ viewController: AccountViewController, didTapSignInButton button: UIButton)
     func accountViewController(_ viewController: AccountViewController, didTapSignOutButton button: UIButton)
     func accountViewController(_ viewController: AccountViewController, didTapSettingsButton button: UIButton)
+    func accountViewController(_ viewController: AccountViewController, didShowErrorAlert error: Bool)
 }
 
 class AccountViewController: UIViewController {
@@ -54,7 +55,7 @@ class AccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabBar()
+        setupView()
         setupAuthorizedUserView()
         setupUnauthorizedUserView()
         checkForTokenAvailability()
@@ -104,13 +105,13 @@ extension AccountViewController: SFSafariViewControllerDelegate {
                             self.setupActivityIndicator(isLaunch: false)
                         } else {
                             self.setupActivityIndicator(isLaunch: false)
-                            self.showErrorAlert()
+                            self.delegate?.accountViewController(self, didShowErrorAlert: true)
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
                         self.setupActivityIndicator(isLaunch: false)
-                        self.showErrorAlert()
+                        self.delegate?.accountViewController(self, didShowErrorAlert: true)
                     }
                 }
             }
@@ -132,7 +133,7 @@ private extension AccountViewController {
                     self.setupActivityIndicator(isLaunch: false)
                 }
             } else {
-                self.showErrorAlert()
+                self.delegate?.accountViewController(self, didShowErrorAlert: true)
             }
         }
     }
@@ -165,7 +166,7 @@ private extension AccountViewController {
         case .unauthorized:
             setupActivityIndicator(isLaunch: false)
             authorizedUserView?.alpha = 0
-            userNameLabel.text = "AccountViewController.YourProfile".localized()
+            userNameLabel.text = "YourProfile".localized(name: "AccountVCLocalization")
             authorizedUserView?.removeFromSuperview()
             setupContainerView(with: unauthorizedUserView ?? UIView())
         case .authorized:
@@ -211,7 +212,8 @@ private extension AccountViewController {
         unauthorizedUserView?.delegate = self
     }
 
-    func setupTabBar() {
+    func setupView() {
+        userNameLabel.text = "YourProfile".localized(name: "AccountVCLocalization")
         appearance.backgroundColor = .white
         tabBarController?.tabBar.standardAppearance = appearance
     }
@@ -228,20 +230,5 @@ private extension AccountViewController {
                 self.settingButton.isEnabled = true
             }
         }
-    }
-}
-
-// MARK: - setup error alert
-extension AccountViewController {
-
-    func showErrorAlert() {
-        let alertController = UIAlertController(title: "AlertErrorTitle".localized(),
-                                                message: "AccountViewController.AlertMessage".localized(),
-                                                preferredStyle: .alert)
-        let action = UIAlertAction(title: "AccountViewController.AlertAction".localized(),
-                                   style: .default,
-                                   handler: nil)
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HomeRouterProtocol.swift
 //  Foursquare_clone_app
 //
 //  Created by maks on 08.02.2021.
@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-protocol AccountRouterProtocol {
-    func showAccountStory(from: inout UIViewController, animated: Bool)
+protocol HomeRoutingProtocol {
+    func showHomeStory(from: inout UIViewController, animated: Bool)
 }

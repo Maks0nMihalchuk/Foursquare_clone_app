@@ -68,7 +68,7 @@ private extension TermsOfUseViewController {
 
     func setupNavigationBar() {
         let navBar = navigationController?.navigationBar
-        title = "Settings.TermsOfUse".localized()
+        title = "TermsOfUse".localized(name: "SettingsVCLocalization")
         navigationItem.leftBarButtonItem = backButton
         navBar?.barTintColor = .systemBlue
         navBar?.backgroundColor = .systemBlue

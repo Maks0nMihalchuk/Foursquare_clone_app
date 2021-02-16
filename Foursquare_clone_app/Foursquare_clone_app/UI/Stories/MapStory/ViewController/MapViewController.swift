@@ -19,7 +19,7 @@ protocol MapViewControllerDelegate: class {
     func mapViewController(_ viewController: MapViewController,
                            didTapMapViewZoomButton button: UIButton,
                            on mapView: MKMapView,
-                           by key: KeyToScaleMapView)
+                           state: MapViewScaleState)
 
 }
 
@@ -54,11 +54,11 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func didTapButtonZoomIn(_ sender: UIButton) {
-        delegate?.mapViewController(self, didTapMapViewZoomButton: sender, on: mapView, by: .zoomIn)
+        delegate?.mapViewController(self, didTapMapViewZoomButton: sender, on: mapView, state: .zoomIn)
     }
 
     @IBAction func didTapButtonZoomOut(_ sender: UIButton) {
-        delegate?.mapViewController(self, didTapMapViewZoomButton: sender, on: mapView, by: .zoomOut)
+        delegate?.mapViewController(self, didTapMapViewZoomButton: sender, on: mapView, state: .zoomOut)
     }
 
     @IBAction func didTapFindUserLocationButton(_ sender: UIButton) {
@@ -99,7 +99,7 @@ private extension MapViewController {
 
     func setupCustomAnnotationView(width: CGFloat) -> BriefDescriptionVenueView {
         let view = UIView.fromNib() as BriefDescriptionVenueView
-        view.setupUI(viewModel: viewModel)
+        view.setup(withViewModel: viewModel)
         let widthConstraint = NSLayoutConstraint(item: view,
                                                  attribute: .width,
                                                  relatedBy: .equal,
@@ -154,7 +154,7 @@ private extension MapViewController {
         navigationController?.isNavigationBarHidden = false
         let navBar = navigationController?.navigationBar
         navigationItem.leftBarButtonItem = backButton
-        title = "ShowView".localized()
+        title = "ShowMap".localized(name: "MapVCLocalization")
         navBar?.barTintColor = .systemBlue
         navBar?.backgroundColor = .systemBlue
         navBar?.barTintColor = .systemBlue

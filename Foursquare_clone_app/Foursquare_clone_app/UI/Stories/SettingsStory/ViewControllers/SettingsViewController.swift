@@ -75,7 +75,7 @@ private extension SettingsViewController {
 
     func setupNavigationBar() {
         let navBar = navigationController?.navigationBar
-        title = "Settings.Title".localized()
+        title = "Title".localized(name: "SettingsVCLocalization")
         navigationItem.leftBarButtonItem = backButton
         navBar?.barTintColor = .systemBlue
         navBar?.backgroundColor = .systemBlue
@@ -85,12 +85,16 @@ private extension SettingsViewController {
     }
 
     func setupView() {
-        pushNotificationsLabel.text = "Settings.PushNotification".localized()
-        aboutUsButton.setTitle("Settings.AboutUs".localized(),
+        pushNotificationsLabel.text = "PushNotification"
+            .localized(name: "SettingsVCLocalization")
+        aboutUsButton.setTitle("AboutUs"
+            .localized(name: "SettingsVCLocalization"),
                                for: .normal)
-        termsOfUseButton.setTitle("Settings.TermsOfUse".localized(),
+        termsOfUseButton.setTitle("TermsOfUse"
+            .localized(name: "SettingsVCLocalization"),
                                   for: .normal)
-        privacyButton.setTitle("Settings.Privacy".localized(),
+        privacyButton.setTitle("Privacy"
+            .localized(name: "SettingsVCLocalization"),
                                for: .normal)
     }
 

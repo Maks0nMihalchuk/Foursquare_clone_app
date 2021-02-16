@@ -74,7 +74,7 @@ private extension PrivacyViewController {
 
     func setupNavigationBar() {
         let navBar = navigationController?.navigationBar
-        title = "Settings.Privacy".localized()
+        title = "Privacy".localized(name: "SettingsVCLocalization")
         navigationItem.leftBarButtonItem = backButton
         navBar?.barTintColor = .systemBlue
         navBar?.backgroundColor = .systemBlue

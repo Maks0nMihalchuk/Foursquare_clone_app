@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private let mainRouter: MainRouterProtocol = MainRouter(assembly: MainAssembly(),
+    private let mainRouter: MainRoutingProtocol = MainRouter(assembly: MainAssembly(),
                                                             homeRouter: HomeRouter(assembly: HomeAssembly()),
                                                             accountRouter: AccountRouter(assembly: AccountAssembly()),
                                                             listsRouter: ListsRouter(assembly: ListsAssembly()))

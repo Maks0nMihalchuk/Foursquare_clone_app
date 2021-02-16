@@ -24,7 +24,7 @@ struct ShortInfoViewModel {
 
     var address: String {
         guard let adress = dataModel.address else {
-            return "LabelTextPlaceholder".localized()
+            return "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
         }
 
         return adress
@@ -76,7 +76,7 @@ private extension ShortInfoViewModel {
 
     func getHoursStatus() -> String {
         guard let status = dataModel.hoursStatus else {
-            return "Add Hours".localized()
+            return "Add Hours".localized(name: "DetailVCLocalization")
         }
 
         return status
@@ -87,7 +87,7 @@ private extension ShortInfoViewModel {
             var category = String()
 
             if dataModel.categories.isEmpty {
-                return "Add Categories".localized()
+                return "Add Categories".localized(name: "DetailVCLocalization")
             }
 
             dataModel.categories.forEach {

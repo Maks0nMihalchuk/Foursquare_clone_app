@@ -66,7 +66,7 @@ private extension AboutUsViewController {
 
     func setupNavigationBar() {
         let navBar = navigationController?.navigationBar
-        title = "Settings.AboutUs".localized()
+        title = "AboutUs".localized(name: "SettingsVCLocalization")
         navigationItem.leftBarButtonItem = backButton
         navBar?.barTintColor = .systemBlue
         navBar?.backgroundColor = .systemBlue

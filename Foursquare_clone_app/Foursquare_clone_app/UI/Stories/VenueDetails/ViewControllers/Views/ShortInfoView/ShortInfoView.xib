@@ -140,7 +140,7 @@
                 <outlet property="ratingLabel" destination="kwM-yo-SkR" id="t4w-T5-4yR"/>
                 <outlet property="showMapButton" destination="Xr8-gC-J6L" id="QYO-N6-h1Y"/>
             </connections>
-            <point key="canvasLocation" x="-123.18840579710145" y="94.754464285714278"/>
+            <point key="canvasLocation" x="-103" y="86"/>
         </view>
     </objects>
 </document>

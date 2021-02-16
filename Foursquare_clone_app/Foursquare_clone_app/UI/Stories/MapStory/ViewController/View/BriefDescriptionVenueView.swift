@@ -10,10 +10,10 @@ import UIKit
 
 class BriefDescriptionVenueView: UIView {
 
-    @IBOutlet weak var venueNameLabel: UILabel!
-    @IBOutlet weak var hoursStatusLabel: UILabel!
+    @IBOutlet private weak var venueNameLabel: UILabel!
+    @IBOutlet private weak var hoursStatusLabel: UILabel!
 
-    func setupUI(viewModel: ShortInfoViewModel?) {
+    func setup(withViewModel viewModel: ShortInfoViewModel?) {
         venueNameLabel.text = viewModel?.name
         hoursStatusLabel.text = viewModel?.hoursStatus
     }

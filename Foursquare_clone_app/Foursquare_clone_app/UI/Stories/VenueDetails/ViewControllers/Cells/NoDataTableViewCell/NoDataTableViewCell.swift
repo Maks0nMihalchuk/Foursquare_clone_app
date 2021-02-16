@@ -14,6 +14,7 @@ class NoDataTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        textErrorLabel.text = "NotDataTableViewCell.LabelText".localized()
+        textErrorLabel.text = "NotDataTableViewCell.LabelText"
+            .localized(name: "DetailVCLocalization")
     }
 }

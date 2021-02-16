@@ -11,7 +11,7 @@ import UIKit
 
 typealias VenueDetailsStoryCompletion = ((_ result: VenueDetailsStoryResult) -> Void)
 
-protocol VenueDetailsRouterProtocol {
+protocol VenueDetailsRoutingProtocol {
     func showVenueDetailsStory(from: UIViewController,
                                type: VenueDetailsStoryType,
                                venueID: String,

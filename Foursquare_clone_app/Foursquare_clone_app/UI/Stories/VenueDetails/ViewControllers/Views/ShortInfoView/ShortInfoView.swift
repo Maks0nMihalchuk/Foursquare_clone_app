@@ -36,13 +36,13 @@ class ShortInfoView: UIView {
 
     func setupUI() {
         ratingLabel.text = "-"
-        addressLabel.text = "AdressLabelText".localized()
-        addressVenueLabel.text = "LabelTextPlaceholder".localized()
-        hoursLabel.text = "HoursLabelText".localized()
-        hoursVenueLabel.text = "LabelTextPlaceholder".localized()
-        categoriesLabel.text = "CategoriesLabelText".localized()
-        categoriesVenueLabel.text = "LabelTextPlaceholder".localized()
-        showMapButton.setTitle("ShowMap".localized(), for: .normal)
+        addressLabel.text = "AdressLabelText".localized(name: "DetailVCLocalization")
+        addressVenueLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
+        hoursLabel.text = "HoursLabelText".localized(name: "DetailVCLocalization")
+        hoursVenueLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
+        categoriesLabel.text = "CategoriesLabelText".localized(name: "DetailVCLocalization")
+        categoriesVenueLabel.text = "LabelTextPlaceholder".localized(name: "DetailVCLocalization")
+        showMapButton.setTitle("ShowMap".localized(name: "DetailVCLocalization"), for: .normal)
         showMapButton.titleLabel?.textAlignment = .center
     }
 

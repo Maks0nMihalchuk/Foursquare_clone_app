@@ -9,14 +9,17 @@
 import UIKit
 
 protocol ScrollViewDetailViewControllerDelegate: class {
-    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
-                                            didTapFullScreenImage button: UIButton,
-                                            with image: UIImage,
-                                            model: BestPhotoViewModel)
-    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
-                                            didTapBack button: UIButton)
-    func detailViewControllerWithScrollView(_ viewController: ScrollViewDetailViewController,
-                                            didTapShowMap button: UIButton, with model: ShortInfoViewModel)
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didTapFullScreenImage button: UIButton,
+                                        with image: UIImage,
+                                        model: BestPhotoViewModel)
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didTapBack button: UIButton)
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didTapShowMap button: UIButton,
+                                        with viewModel: ShortInfoViewModel)
+    func scrollViewDetailViewController(_ viewController: ScrollViewDetailViewController,
+                                        didShowAlertError error: Bool)
 }
 
 class ScrollViewDetailViewController: UIViewController {
@@ -73,7 +76,7 @@ class ScrollViewDetailViewController: UIViewController {
     }
 
     @IBAction func screenCloseButtonPressed(_ sender: UIButton) {
-        delegate?.detailViewControllerWithScrollView(self, didTapBack: sender)
+        delegate?.scrollViewDetailViewController(self, didTapBack: sender)
     }
 
     @IBAction func fullScreenDisplayButtonPressed(_ sender: UIButton) {
@@ -82,7 +85,7 @@ class ScrollViewDetailViewController: UIViewController {
             let model = bestPhotoView?.viewModel
         else { return }
 
-        delegate?.detailViewControllerWithScrollView(self,
+        delegate?.scrollViewDetailViewController(self,
                                                      didTapFullScreenImage: sender,
                                                      with: image,
                                                      model: model)
@@ -93,7 +96,7 @@ class ScrollViewDetailViewController: UIViewController {
 extension ScrollViewDetailViewController: ShortInfoViewDelegate {
     func shortInfoView(_ view: ShortInfoView,
                        didTapShowMapButton button: UIButton, with model: ShortInfoViewModel) {
-        delegate?.detailViewControllerWithScrollView(self, didTapShowMap: button, with: model)
+        delegate?.scrollViewDetailViewController(self, didTapShowMap: button, with: model)
     }
 }
 
@@ -144,7 +147,8 @@ private extension ScrollViewDetailViewController {
                                         } else {
                                             DispatchQueue.main.async {
                                                 self.setupActivityIndicator(isHidden: false)
-                                                self.showAlertError()
+                                                self.delegate?.scrollViewDetailViewController(self,
+                                                                                              didShowAlertError: true)
                                             }
                                         }
         })
@@ -248,19 +252,5 @@ private extension ScrollViewDetailViewController {
 
     func checkState(isHidden: Bool) -> HoursTableCallState {
         return isHidden ? .decomposed : .folded
-    }
-}
-
-// MARK: - setup error alert
-private extension ScrollViewDetailViewController {
-
-    func showAlertError() {
-        let alertController = UIAlertController(title: "Error",
-                                                message: "when downloading data error occurred", preferredStyle: .alert)
-        let action = UIAlertAction(title: "AccountViewController.AlertActionTitle".localized(),
-                                   style: .default,
-                                   handler: nil)
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
     }
 }

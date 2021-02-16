@@ -1,0 +1,28 @@
+/* 
+  DetailVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"LabelTextPlaceholder" = "No Data!";
+
+"VenueNameLabelText" = "Venue Name";
+"Add Hours" = "Add Hours";
+"ShowMap" = "Show map";
+"Add Phone" = "Add Phone";
+"Add Website" = "Add Website";
+"Add Categories" = "Add Categories";
+"HoursLabelText" = "HOURS";
+"AdressLabelText" = "ADRESS";
+"CategoriesLabelText" = "CATEGORIES";
+"PhoneLabelText" = "PHONE";
+"WebSiteLabelText" = "WEBSITE";
+
+"NotDataTableViewCell.LabelText" = "Sorry. Something went wrong. No data available";
+"СlearButton" = "Сlear";
+
+"AlertTitle" = "Error";
+"AlertMessage" = "When downloading data error occurred";
+"AlertActionTitle" = "Okey";

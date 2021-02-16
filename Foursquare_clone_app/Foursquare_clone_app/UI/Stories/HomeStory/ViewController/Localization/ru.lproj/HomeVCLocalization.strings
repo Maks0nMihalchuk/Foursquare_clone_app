@@ -1,0 +1,20 @@
+/* 
+  HomeVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 15.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"Title" = "Поиск";
+"SearchButton.Title" = "Что ищите?";
+"BreakfastTitle" = "Завтрак";
+"LunchTitle" = "Обед";
+"DinnerTitle" = "Ужин";
+"CoffeeAndTeaTitle" = "Кофе и чай";
+"NightlifeTitle" = "Ночь";
+"ThingsToDoTitle" = "Дела";
+
+"LocationErrorAlert.Title" = "Службы геолокации отключены";
+"LocationErrorAlert.Message" = "Пожалуйста, включите службы геолокации в настройках";
+"LocationErrorAlert.Action" = "Окей";

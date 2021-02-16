@@ -73,21 +73,28 @@ private extension CreateNewListAlert {
     }
 
     func setupButton() {
-        createListButton.setTitle("CreateNewListAlert.CreateListButtonTitle".localized(),
+        createListButton.setTitle("CreateNewListAlert.CreateListButtonTitle"
+            .localized(name: "ListVCLocalization"),
                                   for: .normal)
-        cancelButton.setTitle("CreateNewListAlert.CancelButtonTitle".localized(),
+        cancelButton.setTitle("CreateNewListAlert.CancelButtonTitle".localized(name: "ListVCLocalization"),
                               for: .normal)
     }
 
     func setupTextField() {
-        listNameTextField.placeholder = "CreateNewListAlert.ListNameTextFieldPlaceholder".localized()
-        descriptionTextField.placeholder = "CreateNewListAlert.DescriptionTextFieldPlaceholder".localized()
+        listNameTextField.placeholder = "CreateNewListAlert.ListNameTextFieldPlaceholder"
+            .localized(name: "ListVCLocalization")
+        descriptionTextField.placeholder = "CreateNewListAlert.DescriptionTextFieldPlaceholder"
+            .localized(name: "ListVCLocalization")
     }
     func setupLabel() {
-        listNameLabel.text = "CreateNewListAlert.ListNameLabelText".localized()
-        descriptionLabel.text = "CreateNewListAlert.DescriptionLabelText".localized()
-        makeCollaborativeLabel.text = "CreateNewListAlert.MakeCollaborativeLabelText".localized()
-        makeCollaborativeDescriptionLabel.text = "CreateNewListAlert.MakeCollaborativeDescriptionLabel".localized()
+        listNameLabel.text = "CreateNewListAlert.ListNameLabelText"
+            .localized(name: "ListVCLocalization")
+        descriptionLabel.text = "CreateNewListAlert.DescriptionLabelText"
+            .localized(name: "ListVCLocalization")
+        makeCollaborativeLabel.text = "CreateNewListAlert.MakeCollaborativeLabelText"
+            .localized(name: "ListVCLocalization")
+        makeCollaborativeDescriptionLabel.text = "CreateNewListAlert.MakeCollaborativeDescriptionLabel"
+            .localized(name: "ListVCLocalization")
     }
 
     func setupImage() {

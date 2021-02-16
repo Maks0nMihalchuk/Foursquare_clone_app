@@ -1,0 +1,11 @@
+/* 
+  SerachVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"AlertSelectController.Title" = "Make your choice";
+"AlertSelectController.Message" = "choose which controller you want to run";
+"AlertSelectController.CancelButton" = "Cancel";

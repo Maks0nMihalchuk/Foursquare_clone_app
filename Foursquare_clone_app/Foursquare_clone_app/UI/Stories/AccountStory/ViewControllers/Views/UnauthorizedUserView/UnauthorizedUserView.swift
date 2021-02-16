@@ -23,10 +23,14 @@ class UnauthorizedUserView: UIView {
     weak var delegate: UnauthorizedUserViewDelegate?
 
     func setupUI() {
-        placeholderLabel.text = "Unauthorized.PlaceholderLabel".localized()
-        createYourPersonalAccLabel.text = "Unauthorized.createYourAcc".localized()
-        haveAccountLabel.text = "Unauthorized.Already".localized()
-        signinButton.setTitle("Unauthorized.SignInButton".localized(),
+        placeholderLabel.text = "Unauthorized.PlaceholderLabel"
+            .localized(name: "AccountVCLocalization")
+        createYourPersonalAccLabel.text = "Unauthorized.createYourAcc"
+            .localized(name: "AccountVCLocalization")
+        haveAccountLabel.text = "Unauthorized.Already"
+            .localized(name: "AccountVCLocalization")
+        signinButton.setTitle("Unauthorized.SignInButton"
+            .localized(name: "AccountVCLocalization"),
                               for: .normal)
     }
 

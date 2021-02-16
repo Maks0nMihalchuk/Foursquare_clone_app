@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum KeyToScaleMapView {
+enum MapViewScaleState {
     case zoomIn
     case zoomOut
 }

@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-class MainRouter: MainRouterProtocol {
+class MainRouter: MainRoutingProtocol {
 
     private let assembly: MainAssemblyProtocol
-    private let homeRouter: HomeRouterProtocol
-    private let accountRouter: AccountRouterProtocol
-    private let listsRouter: ListsRouterProtocol
+    private let homeRouter: HomeRoutingProtocol
+    private let accountRouter: AccountRoutingProtocol
+    private let listsRouter: ListsRoutingProtocol
 
     init(assembly: MainAssemblyProtocol,
-         homeRouter: HomeRouterProtocol,
-         accountRouter: AccountRouterProtocol,
-         listsRouter: ListsRouterProtocol) {
+         homeRouter: HomeRoutingProtocol,
+         accountRouter: AccountRoutingProtocol,
+         listsRouter: ListsRoutingProtocol) {
         self.assembly = assembly
         self.homeRouter = homeRouter
         self.accountRouter = accountRouter

@@ -72,7 +72,7 @@ struct DetailViewModel {
 
     var phone: String {
         guard let phone = dataModel.phone else {
-            return "Add Phone".localized()
+            return "Add Phone".localized(name: "DetailVCLocalization")
         }
 
         return phone
@@ -80,7 +80,7 @@ struct DetailViewModel {
 
     var website: String {
         guard let website = dataModel.webSite else {
-            return "Add Website".localized()
+            return "Add Website".localized(name: "DetailVCLocalization")
         }
 
         return website
@@ -128,7 +128,7 @@ private extension DetailViewModel {
 
     func getHoursStatus() -> String {
         guard let status = dataModel.hoursStatus else {
-            return "Add Hours".localized()
+            return "Add Hours".localized(name: "DetailVCLocalization")
         }
 
         return status
@@ -173,7 +173,7 @@ private extension DetailViewModel {
             var category = String()
 
             if dataModel.categories.isEmpty {
-                return "Add Categories".localized()
+                return "Add Categories".localized(name: "DetailVCLocalization")
             }
 
             dataModel.categories.forEach {

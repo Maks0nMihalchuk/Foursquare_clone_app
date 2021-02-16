@@ -17,7 +17,7 @@ struct ContactViewModel {
 
     var phone: String {
         guard let phone = dataModel.phone else {
-            return "Add Phone".localized()
+            return "Add Phone".localized(name: "DetailVCLocalization")
         }
 
         return phone
@@ -25,7 +25,7 @@ struct ContactViewModel {
 
     var website: String {
         guard let website = dataModel.webSite else {
-            return "Add Website".localized()
+            return "Add Website".localized(name: "DetailVCLocalization")
         }
 
         return website

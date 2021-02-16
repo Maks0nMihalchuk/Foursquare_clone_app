@@ -43,8 +43,10 @@ class ListsViewController: UIViewController {
     private var userLists = [GetUserListsGroup]()
     private let networkManager = NetworkManager.shared
     private let keychainManager = KeychainManager.shared
-    private let defaultNameLists = [DefaultNameListsModel(listName: "DefaultNameListsName.MySavedPlaces".localized()),
-                                    DefaultNameListsModel(listName: "DefaultNameListsName.MyLikedPlaces".localized())]
+    private let defaultNameLists = [DefaultNameListsModel(listName: "MySavedPlaces"
+        .localized(name: "ListVCLocalization")),
+                                    DefaultNameListsModel(listName: "MyLikedPlaces"
+                                        .localized(name: "ListVCLocalization"))]
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -267,10 +269,12 @@ private extension ListsViewController {
     }
 
     func setupAndShowErrorAlert() {
-        let controller = UIAlertController(title: "AlertErrorTitle".localized(),
-                                           message: "ListsViewController.AlertToErrorMessage".localized(),
+        let controller = UIAlertController(title: "AlertErrorTitle".localized(name: "ListVCLocalization"),
+                                           message: "AlertToErrorMessage".localized(name: "ListVCLocalization"),
                                            preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "AlertButton.Title".localized(name: "ListVCLocalization"),
+                                   style: .cancel,
+                                   handler: nil)
         controller.addAction(cancel)
         present(controller, animated: true, completion: nil)
     }
@@ -310,9 +314,9 @@ private extension ListsViewController {
 
     func setupNumberPlaces(numberPlaces: Int) -> String {
         if numberPlaces == 0 {
-            return "UserCreatedCell.NumberPlacesLabel".localized()
+            return "UserCreatedCell.NumberPlacesLabel".localized(name: "ListVCLocalization")
         } else {
-            return "\(numberPlaces) " + "UserCreatedCell.Places".localized()
+            return "\(numberPlaces) " + "UserCreatedCell.Places".localized(name: "ListVCLocalization")
         }
     }
 

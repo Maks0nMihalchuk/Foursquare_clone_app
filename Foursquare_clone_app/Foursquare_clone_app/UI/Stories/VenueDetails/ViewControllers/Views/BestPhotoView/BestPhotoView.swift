@@ -27,7 +27,8 @@ class BestPhotoView: UIView {
     func setupUI() {
         bestPhotoImageView.image = UIImage(named: "img_placeholder")
         gradientSetup()
-        venueName.text = "LabelTextPlaceholder".localized()
+        venueName.text = "LabelTextPlaceholder"
+            .localized(name: "DetailVCLocalization")
     }
 
     func didTransferImage() -> UIImage? {
