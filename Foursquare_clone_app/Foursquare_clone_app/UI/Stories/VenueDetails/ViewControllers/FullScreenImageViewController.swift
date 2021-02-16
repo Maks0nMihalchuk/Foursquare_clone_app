@@ -21,8 +21,14 @@ class FullScreenImageViewController: UIViewController {
 
     var venueName = String()
     var venueImage: UIImage?
-    private let router = VenueDetailsRouter(assembly: VenueDetailsAssembly(),
-                                             networking: NetworkManager.shared)
+    private let pinchGestureRecognizer = UIPinchGestureRecognizer()
+    private var pinchGestureAnchorScale: CGFloat?
+
+    private var scale: CGFloat = 1.0 {
+        didSet {
+            updateImageViewTransform()
+        }
+    }
 
     private lazy var backButton: UIBarButtonItem = {
         let image = UIImage(named: "backWhiteArrow")
@@ -34,13 +40,18 @@ class FullScreenImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupImageView()
         setupNavigationBar()
+        setupGestureRecognizer()
+        setupImageView()
     }
 }
 
 // MARK: - setupUI
 private extension FullScreenImageViewController {
+
+    func setupGestureRecognizer() {
+        pinchGestureRecognizer.addTarget(self, action: #selector(handlePinchGesture(_:)))
+    }
 
     func setupNavigationBar() {
         navigationController?.isNavigationBarHidden = false
@@ -51,12 +62,40 @@ private extension FullScreenImageViewController {
         navBar?.backgroundColor = .black
         navBar?.barTintColor = .black
         navBar?.titleTextAttributes = [.foregroundColor: UIColor.white,
-                                      .font: UIFont.boldSystemFont(ofSize: 22)]
+                                       .font: UIFont.boldSystemFont(ofSize: 22)]
     }
 
     func setupImageView() {
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(pinchGestureRecognizer)
+
         guard let image = venueImage else { return }
+
         imageView.image = image
+    }
+
+    func updateImageViewTransform() {
+        imageView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale).rotated(by: 0.0)
+    }
+
+    @objc func handlePinchGesture(_ gestureRecognizer: UIPinchGestureRecognizer) {
+        guard pinchGestureRecognizer === gestureRecognizer else { return }
+
+        switch gestureRecognizer.state {
+        case .began:
+            pinchGestureAnchorScale = gestureRecognizer.scale
+        case .changed:
+            guard let pinchGestureAnchorScale = pinchGestureAnchorScale else { return }
+
+            let gestureScale = gestureRecognizer.scale
+            scale += gestureScale - pinchGestureAnchorScale
+            self.pinchGestureAnchorScale = gestureScale
+        case .cancelled, .ended:
+            pinchGestureAnchorScale = nil
+        case .failed, .possible:
+            break
+        default: break
+        }
     }
 
     @objc func screenCloseButtonPressed(_ sender: UIBarButtonItem) {
