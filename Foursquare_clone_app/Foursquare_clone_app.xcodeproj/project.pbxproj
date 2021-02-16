@@ -149,9 +149,6 @@
 		2DBD1C3825D1C70100A9D453 /* АК2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2DBD1C3725D1C70100A9D453 /* АК2.pdf */; };
 		2DC5D57125C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5D57025C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift */; };
 		2DC5D57425C04F65005ABFFF /* VenueDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5D57325C04F65005ABFFF /* VenueDetailsRouter.swift */; };
-		2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCC325B62F4C0062AA90 /* ShortInfoCellModel.swift */; };
-		2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCC725B631770062AA90 /* HoursCellModel.swift */; };
-		2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */; };
 		2DCC68B125A8AC6A00639B93 /* GetUserLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */; };
 		2DCDA17825D4024A003B9643 /* RedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DCDA17725D4024A003B9643 /* RedView.xib */; };
 		2DCDA17A25D40267003B9643 /* RedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCDA17925D40267003B9643 /* RedView.swift */; };
@@ -174,7 +171,6 @@
 		2DEC31D5258AA75C009FA472 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC31D4258AA75C009FA472 /* SearchViewController.swift */; };
 		2DFE6C0725B4865500D945E6 /* KeysForCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFE6C0625B4865500D945E6 /* KeysForCells.swift */; };
 		2DFE6C0C25B5E50300D945E6 /* GeneralLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFE6C0B25B5E50300D945E6 /* GeneralLogicProtocol.swift */; };
-		2DFE6C1025B62C9B00D945E6 /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFE6C0F25B62C9B00D945E6 /* ImageCellModel.swift */; };
 		E4217F81A01AF91F102AD4F6 /* Pods_Foursquare_clone_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43C3487CFBC085209AB5FC5 /* Pods_Foursquare_clone_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -331,9 +327,6 @@
 		2DBD1C3725D1C70100A9D453 /* АК2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "АК2.pdf"; sourceTree = "<group>"; };
 		2DC5D57025C04F35005ABFFF /* VenueDetailsRoutingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsRoutingProtocol.swift; sourceTree = "<group>"; };
 		2DC5D57325C04F65005ABFFF /* VenueDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsRouter.swift; sourceTree = "<group>"; };
-		2DC7BCC325B62F4C0062AA90 /* ShortInfoCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortInfoCellModel.swift; sourceTree = "<group>"; };
-		2DC7BCC725B631770062AA90 /* HoursCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCellModel.swift; sourceTree = "<group>"; };
-		2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellModel.swift; sourceTree = "<group>"; };
 		2DCC68B025A8AC6A00639B93 /* GetUserLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLists.swift; sourceTree = "<group>"; };
 		2DCDA17725D4024A003B9643 /* RedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedView.xib; sourceTree = "<group>"; };
 		2DCDA17925D40267003B9643 /* RedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedView.swift; sourceTree = "<group>"; };
@@ -359,7 +352,6 @@
 		2DEC31D4258AA75C009FA472 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2DFE6C0625B4865500D945E6 /* KeysForCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysForCells.swift; sourceTree = "<group>"; };
 		2DFE6C0B25B5E50300D945E6 /* GeneralLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLogicProtocol.swift; sourceTree = "<group>"; };
-		2DFE6C0F25B62C9B00D945E6 /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
 		B028462DEFB9CF5C6C51579F /* Pods-Foursquare_clone_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foursquare_clone_app.debug.xcconfig"; path = "Target Support Files/Pods-Foursquare_clone_app/Pods-Foursquare_clone_app.debug.xcconfig"; sourceTree = "<group>"; };
 		E43C3487CFBC085209AB5FC5 /* Pods_Foursquare_clone_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foursquare_clone_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -792,7 +784,6 @@
 			children = (
 				2D38F7E325B34ECA007CAE19 /* HoursTableCell.swift */,
 				2D38F7E425B34ECA007CAE19 /* HoursTableCell.xib */,
-				2DC7BCC525B6315D0062AA90 /* Model */,
 			);
 			path = HoursTableCell;
 			sourceTree = "<group>";
@@ -802,7 +793,6 @@
 			children = (
 				2D38F7E825B35CCF007CAE19 /* ContactTableCell.swift */,
 				2D38F7E925B35CCF007CAE19 /* ContactTableCell.xib */,
-				2DC7BCC925B6328D0062AA90 /* Model */,
 			);
 			path = ContactTableCell;
 			sourceTree = "<group>";
@@ -1012,7 +1002,6 @@
 			children = (
 				2D5CB38825B1B259007C6ED2 /* ImageTableViewCell.swift */,
 				2D5CB38925B1B259007C6ED2 /* ImageTableViewCell.xib */,
-				2DFE6C0E25B62C7600D945E6 /* Model */,
 			);
 			path = ImageTableCell;
 			sourceTree = "<group>";
@@ -1022,7 +1011,6 @@
 			children = (
 				2D5CB38E25B1B45D007C6ED2 /* ShortInfoTableCell.swift */,
 				2D5CB38F25B1B45D007C6ED2 /* ShortInfoTableCell.xib */,
-				2DC7BCC225B62F1F0062AA90 /* Model */,
 			);
 			path = ShortInfoTableCell;
 			sourceTree = "<group>";
@@ -1404,30 +1392,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		2DC7BCC225B62F1F0062AA90 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2DC7BCC325B62F4C0062AA90 /* ShortInfoCellModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2DC7BCC525B6315D0062AA90 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2DC7BCC725B631770062AA90 /* HoursCellModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2DC7BCC925B6328D0062AA90 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2DC7BCCA25B632A40062AA90 /* ContactCellModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		2DCC68AF25A8AC3700639B93 /* UserListModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1489,14 +1453,6 @@
 				2DFE6C0B25B5E50300D945E6 /* GeneralLogicProtocol.swift */,
 			);
 			path = GeneralLogicProtocol;
-			sourceTree = "<group>";
-		};
-		2DFE6C0E25B62C7600D945E6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2DFE6C0F25B62C9B00D945E6 /* ImageCellModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		3CDDD1E5D4225A368687AC8E /* Pods */ = {
@@ -1767,14 +1723,12 @@
 				2D701FB425CDA1D300A16B96 /* GeopositionManagerTrackingProtocol.swift in Sources */,
 				2D06D148259A22120090CF23 /* URLExtension.swift in Sources */,
 				2D49B9CB259B276B009AC096 /* KeychainManager.swift in Sources */,
-				2DC7BCC425B62F4C0062AA90 /* ShortInfoCellModel.swift in Sources */,
 				2D48B13825D2EA1F004A211C /* BestPhotoViewModel.swift in Sources */,
 				2D613F7625AF0FAF00F86004 /* KeysForSections.swift in Sources */,
 				2D25C11025C2CDC8009DC3E6 /* GeopositionManager.swift in Sources */,
 				2DD269FF258A595800EAEC68 /* CategoryModel.swift in Sources */,
 				2D39010E258D13F9003C2187 /* Mapper.swift in Sources */,
 				2D3BD9AA25875B6800389405 /* AppDelegate.swift in Sources */,
-				2DC7BCCB25B632A40062AA90 /* ContactCellModel.swift in Sources */,
 				2DD7372225D528AE002360B2 /* UserTips.swift in Sources */,
 				2D909DB325DAA91600735AD2 /* MapViewScaleState.swift in Sources */,
 				2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */,
@@ -1784,7 +1738,6 @@
 				2D06D14B259A29290090CF23 /* TokenModel.swift in Sources */,
 				2D9D63DA25CAFFF800C5261D /* SettingsRoutingProtocol.swift in Sources */,
 				2D2B00D8258BB8D900D49F32 /* UIColorExtension.swift in Sources */,
-				2DC7BCC825B631770062AA90 /* HoursCellModel.swift in Sources */,
 				2D48B11325D1D94D004A211C /* ListsRoutingProtocol.swift in Sources */,
 				2D390108258CE2E6003C2187 /* LocationModel.swift in Sources */,
 				2D8FCDA125D8561100FFD9CC /* UIViewExtension.swift in Sources */,
@@ -1794,7 +1747,6 @@
 				2D48B12025D2D6A6004A211C /* ShortInfoViewModel.swift in Sources */,
 				2D33378425D1A72700B13C83 /* MainRouter.swift in Sources */,
 				2DD7372B25D5ADDC002360B2 /* AccountAssemblyProtocol.swift in Sources */,
-				2DFE6C1025B62C9B00D945E6 /* ImageCellModel.swift in Sources */,
 				2D62C63725D1CFE000091D0D /* AccountRoutingProtocol.swift in Sources */,
 				2DD6DCC425ACA68600B0E948 /* GetUserListsGroup.swift in Sources */,
 				2D85CEDE25C7221C0058158E /* VenueSearchAssembly.swift in Sources */,

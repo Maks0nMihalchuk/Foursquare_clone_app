@@ -25,18 +25,17 @@ class HoursTableCell: UITableViewCell {
 
     weak var delegate: HoursTableCellDelegate?
 
-    var contentModel: HoursCellModel?
     override func awakeFromNib() {
         super.awakeFromNib()
         setupHoursLabel()
     }
 
-    func configure(with content: HoursCellModel) {
-        detailHoursInfoStackView.isHidden = content.state
-        detailHoursButton.isHidden = hoursDetailLabel.text!.isEmpty
-        hoursStatusLabel.text = content.hoursStatus
-        daysLabel.text = content.detailHours.days
-        hoursDetailLabel.text = content.detailHours.detailHours
+    func configure(with viewModel: HoursViewModel, state: Bool) {
+        detailHoursInfoStackView.isHidden = state
+        detailHoursButton.isHidden = viewModel.detailHours.isEmpty
+        hoursStatusLabel.text = viewModel.hoursStatus
+        daysLabel.text = viewModel.detailDays
+        hoursDetailLabel.text = viewModel.detailHours
     }
 
     @IBAction func detailHoursButtonPressed(_ sender: UIButton) {

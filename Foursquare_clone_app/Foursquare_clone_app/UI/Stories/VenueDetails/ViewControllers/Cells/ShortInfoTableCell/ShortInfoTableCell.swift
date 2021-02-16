@@ -36,16 +36,15 @@ class ShortInfoTableCell: UITableViewCell {
         showMapViewButton.titleLabel?.textAlignment = .center
     }
 
-    func configure(with content: ShortInfoCellModel) {
-        adressVenueLabel.text = content.adressVenue
-        hoursVenueLabel.text = content.hoursVenue
-        categoriesVenueLabel.text = content.categoriesVenue
-        ratingLabel.text = content.rating
-        ratingLabel.backgroundColor = content.ratingColor
+    func configure(with viewModel: ShortInfoViewModel) {
+        adressVenueLabel.text = viewModel.address
+        hoursVenueLabel.text = viewModel.hoursStatus
+        categoriesVenueLabel.text = viewModel.categories
+        ratingLabel.text = viewModel.rating
+        ratingLabel.backgroundColor = viewModel.ratingColor
     }
 
     @IBAction func didTapShowMapButton(_ sender: UIButton) {
         delegate?.shortInfoTableCell(self, didTapShowMapButton: sender)
     }
-
 }

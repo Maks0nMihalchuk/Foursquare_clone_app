@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum HoursTableCallState {
+    case folded
+    case decomposed
+}
+
 struct HoursViewModel {
 
     private let dataModel: DetailVenueModel

@@ -34,7 +34,7 @@ class ScrollViewDetailViewController: UIViewController {
 
     var networking: NetworkManager?
     var venueID = String()
-    var dataModel: DetailVenueModel? {
+    private var dataModel: DetailVenueModel? {
         didSet {
             guard let requireDataModel = dataModel else { return }
 

@@ -21,9 +21,8 @@ class ContactTableCell: UITableViewCell {
         webSiteLabel.text = "WebSiteLabelText".localized(name: "DetailVCLocalization")
     }
 
-    func configure(with content: ContactCellModel) {
-        phoneNumberLabel.text = content.phone
-        webSiteURLLabel.text = content.webSiteURL
+    func configure(with viewModel: ContactViewModel) {
+        phoneNumberLabel.text = viewModel.phone
+        webSiteURLLabel.text = viewModel.website
     }
-
 }

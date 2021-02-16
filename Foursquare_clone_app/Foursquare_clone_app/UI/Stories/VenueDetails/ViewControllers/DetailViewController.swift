@@ -31,29 +31,33 @@ class DetailViewController: UIViewController {
     private let numberOfCells = KeysForCells.arrayOfKeysForCells.count
     private let contentOffsetY: CGFloat = 250
     private let numberOfCellsWhenNoData = 1
+    private var loadingIndicator = false
     private var defaultHoursCellStatus = false
+    private var bestPhotoViewModel: BestPhotoViewModel?
     private var shortInfoViewModel: ShortInfoViewModel?
+    private var hoursViewModel: HoursViewModel?
+    private var contactViewModel: ContactViewModel?
+    private var dataModel: DetailVenueModel? {
+        didSet {
+            guard let requireDataModel = dataModel else { return }
+
+            self.bestPhotoViewModel = BestPhotoViewModel(dataModel: requireDataModel)
+            self.shortInfoViewModel = ShortInfoViewModel(dataModel: requireDataModel)
+            self.hoursViewModel = HoursViewModel(dataModel: requireDataModel)
+            self.contactViewModel = ContactViewModel(dataModel: requireDataModel)
+            self.tableView.reloadData()
+        }
+    }
 
     var networking: NetworkManager?
     var venueID = String()
-    var viewModel: DetailViewModel? {
-        didSet {
-            guard viewModel != nil else { return }
-
-            DispatchQueue.main.async {
-                guard self.isViewLoaded else { return }
-
-                self.tableView.reloadData()
-            }
-        }
-    }
 
     weak var delegate: DetailViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
         setupView()
+        loadData()
         setupTableView()
         setupBlurEffectView()
         tableView.reloadData()
@@ -64,10 +68,13 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func clearDataButtonPressed(_ sender: UIButton) {
-        viewModel = nil
+        dataModel = nil
+        bestPhotoViewModel = nil
+        shortInfoViewModel = nil
+        hoursViewModel = nil
+        contactViewModel = nil
         tableView.reloadData()
     }
-
 }
 
 // MARK: - ShortInfoTableCell
@@ -130,28 +137,35 @@ extension DetailViewController: UITableViewDelegate {
 extension DetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel != nil ? numberOfCells : numberOfCellsWhenNoData
+        return dataModel != nil ? numberOfCells : numberOfCellsWhenNoData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let requiredViewModel = viewModel else {
+        guard
+            let bestPhotoViewModel = bestPhotoViewModel,
+            let shortInfoViewModel = shortInfoViewModel,
+            let hoursViewModel = hoursViewModel,
+            let contactViewModel = contactViewModel
+        else {
             return getNoDataTableVIewCell(tableView, indexPath)
         }
 
         switch KeysForCells.arrayOfKeysForCells[indexPath.row] {
         case .imageCell:
-            let imageCell = getImageTableCell(tableView, indexPath, with: requiredViewModel)
+            let imageCell = getImageTableCell(tableView, indexPath, with: bestPhotoViewModel)
+            imageCell.delegate = self
             return imageCell
         case .shortInfoCell:
-            let shortInfoCell = getShortInfoTableCell(tableView, indexPath, with: requiredViewModel)
+            let shortInfoCell = getShortInfoTableCell(tableView, indexPath, with: shortInfoViewModel)
+            shortInfoCell.delegate = self
             return shortInfoCell
         case .hoursCell:
-            let hoursCell = getHoursTableCell(tableView, indexPath, with: requiredViewModel)
+            let hoursCell = getHoursTableCell(tableView, indexPath, with: hoursViewModel)
             hoursCell.delegate = self
             return hoursCell
         case .contactsCell:
-            let contactCell = getContactTableCell(tableView, indexPath, with: requiredViewModel)
+            let contactCell = getContactTableCell(tableView, indexPath, with: contactViewModel)
             return contactCell
         }
     }
@@ -184,8 +198,7 @@ private extension DetailViewController {
                                             }
 
                                             DispatchQueue.main.async {
-                                                self.viewModel = DetailViewModel(dataModel: detailVenue)
-                                                self.shortInfoViewModel = ShortInfoViewModel(dataModel: detailVenue)
+                                                self.dataModel = detailVenue
                                                 self.setupActivityIndicator(isHidden: false)
                                                 self.tableView.reloadData()
                                             }
@@ -245,7 +258,7 @@ private extension DetailViewController {
 
     func getImageTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: DetailViewModel) -> ImageTableViewCell {
+                           with viewModel: BestPhotoViewModel) -> ImageTableViewCell {
         let optionImageCell = tableView
             .dequeueReusableCell(withIdentifier: ImageTableViewCell.getIdentifier(),
                                                             for: indexPath) as? ImageTableViewCell
@@ -254,16 +267,14 @@ private extension DetailViewController {
             return ImageTableViewCell()
         }
 
-        cell.delegate = self
         let image = getImage(url: viewModel.imageURL)
-        let content = ImageCellViewModel(image: image, nameVenue: viewModel.nameVenueAndPrice)
-        cell.configure(with: content, venueName: viewModel.venueName)
+        cell.configure(with: image, venueName: viewModel.nameVenueAndPrice)
         return cell
     }
 
     func getShortInfoTableCell(_ tableView: UITableView,
                                _ indexPath: IndexPath,
-                               with viewModel: DetailViewModel) -> ShortInfoTableCell {
+                               with viewModel: ShortInfoViewModel) -> ShortInfoTableCell {
         let optionShortInfoCell = tableView.dequeueReusableCell(withIdentifier: ShortInfoTableCell.getIdentifier(),
                                                                 for: indexPath) as? ShortInfoTableCell
 
@@ -271,19 +282,13 @@ private extension DetailViewController {
             return ShortInfoTableCell()
         }
 
-        cell.delegate = self
-        let content = ShortInfoCellModel(adressVenue: viewModel.location,
-                                         hoursVenue: viewModel.hoursStatus,
-                                         categoriesVenue: viewModel.categories,
-                                         rating: viewModel.rating,
-                                         ratingColor: viewModel.ratingColor)
-        cell.configure(with: content)
+        cell.configure(with: viewModel)
         return cell
     }
 
     func getHoursTableCell(_ tableView: UITableView,
                            _ indexPath: IndexPath,
-                           with viewModel: DetailViewModel) -> HoursTableCell {
+                           with viewModel: HoursViewModel) -> HoursTableCell {
         let optionHoursCell = tableView.dequeueReusableCell(withIdentifier: HoursTableCell.getIdentifier(),
                                                             for: indexPath) as? HoursTableCell
 
@@ -291,19 +296,14 @@ private extension DetailViewController {
             return HoursTableCell()
         }
 
-        let detailContent = DetailHours(days: viewModel.detailDays,
-                                        detailHours: viewModel.detailHours)
-        let content = HoursCellModel(hoursStatus: viewModel.hoursStatus,
-                                     detailHours: detailContent,
-                                     state: defaultHoursCellStatus)
-        cell.configure(with: content)
+        cell.configure(with: viewModel, state: defaultHoursCellStatus)
         defaultHoursCellStatus = !defaultHoursCellStatus
         return cell
     }
 
     func getContactTableCell(_ tableView: UITableView,
                              _ indexPath: IndexPath,
-                             with viewModel: DetailViewModel) -> ContactTableCell {
+                             with viewModel: ContactViewModel) -> ContactTableCell {
         let optionContactCell = tableView.dequeueReusableCell(withIdentifier: ContactTableCell.getIdentifier(),
                                                               for: indexPath) as? ContactTableCell
 
@@ -311,10 +311,7 @@ private extension DetailViewController {
             return ContactTableCell()
         }
 
-        let content = ContactCellModel(phone: viewModel.phone,
-                                       webSiteURL: viewModel.website)
-        cell.configure(with: content)
-
+        cell.configure(with: viewModel)
         return cell
     }
 }
@@ -346,7 +343,12 @@ private extension DetailViewController {
         imageView.kf.setImage(with: url,
                               placeholder: UIImage(named: "img_placeholder"),
                               options: [.transition(.fade(1.0))],
-                              progressBlock: nil)
+                              progressBlock: nil) { (_) in
+                                if !self.loadingIndicator {
+                                    self.tableView.reloadData()
+                                    self.loadingIndicator = true
+                                }
+        }
         return imageView.image
     }
 }

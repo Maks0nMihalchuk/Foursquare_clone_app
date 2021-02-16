@@ -7,11 +7,10 @@
 //
 
 import UIKit
-    //нажал кнопку показа полноэкранного изображения
+
 protocol ImageTableViewCellDelegate: class {
     func imageTableCell(_ tableViewCell: ImageTableViewCell,
                         didTapToShowFullScreenImage imageView: UIImageView, name: String)
-
 }
 
 class ImageTableViewCell: UITableViewCell {
@@ -24,11 +23,11 @@ class ImageTableViewCell: UITableViewCell {
     private let gradient = CAGradientLayer()
     private var name = String()
 
-    func configure(with viewModel: ImageCellViewModel, venueName: String) {
-        venueImageView.image = viewModel.image
-        gradientSetup()
-        nameVenueLabel.text = viewModel.nameVenue
+    func configure(with image: UIImage?, venueName: String) {
         name = venueName
+        nameVenueLabel.text = venueName
+        venueImageView.image = image
+        gradientSetup()
     }
     @IBAction func fullScreenImageButtonPressed(_ sender: UIButton) {
         delegate?.imageTableCell(self, didTapToShowFullScreenImage: venueImageView, name: name)
