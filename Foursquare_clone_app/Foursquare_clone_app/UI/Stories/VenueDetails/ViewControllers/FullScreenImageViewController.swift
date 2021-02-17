@@ -15,20 +15,12 @@ protocol FullScreenImageDelegate: class {
 
 class FullScreenImageViewController: UIViewController {
 
-    @IBOutlet private weak var imageView: UIImageView!
-
     weak var delegate: FullScreenImageDelegate?
 
     var venueName = String()
     var venueImage: UIImage?
-    private let pinchGestureRecognizer = UIPinchGestureRecognizer()
-    private var pinchGestureAnchorScale: CGFloat?
 
-    private var scale: CGFloat = 1.0 {
-        didSet {
-            updateImageViewTransform()
-        }
-    }
+    private var imageScrollView: ImageScrollView!
 
     private lazy var backButton: UIBarButtonItem = {
         let image = UIImage(named: "backWhiteArrow")
@@ -40,18 +32,13 @@ class FullScreenImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupImageScrollView()
         setupNavigationBar()
-        setupGestureRecognizer()
-        setupImageView()
     }
 }
 
 // MARK: - setupUI
 private extension FullScreenImageViewController {
-
-    func setupGestureRecognizer() {
-        pinchGestureRecognizer.addTarget(self, action: #selector(handlePinchGesture(_:)))
-    }
 
     func setupNavigationBar() {
         navigationController?.isNavigationBarHidden = false
@@ -65,37 +52,20 @@ private extension FullScreenImageViewController {
                                        .font: UIFont.boldSystemFont(ofSize: 22)]
     }
 
-    func setupImageView() {
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(pinchGestureRecognizer)
-
+    func setupImageScrollView() {
         guard let image = venueImage else { return }
 
-        imageView.image = image
+        imageScrollView = ImageScrollView(frame: view.bounds, image: image)
+        view.addSubview(imageScrollView)
+        setupLayoutImageScrollView()
     }
 
-    func updateImageViewTransform() {
-        imageView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale).rotated(by: 0.0)
-    }
-
-    @objc func handlePinchGesture(_ gestureRecognizer: UIPinchGestureRecognizer) {
-        guard pinchGestureRecognizer === gestureRecognizer else { return }
-
-        switch gestureRecognizer.state {
-        case .began:
-            pinchGestureAnchorScale = gestureRecognizer.scale
-        case .changed:
-            guard let pinchGestureAnchorScale = pinchGestureAnchorScale else { return }
-
-            let gestureScale = gestureRecognizer.scale
-            scale += gestureScale - pinchGestureAnchorScale
-            self.pinchGestureAnchorScale = gestureScale
-        case .cancelled, .ended:
-            pinchGestureAnchorScale = nil
-        case .failed, .possible:
-            break
-        default: break
-        }
+    func setupLayoutImageScrollView() {
+        imageScrollView.translatesAutoresizingMaskIntoConstraints = false
+        imageScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        imageScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        imageScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        imageScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
 
     @objc func screenCloseButtonPressed(_ sender: UIBarButtonItem) {

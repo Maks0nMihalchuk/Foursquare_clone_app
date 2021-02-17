@@ -49,7 +49,7 @@
                 <outlet property="nameVenueLabel" destination="sqa-2G-bf7" id="Dw0-Rr-xER"/>
                 <outlet property="venueImageView" destination="Jxp-dr-gtT" id="dwV-jp-4YB"/>
             </connections>
-            <point key="canvasLocation" x="324.63768115942031" y="192.85714285714286"/>
+            <point key="canvasLocation" x="135" y="139"/>
         </tableViewCell>
     </objects>
 </document>

@@ -267,8 +267,7 @@ private extension DetailViewController {
             return ImageTableViewCell()
         }
 
-        let image = getImage(url: viewModel.imageURL)
-        cell.configure(with: image, venueName: viewModel.nameVenueAndPrice)
+        cell.configure(with: viewModel)
         return cell
     }
 
@@ -332,23 +331,5 @@ private extension DetailViewController {
                            forCellReuseIdentifier: HoursTableCell.getIdentifier())
         tableView.register(ContactTableCell.getNib(),
                            forCellReuseIdentifier: ContactTableCell.getIdentifier())
-    }
-}
-
-// MARK: - Get Image for imageCell
-private extension DetailViewController {
-
-    func getImage(url: URL?) -> UIImage? {
-        let imageView = UIImageView()
-        imageView.kf.setImage(with: url,
-                              placeholder: UIImage(named: "img_placeholder"),
-                              options: [.transition(.fade(1.0))],
-                              progressBlock: nil) { (_) in
-                                if !self.loadingIndicator {
-                                    self.tableView.reloadData()
-                                    self.loadingIndicator = true
-                                }
-        }
-        return imageView.image
     }
 }

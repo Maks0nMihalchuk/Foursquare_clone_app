@@ -52,6 +52,7 @@
 		2D365AD325C9D2B000E4C777 /* AuthorizedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365AD225C9D2B000E4C777 /* AuthorizedUserView.swift */; };
 		2D365AD525CA8E5000E4C777 /* UserInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365AD425CA8E5000E4C777 /* UserInfoDataModel.swift */; };
 		2D365AD725CAA70800E4C777 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D365AD625CAA70800E4C777 /* UserInfoViewModel.swift */; };
+		2D3683E825DD27D300F6DA82 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3683E725DD27D300F6DA82 /* ImageScrollView.swift */; };
 		2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D36A6FB25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift */; };
 		2D36A70025C0198F002B0E8A /* VenueDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D36A6FF25C0198F002B0E8A /* VenueDetailsAssembly.swift */; };
 		2D36A70325C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D36A70225C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard */; };
@@ -224,6 +225,7 @@
 		2D365AD225C9D2B000E4C777 /* AuthorizedUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedUserView.swift; sourceTree = "<group>"; };
 		2D365AD425CA8E5000E4C777 /* UserInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDataModel.swift; sourceTree = "<group>"; };
 		2D365AD625CAA70800E4C777 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		2D3683E725DD27D300F6DA82 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		2D36A6FB25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2D36A6FF25C0198F002B0E8A /* VenueDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsAssembly.swift; sourceTree = "<group>"; };
 		2D36A70225C01BA7002B0E8A /* DetailsVenueStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailsVenueStoryboard.storyboard; sourceTree = "<group>"; };
@@ -700,6 +702,14 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		2D3683E625DD278B00F6DA82 /* ImageScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				2D3683E725DD27D300F6DA82 /* ImageScrollView.swift */,
+			);
+			path = ImageScrollView;
+			sourceTree = "<group>";
+		};
 		2D36A6F425C00C28002B0E8A /* Stories */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +894,7 @@
 		2D48B11625D2BBCF004A211C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D3683E625DD278B00F6DA82 /* ImageScrollView */,
 				2D48B13125D2E82C004A211C /* BestPhotoView */,
 				2D48B11725D2BBE7004A211C /* ShortInfoView */,
 				2D48B11825D2BBF0004A211C /* HoursView */,
@@ -1734,6 +1745,7 @@
 				2D36A6FC25C00D4C002B0E8A /* VenueDetailsAssemblyProtocol.swift in Sources */,
 				2DD7372625D529A5002360B2 /* UserFollowers.swift in Sources */,
 				2D48B11525D1D981004A211C /* ListsRouter.swift in Sources */,
+				2D3683E825DD27D300F6DA82 /* ImageScrollView.swift in Sources */,
 				2D33377E25D1A70C00B13C83 /* MainAssembly.swift in Sources */,
 				2D06D14B259A29290090CF23 /* TokenModel.swift in Sources */,
 				2D9D63DA25CAFFF800C5261D /* SettingsRoutingProtocol.swift in Sources */,

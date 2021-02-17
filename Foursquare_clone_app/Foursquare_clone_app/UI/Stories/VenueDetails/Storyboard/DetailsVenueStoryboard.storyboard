@@ -51,10 +51,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-jx-815" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                         <color key="backgroundColor" red="0.77700000000000002" green="0.7769868338" blue="0.7769868338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" id="eSd-Jr-26d"/>
+                                            <constraint firstAttribute="height" constant="100" id="eSd-Jr-26d"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -110,27 +110,13 @@
                     <view key="view" contentMode="scaleToFill" id="BDD-Jp-2i3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rbw-ps-yIA">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="rbw-ps-yIA" firstAttribute="leading" secondItem="gOj-l3-MJr" secondAttribute="leading" id="3Fs-wc-CZU"/>
-                            <constraint firstItem="gOj-l3-MJr" firstAttribute="bottom" secondItem="rbw-ps-yIA" secondAttribute="bottom" id="6l8-aw-RyG"/>
-                            <constraint firstItem="rbw-ps-yIA" firstAttribute="top" secondItem="gOj-l3-MJr" secondAttribute="top" id="pvM-Jl-1e8"/>
-                            <constraint firstItem="gOj-l3-MJr" firstAttribute="trailing" secondItem="rbw-ps-yIA" secondAttribute="trailing" id="uhR-o1-G0V"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gOj-l3-MJr"/>
                     </view>
-                    <connections>
-                        <outlet property="imageView" destination="rbw-ps-yIA" id="a4U-Fk-AMx"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaT-pF-VfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2335" y="883"/>
+            <point key="canvasLocation" x="2275" y="912"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="ZQf-Ch-Y5x">

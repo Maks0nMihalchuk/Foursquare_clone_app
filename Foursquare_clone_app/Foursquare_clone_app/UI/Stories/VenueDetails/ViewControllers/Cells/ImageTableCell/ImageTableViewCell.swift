@@ -20,15 +20,16 @@ class ImageTableViewCell: UITableViewCell {
 
     weak var delegate: ImageTableViewCellDelegate?
 
-    private let gradient = CAGradientLayer()
     private var name = String()
+    private let gradient = CAGradientLayer()
 
-    func configure(with image: UIImage?, venueName: String) {
-        name = venueName
-        nameVenueLabel.text = venueName
-        venueImageView.image = image
-        gradientSetup()
+    func configure(with viewModel: BestPhotoViewModel) {
+        name = viewModel.venueName
+        nameVenueLabel.text = viewModel.nameVenueAndPrice
+        setupImageView(url: viewModel.imageURL)
+
     }
+
     @IBAction func fullScreenImageButtonPressed(_ sender: UIButton) {
         delegate?.imageTableCell(self, didTapToShowFullScreenImage: venueImageView, name: name)
     }
@@ -36,6 +37,15 @@ class ImageTableViewCell: UITableViewCell {
 
 // MARK: - gradientSetup
 private extension ImageTableViewCell {
+
+    func setupImageView(url: URL?) {
+        venueImageView.kf.setImage(with: url,
+                                   placeholder: UIImage(named: "img_placeholder"),
+                                   options: [.transition(.fade(1.0))],
+                                   progressBlock: nil) { (_) in
+                                    self.gradientSetup()
+        }
+    }
 
     func gradientSetup() {
         gradient.frame = venueImageView.bounds
