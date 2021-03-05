@@ -22,6 +22,7 @@ Profile tab is AccountViewController:
 
   - Did presed on the "Login" button opens the SFSafariViewController with the original Foursquare site. After authorization, we return to the application and save the access token in the keychain.
 
+
 * When the user is logged in, the authorization state of the controller is displayed
 * After authorization, the download of user data begins
 
@@ -35,4 +36,16 @@ Profile tab is AccountViewController:
    - The switch activates local notifications.
    - The "About Us" button opens a controller with a WebView and displays the apple site.
    - The "Operating Conditions" button opens the controller with WebView and displays the local PDF file.
-   - The "Privacy" button opens a controller with a TextView and displays the text formatted via attributes.
+   - The "Privacy" button opens a controller with a TextView and displays the text formatted via attributes. 
+
+Lists tab - ListsViewController:
+
+![Screenshot 2021-03-05 at 11 22 14](https://user-images.githubusercontent.com/61950177/110104628-0fef7700-7db0-11eb-9e9e-81570e0ecd42.png)
+
+* Without authorization, the user cannot create new lists.
+
+When creating a list, a custom alert appears:
+
+![Screenshot 2021-03-05 at 11 22 51](https://user-images.githubusercontent.com/61950177/110104992-81c7c080-7db0-11eb-9880-199a86dd22f3.png)
+
+* After clicking the create button, we make a post request to the server.
