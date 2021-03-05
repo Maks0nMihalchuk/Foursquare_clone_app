@@ -39,7 +39,7 @@ The application is based on the MVC pattern. The project is divided into modules
 
 ## Map Screen: 
 
-https://user-images.githubusercontent.com/61950177/110151727-80ff5080-7de9-11eb-9b39-2f56a182e2c6.mov
+![Screen_Recording_2021-03-05_at_19 29 57](https://user-images.githubusercontent.com/61950177/110152219-20bcde80-7dea-11eb-8785-b97fa197ef64.gif)
 
 ### FullScreenImageViewController:
 
