@@ -13,6 +13,27 @@ The application is based on the MVC pattern. The project is divided into modules
 * Image is uploaded via Kingfisher.
 * The label in the picture displays the coordinates of the user.
 * By clicking on the search button or on one of the standard categories, we get to the search screen.
+* If the user has not allowed to use the data about his location, then the default coordinates are used.
+
+### Search screen:
+
+![Screenshot 2021-03-05 at 11 23 26](https://user-images.githubusercontent.com/61950177/110106126-f5b69880-7db1-11eb-9ac5-1e77036c06dc.png)
+
+* By clicking on the place you need, we are prompted to select a controller option to display detailed information about the place.
+
+![Screenshot 2021-03-05 at 12 59 16](https://user-images.githubusercontent.com/61950177/110106682-a58c0600-7db2-11eb-8ef0-cac38e8dbd8c.png)
+
+### Detail screen:
+
+* With ScrollView:
+
+![Screen_Recording_2021-03-05_at_13 05 36](https://user-images.githubusercontent.com/61950177/110108079-68287800-7db4-11eb-99a8-c8ddef337a94.gif)
+
+* With TableView:
+
+![Screen_Recording_2021-03-05_at_13 13 15](https://user-images.githubusercontent.com/61950177/110108362-c48b9780-7db4-11eb-9fb5-d76d6bf947ac.gif)
+
+* There is a bug with a button for showing detailed information about the operating time.
 
 ### Profile tab is AccountViewController: 
 
