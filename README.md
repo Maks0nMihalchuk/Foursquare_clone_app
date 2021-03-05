@@ -33,7 +33,13 @@ The application is based on the MVC pattern. The project is divided into modules
 
 ![Screen_Recording_2021-03-05_at_13 13 15](https://user-images.githubusercontent.com/61950177/110108362-c48b9780-7db4-11eb-9fb5-d76d6bf947ac.gif)
 
-* There is a bug with a button for showing detailed information about the operating time.
+    * There is a bug with a button for showing detailed information about the operating time.
+
+* Did tap on the picture to open the screen for full screen view of the picture
+
+### FullScreenImageViewController:
+
+![Screen_Recording_2021-03-05_at_13 33 32-2](https://user-images.githubusercontent.com/61950177/110148474-85296f00-7de5-11eb-84f0-6e588ececa36.gif)
 
 ### Profile tab is AccountViewController: 
 
@@ -71,4 +77,3 @@ After authorization, the download of user data begins
 ![Screenshot 2021-03-05 at 11 22 51](https://user-images.githubusercontent.com/61950177/110104992-81c7c080-7db0-11eb-9880-199a86dd22f3.png)
 
 * After clicking the create button, we make a post request to the server.
-
