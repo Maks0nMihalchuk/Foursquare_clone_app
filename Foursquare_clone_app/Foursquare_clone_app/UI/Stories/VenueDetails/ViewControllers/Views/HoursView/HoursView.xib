@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="HoursView" id="iN0-l3-epB" customClass="HoursView" customModule="Foursquare_clone_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPj-K8-7se">
+                    <rect key="frame" x="16" y="8" width="382" height="26.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="26.5" id="dcZ-ga-k8B"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Qo-I9-elf">
+                    <rect key="frame" x="16" y="42.5" width="378" height="48.5"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yPr-gw-hGb">
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="48.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0P-0d-zZZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="48.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWw-Qg-WAM">
+                                    <rect key="frame" x="353" y="0.0" width="25" height="48.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="Vab-4L-vCN"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="arrow"/>
+                                    <connections>
+                                        <action selector="stateChangeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="AN3-44-pIV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="J1A-Tp-BZW">
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="0.0"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0V-Jp-bb5">
+                                    <rect key="frame" x="0.0" y="0.0" width="185" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaD-GB-Vm1">
+                                    <rect key="frame" x="193" y="0.0" width="185" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="2Qo-I9-elf" firstAttribute="top" secondItem="HPj-K8-7se" secondAttribute="bottom" constant="8" id="3da-7k-aAy"/>
+                <constraint firstAttribute="trailing" secondItem="2Qo-I9-elf" secondAttribute="trailing" constant="20" id="7Ce-It-beF"/>
+                <constraint firstItem="HPj-K8-7se" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Bkd-eu-2aF"/>
+                <constraint firstAttribute="bottom" secondItem="2Qo-I9-elf" secondAttribute="bottom" constant="8" id="FsG-mR-mK5"/>
+                <constraint firstItem="2Qo-I9-elf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="HIp-VC-CTw"/>
+                <constraint firstItem="HPj-K8-7se" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Piq-9T-dZB"/>
+                <constraint firstAttribute="trailing" secondItem="HPj-K8-7se" secondAttribute="trailing" constant="16" id="etK-wh-Shv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="detailDaysLabel" destination="J0V-Jp-bb5" id="2Lf-aO-gLW"/>
+                <outlet property="detailHoursButton" destination="aWw-Qg-WAM" id="IYi-aw-Gfk"/>
+                <outlet property="detailHoursLabel" destination="jaD-GB-Vm1" id="bVK-2O-PpD"/>
+                <outlet property="detailHoursStackView" destination="J1A-Tp-BZW" id="Kdk-Mo-Pq1"/>
+                <outlet property="hoursLabel" destination="HPj-K8-7se" id="hkf-uS-1xR"/>
+                <outlet property="hoursVanueLabel" destination="z0P-0d-zZZ" id="Sea-Q4-jA1"/>
+            </connections>
+            <point key="canvasLocation" x="69.565217391304358" y="174.10714285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow" width="17" height="17"/>
+    </resources>
+</document>

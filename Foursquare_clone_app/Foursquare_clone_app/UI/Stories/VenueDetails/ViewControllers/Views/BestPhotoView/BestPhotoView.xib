@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="BestPhotoView" id="iN0-l3-epB" customClass="BestPhotoView" customModule="Foursquare_clone_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gYl-Eu-dlv">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name and Price" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5h-8J-C0c" userLabel="VenueNameLabel">
+                    <rect key="frame" x="16" y="360" width="382" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="c5h-8J-C0c" secondAttribute="bottom" constant="16" id="0Ve-ot-Sng"/>
+                <constraint firstItem="gYl-Eu-dlv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Afh-7Z-suV"/>
+                <constraint firstItem="gYl-Eu-dlv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FHw-Nd-yxl"/>
+                <constraint firstAttribute="bottom" secondItem="gYl-Eu-dlv" secondAttribute="bottom" id="dHT-wv-U44"/>
+                <constraint firstAttribute="trailing" secondItem="c5h-8J-C0c" secondAttribute="trailing" constant="16" id="f0v-QF-NSI"/>
+                <constraint firstAttribute="trailing" secondItem="gYl-Eu-dlv" secondAttribute="trailing" id="uOd-cv-4w0"/>
+                <constraint firstItem="c5h-8J-C0c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wfD-48-fJw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bestPhotoImageView" destination="gYl-Eu-dlv" id="Xai-Cr-5WJ"/>
+                <outlet property="venueName" destination="c5h-8J-C0c" id="cOC-WR-1pM"/>
+            </connections>
+            <point key="canvasLocation" x="-91.304347826086968" y="181.47321428571428"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,20 @@
+/* 
+  HomeVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 15.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"Title" = "Search";
+"SearchButton.Title" = "What are looking for?";
+"BreakfastTitle" = "Breakfast";
+"LunchTitle" = "Lunch";
+"DinnerTitle" = "Dinner";
+"CoffeeAndTeaTitle" = "Coffee & Tea";
+"NightlifeTitle" = "Nightlife";
+"ThingsToDoTitle" = "Things to do";
+
+"LocationErrorAlert.Title" = "Location Services disabled";
+"LocationErrorAlert.Message" = "Please enable Location Services in Settings";
+"LocationErrorAlert.Action" = "Okey";

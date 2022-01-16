@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="UnauthorizedUserView" id="iN0-l3-epB" customClass="UnauthorizedUserView" customModule="Foursquare_clone_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="699"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageToAccScreen" translatesAutoresizingMaskIntoConstraints="NO" id="0kL-Pw-jY8">
+                    <rect key="frame" x="79" y="70" width="256" height="256"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Personal Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD4-00-Dau">
+                    <rect key="frame" x="93.000000000000014" y="362" width="228.33333333333337" height="20.666666666666686"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By creating an account, you are able to follow friends and experts you trust and see the places they've recommended." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbI-eJ-xc6">
+                    <rect key="frame" x="16" y="398.66666666666669" width="382" height="26.333333333333314"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKL-k1-B2D">
+                    <rect key="frame" x="8" y="649" width="213" height="30"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5s-fB-DSE" userLabel="SeparatorView">
+                    <rect key="frame" x="8" y="632" width="398" height="1"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="7m0-Dv-7Lw"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hig-ht-jpa">
+                    <rect key="frame" x="349" y="649" width="49" height="30"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <state key="normal" title="Sign in">
+                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="signInButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="me5-RT-yEz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.873" green="0.8727458119" blue="0.8727458119" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="sKL-k1-B2D" secondAttribute="bottom" constant="20" id="3KC-dR-ci6"/>
+                <constraint firstItem="UbI-eJ-xc6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4Vg-ml-DPe"/>
+                <constraint firstItem="0kL-Pw-jY8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5ul-Y7-bn0"/>
+                <constraint firstItem="UbI-eJ-xc6" firstAttribute="top" secondItem="XD4-00-Dau" secondAttribute="bottom" constant="16" id="7Bu-UG-NCF"/>
+                <constraint firstAttribute="trailing" secondItem="hig-ht-jpa" secondAttribute="trailing" constant="16" id="7rL-qV-0rZ"/>
+                <constraint firstItem="hig-ht-jpa" firstAttribute="top" secondItem="T5s-fB-DSE" secondAttribute="bottom" constant="16" id="K1x-9Q-9Qo"/>
+                <constraint firstItem="UbI-eJ-xc6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Mz1-Ti-GFu"/>
+                <constraint firstItem="XD4-00-Dau" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Sa0-RN-lny"/>
+                <constraint firstAttribute="trailing" secondItem="T5s-fB-DSE" secondAttribute="trailing" constant="8" id="bp6-ze-FhD"/>
+                <constraint firstAttribute="bottom" secondItem="hig-ht-jpa" secondAttribute="bottom" constant="20" id="cig-Qd-E2u"/>
+                <constraint firstAttribute="trailing" secondItem="UbI-eJ-xc6" secondAttribute="trailing" constant="16" id="d1l-UI-zlg"/>
+                <constraint firstItem="sKL-k1-B2D" firstAttribute="top" secondItem="T5s-fB-DSE" secondAttribute="bottom" constant="16" id="hy5-aA-9dG"/>
+                <constraint firstItem="T5s-fB-DSE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="isG-qc-xgA"/>
+                <constraint firstItem="sKL-k1-B2D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="jd1-YI-FBH"/>
+                <constraint firstItem="T5s-fB-DSE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="l7H-bO-BKd"/>
+                <constraint firstItem="0kL-Pw-jY8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="70" id="sCZ-Xr-lFP"/>
+                <constraint firstItem="XD4-00-Dau" firstAttribute="top" secondItem="0kL-Pw-jY8" secondAttribute="bottom" constant="36" id="zRg-hk-SG6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="createYourPersonalAccLabel" destination="XD4-00-Dau" id="sDb-Nd-LaE"/>
+                <outlet property="haveAccountLabel" destination="sKL-k1-B2D" id="mzI-ly-4NN"/>
+                <outlet property="placeholderLabel" destination="UbI-eJ-xc6" id="SYO-gh-j68"/>
+                <outlet property="signinButton" destination="hig-ht-jpa" id="UKt-Aq-MEd"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="8.7053571428571423"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="imageToAccScreen" width="128" height="128"/>
+    </resources>
+</document>

@@ -1,0 +1,26 @@
+/* 
+  AccountVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"YourProfile" = "Ваш профиль";
+"Title" = "Я";
+
+"AlertErrorTitle" = "Ошибка";
+"AlertMessage" = "Ошибка авторизации. Попробуйте позже";
+"AlertAction" = "Хорошо";
+
+"Unauthorized.PlaceholderLabel" = "Создав учетную запись, вы можете подписаться на друзей и экспертов, которым доверяете, и увидеть места, которые они порекомендовали.";
+"Unauthorized.createYourAcc" = "Cоздать Свой личный кабинет";
+"Unauthorized.Already" = "Уже есть аккаунт?";
+"Unauthorized.SignInButton" = "Войти";
+
+"Authorized.SignOutButton" = "Выход";
+"Authorized.Tips" = "Подсказки";
+"Authorized.Photos" = "Фотографии";
+"Authorized.Followers" = "Последователи";
+"Authorized.Lists" = "Списки";
+"Authorized.Placeholder" = "Понравилась еда? Открыли для себя новый бар? Нашли место, где всегда отличные распродажи? Поделитесь своим опытом с другими, оставив подсказку.";

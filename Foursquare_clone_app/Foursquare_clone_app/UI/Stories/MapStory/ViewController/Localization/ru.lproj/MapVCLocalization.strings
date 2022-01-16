@@ -1,0 +1,13 @@
+/* 
+  MapVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"ShowMap" = "Карта";
+
+"AlertErrorTitle" = "Ошибка при попытке определить ваше местоположение ";
+"AlertErrorMessage" = "Чтобы эта функция работала, нам нужен доступ к вашему местоположению ";
+"AlertActionTitle" = "Хорошо";

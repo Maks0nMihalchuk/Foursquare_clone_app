@@ -1,0 +1,19 @@
+/* 
+  SettingsVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"Title" = "Настройки";
+
+"PushNotification" = "Всплывающие уведомления";
+"AboutUs" = "О нас";
+"TermsOfUse" = "Условия эксплуатации";
+"Privacy" = "Конфиденциальность";
+
+"AlertTitle" = "Уведомление";
+"AlertSet" = "Установить";
+"AlerRemove" = "Удалить";
+"AlertCancel" = "Отмена";

@@ -1,0 +1,32 @@
+/* 
+  ListVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"Title" = "Списки";
+"AlertErrorTitle" = "Ошибка";
+"AlertToErrorMessage" = "Для добавления списков вам необходимо авторизоваться";
+"AlertButton.Title" = "Назад";
+
+"HeaderNameTitle.YourPlaces" = "Твои места";
+"HeaderNameTitle.ListsYouCreated" = "Списки, созданые тобой";
+
+"MySavedPlaces" = "Места, сохраненные мной";
+"MyLikedPlaces" = "Места, которые мне понравились";
+
+"CellWithButton.CreateNewListLabelTitle" = "Создать новый список";
+
+"UserCreatedCell.NumberPlacesLabel" = "Мест нет";
+"UserCreatedCell.Places" = "мест(-а)";
+
+"CreateNewListAlert.CreateListButtonTitle" = "Готово";
+"CreateNewListAlert.CancelButtonTitle" = "Закрыть";
+"CreateNewListAlert.ListNameLabelText" = "Введи название списка";
+"CreateNewListAlert.ListNameTextFieldPlaceholder" = "Напр.: места, где можно позавтракать; места, где мне нужно побывать";
+"CreateNewListAlert.DescriptionLabelText" = "Описание";
+"CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Напр.: лучшие места, где можно позавтракать в воскресенье";
+"CreateNewListAlert.MakeCollaborativeLabelText" = "Разрешить совместную работу?";
+"CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "Люди, которые подписаны на твой список, тоже смогут добавлять к нему места!";

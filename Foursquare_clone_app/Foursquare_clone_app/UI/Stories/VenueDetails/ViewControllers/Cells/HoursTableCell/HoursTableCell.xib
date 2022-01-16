@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="HoursTableCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="HoursTableCell" rowHeight="105" id="KGk-i7-Jjw" customClass="HoursTableCell" customModule="Foursquare_clone_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzJ-V4-z2a">
+                        <rect key="frame" x="0.0" y="16" width="320" height="73"/>
+                        <subviews>
+                            <stackView opaque="NO" tag="1" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="12n-Zh-ghY">
+                                <rect key="frame" x="8" y="4" width="304" height="65"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="176" translatesAutoresizingMaskIntoConstraints="NO" id="0d2-uW-a3h">
+                                        <rect key="frame" x="0.0" y="0.0" width="304" height="22"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOURS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9t-zf-zHQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="62" height="22"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxE-kZ-yRL">
+                                                <rect key="frame" x="238" y="0.0" width="66" height="22"/>
+                                                <state key="normal" title="   " image="arrow"/>
+                                                <connections>
+                                                    <action selector="detailHoursButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TfV-Y6-mul"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8S-S7-51s">
+                                        <rect key="frame" x="0.0" y="30" width="304" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PsF-Wm-MZv">
+                                        <rect key="frame" x="0.0" y="65" width="304" height="0.0"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFA-FR-ohn">
+                                                <rect key="frame" x="0.0" y="0.0" width="148" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flM-j5-1t9">
+                                                <rect key="frame" x="156" y="0.0" width="148" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="12n-Zh-ghY" secondAttribute="bottom" constant="4" id="Jcm-64-fDb"/>
+                            <constraint firstItem="12n-Zh-ghY" firstAttribute="top" secondItem="yzJ-V4-z2a" secondAttribute="top" constant="4" id="SdM-RN-48g"/>
+                            <constraint firstAttribute="trailing" secondItem="12n-Zh-ghY" secondAttribute="trailing" constant="8" id="XJB-sV-AwN"/>
+                            <constraint firstItem="12n-Zh-ghY" firstAttribute="leading" secondItem="yzJ-V4-z2a" secondAttribute="leading" constant="8" id="azs-aY-alD"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.89214399678918888" green="0.89850510463123179" blue="0.91758842815736041" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="yzJ-V4-z2a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Hx8-cJ-uMh"/>
+                    <constraint firstItem="yzJ-V4-z2a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nop-db-4pR"/>
+                    <constraint firstAttribute="trailing" secondItem="yzJ-V4-z2a" secondAttribute="trailing" id="nuB-hL-h4f"/>
+                    <constraint firstAttribute="bottom" secondItem="yzJ-V4-z2a" secondAttribute="bottom" constant="16" id="sWe-BO-ob4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="daysLabel" destination="PFA-FR-ohn" id="h7W-mp-5Xm"/>
+                <outlet property="detailHoursButton" destination="JxE-kZ-yRL" id="oMA-n6-Eu3"/>
+                <outlet property="detailHoursInfoStackView" destination="PsF-Wm-MZv" id="7xZ-V9-r3t"/>
+                <outlet property="hoursDetailLabel" destination="flM-j5-1t9" id="ArK-hY-fBh"/>
+                <outlet property="hoursLabel" destination="b9t-zf-zHQ" id="aFF-5v-0Tr"/>
+                <outlet property="hoursStatusLabel" destination="I8S-S7-51s" id="PoB-JL-uag"/>
+            </connections>
+            <point key="canvasLocation" x="-49.275362318840585" y="-174.44196428571428"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow" width="17" height="17"/>
+    </resources>
+</document>

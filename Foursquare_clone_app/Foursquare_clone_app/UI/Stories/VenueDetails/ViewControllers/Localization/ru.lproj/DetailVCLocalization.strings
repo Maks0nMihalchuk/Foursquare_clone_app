@@ -1,0 +1,28 @@
+/* 
+  DetailVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"LabelTextPlaceholder" = "Нет Данных!";
+
+"VenueNameLabelText" = "Название места проведения";
+"Add Hours" = "Добавить часы";
+"ShowMap" = "Показать карту";
+"Add Phone" = "Добавить телефон";
+"Add Website" = "Добавить веб-сайт";
+"Add Categories" = "Добавить категории";
+"HoursLabelText" = "ЧАСЫ";
+"AdressLabelText" = "АДРЕС";
+"CategoriesLabelText" = "КАТЕГОРИИ";
+"PhoneLabelText" = "ТЕЛЕФОН";
+"WebSiteLabelText" = "ВЕБ-САЙТ";
+
+"NotDataTableViewCell.LabelText" = "Извините. Что то пошло не так. Данные отсутствуют";
+"СlearButton" = "Очистить";
+
+"AlertTitle" = "Ошибка";
+"AlertMessage" = "При загрузке данных произошла ошибка";
+"AlertActionTitle" = "Хорошо";

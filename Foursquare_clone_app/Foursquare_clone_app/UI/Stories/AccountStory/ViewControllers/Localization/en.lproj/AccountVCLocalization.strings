@@ -1,0 +1,26 @@
+/* 
+  AccountVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"YourProfile" = "Your profile";
+"Title" = "Me";
+
+"AlertErrorTitle" = "Error";
+"AlertMessage" = "Authorisation Error. Try later";
+"AlertAction" = "Okey";
+
+"Unauthorized.PlaceholderLabel" = "By creating an account, you are able to follow friends and experts you trust and see the places they've recommended.";
+"Unauthorized.createYourAcc" = "Create Your Personal Account";
+"Unauthorized.Already" = "Already have an account?";
+"Unauthorized.SignInButton" = "Sign in";
+
+"Authorized.SignOutButton" = "Sign out";
+"Authorized.Tips" = "Tips";
+"Authorized.Photos" = "Photos";
+"Authorized.Followers" = "Followers";
+"Authorized.Lists" = "Lists";
+"Authorized.Placeholder" = "Had a great meal? Discovered a new bar? Know a place that always has great sales? Share your experience with others by leaving a tip.";

@@ -1,0 +1,33 @@
+/* 
+  ListVCLocalization.strings
+  Foursquare_clone_app
+
+  Created by maks on 16.02.2021.
+  Copyright © 2021 maks. All rights reserved.
+*/
+
+"Title" = "Lists";
+
+"AlertErrorTitle" = "Error";
+"AlertToErrorMessage" = "To add lists you need to log in";
+"AlertButton.Title" = "Cancel";
+
+"HeaderNameTitle.YourPlaces" = "Your Places";
+"HeaderNameTitle.ListsYouCreated" = "Lists You Created";
+
+"MySavedPlaces" = "My Saved Places";
+"MyLikedPlaces" = "My Liked Places";
+
+"CellWithButton.CreateNewListLabelTitle" = "Create a new list";
+
+"UserCreatedCell.NumberPlacesLabel" = "No places";
+"UserCreatedCell.Places" = "places";
+
+"CreateNewListAlert.CreateListButtonTitle" = "Create List";
+"CreateNewListAlert.CancelButtonTitle" = "Cancel";
+"CreateNewListAlert.ListNameLabelText" = "Enter List Name";
+"CreateNewListAlert.ListNameTextFieldPlaceholder" = "Ex: Branch Places, Paris Trip";
+"CreateNewListAlert.DescriptionLabelText" = "Description";
+"CreateNewListAlert.DescriptionTextFieldPlaceholder" = "Ex: The best breakfast places to get eggs on a Sunday";
+"CreateNewListAlert.MakeCollaborativeLabelText" = "Make Collaborative?";
+"CreateNewListAlert.MakeCollaborativeDescriptionLabel" = "People why follow your lists can add places? too!";
